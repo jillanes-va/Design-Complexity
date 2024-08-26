@@ -1,0 +1,9 @@
+Mi proyecto consiste en aplicar la metodología de Economía Compleja al área del diseño, mediante el análisis de datos de patentes ganadoras de premios de diseño, otorgadas por la institución italiana A'Design Award and Competition, a lo largo de 2010 a 2023 
+
+El código debe contener:
+
+-Importación de los datos en forma csv
+-Limpieza y tratamiento de datos
+-Obtención de índices (ECI, PCI, Similaridad)
+-Correlación de métricas y testeo (ECI vs ECI, Principio de Similaridad, GDP vs Metricas)
+-Producción de figuras (straigtfoward...)

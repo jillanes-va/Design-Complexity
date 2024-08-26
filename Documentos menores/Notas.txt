@@ -1,0 +1,17 @@
+'designer_rank': Lugar del diseñador por puntaje (suma de todos los puntajes registrados en los datos)(se pueden repetir si tienen el mismo puntaje)
+'designer_name': Nombre del diseñador particular o empresa que registró la patente.
+'designer_wins': ? (tiene que ver con el designer_awards, pero siempre es mayor o igual)
+'designer_score': Suma de todos los puntajes obtenidos en los datos.
+'designer_awards': Cantidad de premios ganados en los datos
+'designer_url': Página web de A'Design Award & Competition del diseñador particular o empresa .
+'designer_organization': A que organización pertenece el diseñador particular o la empresa.
+'designer_country': País de origen del diseñador particular o la empresa.
+'designer_registration': Cuándo se registró el diseñador en A'Design Award & Competition.
+'designer_account': Tipo de empresa/organización asociada (?)
+'award_url': URL de la página donde se detalla el premio ganador.
+'award_text': Descripción del diseño ganador.
+'award_name': Nombre del diseño ganador.
+'award_metal': Categoría de premio ganador
+'award_period': Periodo anual en donde ganó.
+'award_category': Categoría de premio ganada.
+'award_score': Puntaje obtenido. (Pareado con 'award_metal')
