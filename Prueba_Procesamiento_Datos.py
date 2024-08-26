@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
+
 #%% Cargamos los datos y limpiamos los NaNs
 
 str_archivo = r'G:/Mi unidad/Estudio/Ciencias Físicas/Tesis/wrd_04_all-data.csv'
