@@ -1,14 +1,13 @@
-import numpy as np
+from Importacion import carga
 
-def ordenacion(data):
-    datos_nombre_diseñador = data['designer_name'].values  # En formato np.array
-    datos_pais_diseñador = data['designer_country'].values
-    datos_categoria_premio = data['award_category'].values
-    datos_periodo_premio = data['award_period'].values
-    datos_puntaje_premio = data['award_score'].values
+def set_of_columns(data):
+    lista_de_elementos = []
+    todas_las_columnas = list(data)
+    for index in todas_las_columnas:
+        lista_de_elementos.append(list(set(data[index])))
+    return todas_las_columnas, lista_de_elementos
 
-    lista_nombres = []
-    lista_categorias = []
-    lista_paises = []
-    lista_periodos = []
-    lista_puntajes = []
+
+
+
+
