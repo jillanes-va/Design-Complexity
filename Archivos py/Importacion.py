@@ -1,13 +1,8 @@
 from pandas import read_csv
+#nombre_archivo = r'wrd_04_all-data.csv'
 
-
-#str_archivo = r'../Datos/wrd_04_all-data.csv'
-#%% Cargamos los datos y limpiamos los NaNs
-
-def carga(nombre_archivo: str):
-    '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /Datos)'''
+def carga(nombre_archivo: str, columnas_importantes: list):
+    '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /Datos) en formato csv y lo importa limpiando los NaNs de las columnas importantes'''
     str_archivo = r'../Datos/' + nombre_archivo
-    data = read_csv(str_archivo)
-    data_sin_nan = data.loc[
-        data['award_category'].notna() & data['designer_country'].notna() & data['award_period'].notna()]
-    return data_sin_nan
+    data = read_csv(str_archivo).dropna(subset = columnas_importantes)
+    return data
