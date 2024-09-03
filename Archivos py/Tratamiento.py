@@ -1,5 +1,6 @@
 from Importacion import carga
 import numpy as np
+import matplotlib.pyplot as plt
 
 def domain_of_data(data):
     '''TO DO'''
@@ -18,22 +19,30 @@ def dictionaries(data):
         diccionarios.append(dict( [ (lista_de_elementos[index][n], n) for n in range(cantidad_de_elementos[index])] ))
     return diccionarios
 
-def distributividad(d, l):
-    pass
+def distributividad(d : list, l : list):
+    assert len(d) == len(l), 'La lista debe tener la misma cantidad de elementos que el diccionario.'
+    distribuido = tuple(d[n][l[n]] for n in range(len(l)))
+    return distribuido
 
 def X_matrix(data):
-    _, cantidad_elementos = domain_of_data(data)
-    diccionarios = dictionaries(data)
-    X_cpt = np.zeros(cantidad_elementos[0:3])
-    Valores = data.values
-
-    for N in range(len(Valores.shape[0])):
-        index = ()
-        X_cpt[  ]
+    _, numero_de_cosas = domain_of_data(data)
+    diccionarios = dictionaries(data)[0:3]
+    X_cpt = np.zeros(numero_de_cosas[0:3])
+    print(*diccionarios)
+    for number in data.index:
+        data_number = list(data.loc[number])
+        index = distributividad(diccionarios, data_number[:3] )
+        X_cpt[index] += data_number[3]
     return X_cpt
 
+nombre_archivo = r'wrd_04_all-data.csv'
+columnas = ['designer_country', 'award_category', 'award_period', 'award_score']
 
-
+datos = carga(nombre_archivo, columnas)
+X_cp = np.sum(X_matrix(datos), axis = 2)
+print(X_cp.shape)
+plt.imshow(X_cp)
+plt.show()
 
 
 
