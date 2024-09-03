@@ -28,7 +28,6 @@ def X_matrix(data):
     _, numero_de_cosas = domain_of_data(data)
     diccionarios = dictionaries(data)[0:3]
     X_cpt = np.zeros(numero_de_cosas[0:3])
-    print(*diccionarios)
     for number in data.index:
         data_number = list(data.loc[number])
         index = distributividad(diccionarios, data_number[:3] )
@@ -39,10 +38,10 @@ nombre_archivo = r'wrd_04_all-data.csv'
 columnas = ['designer_country', 'award_category', 'award_period', 'award_score']
 
 datos = carga(nombre_archivo, columnas)
-X_cp = np.sum(X_matrix(datos), axis = 2)
-print(X_cp.shape)
-plt.imshow(X_cp)
+X_cp = np.sum(X_matrix(datos), axis = 2)/ 13
+plt.imshow(np.log(X_cp + 1), interpolation = 'nearest', cmap = 'afmhot')
 plt.show()
+
 
 
 
