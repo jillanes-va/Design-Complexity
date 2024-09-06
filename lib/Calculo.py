@@ -21,10 +21,7 @@ def Matrices(X):
             if X_p[j] != 0:
                 RCA[i, j] = alpha[i, j] / beta[i, j]
 
-    for i in range(c_len):
-        for j in range(p_len):
-            if RCA[i, j] >= 1:
-                M[i, j] = 1
+    M = np.ones((c_len, p_len)) * (RCA >= 1)
     return RCA, M
 
 

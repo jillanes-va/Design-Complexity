@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from IPython.core.pylabtools import figsize
 
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
@@ -24,6 +23,4 @@ def Clustering(phi, metodo  = 'complete', save = True):
     plt.title(r'$\phi_{pq}$')
     plt.xlabel('Categoria')
     plt.ylabel('Categoria')
-    if save:
-        plt.savefig('./figs/Similaridad.pdf')
     plt.show()
