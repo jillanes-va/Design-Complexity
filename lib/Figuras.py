@@ -4,10 +4,13 @@ import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
 
-def graf(X):
+def graf(X, save = False, name = ''):
     plt.figure(figsize = (7,7))
-    plt.imshow(X)
-    plt.show()
+    plt.imshow(X, interpolation = 'nearest', cmap = 'afmhot')
+    plt.xlabel('Categoria')
+    plt.ylabel('Paises')
+    if save and len(name) != 0:
+        plt.savefig('./figs/' + name + '.pdf')
 
 def Clustering(phi, metodo  = 'complete', save = True):
     plt.figure(figsize = (7,7))
