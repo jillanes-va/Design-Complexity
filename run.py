@@ -22,7 +22,9 @@ diccionarios = trat.dictionaries(datos_premio)
 X_cpt = trat.X_matrix(datos_premio, time = True)
 X_cp = X_cpt.sum(axis = 2) / 13
 R_cp, M_cp, diccionarios = calc.Matrices_ordenadas(X_cp, lista_de_cosas, diccionarios)
-figs.graf(np.log(R_cp + 1), save = True, name = 'RCA')
+omega_cp = calc.Similarity_Density(R_cp)
+
+figs.graf(omega_cp, save = False)
 
 
 

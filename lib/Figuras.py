@@ -11,6 +11,8 @@ def graf(X, save = False, name = ''):
     plt.ylabel('Paises')
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
+    else:
+        plt.show()
 
 def Clustering(phi, metodo  = 'complete', save = True):
     plt.figure(figsize = (7,7))

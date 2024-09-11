@@ -21,7 +21,7 @@ def Matrices(X):
             if X_p[j] != 0:
                 RCA[i, j] = alpha[i, j] / beta[i, j]
 
-    M = np.ones((c_len, p_len)) * (RCA >= 1)
+    M = 1 * (RCA >= 1)
     return RCA, M
 
 
@@ -72,6 +72,12 @@ def Similaridad(M):
                     S += M[c, p] * M[c, q]
                 phi[p, q] = S / Maximo
     return phi
+def Similarity_Density(RCA):
+    '''Toma la matriz RCA y calcula su Densidad de Similaridad calculando la Similaridad y matriz M_cp'''
+    M_cp = 1 * (RCA >= 1)
+    phi = Similaridad(M_cp)
+    Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 1)
+    return Num
 
 def Complexity_measures(M, n):
     '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
