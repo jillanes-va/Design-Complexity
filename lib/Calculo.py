@@ -76,7 +76,7 @@ def Similarity_Density(RCA):
     '''Toma la matriz RCA y calcula su Densidad de Similaridad calculando la Similaridad y matriz M_cp'''
     M_cp = 1 * (RCA >= 1)
     phi = Similaridad(M_cp)
-    Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 1)
+    Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 0)
     return Num
 
 def Complexity_measures(M, n):

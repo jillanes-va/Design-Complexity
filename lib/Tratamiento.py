@@ -1,7 +1,7 @@
 import numpy as np
 
 def domain_of_data(data):
-    '''TO DO'''
+    '''Toma los datos y retorna dos listas, la primera con todos los elementos existentes en cada columna y la segunda lista devuelve la cantidad de elementos existentes.'''
     lista_de_elementos = []
     for index in list(data):
         lista_de_elementos.append(sorted(list(set(data[index]))))
@@ -29,17 +29,26 @@ def distributividad(d : list, l : list):
     distribuido = tuple(d[n][l[n]] for n in range(len(l)))
     return distribuido
 
-def X_matrix(data, time = True):
+def X_matrix(data):
     '''Toma los datos y arma una matriz de volumen con índices 'pais', 'producto' y 'año' '''
     _, numero_de_cosas = domain_of_data(data)
-    diccionarios = dictionaries(data)[0:2 + time]
-    X_cpt = np.zeros(numero_de_cosas[0:2 + time])
+    Dim = len(numero_de_cosas) - 1
+    diccionarios = dictionaries(data)[:Dim]
+    X_cpt = np.zeros(numero_de_cosas[:Dim])
     for number in data.index:
         data_number = list(data.loc[number])
-        index = distributividad(diccionarios, data_number[:2 + time] )
-        X_cpt[index] += data_number[2 + time]
+        index = distributividad(diccionarios, data_number[:Dim] )
+        X_cpt[index] += data_number[-1]
     return X_cpt
 
-
+def Promedio_temporal(X, n_time = None):
+    '''Toma la matriz y le realiza el promedio temporal'''
+    if n_time is None:
+        _, _, T = X.shape
+        return X.sum(axis = 2) / T
+    if isinstance(n_time, int):
+        return X/ n_time
+    else:
+        raise TypeError
 
 

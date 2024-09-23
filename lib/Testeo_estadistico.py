@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import lib.Calculo as calc
 
 def Trans_matrix(RCA_t, threeshold = 0.5, n_t = None):
+    '''Toma la matriz de RCA y retorna dos matrices que reportan aquellos productos que son de transición o no, dependiendo de un umbral.'''
     C, P, T = RCA_t.shape
     Transicion = np.zeros((C, P))
     Intransicion = np.zeros((C, P))
@@ -22,15 +23,14 @@ def Trans_matrix(RCA_t, threeshold = 0.5, n_t = None):
                     Intransicion[c,p] = 1
     return Transicion, Intransicion
 
-def Relatedness(RCA, threeshold = 0.5, n_t = None):
+def Relatedness_density_test(RCA, threeshold = 0.5, n_t = None, N_bins = 50):
+    '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
     M_cp = np.ones(RCA.shape) * (RCA >= 1)
     phi_0 = calc.Similaridad(M_cp)
     Transicion, _ = Trans_matrix(RCA, threeshold, n_t)
     omega_cp_t = np.nan_to_num( np.matmul(M_cp, phi_0) * Transicion / np.sum(phi_0, axis = 0) )
 
     cantidad_paises, cantidad_categorias = RCA.shape
-
-    N_bins = 50
 
     Ocurrencias_t = np.zeros(N_bins)
     Total = np.zeros(N_bins)
@@ -52,5 +52,5 @@ def Relatedness(RCA, threeshold = 0.5, n_t = None):
     dom_phi = np.linspace(0, 1, N_bins)
 
     plt.bar(dom_phi, Prob_t, width=1 / N_bins, align='edge')
-    plt.xlabel(r'$\phi$')
+    plt.xlabel(r'$\omega_{cp}$')
     plt.ylabel('%')

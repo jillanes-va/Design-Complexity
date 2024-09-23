@@ -19,12 +19,13 @@ datos_premio = imp.carga(nombre_archivo, columnas)
 lista_de_cosas, cantidad_info = trat.domain_of_data(datos_premio)
 diccionarios = trat.dictionaries(datos_premio)
 
-X_cpt = trat.X_matrix(datos_premio, time = True)
-X_cp = X_cpt.sum(axis = 2) / 13
+X_cpt = trat.X_matrix(datos_premio)
+X_cp = trat.Promedio_temporal(X_cpt)
 R_cp, M_cp, diccionarios = calc.Matrices_ordenadas(X_cp, lista_de_cosas, diccionarios)
+phi = calc.Similaridad(M_cp)
 omega_cp = calc.Similarity_Density(R_cp)
 
-figs.graf(omega_cp, save = False)
+figs.graf(phi, save = False)
 
 
 
