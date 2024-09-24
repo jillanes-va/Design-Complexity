@@ -47,9 +47,7 @@ def Matrices_ordenadas(X, lista_de_cosas, diccionario):
             M_ordenada[i, j] = M[Shuffle_c[i][1], Shuffle_p[j][1]]
             RCA_ordenada[i, j] = RCA[Shuffle_c[i][1], Shuffle_p[j][1]]
 
-    # Nuevo_dict_num_p = dict([(i, lista_de_cosas[1][Shuffle_p[i][1]]) for i in range(N_p)])
     Nuevo_dict_p_num = dict([(lista_de_cosas[1][Shuffle_p[i][1]], i) for i in range(N_p)])
-    # Nuevo_dict_num_c = dict([(i, lista_de_cosas[0][Shuffle_c[i][1]]) for i in range(N_c)])
     Nuevo_dict_c_num = dict([(lista_de_cosas[0][Shuffle_c[i][1]], i) for i in range(N_c)])
 
     diccionario[0] = Nuevo_dict_c_num

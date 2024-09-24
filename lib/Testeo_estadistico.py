@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 import lib.Calculo as calc
+import lib.Tratamiento as trat
 
 def Trans_matrix(RCA_t, threeshold = 0.5, n_t = None):
     '''Toma la matriz de RCA y retorna dos matrices que reportan aquellos productos que son de transición o no, dependiendo de un umbral.'''
@@ -54,3 +56,22 @@ def Relatedness_density_test(RCA, threeshold = 0.5, n_t = None, N_bins = 50):
     plt.bar(dom_phi, Prob_t, width=1 / N_bins, align='edge')
     plt.xlabel(r'$\omega_{cp}$')
     plt.ylabel('%')
+
+def categorias_presentes(X, diccionario):
+    '''Para una matriz país-producto-año retorna los productos no registrados en un año'''
+
+    C, P, T = X.shape
+    diccionario_inv = [trat.inv_dict(d) for d in diccionario]
+
+    anios = []
+    for t in range(T):
+        lista_cat = []
+        cantidad = 0
+        año = diccionario_inv[2][t]
+        for p in range(P):
+            if X[:, p, t].sum() != 0:
+                cantidad += 1
+                lista_cat.append(diccionario_inv[1][p])
+        informacion = (año, cantidad, lista_cat)
+        anios.append(informacion)
+    return anios
