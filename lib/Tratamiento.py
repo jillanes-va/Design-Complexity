@@ -51,4 +51,26 @@ def Promedio_temporal(X, n_time = None):
     else:
         raise TypeError
 
+def pareo_listas(lista_a, lista_b):
+    '''Toma dos listas de strings y entrega dos listas tal que si un string de A es contenido (parcialmente) por un string de B, se guarden en listas distinas pero pareads, entrega ademas aquellos strings sobrantes.'''
+    lista_1 = lista_a.copy()
+    lista_2 = lista_b.copy()
 
+    nueva_lista_1 = []
+    nueva_lista_2 = []
+
+    i = 0
+
+    while i <= len(lista_1):
+        j = 0
+        while j < len(lista_2):
+            if not (lista_1[i] in lista_2[j]):
+                j += 1
+            else:
+                nueva_lista_1.append(lista_1.pop(i))
+                nueva_lista_2.append(lista_2.pop(j))
+                break
+        if j == len(lista_2):
+            i += 1
+
+    return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]

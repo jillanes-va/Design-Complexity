@@ -42,8 +42,7 @@ X_cpt = trat.X_matrix(datos_wipo) #El periodo 2022 - 2023 solo tiene 3 registros
 
 #cate = test.categorias_presentes(X_cpt, diccionarios_wipo)
 
-paises_wipo = lista_de_cosas_wipo[0].copy()
-paises_premios = lista_de_cosas_premios[0].copy()
+
 paises_wipo_presentes = []
 paises_premios_presentes = []
 
