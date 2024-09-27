@@ -1,6 +1,6 @@
 import numpy as np
 
-def Matrices(X):
+def Matrices(X, threshold):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
     c_len, p_len = X.shape
     RCA = np.zeros(X.shape)
@@ -21,13 +21,13 @@ def Matrices(X):
             if X_p[j] != 0:
                 RCA[i, j] = alpha[i, j] / beta[i, j]
 
-    M = 1 * (RCA >= 1)
+    M = 1 * (RCA >= threshold)
     return RCA, M
 
 
-def Matrices_ordenadas(X, lista_de_cosas, diccionario):
+def Matrices_ordenadas(X, lista_de_cosas, diccionario, threshold = 1):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
-    RCA, M = Matrices(X)
+    RCA, M = Matrices(X, threshold)
     M_p = np.sum(M, axis=0)
     M_c = np.sum(M, axis=1)
 
@@ -85,8 +85,8 @@ def Complexity_measures(M, n):
     K_c = M_c
     K_p = M_p
     for i in range(n):
-        K_c = np.matmul(M, K_p) / M_c
-        K_p = np.matmul(M.T, K_c) / M_p
+        K_c = np.nan_to_num(np.matmul(M, K_p) / M_c)
+        K_p = np.nan_to_num(np.matmul(M.T, K_c) / M_p)
     return K_c, K_p
 
 def Z_transf(K):
