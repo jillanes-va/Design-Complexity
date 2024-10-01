@@ -17,11 +17,17 @@ def dictionaries(data):
         diccionarios.append(dict( [ (lista_de_elementos[index][n], n) for n in range(cantidad_de_elementos[index])] ))
     return diccionarios
 
+def re_count(diccionario):
+    new_dict = {}
+    for n, keys in enumerate(diccionario.keys()):
+        new_dict[keys] = n
+    return new_dict
+
 def inv_dict(diccionario):
     '''Toma un diccionario e invierte el mapeo de llaves a valores'''
     inv_map = {}
     for k, v in diccionario.items():
-        inv_map[v] = inv_map.get(v, []) + [k]
+        inv_map[v] = k
     return inv_map
 def distributividad(d : list, l : list):
     '''Función que distribuye una lista con keys a una lista con diccionarios y retorna los valores de los diccionarios en una tupla.'''

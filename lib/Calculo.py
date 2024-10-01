@@ -1,7 +1,20 @@
 import numpy as np
+import lib.Tratamiento as trat
 
-def Matrices(X, threshold):
+def Limpieza(X, diccionario_c, c_min):
+    X_c = (X.sum(axis = 1) > c_min)
+    for n, valor in enumerate(X_c):
+        if not valor:
+            diccionario_c.pop(trat.inv_dict(diccionario_c)[n])
+
+    diccionario_c = trat.re_count(diccionario_c)
+    return X[X_c], diccionario_c
+
+
+def Matrices(X, diccionario, threshold = 1, c_min = 2):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
+    X, diccionario = Limpieza(X, diccionario, c_min)
+
     c_len, p_len = X.shape
     RCA = np.zeros(X.shape)
     M = np.zeros(X.shape)
@@ -22,12 +35,12 @@ def Matrices(X, threshold):
                 RCA[i, j] = alpha[i, j] / beta[i, j]
 
     M = 1 * (RCA >= threshold)
-    return RCA, M
+    return RCA, M, diccionario
 
 
-def Matrices_ordenadas(X, lista_de_cosas, diccionario, threshold = 1):
+def Matrices_ordenadas(X, lista_de_cosas, c_min, threshold = 1):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
-    RCA, M = Matrices(X, threshold)
+    RCA, M, diccionario[0] = Matrices(X, diccionario, threshold, c_min)
     M_p = np.sum(M, axis=0)
     M_c = np.sum(M, axis=1)
 
