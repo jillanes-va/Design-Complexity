@@ -10,7 +10,7 @@ def domain_of_data(data):
 #¿Debería unir a una sola función dictionaries y domain_of_data?
 
 def dictionaries(data):
-    '''Genera los diccionarios para asociar los elementos a números'''
+    '''Genera los diccionarios para asociar los elementos a números. Lista de diccionarios***'''
     lista_de_elementos, cantidad_de_elementos = domain_of_data(data)
     diccionarios = []
     for index in range(len(cantidad_de_elementos)):
