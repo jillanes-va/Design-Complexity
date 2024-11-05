@@ -4,17 +4,19 @@ import matplotlib.pyplot as plt
 import lib.Calculo as calc
 import lib.Tratamiento as trat
 
-def Trans_matrix(RCA_t, threeshold = 0.5, n_t = None):
+def Trans_matrix(X, diccionario, threeshold = 0.5, n_t = None):
     '''Toma la matriz de RCA y retorna dos matrices que reportan aquellos productos que son de transición o no, dependiendo de un umbral.'''
-    C, P, T = RCA_t.shape
+    C, P, T = X.shape
     Transicion = np.zeros((C, P))
     Intransicion = np.zeros((C, P))
 
     if n_t is None:
         n_t = T//2
 
-    R_cp_0 = RCA_t[:, :, :n_t].sum(axis = 2) / (n_t + 1)
-    R_cp_1 = RCA_t[:, :, n_t + 1:].sum(axis = 2) / (T - n_t)
+    X_0 = X[:, :, :n_t].sum(axis = 2) / (n_t + 1)
+    X_1 = X[:, :, n_t + 1:].sum(axis = 2) / (T - n_t)
+
+    R_cp_0 = calc.Matrices(X_0, diccionario)
 
     for c in range(C):
         for p in range(P):

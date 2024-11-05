@@ -53,17 +53,20 @@ def Matrices_ordenadas(X, diccionario, c_min = 1, threshold = 1):
     Shuffle_p = sorted(lista_p, key=lambda A: A[0], reverse=1)
     Shuffle_c = sorted(lista_c, key=lambda A: A[0], reverse=1)
 
+    X_ordenada = np.zeros(X.shape)
     M_ordenada = np.zeros(M.shape)
     RCA_ordenada = np.zeros(RCA.shape)
 
     for i in range(N_c):
         for j in range(N_p):
-            M_ordenada[i, j] = M[Shuffle_c[i][1], Shuffle_p[j][1]]
+            X_ordenada[i, j] = X[Shuffle_c[i][1], Shuffle_p[j][1]]
             RCA_ordenada[i, j] = RCA[Shuffle_c[i][1], Shuffle_p[j][1]]
+            M_ordenada[i, j] = M[Shuffle_c[i][1], Shuffle_p[j][1]]
 
     Nuevo_dict_c_num = dict([(list(diccionario[0].keys())[Shuffle_c[i][1]], i) for i in range(N_c)])
     Nuevo_dict_p_num = dict([(list(diccionario[1].keys())[Shuffle_p[i][1]], i) for i in range(N_p)])
 
+    X = X_ordenada
     diccionario[0] = Nuevo_dict_c_num
     diccionario[1] = Nuevo_dict_p_num
 

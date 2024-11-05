@@ -14,7 +14,7 @@ def graf(X, save = False, name = ''):
     else:
         plt.show()
 
-def Clustering(phi, metodo  = 'complete', save = True):
+def Clustering(phi, metodo  = 'complete', save = False, name = ''):
     plt.figure(figsize = (7,7))
     phi_star = np.zeros(phi.shape)
     linkage_matrix = linkage(squareform(1 - phi - np.identity(phi.shape[0])), method = metodo)
@@ -29,3 +29,8 @@ def Clustering(phi, metodo  = 'complete', save = True):
     plt.xlabel('Categoria')
     plt.ylabel('Categoria')
     plt.show()
+
+    if save and len(name) != 0:
+        plt.savefig('./figs/' + name + '.pdf')
+    else:
+        plt.show()

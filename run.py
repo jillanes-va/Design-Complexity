@@ -25,15 +25,19 @@ diccionarios = trat.dictionaries(datos_premio)
 X_cpt = trat.X_matrix(datos_premio)
 X_cp = trat.Promedio_temporal(X_cpt)
 
+figs.graf(np.log(X_cp + 1))
+
 #sisi = datos_premio.groupby(['designer_country']).sum()
 #print(sisi)
 #print(sisi[sisi['award_score'] > 5.0])
 
 R_cp, M_cp= calc.Matrices_ordenadas(X_cp, diccionarios, 1)
+
+figs.graf(np.log(X_cp + 1))
 phi = calc.Similaridad(M_cp)
 omega_cp = calc.Similarity_Density(R_cp)
 
-figs.graf(np.log(R_cp + 1), save = False)
+test.Relatedness_density_test(R_cp)
 
 
 
