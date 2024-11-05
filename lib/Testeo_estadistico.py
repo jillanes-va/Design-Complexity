@@ -60,6 +60,7 @@ def Relatedness_density_test(X, diccionario, threeshold = 0.5, n_t = None, N_bin
     plt.bar(dom_phi, Prob_t, width=1 / N_bins, align='edge')
     plt.xlabel(r'$\omega_{cp}$')
     plt.ylabel('%')
+    plt.title('Principio de Similaridad')
     plt.show()
 
 def categorias_presentes(X, diccionario):

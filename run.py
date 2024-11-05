@@ -8,6 +8,7 @@ import lib.Figuras as figs
 
 import numpy as np
 import matplotlib.pyplot as plt
+import networkx as nx
 
 #nombre_archivo = r'data_wipo_2010-2023.csv'
 #columnas = ['country_name', 'subclass_name', 'designs']
@@ -25,21 +26,24 @@ X_cp = trat.Promedio_temporal(X_cpt)
 
 Informacion = test.categorias_presentes(X_cpt, diccionaries)
 plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
+plt.ylabel('Frecuencia absoluta')
+plt.title('Categorias presentes por año')
 plt.xticks(rotation = 90)
 plt.show()
 
-figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises')
+figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$X_{cp}$')
 #sisi = datos_premio.groupby(['designer_country']).sum()
 #print(sisi)
 #print(sisi[sisi['award_score'] > 5.0])
 
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1)
-figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises')
+figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
 
-figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises')
+figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 
 ECI = calc.Z_transf( calc.Complexity_measures(M_cp, 2 * 7)[0] )
 plt.scatter([i for i in range(len(ECI))], ECI)
+plt.title('Indice de Complejidad Economica')
 plt.show()
 
 phi = calc.Similaridad(M_cp)
