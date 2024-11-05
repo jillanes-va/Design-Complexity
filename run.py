@@ -28,7 +28,8 @@ Informacion = test.categorias_presentes(X_cpt, diccionaries)
 plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
 plt.ylabel('Frecuencia absoluta')
 plt.title('Categorias presentes por año')
-plt.xticks(rotation = 90)
+plt.tight_layout()
+plt.xticks(rotation = 45)
 plt.show()
 
 figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$X_{cp}$')
@@ -40,6 +41,15 @@ R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1)
 figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
 
 figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+
+k_0 = calc.Complexity_measures(M_cp, 0)[0]
+k_1 = calc.Complexity_measures(M_cp, 1)[0]
+
+plt.scatter(k_0, k_1)
+plt.xlabel('$k_0$')
+plt.ylabel('$k_1$')
+
+plt.show()
 
 ECI = calc.Z_transf( calc.Complexity_measures(M_cp, 2 * 7)[0] )
 plt.scatter([i for i in range(len(ECI))], ECI)
