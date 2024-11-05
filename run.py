@@ -18,26 +18,23 @@ columnas = ['designer_country', 'award_category', 'award_period' , 'award_score'
 datos_premio = imp.carga(nombre_archivo, columnas)
 lista_de_cosas, cantidad_info = trat.domain_of_data(datos_premio)
 
-
-diccionarios = trat.dictionaries(datos_premio)
-
+diccionaries = trat.dictionaries(datos_premio)
 
 X_cpt = trat.X_matrix(datos_premio)
 X_cp = trat.Promedio_temporal(X_cpt)
 
 figs.graf(np.log(X_cp + 1))
-
 #sisi = datos_premio.groupby(['designer_country']).sum()
 #print(sisi)
 #print(sisi[sisi['award_score'] > 5.0])
 
-R_cp, M_cp= calc.Matrices_ordenadas(X_cp, diccionarios, 1)
-
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1)
 figs.graf(np.log(X_cp + 1))
+
 phi = calc.Similaridad(M_cp)
 omega_cp = calc.Similarity_Density(R_cp)
 
-test.Relatedness_density_test(R_cp)
+test.Relatedness_density_test(X_cpt)
 
 
 

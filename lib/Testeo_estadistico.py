@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import lib.Calculo as calc
 import lib.Tratamiento as trat
 
-def Trans_matrix(X, diccionario, threeshold = 0.5, n_t = None):
+def Trans_matrix(X, threeshold = 0.5, n_t = None):
     '''Toma la matriz de RCA y retorna dos matrices que reportan aquellos productos que son de transición o no, dependiendo de un umbral.'''
     C, P, T = X.shape
     Transicion = np.zeros((C, P))
@@ -16,7 +16,8 @@ def Trans_matrix(X, diccionario, threeshold = 0.5, n_t = None):
     X_0 = X[:, :, :n_t].sum(axis = 2) / (n_t + 1)
     X_1 = X[:, :, n_t + 1:].sum(axis = 2) / (T - n_t)
 
-    R_cp_0 = calc.Matrices(X_0, diccionario)
+    R_cp_0, _ = calc.Matrices(X_0, change_dict = False)
+    R_cp_1, _ = calc.Matrices(X_1, change_dict = False)
 
     for c in range(C):
         for p in range(P):
@@ -27,9 +28,9 @@ def Trans_matrix(X, diccionario, threeshold = 0.5, n_t = None):
                     Intransicion[c,p] = 1
     return Transicion, Intransicion
 
-def Relatedness_density_test(RCA, threeshold = 0.5, n_t = None, N_bins = 50):
+def Relatedness_density_test(X, threeshold = 0.5, n_t = None, N_bins = 50):
     '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
-    M_cp = np.ones(RCA.shape) * (RCA >= 1)
+    M_cp = 1 * (RCA >= 1)
     phi_0 = calc.Similaridad(M_cp)
     Transicion, _ = Trans_matrix(RCA, threeshold, n_t)
     omega_cp_t = np.nan_to_num( np.matmul(M_cp, phi_0) * Transicion / np.sum(phi_0, axis = 0) )

@@ -1,8 +1,10 @@
 import numpy as np
 import lib.Tratamiento as trat
 
-def Limpieza(X, diccionarios, c_min):
+def Limpieza(X, diccionarios, c_min, time = False):
     '''Limpia los paises que esten bajo un cierto umbral, elimina de la lista aquellos que no cumplan tal motivo'''
+    if time:
+        X = X.sum(axis = 2)
     X_c = (X.sum(axis = 1) > c_min)
     for n, valor in enumerate(X_c):
         if not valor:
@@ -12,9 +14,9 @@ def Limpieza(X, diccionarios, c_min):
     return X[X_c]
 
 
-def Matrices(X,diccionario, threshold = 1, c_min = 1):
+def Matrices(X, diccionario, threshold = 1, c_min = 1, time = False):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
-    X = Limpieza(X, diccionario, c_min)
+    X = Limpieza(X, diccionario, c_min, time)
 
     c_len, p_len = X.shape
     RCA = np.zeros(X.shape)
@@ -39,7 +41,7 @@ def Matrices(X,diccionario, threshold = 1, c_min = 1):
     return RCA, M
 
 
-def Matrices_ordenadas(X, diccionario, c_min = 1, threshold = 1):
+def Matrices_ordenadas(X, diccionario = None, c_min = 1, threshold = 1, change_dict = True):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
     RCA, M = Matrices(X, diccionario, threshold, c_min)
     M_p = np.sum(M, axis=0)
@@ -63,14 +65,14 @@ def Matrices_ordenadas(X, diccionario, c_min = 1, threshold = 1):
             RCA_ordenada[i, j] = RCA[Shuffle_c[i][1], Shuffle_p[j][1]]
             M_ordenada[i, j] = M[Shuffle_c[i][1], Shuffle_p[j][1]]
 
-    Nuevo_dict_c_num = dict([(list(diccionario[0].keys())[Shuffle_c[i][1]], i) for i in range(N_c)])
-    Nuevo_dict_p_num = dict([(list(diccionario[1].keys())[Shuffle_p[i][1]], i) for i in range(N_p)])
+    if change_dict:
+        Nuevo_dict_c_num = dict([(list(diccionario[0].keys())[Shuffle_c[i][1]], i) for i in range(N_c)])
+        Nuevo_dict_p_num = dict([(list(diccionario[1].keys())[Shuffle_p[i][1]], i) for i in range(N_p)])
 
-    X = X_ordenada
-    diccionario[0] = Nuevo_dict_c_num
-    diccionario[1] = Nuevo_dict_p_num
+        diccionario[0] = Nuevo_dict_c_num
+        diccionario[1] = Nuevo_dict_p_num
 
-    return RCA_ordenada, M_ordenada
+    return RCA_ordenada, M_ordenada, X_ordenada
 
 def Similaridad(M):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''
