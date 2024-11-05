@@ -16,8 +16,8 @@ def Trans_matrix(X, threeshold = 0.5, n_t = None):
     X_0 = X[:, :, :n_t].sum(axis = 2) / (n_t + 1)
     X_1 = X[:, :, n_t + 1:].sum(axis = 2) / (T - n_t)
 
-    R_cp_0, _ = calc.Matrices(X_0, change_dict = False)
-    R_cp_1, _ = calc.Matrices(X_1, change_dict = False)
+    R_cp_0, _ = calc.Matrices(X_0, cleaning = False)
+    R_cp_1, _ = calc.Matrices(X_1, cleaning = False)
 
     for c in range(C):
         for p in range(P):
@@ -28,11 +28,12 @@ def Trans_matrix(X, threeshold = 0.5, n_t = None):
                     Intransicion[c,p] = 1
     return Transicion, Intransicion
 
-def Relatedness_density_test(X, threeshold = 0.5, n_t = None, N_bins = 50):
+def Relatedness_density_test(X, diccionario, threeshold = 0.5, n_t = None, N_bins = 50):
     '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
-    M_cp = 1 * (RCA >= 1)
+    X_total = trat.Promedio_temporal(X)
+    RCA, M_cp = calc.Matrices(X_total, cleaning = False)
     phi_0 = calc.Similaridad(M_cp)
-    Transicion, _ = Trans_matrix(RCA, threeshold, n_t)
+    Transicion, _ = Trans_matrix(X, threeshold, n_t)
     omega_cp_t = np.nan_to_num( np.matmul(M_cp, phi_0) * Transicion / np.sum(phi_0, axis = 0) )
 
     cantidad_paises, cantidad_categorias = RCA.shape
@@ -59,6 +60,7 @@ def Relatedness_density_test(X, threeshold = 0.5, n_t = None, N_bins = 50):
     plt.bar(dom_phi, Prob_t, width=1 / N_bins, align='edge')
     plt.xlabel(r'$\omega_{cp}$')
     plt.ylabel('%')
+    plt.show()
 
 def categorias_presentes(X, diccionario):
     '''Para una matriz país-producto-año retorna los productos no registrados en un año'''

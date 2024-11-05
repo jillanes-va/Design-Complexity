@@ -14,9 +14,10 @@ def Limpieza(X, diccionarios, c_min, time = False):
     return X[X_c]
 
 
-def Matrices(X, diccionario, threshold = 1, c_min = 1, time = False):
+def Matrices(X, diccionario = None, threshold = 1, c_min = 1, time = False, cleaning = True):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
-    X = Limpieza(X, diccionario, c_min, time)
+    if cleaning:
+        X = Limpieza(X, diccionario, c_min, time)
 
     c_len, p_len = X.shape
     RCA = np.zeros(X.shape)
