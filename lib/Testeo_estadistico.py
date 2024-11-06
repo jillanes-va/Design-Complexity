@@ -54,14 +54,8 @@ def Relatedness_density_test(X, diccionario, threeshold = 0.5, n_t = None, N_bin
                 Ocurrencias_t[rebanada] += 1
 
     Prob_t = np.nan_to_num(Ocurrencias_t / Total)
-
     dom_phi = np.linspace(0, 1, N_bins)
-
-    plt.bar(dom_phi, Prob_t, width=1 / N_bins, align='edge')
-    plt.xlabel(r'$\omega_{cp}$')
-    plt.ylabel('%')
-    plt.title('Principio de Similaridad')
-    plt.show()
+    return dom_phi, Prob_t
 
 def categorias_presentes(X, diccionario):
     '''Para una matriz país-producto-año retorna los productos no registrados en un año'''

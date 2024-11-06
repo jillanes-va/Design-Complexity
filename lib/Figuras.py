@@ -29,7 +29,17 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
     plt.title(r'$\phi_{pq}$')
     plt.xlabel('Categoria')
     plt.ylabel('Categoria')
-    plt.show()
+
+    if save and len(name) != 0:
+        plt.savefig('./figs/' + name + '.pdf')
+    else:
+        plt.show()
+
+def Density_plot(domain, Prob, xlabel = '', ylabel = '', title = '', save = False, name = ''):
+    plt.bar(domain, Prob, width=1 / len(domain), align='edge')
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
