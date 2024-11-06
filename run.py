@@ -61,10 +61,8 @@ omega_cp = calc.Similarity_Density(R_cp)
 
 figs.Clustering(phi)
 
-test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-
-
-
+dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+figs.Density_plot(dom_phi, relatedness)
 
 
 

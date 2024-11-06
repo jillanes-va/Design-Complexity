@@ -35,8 +35,8 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
     else:
         plt.show()
 
-def Density_plot(domain, Prob, xlabel = '', ylabel = '', title = '', save = False, name = ''):
-    plt.bar(domain, Prob, width=1 / len(domain), align='edge')
+def Density_plot(domain, prob, xlabel = '', ylabel = '', title = '', save = False, name = ''):
+    plt.bar(domain, prob, width=1 / len(domain), align='edge')
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)

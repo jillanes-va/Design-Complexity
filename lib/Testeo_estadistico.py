@@ -40,6 +40,7 @@ def Relatedness_density_test(X, diccionario, threeshold = 0.5, n_t = None, N_bin
 
     Ocurrencias_t = np.zeros(N_bins)
     Total = np.zeros(N_bins)
+    Prob_t = np.zeros(N_bins)
 
     for c in range(cantidad_paises):
         for p in range(cantidad_categorias):
@@ -53,7 +54,11 @@ def Relatedness_density_test(X, diccionario, threeshold = 0.5, n_t = None, N_bin
             if Transicion[c, p] == 1:
                 Ocurrencias_t[rebanada] += 1
 
-    Prob_t = np.nan_to_num(Ocurrencias_t / Total)
+    for i in range(N_bins):
+        if Total[i] ==0:
+            Prob_t[i] = 0
+        else:
+            Prob_t[i] = Ocurrencias_t[i]/Total[i]
     dom_phi = np.linspace(0, 1, N_bins)
     return dom_phi, Prob_t
 
