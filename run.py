@@ -51,7 +51,7 @@ R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1)
 
 #plt.show()
 
-ECI = calc.Z_transf( calc.Complexity_measures(M_cp, 2 * 7)[0] )
+ECI =  calc.Z_transf(calc.Complexity_measures(M_cp, 4)[0])
 #plt.scatter([i for i in range(len(ECI))], ECI)
 #plt.title('Indice de Complejidad Economica')
 #plt.show()
