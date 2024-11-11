@@ -1,23 +1,29 @@
 import numpy as np
 import lib.Tratamiento as trat
 
-def Limpieza(X, diccionarios, c_min, time = False):
+def Limpieza(X, diccionarios, c_min, p_min, time = False):
     '''Limpia los paises que esten bajo un cierto umbral, elimina de la lista aquellos que no cumplan tal motivo'''
     if time:
         X = X.sum(axis = 2)
-    X_c = (X.sum(axis = 1) > c_min)
-    for n, valor in enumerate(X_c):
+    Mask_c = (X.sum(axis = 1) > c_min)
+    Mask_p = (X.sum(axis = 0) > p_min)
+
+    for n, valor in enumerate(Mask_c):
         if not valor:
             diccionarios[0].pop(trat.inv_dict(diccionarios[0])[n])
+    for n, valor in enumerate(Mask_p):
+        if not valor:
+            diccionarios[1].pop(trat.inv_dict(diccionarios[1])[n])
 
     diccionarios[0] = trat.re_count(diccionarios[0])
-    return X[X_c]
+    diccionarios[1] = trat.re_count(diccionarios[1])
+    return X[:, Mask_p][Mask_c, :]
 
 
-def Matrices(X, diccionario = None, threshold = 1, c_min = 1, time = False, cleaning = True):
+def Matrices(X, diccionario = None, threshold = 1, c_min = 1, p_min = 1, time = False, cleaning = True):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
     if cleaning:
-        X = Limpieza(X, diccionario, c_min, time)
+        X = Limpieza(X, diccionario, c_min, p_min, time)
 
     c_len, p_len = X.shape
     RCA = np.zeros(X.shape)
@@ -39,41 +45,46 @@ def Matrices(X, diccionario = None, threshold = 1, c_min = 1, time = False, clea
                 RCA[i, j] = alpha[i, j] / beta[i, j]
 
     M = 1 * (RCA >= threshold)
-    return RCA, M
+    return RCA, M, X
 
 
-def Matrices_ordenadas(X, diccionario = None, c_min = 1, threshold = 1, change_dict = True):
+def Matrices_ordenadas(X, diccionario, c_min = 1, p_min = 1, threshold = 1, change_dict = True):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
-    RCA, M = Matrices(X, diccionario, threshold, c_min)
+    RCA, M, X = Matrices(X, diccionario, threshold, c_min, p_min)
     M_p = np.sum(M, axis=0)
     M_c = np.sum(M, axis=1)
 
-    N_c, N_p = M.shape
+    N_c, N_p = X.shape
 
     lista_p = [(M_p[i], i) for i in range(N_p)]
     lista_c = [(M_c[i], i) for i in range(N_c)]
 
-    Shuffle_p = sorted(lista_p, key=lambda A: A[0], reverse=1)
-    Shuffle_c = sorted(lista_c, key=lambda A: A[0], reverse=1)
+    llave = lambda A: A[0]
 
-    X_ordenada = np.zeros(X.shape)
-    M_ordenada = np.zeros(M.shape)
-    RCA_ordenada = np.zeros(RCA.shape)
+    Shuffle_p = sorted(lista_p, key= llave, reverse = 1)
+    Shuffle_c = sorted(lista_c, key= llave, reverse = 1)
 
-    for i in range(N_c):
-        for j in range(N_p):
-            X_ordenada[i, j] = X[Shuffle_c[i][1], Shuffle_p[j][1]]
-            RCA_ordenada[i, j] = RCA[Shuffle_c[i][1], Shuffle_p[j][1]]
-            M_ordenada[i, j] = M[Shuffle_c[i][1], Shuffle_p[j][1]]
+    arrays = [RCA, M, X]
+    array_1 = [np.zeros(X.shape), np.zeros(X.shape), np.zeros(X.shape)]
+    array_2 = [np.zeros(X.shape), np.zeros(X.shape), np.zeros(X.shape)]
+
+    for i in range(3):
+        for j in range(N_c):
+            array_1[i][j, :] = arrays[i][ Shuffle_c[j][1], : ]
+    for i in range(3):
+        for j in range(N_c):
+            array_2[i][:, j] = array_1[i][:, Shuffle_p[j][1]]
 
     if change_dict:
-        Nuevo_dict_c_num = dict([(list(diccionario[0].keys())[Shuffle_c[i][1]], i) for i in range(N_c)])
-        Nuevo_dict_p_num = dict([(list(diccionario[1].keys())[Shuffle_p[i][1]], i) for i in range(N_p)])
+        llave_c = list(diccionario[0].keys())
+        llave_p = list(diccionario[1].keys())
+        Nuevo_dict_c_num = dict([(llave_c[Shuffle_c[i][1]], i) for i in range(N_c)])
+        Nuevo_dict_p_num = dict([(llave_p[Shuffle_p[i][1]], i) for i in range(N_p)])
 
         diccionario[0] = Nuevo_dict_c_num
         diccionario[1] = Nuevo_dict_p_num
 
-    return RCA_ordenada, M_ordenada, X_ordenada
+    return array_2
 
 def Similaridad(M):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''
@@ -111,4 +122,4 @@ def Complexity_measures(M, n):
 
 def Z_transf(K):
     '''Aplica la transformada Z sobre un vector K'''
-    return (K - np.mean(K)) / np.std(K)
+    return -(K - np.mean(K)) / np.std(K)
