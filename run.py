@@ -51,7 +51,7 @@ R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1)
 
 #plt.show()
 
-#ECI = calc.Z_transf( calc.Complexity_measures(M_cp, 2 * 7)[0] )
+ECI = calc.Z_transf( calc.Complexity_measures(M_cp, 2 * 7)[0] )
 #plt.scatter([i for i in range(len(ECI))], ECI)
 #plt.title('Indice de Complejidad Economica')
 #plt.show()
@@ -59,16 +59,23 @@ R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1)
 phi = calc.Similaridad(M_cp)
 omega_cp = calc.Similarity_Density(R_cp)
 
-Prop = len(phi[phi>0.4])
-Total = np.size(phi)
-print(Prop / Total * 100)
+paises_num = diccionaries[0]
+num_paises = trat.inv_dict(paises_num)
+
+ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
+ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
+
+print(ECI_paises)
+# Prop = len(phi[phi>0.4])
+# Total = np.size(phi)
+# print(Prop / Total * 100)
 
 #figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = True)
 
 #figs.Clustering(phi)
 
-dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = True)
+#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+#figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = True)
 
 
 
