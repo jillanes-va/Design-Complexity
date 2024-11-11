@@ -24,7 +24,6 @@ diccionaries = trat.dictionaries(datos_premio)
 X_cpt = trat.X_matrix(datos_premio)
 X_cp = trat.Promedio_temporal(X_cpt)
 
-print(X_cp.sum(axis = 0))
 #Informacion = test.categorias_presentes(X_cpt, diccionaries)
 #plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
 #plt.ylabel('Frecuencia absoluta')
@@ -39,12 +38,12 @@ print(X_cp.sum(axis = 0))
 #print(sisi[sisi['award_score'] > 5.0])
 
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
+print(M_cp.shape)
+#figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
 
-figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
+#figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
 
-figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
-
-figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+#figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 
 #k_0 =  calc.Complexity_measures(M_cp, 4)[0]
 #k_1 =  calc.Complexity_measures(M_cp, 5)[0]
@@ -62,14 +61,14 @@ num_paises = trat.inv_dict(paises_num)
 ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
 ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
 
-plt.scatter([i for i in range(len(ECI))], [i[0] for i in ECI_paises])
-# Prop = len(phi[phi>0.4])
-# Total = np.size(phi)
-# print(Prop / Total * 100)
+with open(r'./Datos/Resultados/Ranking_ECI_Design.csv', 'w') as f:
+    f.write('Ranking,Pais,ECI_design\n')
+    for i, valores in enumerate(ECI_paises):
+        f.write('{},'.format(i+1) + valores[1] + ',{}'.format(valores[0])+'\n')
 
-figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = True)
+#figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = True)
 
-figs.Clustering(phi)
+#figs.Clustering(phi)
 
-dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = False)
+#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+#figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = False)
