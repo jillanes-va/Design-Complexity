@@ -63,12 +63,13 @@ Prop = len(phi[phi>0.4])
 Total = np.size(phi)
 print(Prop / Total * 100)
 
-figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = True)
+#figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = True)
 
 #figs.Clustering(phi)
 
 dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-#figs.Density_plot(dom_phi, relatedness)
+figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = True)
+
 
 
 
