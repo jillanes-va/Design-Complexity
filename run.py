@@ -23,6 +23,8 @@ diccionaries = trat.dictionaries(datos_premio)
 
 X_cpt = trat.X_matrix(datos_premio)
 X_cp = trat.Promedio_temporal(X_cpt)
+
+print(X_cp.sum(axis = 0))
 #Informacion = test.categorias_presentes(X_cpt, diccionaries)
 #plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
 #plt.ylabel('Frecuencia absoluta')
@@ -36,13 +38,13 @@ X_cp = trat.Promedio_temporal(X_cpt)
 #print(sisi)
 #print(sisi[sisi['award_score'] > 5.0])
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 1 )
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
 
-#figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
+figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
 
-#figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
+figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = '$R_{cp}$')
 
-#figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 
 #k_0 =  calc.Complexity_measures(M_cp, 4)[0]
 #k_1 =  calc.Complexity_measures(M_cp, 5)[0]
@@ -70,8 +72,4 @@ figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = T
 figs.Clustering(phi)
 
 dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = True)
-
-
-
-
+figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = False)

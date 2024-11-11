@@ -72,7 +72,7 @@ def Matrices_ordenadas(X, diccionario, c_min = 1, p_min = 1, threshold = 1, chan
         for j in range(N_c):
             array_1[i][j, :] = arrays[i][ Shuffle_c[j][1], : ]
     for i in range(3):
-        for j in range(N_c):
+        for j in range(N_p):
             array_2[i][:, j] = array_1[i][:, Shuffle_p[j][1]]
 
     if change_dict:
