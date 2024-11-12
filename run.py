@@ -61,14 +61,10 @@ num_paises = trat.inv_dict(paises_num)
 ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
 ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
 
-with open(r'./Datos/Resultados/Ranking_ECI_Design.csv', 'w') as f:
-    f.write('Ranking,Pais,ECI_design\n')
-    for i, valores in enumerate(ECI_paises):
-        f.write('{},'.format(i+1) + valores[1] + ',{}'.format(valores[0])+'\n')
 
 #figs.red(phi, inicio = 10, max_color = 204, name = 'Espacio_productos', save = True)
 
 #figs.Clustering(phi)
 
-#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-#figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', name = 'PrincipleOfRelatedness', save = False)
+dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', xlim_sup= 0.85, name = 'PrincipleOfRelatedness', save = False)
