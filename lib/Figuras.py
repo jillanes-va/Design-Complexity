@@ -4,6 +4,8 @@ import networkx as nx
 
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
+plt.rcParams['font.family'] = 'STIXGeneral'
+
 
 def graf(X, xlabel = '', ylabel = '', save = False, name = '', title = ''):
     plt.figure(figsize = (7,7))
@@ -47,9 +49,10 @@ def Density_plot(domain, prob, xlabel = '', ylabel = '', xlim_sup = 0.7, save = 
     else:
         plt.show()
 
-def red(phi, PCI,inicio = 10, max_color = 120, umbral_enlace = 0.5, save = False, name = ''):
+def red(phi, by_com = True, PCI = None, umbral_enlace = 0.5, save = False, name = ''):
     Red_original = nx.from_numpy_array(phi)
     Red_nueva = nx.maximum_spanning_tree(Red_original)
+
 
     pesos_red = []
     for enlace in list(Red_original.edges.data()):
@@ -58,22 +61,32 @@ def red(phi, PCI,inicio = 10, max_color = 120, umbral_enlace = 0.5, save = False
             Red_nueva.add_edge(enlace[0], enlace[1], weight = peso)
         pesos_red.append(peso)
     k_degree = np.sum([2 for enlaces in Red_nueva.edges])/Red_nueva.number_of_nodes()
-    print(k_degree)
-    print( (phi[phi > umbral_enlace].sum() / phi.sum())*100, '%' )
+    #print(k_degree) #Printea el grado promedio de la red sin peso.
+    #print( (phi[phi > umbral_enlace].sum() / phi.sum())*100, '%' ) #Contea la reconexion del top %
 
     posicion_red = nx.kamada_kawai_layout(Red_nueva)
     pesos = np.array([enlace[2]['weight'] for enlace in Red_nueva.edges.data()])
     pesos = 3*smooth(pesos)
-    coloracion = get_cmap(PCI)
 
     fig, ax = plt.subplots()
-    nx.draw_networkx_nodes(Red_nueva, pos = posicion_red, node_size= 50, node_color = coloracion )
+    if by_com:
+        comunidades = nx.community.greedy_modularity_communities(Red_nueva)
+
+        for nodos, color in zip(comunidades, ['tab:blue', 'tab:green', 'tab:orange', 'tab:red', 'tab:brown', 'tab:purple', 'tab:pink', 'tab:cyan']):
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=nodos, node_color = color, node_size = 50)
+    else:
+        coloracion, barra = get_cmap(PCI)
+        nx.draw_networkx_nodes(Red_nueva, pos=posicion_red, node_size=50, node_color=coloracion)
+        plt.colorbar(barra, ax=plt.gca())
+
     nx.draw_networkx_edges(Red_nueva, pos = posicion_red, width = pesos)
+
 
     if save and len(name) != 0:
         plt.axis('off')
         plt.savefig('./figs/' + name + '.pdf', transparent = True, bbox_inches = 'tight')
     else:
+        plt.tight_layout()
         plt.show()
 
 def grafico_prueba(A):
@@ -81,12 +94,22 @@ def grafico_prueba(A):
     ax.hist(A, bins = 30, density = True)
     plt.show()
 
-def get_cmap(PCI, name='plasma'):
+def get_cmap(PCI, name='inferno'):
     '''Returns a function that maps each index in 0, 1, ..., n-1 to a distinct
     RGB color; the keyword argument name must be a standard mpl colormap name.'''
-    normalizacion = plt.Normalize(vmin = PCI.min(), vmax = PCI.max())
+    normalizacion = plt.Normalize(vmin = PCI.min(), vmax = PCI.max()+1)
     cmap = plt.get_cmap(name)
     lista = np.array([cmap(normalizacion(valores)) for valores in PCI])
+    colorbar = plt.cm.ScalarMappable(cmap = cmap, norm = normalizacion)
+    colorbar.set_array([])
+    return lista, colorbar
+
+def get_cmap_evenly(N, name='inferno'):
+    '''Returns a function that maps each index in 0, 1, ..., n-1 to a distinct
+    RGB color; the keyword argument name must be a standard mpl colormap name.'''
+    normalizacion = plt.Normalize(vmin = 0, vmax = N - 1)
+    cmap = plt.get_cmap(name)
+    lista = np.array([cmap(normalizacion(valores)) for valores in range(N)])
     return lista
 
 def smooth(x,n=0.5):

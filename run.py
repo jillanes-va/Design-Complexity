@@ -60,17 +60,25 @@ PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[1])
 num_paises = trat.inv_dict(diccionaries[0])
 num_cat = trat.inv_dict(diccionaries[1])
 
-ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
-PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
+# ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
+# PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
+#
+# ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
+# PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
+#
+#
+#
+figs.red(phi, PCI = PCI, by_com = False, name = 'Espacio_productos_PCI', save = True, umbral_enlace = 0.455)
 
-ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
-PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
-
-
-
-figs.red(phi, PCI, inicio = 10, max_color = 204, name = 'Espacio_productos', save = False, umbral_enlace = 0.455)
+# Red = nx.from_numpy_array(phi)
+# Comunidades = nx.community.greedy_modularity_communities(Red)
+# for i, comunidad in enumerate(Comunidades):
+#     print('Comunidad {}'.format(i+1))
+#     for j in comunidad:
+#         print(num_cat[j])
+#     print('')
 
 #figs.Clustering(phi)
 
 #dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-#figs.Density_plot(dom_phi, relatedness, xlabel = r'$\omega_{cp}$', ylabel = 'P(Transición)', xlim_sup= 0.85, name = 'PrincipleOfRelatedness', save = False)
+#figs.Density_plot(dom_phi, relatedness, xlabel = r'Densidad de similaridad', ylabel = 'Probabilidad de que RCA de diseño transicione en categorias', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = True)
