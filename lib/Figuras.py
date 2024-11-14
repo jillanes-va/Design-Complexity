@@ -4,6 +4,9 @@ import networkx as nx
 
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
+
+import lib.Tratamiento as trat
+
 plt.rcParams['font.family'] = 'STIXGeneral'
 
 
@@ -49,7 +52,7 @@ def Density_plot(domain, prob, xlabel = '', ylabel = '', xlim_sup = 0.7, save = 
     else:
         plt.show()
 
-def red(phi, by_com = True, PCI = None, umbral_enlace = 0.5, save = False, name = ''):
+def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, save = False, name = ''):
     Red_original = nx.from_numpy_array(phi)
     Red_nueva = nx.maximum_spanning_tree(Red_original)
 
@@ -61,25 +64,31 @@ def red(phi, by_com = True, PCI = None, umbral_enlace = 0.5, save = False, name 
             Red_nueva.add_edge(enlace[0], enlace[1], weight = peso)
         pesos_red.append(peso)
     k_degree = np.sum([2 for enlaces in Red_nueva.edges])/Red_nueva.number_of_nodes()
-    #print(k_degree) #Printea el grado promedio de la red sin peso.
-    #print( (phi[phi > umbral_enlace].sum() / phi.sum())*100, '%' ) #Contea la reconexion del top %
+    print(k_degree) #Printea el grado promedio de la red sin peso.
+    print( (phi[phi > umbral_enlace].sum() / phi.sum())*100, '%' ) #Contea la reconexion del top %
 
-    posicion_red = nx.kamada_kawai_layout(Red_nueva)
+    posicion_red = nx.kamada_kawai_layout(Red_nueva, weight = None)
     pesos = np.array([enlace[2]['weight'] for enlace in Red_nueva.edges.data()])
-    pesos = 3*smooth(pesos)
+    pesos = 2 * smooth(pesos)
+
 
     fig, ax = plt.subplots()
     if by_com:
         comunidades = nx.community.greedy_modularity_communities(Red_nueva)
+        #posicion_red = equal_vectors(comunidades)
+        print(comunidades)
+        for nodos, color, color_oscuro in zip(comunidades, ['tab:blue', 'tab:green', 'tab:orange', 'tab:red', 'tab:brown', 'tab:purple', 'tab:pink', 'tab:cyan'], ['#1e547b', '#2b752b', '#bb7130', '#8e2829', '#6f372c', '#6b3996', '#ad3f8c', 'cyan']):
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=nodos, node_color= color_oscuro, node_size=95)
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=nodos, node_color = color, node_size = 55)
 
-        for nodos, color in zip(comunidades, ['tab:blue', 'tab:green', 'tab:orange', 'tab:red', 'tab:brown', 'tab:purple', 'tab:pink', 'tab:cyan']):
-            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=nodos, node_color = color, node_size = 50)
+
+
     else:
         coloracion, barra = get_cmap(PCI)
-        nx.draw_networkx_nodes(Red_nueva, pos=posicion_red, node_size=50, node_color=coloracion)
+        nx.draw_networkx_nodes(Red_nueva, pos=posicion_red, node_size = 55, node_color=coloracion)
         plt.colorbar(barra, ax=plt.gca())
 
-    nx.draw_networkx_edges(Red_nueva, pos = posicion_red, width = pesos)
+    nx.draw_networkx_edges(Red_nueva, pos = posicion_red, width = pesos, alpha = 0.3)
 
 
     if save and len(name) != 0:
@@ -114,4 +123,23 @@ def get_cmap_evenly(N, name='inferno'):
 
 def smooth(x,n=0.5):
     y = ( x - np.min(x)) / (np.max(x) - np.min(x))
-    return (y + 0.35)/1.35
+    return (y + 0.35)/1.15
+
+def equal_vectors(comunidades):
+    np.random.seed(None)
+    print(np.random.get_state()[1][0])
+    r = 0.3
+    N = len(comunidades)
+    diff = 2 * np.pi/(N)
+    centro_comm = np.zeros((N, 2))
+    nodes_pos = {}
+    for i in range(0, N - 1):
+        centro_comm[i +1,:] = np.random.random(), np.random.random()
+    for n, comunidad in enumerate(comunidades):
+        for nodo in comunidad:
+            posicion = r*centro_comm[n, :] + 0.03* np.random.normal(size = 2)
+            nodes_pos.update({nodo : posicion})
+
+    print('')
+
+    return nodes_pos

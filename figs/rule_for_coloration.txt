@@ -1,0 +1,96 @@
+blue
+Furniture Design Award Category.
+Graphics, Illustration and Visual Communication Design Award Category.
+Architecture, Building and Structure Design Award Category.
+Arts, Crafts and Ready-Made Design Award Category.
+Jewelry, Eyewear and Watch Design Award Category.
+Lighting Products and Lighting Projects Design Award Category.
+Packaging Design Award Category.
+Baby, Kids' and Children's Products Design Award Category.
+Bakeware, Tableware, Drinkware and Cookware Design Award Category.
+Fashion and Travel Accessories Design Award Category.
+Fashion, Apparel and Garment Design Award Category.
+Website and Web Design Award Category.
+Toy, Games and Hobby Products Design Award Category.
+Social Design Award Category.
+Sustainable Products, Projects and Green Design Award Category.
+Vehicle, Mobility and Transportation Design Award Category.
+Digital and Electronic Devices Design Award Category.
+Photography and Photo Manipulation Design Award Category.
+Advertising, Marketing and Communication Design Award Category.
+Print and Published Media Design Award Category.
+3D Printed Forms and Products Design Award Category.
+Engineering and Technical Design Award Category.
+Education, Teaching Aid and Training Content Design Award Category.
+Wearable Technologies Design Award Category.
+Public Awareness, Volunteerism, and Society Design Award Category.
+
+green
+Building Materials and Construction Components Design Award Category.
+Street Furniture Design Award Category.
+Differently Abled and Seniors' Assistance Design Award Category.
+Medical Devices and Medical Equipment Design Award Category.
+Art Materials, Stationery Supplies and Gift Items Design Award Category.
+Movie, Video and Animation Design Award Category.
+Textile, Fabric, Textures, Patterns and Cloth Design Award Category.
+Futuristic Design Award Category.
+Idea Design Award Category.
+Interface and Interaction Design Award Category.
+Sports, Entertainment and Recreation Equipment Design Award Category.
+Bathroom Furniture and Sanitary Ware Design Award Category.
+Cultural Heritage and Culture Industry Design Award Category.
+Yacht and Marine Vessels Design Award Category.
+Footwear, Shoes and Boots Design Award Category.
+Safety Clothing and Personal Protective Equipment Design Award Category.
+Computer Graphics and 3D Model Design Award Category.
+Energy Products, Projects and Devices Design Award Category.
+Generative, Algorithmic and Parametric Design Award Category.
+
+orange
+Hardware, Power and Hand Tools Design Award Category.
+Robotics, Automaton and Automation Design Award Category.
+Agricultural Tools, Equipment and Machinery Design Award Category.
+Awards, Prize and Competitions Design Award Category.
+Digital and Broadcasting Media Design Award Category.
+Aerospace and Aircraft Design Award Category.
+Cybernetics, Prosthesis and Implant Design Award Category.
+Heating, Ventilation, and Air Conditioning Products Design Award Category.
+Manufacturing and Processing Machinery Design Award Category.
+Furniture Accessories, Hardware and Materials Design Award Category.
+Hospitality, Recreation, Travel and Tourism Design Award Category.
+Office Furniture Design Award Category.
+Event and Happening Design Award Category.
+
+red
+Interior Space and Exhibition Design Award Category.
+Garden and Outdoor Furniture Design Award Category.
+Car and Land Based Motor Vehicles Design Award Category.
+Construction and Real Estate Projects Design Award Category.
+Disposable and Single-Use Product Design Award Category.
+Urban Planning and Urban Design Award Category.
+Information Technologies Design Award Category.
+Landscape Planning and Garden Design Award Category.
+Audio and Sound Equipment Design Award Category.
+
+brown
+Music, Audio and Sound Design Award Category.
+Security, Safety and Surveillance Products Design Award Category.
+Beauty, Personal Care and Cosmetic Products Design Award Category.
+Scientific Instruments and Research Equipment Design Award Category.
+Home Appliances Design Award Category.
+Pet Supplies and Products for Animals Design Award Category.
+Mobile Technologies, Applications and Software Design Award Category.
+Meta, Strategic and Service Design Award Category.
+
+purple
+Musical Instruments Design Award Category.
+Outdoor Gear and Camping Equipment Design Award Category.
+Design Quality and Innovation Award Category.
+Food, Beverage and Culinary Arts Design Award Category.
+Prosumer Products, Tools, and Machinery Design Award Category.
+
+pink
+Luxury Design Award Category.
+Performing Arts, Style and Scenery Design Award Category.
+Limited Edition and Custom Design Award Category.
+
