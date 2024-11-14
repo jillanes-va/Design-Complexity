@@ -43,8 +43,8 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
 
 def Density_plot(domain, prob, xlabel = '', ylabel = '', xlim_sup = 0.7, save = False, name = ''):
     plt.bar(domain, prob, width=1 / len(domain), align='edge')
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+    plt.xlabel(xlabel, fontsize = 'x-large')
+    plt.ylabel(ylabel, fontsize = 'x-large')
     plt.xlim([-0.05, xlim_sup])
 
     if save and len(name) != 0:
@@ -75,14 +75,9 @@ def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, 
     fig, ax = plt.subplots()
     if by_com:
         comunidades = nx.community.greedy_modularity_communities(Red_nueva)
-        #posicion_red = equal_vectors(comunidades)
-        print(comunidades)
-        for nodos, color, color_oscuro in zip(comunidades, ['tab:blue', 'tab:green', 'tab:orange', 'tab:red', 'tab:brown', 'tab:purple', 'tab:pink', 'tab:cyan'], ['#1e547b', '#2b752b', '#bb7130', '#8e2829', '#6f372c', '#6b3996', '#ad3f8c', 'cyan']):
-            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=nodos, node_color= color_oscuro, node_size=95)
-            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=nodos, node_color = color, node_size = 55)
-
-
-
+        for comunidad, color, color_oscuro in zip(comunidades, ['tab:blue', 'tab:green', 'tab:orange', 'tab:red', 'tab:brown', 'tab:purple', 'tab:pink', 'tab:cyan'], ['#1e547b', '#2b752b', '#bb7130', '#8e2829', '#6f372c', '#6b3996', '#ad3f8c', 'cyan']):
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color= color_oscuro, node_size=95)
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color = color, node_size = 55)
     else:
         coloracion, barra = get_cmap(PCI)
         nx.draw_networkx_nodes(Red_nueva, pos=posicion_red, node_size = 55, node_color=coloracion)

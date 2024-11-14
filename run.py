@@ -77,9 +77,9 @@ num_cat = trat.inv_dict(diccionaries[1])
 # plt.show()
 #
 #
-figs.red(phi, PCI = PCI, by_com = True, name = 'Espacio_productos_Comunidades', save = True, umbral_enlace = 0.4)
+#figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
 #
 # figs.Clustering(phi, save = False)
 #
-# dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-# figs.Density_plot(dom_phi, relatedness, xlabel = r'Densidad de similaridad', ylabel = 'Probabilidad de que RCA de diseño transicione en categorias', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = True)
+dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+figs.Density_plot(dom_phi, relatedness, xlabel = r'Densidad de similaridad', ylabel = 'Probabilidad de transicionar en alguna categoría', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = True)
