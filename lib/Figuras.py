@@ -70,8 +70,9 @@ def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, 
     posicion_red = nx.kamada_kawai_layout(Red_nueva, weight = None)
     pesos = np.array([enlace[2]['weight'] for enlace in Red_nueva.edges.data()])
     pesos = 2 * smooth(pesos)
-
-
+    for n, nodo in enumerate(Red_nueva.nodes()):
+        Red_nueva.nodes[nodo]['PCI'] = PCI[n]
+    nx.write_gexf(Red_nueva, r'./Datos/Resultados/Red_Graphi.gexf')
     fig, ax = plt.subplots()
     if by_com:
         comunidades = nx.community.greedy_modularity_communities(Red_nueva)
