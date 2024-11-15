@@ -1,0 +1,83 @@
+Numero Categoria
+0 Furniture Design Award Category.
+1 Graphics, Illustration and Visual Communication Design Award Category.
+2 Architecture, Building and Structure Design Award Category.
+3 Arts, Crafts and Ready-Made Design Award Category.
+4 Jewelry, Eyewear and Watch Design Award Category.
+5 Lighting Products and Lighting Projects Design Award Category.
+6 Packaging Design Award Category.
+7 Baby, Kids' and Children's Products Design Award Category.
+8 Bakeware, Tableware, Drinkware and Cookware Design Award Category.
+9 Fashion and Travel Accessories Design Award Category.
+10 Fashion, Apparel and Garment Design Award Category.
+11 Website and Web Design Award Category.
+12 Toy, Games and Hobby Products Design Award Category.
+13 Social Design Award Category.
+14 Sustainable Products, Projects and Green Design Award Category.
+15 Vehicle, Mobility and Transportation Design Award Category.
+16 Building Materials and Construction Components Design Award Category.
+17 Digital and Electronic Devices Design Award Category.
+18 Photography and Photo Manipulation Design Award Category.
+19 Advertising, Marketing and Communication Design Award Category.
+20 Street Furniture Design Award Category.
+21 Differently Abled and Seniors' Assistance Design Award Category.
+22 Medical Devices and Medical Equipment Design Award Category.
+23 Print and Published Media Design Award Category.
+24 Pet Supplies and Products for Animals Design Award Category.
+25 Art Materials, Stationery Supplies and Gift Items Design Award Category.
+26 Mobile Technologies, Applications and Software Design Award Category.
+27 Movie, Video and Animation Design Award Category.
+28 Textile, Fabric, Textures, Patterns and Cloth Design Award Category.
+29 Futuristic Design Award Category.
+30 Idea Design Award Category.
+31 Interface and Interaction Design Award Category.
+32 Sports, Entertainment and Recreation Equipment Design Award Category.
+33 Bathroom Furniture and Sanitary Ware Design Award Category.
+34 Cultural Heritage and Culture Industry Design Award Category.
+35 3D Printed Forms and Products Design Award Category.
+36 Engineering and Technical Design Award Category.
+37 Yacht and Marine Vessels Design Award Category.
+38 Limited Edition and Custom Design Award Category.
+39 Footwear, Shoes and Boots Design Award Category.
+40 Safety Clothing and Personal Protective Equipment Design Award Category.
+41 Security, Safety and Surveillance Products Design Award Category.
+42 Computer Graphics and 3D Model Design Award Category.
+43 Education, Teaching Aid and Training Content Design Award Category.
+44 Food, Beverage and Culinary Arts Design Award Category.
+45 Performing Arts, Style and Scenery Design Award Category.
+46 Prosumer Products, Tools, and Machinery Design Award Category.
+47 Urban Planning and Urban Design Award Category.
+48 Beauty, Personal Care and Cosmetic Products Design Award Category.
+49 Energy Products, Projects and Devices Design Award Category.
+50 Home Appliances Design Award Category.
+51 Luxury Design Award Category.
+52 Furniture Accessories, Hardware and Materials Design Award Category.
+53 Generative, Algorithmic and Parametric Design Award Category.
+54 Hospitality, Recreation, Travel and Tourism Design Award Category.
+55 Landscape Planning and Garden Design Award Category.
+56 Musical Instruments Design Award Category.
+57 Office Furniture Design Award Category.
+58 Wearable Technologies Design Award Category.
+59 Design Quality and Innovation Award Category.
+60 Event and Happening Design Award Category.
+61 Meta, Strategic and Service Design Award Category.
+62 Public Awareness, Volunteerism, and Society Design Award Category.
+63 Audio and Sound Equipment Design Award Category.
+64 Hardware, Power and Hand Tools Design Award Category.
+65 Interior Space and Exhibition Design Award Category.
+66 Robotics, Automaton and Automation Design Award Category.
+67 Agricultural Tools, Equipment and Machinery Design Award Category.
+68 Awards, Prize and Competitions Design Award Category.
+69 Digital and Broadcasting Media Design Award Category.
+70 Music, Audio and Sound Design Award Category.
+71 Aerospace and Aircraft Design Award Category.
+72 Garden and Outdoor Furniture Design Award Category.
+73 Outdoor Gear and Camping Equipment Design Award Category.
+74 Car and Land Based Motor Vehicles Design Award Category.
+75 Construction and Real Estate Projects Design Award Category.
+76 Cybernetics, Prosthesis and Implant Design Award Category.
+77 Disposable and Single-Use Product Design Award Category.
+78 Heating, Ventilation, and Air Conditioning Products Design Award Category.
+79 Information Technologies Design Award Category.
+80 Manufacturing and Processing Machinery Design Award Category.
+81 Scientific Instruments and Research Equipment Design Award Category.
