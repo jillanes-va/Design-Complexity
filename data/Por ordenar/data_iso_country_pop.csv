@@ -1,0 +1,233 @@
+country_code,country_iso,country_name,pop2019,region
+4,afg,Afghanistan,38041.754,Asia
+8,alb,Albania,2880.917,Europe
+12,dza,Algeria,43053.054,Africa
+16,asm,American Samoa,55.312,Oceania
+20,and,Andorra,77.142,Europe
+24,ago,Angola,31825.295,Africa
+660,aia,Anguilla,14.869,Americas
+28,atg,Antigua and Barbuda,97.118,Americas
+32,arg,Argentina,44780.677,Americas
+51,arm,Armenia,2957.731,Asia
+533,abw,Aruba,106.314,Americas
+36,aus,Australia,25203.198,Oceania
+40,aut,Austria,8955.102,Europe
+31,aze,Azerbaijan,10047.718,Asia
+44,bhs,Bahamas,389.482,Americas
+48,bhr,Bahrain,1641.172,Asia
+50,bgd,Bangladesh,163046.161,Asia
+52,brb,Barbados,287.025,Americas
+112,blr,Belarus,9452.411,Europe
+56,bel,Belgium,11539.328,Europe
+84,blz,Belize,390.353,Americas
+204,ben,Benin,11801.151,Africa
+60,bmu,Bermuda,62.506,Americas
+64,btn,Bhutan,763.092,Asia
+68,bol,Bolivia,11513.1,Americas
+70,bih,Bosnia and Herzegovina,3301,Europe
+72,bwa,Botswana,2303.697,Africa
+76,bra,Brazil,211049.527,Americas
+92,vgb,British Virgin Islands,30.03,Americas
+96,brn,Brunei,433.285,Asia
+100,bgr,Bulgaria,7000.119,Europe
+854,bfa,Burkina Faso,20321.378,Africa
+108,bdi,Burundi,11530.58,Africa
+116,khm,Cambodia,16486.542,Asia
+120,cmr,Cameroon,25876.38,Africa
+124,can,Canada,37411.047,Americas
+132,cpv,Cape Verde,549.935,Africa
+136,cym,Cayman Islands,64.948,Americas
+140,caf,Central African Republic,4745.185,Africa
+148,tcd,Chad,15946.876,Africa
+152,chl,Chile,18952.038,Chile
+156,chn,China,1433783.686,Asia
+170,col,Colombia,50339.443,Americas
+174,com,Comoros,850.886,Africa
+184,cok,Cook Islands,17.548,Oceania
+188,cri,Costa Rica,5047.561,Americas
+191,hrv,Croatia,4130.304,Europe
+192,cub,Cuba,11333.483,Americas
+531,cuw,Curacao,163.424,Americas
+196,cyp,Cyprus,1198.575,Asia
+203,cze,Czech Republic,10689.209,Europe
+208,dnk,Denmark,5771.876,Europe
+262,dji,Djibouti,973.56,Africa
+212,dma,Dominica,71.808,Americas
+214,dom,Dominican Republic,10738.958,Americas
+180,cod,DR Congo,86790.567,Africa
+218,ecu,Ecuador,17373.662,Americas
+818,egy,Egypt,100388.073,Africa
+222,slv,El Salvador,6453.553,Americas
+226,gnq,Equatorial Guinea,1355.986,Africa
+232,eri,Eritrea,3497.117,Africa
+233,est,Estonia,1325.648,Europe
+231,eth,Ethiopia,112078.73,Africa
+238,flk,Falkland Islands,3.377,Americas
+234,fro,Faroe Islands,48.678,Europe
+242,fji,Fiji,889.953,Oceania
+246,fin,Finland,5532.156,Europe
+250,fra,France,65129.728,Europe
+254,guf,French Guiana,290.832,Americas
+258,pyf,French Polynesia,279.287,Oceania
+266,gab,Gabon,2172.579,Africa
+270,gmb,Gambia,2347.706,Africa
+268,geo,Georgia,3996.765,Asia
+276,deu,Germany,83517.045,Europe
+288,gha,Ghana,30417.856,Africa
+292,gib,Gibraltar,33.701,Europe
+300,grc,Greece,10473.455,Europe
+304,grl,Greenland,56.672,Americas
+308,grd,Grenada,112.003,Americas
+312,glp,Guadeloupe,400.056,Americas
+316,gum,Guam,167.294,Oceania
+320,gtm,Guatemala,17581.472,Americas
+324,gin,Guinea,12771.246,Africa
+624,gnb,Guinea-Bissau,1920.922,Africa
+328,guy,Guyana,782.766,Americas
+332,hti,Haiti,11263.077,Americas
+340,hnd,Honduras,9746.117,Americas
+344,hkg,Hong Kong,7436.154,Asia
+348,hun,Hungary,9684.679,Europe
+352,isl,Iceland,339.031,Europe
+356,ind,India,1366417.754,Asia
+360,idn,Indonesia,270625.568,Asia
+364,irn,Iran,82913.906,Asia
+368,irq,Iraq,39309.783,Asia
+372,irl,Ireland,4882.495,Europe
+833,imn,Isle of Man,84.584,Europe
+376,isr,Israel,8519.377,Asia
+380,ita,Italy,60550.075,Europe
+384,civ,Ivory Coast,25716.544,Africa
+388,jam,Jamaica,2948.279,Americas
+392,jpn,Japan,126860.301,Asia
+400,jor,Jordan,10101.694,Asia
+398,kaz,Kazakhstan,18551.427,Asia
+404,ken,Kenya,52573.973,Africa
+296,kir,Kiribati,117.606,Oceania
+414,kwt,Kuwait,4207.083,Asia
+417,kgz,Kyrgyzstan,6415.85,Asia
+418,lao,Laos,7169.455,Asia
+428,lva,Latvia,1906.743,Europe
+422,lbn,Lebanon,6855.713,Asia
+426,lso,Lesotho,2125.268,Africa
+430,lbr,Liberia,4937.374,Africa
+434,lby,Libya,6777.452,Africa
+438,lie,Liechtenstein,38.019,Europe
+440,ltu,Lithuania,2759.627,Europe
+442,lux,Luxembourg,615.729,Europe
+446,mac,Macau,640.445,Asia
+807,mkd,Macedonia,2083.459,Europe
+450,mdg,Madagascar,26969.307,Africa
+454,mwi,Malawi,18628.747,Africa
+458,mys,Malaysia,31949.777,Asia
+462,mdv,Maldives,530.953,Asia
+466,mli,Mali,19658.031,Africa
+470,mlt,Malta,440.372,Europe
+584,mhl,Marshall Islands,58.791,Oceania
+474,mtq,Martinique,375.554,Americas
+478,mrt,Mauritania,4525.696,Africa
+480,mus,Mauritius,1269.668,Africa
+175,myt,Mayotte,266.15,Africa
+484,mex,Mexico,127575.529,Americas
+583,fsm,Micronesia,113.815,Oceania
+498,mda,Moldova,4043.263,Europe
+492,mco,Monaco,38.964,Europe
+496,mng,Mongolia,3225.167,Asia
+499,mne,Montenegro,627.987,Europe
+500,msr,Montserrat,4.989,Americas
+504,mar,Morocco,36471.769,Africa
+508,moz,Mozambique,30366.036,Africa
+104,mmr,Myanmar,54045.42,Asia
+516,nam,Namibia,2494.53,Africa
+520,nru,Nauru,10.756,Oceania
+524,npl,Nepal,28608.71,Asia
+528,nld,Netherlands,17097.13,Europe
+540,ncl,New Caledonia,282.75,Oceania
+554,nzl,New Zealand,4783.063,Oceania
+558,nic,Nicaragua,6545.502,Americas
+562,ner,Niger,23310.715,Africa
+566,nga,Nigeria,200963.599,Africa
+570,niu,Niue,1.615,Oceania
+408,prk,North Korea,25666.161,Asia
+580,mnp,Northern Mariana Islands,57.216,Oceania
+578,nor,Norway,5378.857,Europe
+512,omn,Oman,4974.986,Asia
+586,pak,Pakistan,216565.318,Asia
+585,plw,Palau,18.008,Oceania
+275,pse,Palestine,4981.42,Asia
+591,pan,Panama,4246.439,Americas
+598,png,Papua New Guinea,8776.109,Oceania
+600,pry,Paraguay,7044.636,Americas
+604,per,Peru,32510.453,Americas
+608,phl,Philippines,108116.615,Asia
+616,pol,Poland,37887.768,Europe
+620,prt,Portugal,10226.187,Europe
+630,pri,Puerto Rico,2933.408,Americas
+634,qat,Qatar,2832.067,Asia
+178,cog,Republic of the Congo,5380.508,Africa
+638,reu,Reunion,888.927,Africa
+642,rou,Romania,19364.557,Europe
+643,rus,Russia,145872.256,Europe
+646,rwa,Rwanda,12626.95,Africa
+652,blm,Saint Barthélemy,9.847,Americas
+659,kna,Saint Kitts and Nevis,52.823,Americas
+662,lca,Saint Lucia,182.79,Americas
+663,maf,Saint Martin,38.002,Americas
+666,spm,Saint Pierre and Miquelon,5.822,Americas
+670,vct,Saint Vincent and the Grenadines,110.589,Americas
+882,wsm,Samoa,197.097,Oceania
+674,smr,San Marino,33.86,Europe
+678,stp,Sao Tome and Principe,215.056,Africa
+682,sau,Saudi Arabia,34268.528,Asia
+686,sen,Senegal,16296.364,Africa
+688,srb,Serbia,8772.235,Europe
+690,syc,Seychelles,97.739,Africa
+694,sle,Sierra Leone,7813.215,Africa
+702,sgp,Singapore,5804.337,Asia
+534,sxm,Sint Maarten,42.388,Americas
+703,svk,Slovakia,5457.013,Europe
+705,svn,Slovenia,2078.654,Europe
+90,slb,Solomon Islands,669.823,Oceania
+706,som,Somalia,15442.905,Africa
+710,zaf,South Africa,58558.27,Africa
+410,kor,South Korea,51225.308,Asia
+728,ssd,South Sudan,11062.113,Africa
+724,esp,Spain,46736.776,Europe
+144,lka,Sri Lanka,21323.733,Asia
+729,sdn,Sudan,42813.238,Africa
+740,sur,Suriname,581.372,Americas
+748,swz,Swaziland,1148.13,Africa
+752,swe,Sweden,10036.379,Europe
+756,che,Switzerland,8591.365,Europe
+760,syr,Syria,17070.135,Asia
+158,twn,Taiwan,23773.876,Asia
+762,tjk,Tajikistan,9321.018,Asia
+834,tza,Tanzania,58005.463,Africa
+764,tha,Thailand,69625.582,Asia
+626,tls,Timor-Leste,1293.119,Asia
+768,tgo,Togo,8082.366,Africa
+772,tkl,Tokelau,1.34,Oceania
+776,ton,Tonga,104.494,Oceania
+780,tto,Trinidad and Tobago,1394.973,Americas
+788,tun,Tunisia,11694.719,Africa
+792,tur,Turkey,83429.615,Asia
+795,tkm,Turkmenistan,5942.089,Asia
+796,tca,Turks and Caicos Islands,38.191,Americas
+798,tuv,Tuvalu,11.646,Oceania
+800,uga,Uganda,44269.594,Africa
+804,ukr,Ukraine,43993.638,Europe
+784,are,United Arab Emirates,9770.529,Asia
+826,gbr,United Kingdom,67530.172,Europe
+840,usa,United States,329064.917,Americas
+850,vir,United States Virgin Islands,104.578,Americas
+858,ury,Uruguay,3461.734,Americas
+860,uzb,Uzbekistan,32981.716,Asia
+548,vut,Vanuatu,299.882,Oceania
+336,vat,Vatican City,0.799,Europe
+862,ven,Venezuela,28515.829,Americas
+704,vnm,Vietnam,96462.106,Asia
+876,wlf,Wallis and Futuna,11.432,Oceania
+732,esh,Western Sahara,582.463,Africa
+887,yem,Yemen,29161.922,Asia
+894,zmb,Zambia,17861.03,Africa
+716,zwe,Zimbabwe,14645.468,Africa
