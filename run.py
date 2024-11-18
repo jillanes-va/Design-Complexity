@@ -61,6 +61,11 @@ PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[1])
 
 num_paises = trat.inv_dict(diccionaries[0])
 num_cat = trat.inv_dict(diccionaries[1])
+
+with open(r'.\Datos\Diccionarios\dict_paises_Awards.txt', 'w+') as f:
+    f.write('Numero Pais\n')
+    for par in num_paises.items():
+        f.write('{} '.format(par[0]) + par[1] + '\n')
 #
 # ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
 # PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
@@ -77,7 +82,7 @@ num_cat = trat.inv_dict(diccionaries[1])
 # plt.show()
 #
 #
-figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
+#figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
 #
 # figs.Clustering(phi, save = False)
 #

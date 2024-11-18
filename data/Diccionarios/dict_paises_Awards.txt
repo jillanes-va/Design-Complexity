@@ -1,0 +1,85 @@
+Numero Pais
+0 United States
+1 Italy
+2 United Kingdom
+3 Germany
+4 Turkey
+5 South Korea
+6 Canada
+7 Hungary
+8 Russia
+9 Spain
+10 Australia
+11 India
+12 Netherlands
+13 Czechia
+14 Iran
+15 France
+16 Israel
+17 Brazil
+18 Singapore
+19 Portugal
+20 Austria
+21 Hong Kong
+22 Sweden
+23 Switzerland
+24 Belgium
+25 China
+26 Denmark
+27 Thailand
+28 Egypt
+29 Lithuania
+30 Poland
+31 Finland
+32 Serbia
+33 Greece
+34 Japan
+35 Mexico
+36 Bulgaria
+37 Ireland
+38 Romania
+39 Ukraine
+40 United Arab Emirates
+41 Latvia
+42 New Zealand
+43 Argentina
+44 Croatia
+45 Malaysia
+46 Vietnam
+47 Slovenia
+48 Taiwan
+49 Indonesia
+50 Philippines
+51 Slovakia
+52 Saudi Arabia
+53 Chile
+54 Chinese Taipei
+55 Estonia
+56 Norway
+57 South Africa
+58 Jordan
+59 Lebanon
+60 Peru
+61 Colombia
+62 Cyprus
+63 Guatemala
+64 Kazakhstan
+65 Macau (China)
+66 Qatar
+67 Armenia
+68 Georgia
+69 Iceland
+70 Moldova
+71 Pakistan
+72 Puerto Rico
+73 Belarus
+74 Bosnia and Herzegovina
+75 Kyrgyzstan
+76 Malta
+77 North Korea
+78 Bangladesh
+79 Dominican Republic
+80 Ecuador
+81 Kuwait
+82 Sri Lanka
+83 Uruguay
