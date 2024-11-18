@@ -41,21 +41,25 @@ def X_matrix(data):
     Dim = len(numero_de_cosas) - 1
     diccionarios = dictionaries(data)[:Dim]
     X_cpt = np.zeros(numero_de_cosas[:Dim])
+
     for number in data.index:
         data_number = list(data.loc[number])
-        index = distributividad(diccionarios, data_number[:Dim] )
+        index = distributividad(diccionarios, data_number[:Dim])
         X_cpt[index] += data_number[-1]
     return X_cpt
 
-def Promedio_temporal(X, n_time = None):
+def Promedio_temporal(X, n_time = None, Awards = True):
     '''Toma la matriz y le realiza el promedio temporal'''
-    if n_time is None:
-        _, _, T = X.shape
-        return X.sum(axis = 2) / T
-    if isinstance(n_time, int) or isinstance(n_time, float):
-        return X/ n_time
+    if Awards:
+        if n_time is None:
+            _, _, T = X.shape
+            return X.sum(axis = 2) / T
+        if isinstance(n_time, int) or isinstance(n_time, float):
+            return X/ n_time
+        else:
+            raise TypeError
     else:
-        raise TypeError
+        return X/5
 
 def pareo_listas(lista_a, lista_b):
     '''Toma dos listas de strings y entrega dos listas tal que si un string de A es contenido (parcialmente) por un string de B, se guarden en listas distinas pero pareads, entrega ademas aquellos strings sobrantes.'''

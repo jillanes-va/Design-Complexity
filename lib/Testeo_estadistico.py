@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import lib.Calculo as calc
 import lib.Tratamiento as trat
 
-def Trans_matrix(X, threeshold = 0.5, n_t = None):
+def Trans_matrix(X, threeshold = 0.5, n_t = None, Awards = True):
     '''Toma la matriz de RCA y retorna dos matrices que reportan aquellos productos que son de transición o no, dependiendo de un umbral.'''
     C, P, T = X.shape
     Transicion = np.zeros((C, P))
@@ -13,8 +13,12 @@ def Trans_matrix(X, threeshold = 0.5, n_t = None):
     if n_t is None:
         n_t = T//2
 
-    X_0 = X[:, :, :n_t].sum(axis = 2) / (n_t + 1)
-    X_1 = X[:, :, n_t + 1:].sum(axis = 2) / (T - n_t)
+    if Awards:
+        X_0 = X[:, :, :n_t].sum(axis = 2) / (n_t + 1)
+        X_1 = X[:, :, n_t + 1:].sum(axis = 2) / (T - n_t)
+    else:
+        X_0 = X[:, :, n_t] /5
+        X_1 = X[:, :, n_t + 1] /5
 
     R_cp_0, _, _ = calc.Matrices(X_0, cleaning = False)
     R_cp_1, _, _ = calc.Matrices(X_1, cleaning = False)
@@ -28,12 +32,15 @@ def Trans_matrix(X, threeshold = 0.5, n_t = None):
                     Intransicion[c,p] = 1
     return Transicion, Intransicion
 
-def Relatedness_density_test(X, diccionario, threeshold = 0.5, n_t = None, N_bins = 50):
+def Relatedness_density_test(X, diccionario= None, threeshold = 0.5, n_t = None, N_bins = 50, Awards = True):
     '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
-    X_total = trat.Promedio_temporal(X)
-    RCA, M_cp, X_total = calc.Matrices(X_total, cleaning = False)
+    X_total = trat.Promedio_temporal(X, Awards = Awards)
+    if Awards:
+        RCA, M_cp, X_total = calc.Matrices(X_total, cleaning = False)
+    else:
+        RCA, M_cp, X_total = calc.Matrices(X_total.sum(axis =2)/15, cleaning=False)
     phi_0 = calc.Similaridad(M_cp)
-    Transicion, _ = Trans_matrix(X, threeshold, n_t)
+    Transicion, _ = Trans_matrix(X, threeshold, n_t, Awards)
     omega_cp_t = np.nan_to_num( np.matmul(M_cp, phi_0) * Transicion / np.sum(phi_0, axis = 0) )
 
     cantidad_paises, cantidad_categorias = RCA.shape
