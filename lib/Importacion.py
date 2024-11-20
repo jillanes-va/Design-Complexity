@@ -9,7 +9,7 @@ def carga(nombre_archivo: str, columnas_importantes: list):
 
 def locarno(nombre_archivo: str, columnas_importantes: list):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato .xlsx'''
-    str_archivo = r'./data/Por ordenar/locarno2.xlsx'
+    str_archivo = r'./data/TO_DO/locarno2.xlsx'
     hoja = 'categories'
     data = read_excel(str_archivo).loc[:,columnas_importantes]
     return data

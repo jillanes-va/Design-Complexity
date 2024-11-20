@@ -1,4 +1,4 @@
-Numero Pais
+number country_name
 0 United States
 1 Italy
 2 United Kingdom

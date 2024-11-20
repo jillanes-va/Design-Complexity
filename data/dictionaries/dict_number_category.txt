@@ -1,4 +1,4 @@
-Numero Categoria
+number category_name
 0 Furniture Design Award Category.
 1 Graphics, Illustration and Visual Communication Design Award Category.
 2 Architecture, Building and Structure Design Award Category.

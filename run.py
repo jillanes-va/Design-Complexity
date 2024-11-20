@@ -13,7 +13,7 @@ import networkx as nx
 
 #----------------------------------Tipo de archivo a importar----------------------------------------------
 columnas_gdp = ['country_name', 'gdp_per_cap_ppp']
-gdp_dir = 'Por ordenar/world-gdp_per_cap-ranking.csv'
+gdp_dir = 'TO_DO/world-gdp_per_cap-ranking.csv'
 
 awards_dir = r'wipo_design.csv'
 columnas_awards = ['country_name', 'subclass_name', 'wipo_year_from', 'n']
@@ -33,7 +33,6 @@ paises_gdp = listas_gdp[0]
 paises_pareados = []
 i = 0
 
-print(paises_awards == paises_gdp)
 
 while i < len(paises_awards):
     pais_award = paises_awards[i]
@@ -45,9 +44,11 @@ while i < len(paises_awards):
             break
     i += 1
 
-print(len(paises_pareados))
-print(len(paises_awards))
-print(len(paises_gdp))
+#with open(r'data/countries/dict_awards_gdp/non_paired_awards_gdp.csv', 'w') as f:
+#    f.write('country_award,country_gdp\n')
+#    for dupla in paises_pareados:
+#        f.write(dupla[0] + ',' + dupla[1] + '\n')
+
 
 
 #diccionaries = trat.dictionaries(datos_premio)
@@ -60,7 +61,7 @@ print(len(paises_gdp))
 #Informacion = test.categorias_presentes(X_cpt, diccionaries)
 # plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
 # plt.ylabel('Frecuencia absoluta')
-# plt.title('Categorias presentes por año')
+# plt.title('categories presentes por año')
 # plt.tight_layout()
 # plt.xticks(rotation = 45)
 # plt.show()
@@ -73,11 +74,11 @@ print(len(paises_gdp))
 #------------------------------------Calculo de RCA y demás--------------------------------------------
 #
 #R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
-#figs.graf(np.log(X_cp + 1), xlabel = 'Subclases', ylabel = 'Paises', title = 'log-$X_{cp}$')
+#figs.graf(np.log(X_cp + 1), xlabel = 'Subclases', ylabel = 'countries', title = 'log-$X_{cp}$')
 #
-#figs.graf(np.log(R_cp + 1), xlabel = 'Subclases', ylabel = 'Paises', title = 'log-$RCA_{cp}$')
+#figs.graf(np.log(R_cp + 1), xlabel = 'Subclases', ylabel = 'countries', title = 'log-$RCA_{cp}$')
 #
-#figs.graf(M_cp, xlabel = 'Subclases', ylabel = 'Paises',title = '$M_{cp}$')
+#figs.graf(M_cp, xlabel = 'Subclases', ylabel = 'countries',title = '$M_{cp}$')
 #
 #-------------------------------------Calculo de ECI y PCI-------------------------------------------
 #
