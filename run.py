@@ -44,10 +44,13 @@ while i < len(paises_awards):
             break
     i += 1
 
-#with open(r'data/countries/dict_awards_gdp/non_paired_awards_gdp.csv', 'w') as f:
-#    f.write('country_award,country_gdp\n')
-#    for dupla in paises_pareados:
-#        f.write(dupla[0] + ',' + dupla[1] + '\n')
+with open(r'data/countries/dict_awards_gdp/non_paired_awards_gdp.csv', 'w', encoding = 'utf8') as f:
+    f.write('country_award,country_gdp\n')
+    for n_pais in range(len(paises_gdp)):
+        if n_pais >= len(paises_awards):
+            f.write(',' + paises_gdp[n_pais] + '\n')
+        else:
+            f.write( paises_awards[n_pais] + ',' + paises_gdp[n_pais] + '\n')
 
 
 

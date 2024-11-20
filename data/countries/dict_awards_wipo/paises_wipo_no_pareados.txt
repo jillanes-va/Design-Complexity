@@ -17,7 +17,6 @@ Chad
 Comoros
 Congo
 Curacao
-Czech Republic *
 C�te d'ivoire
 Democratic Republic of the Congo
 Djibouti
@@ -38,9 +37,6 @@ Holy See
 Honduras
 Iraq
 Jamaica
-Korea (Democratic People's Republic of) *
-Korea (Republic of) *
-Lao People's Democratic Republic *
 Lesotho
 Liberia
 Libya (State of)
@@ -76,6 +72,5 @@ Tonga
 Turkmenistan
 Uganda
 Uzbekistan
-Viet Nam *
 Yemen
 Zambia
