@@ -122,4 +122,5 @@ def Complexity_measures(M, n):
 
 def Z_transf(K):
     '''Aplica la transformada Z sobre un vector K'''
-    return -(K - np.mean(K)) / np.std(K)
+    return (K - np.mean(K)) / np.std(K)
+
