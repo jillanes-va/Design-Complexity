@@ -9,20 +9,46 @@ import lib.Figuras as figs
 import numpy as np
 import matplotlib.pyplot as plt
 
-#wipo_str = r'wipo_design.csv'
-#wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+wipo_str = r'wipo_design.csv'
+wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 
-#awards = r'wrd_04_all-data.csv'
-#columnas = ['designer_country', 'award_category', 'award_period' , 'award_score']
+#awards_str = r'wrd_04_all-data.csv'
+#awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 
-wipo_data = imp.carga(wipo_str, wipo_columns)
-lista_de_cosas, cantidad_info = trat.domain_of_data(wipo_data)
+for i in range(3):
+    data = imp.carga(wipo_str, wipo_columns)
+    lista_de_cosas, cantidad_info = trat.domain_of_data(data)
 
-diccionaries = trat.dictionaries(wipo_data)
+    diccionaries = trat.dictionaries(data)
 
-X_cpt = trat.X_matrix(wipo_data)
-X_cp = trat.Promedio_temporal(X_cpt, Awards=True, n_time = 15)
+    X_cpt = trat.X_matrix(data)
+    X_cp = trat.Promedio_temporal(X_cpt, Awards = False)[:, :, i]
+
+    R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
+
+    ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[0])
+    PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[1])
+
+    num_paises = trat.inv_dict(diccionaries[0])
+    num_cat = trat.inv_dict(diccionaries[1])
+
+
+    ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
+    PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
+
+    ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
+    PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
+
+    with open('./data/results/awards/Ranking_ECI_Design_wipo_{}.csv'.format(i + 1), 'w+', encoding = 'utf-8') as f:
+        f.writelines('ranking,country,ECI\n')
+        for n, data in enumerate(ECI_paises):
+            f.writelines(str(n + 1) + ',' + data[1] + ',' + str(data[0]) + '\n')
+
+    with open('./data/results/awards/Ranking_PCI_Design_wipo_{}.csv'.format(i + 1), 'w+', encoding = 'utf-8') as f:
+        f.writelines('ranking,product,PCI\n')
+        for n, data in enumerate(PCI_cat):
+            f.writelines(str(n + 1) + ',' + data[1] + ',' + str(data[0]) + '\n')
 
 # Informacion = test.categorias_presentes(X_cpt[:,:,:12], diccionaries)
 # plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
@@ -37,50 +63,60 @@ X_cp = trat.Promedio_temporal(X_cpt, Awards=True, n_time = 15)
 #print(sisi)
 #print(sisi[sisi['award_score'] > 5.0])
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
-figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
-
-figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$')
-
-figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
-
-k_0 =  calc.Complexity_measures(M_cp, 0)[0]
-k_1 =  calc.Complexity_measures(M_cp, 1)[0]
-
-plt.scatter(k_0, k_1)
-plt.xlabel('k_0')
-plt.ylabel('k_1')
-plt.show()
-
-
-phi = calc.Similaridad(M_cp)
-omega_cp = calc.Similarity_Density(R_cp)
-
-ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[0])
-PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[1])
-
-num_paises = trat.inv_dict(diccionaries[0])
-num_cat = trat.inv_dict(diccionaries[1])
-
-
-ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
-PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
-
-ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
-PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
-
-plt.scatter([i for i in range(len(ECI))], ECI)
-plt.title('Indice de Complejidad Economica')
-plt.show()
-
-plt.scatter([i for i in range(len(PCI))], PCI)
-plt.title('Indice de Complejidad Economica de los Productos')
-plt.show()
-
-
-figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
-
-figs.Clustering(phi, save = False)
+# R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
+# figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
+#
+# figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$')
+#
+# figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+#
+# k_0 =  calc.Complexity_measures(M_cp, 0)[0]
+# k_1 =  calc.Complexity_measures(M_cp, 1)[0]
+#
+# plt.scatter(k_0, k_1)
+# plt.xlabel('k_0')
+# plt.ylabel('k_1')
+# plt.show()
+#
+#
+# phi = calc.Similaridad(M_cp)
+# omega_cp = calc.Similarity_Density(R_cp)
+#
+# ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[0])
+# PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 2 * 9)[1])
+#
+# num_paises = trat.inv_dict(diccionaries[0])
+# num_cat = trat.inv_dict(diccionaries[1])
+#
+#
+# ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
+# PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
+#
+# ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
+# PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
+#
+# with open('./data/results/awards/Ranking_ECI_Design_Awards.csv', 'w+', encoding = 'utf-8') as f:
+#     f.writelines('ranking,country,ECI\n')
+#     for n, data in enumerate(ECI_paises):
+#         f.writelines(str(n + 1) + ',' + data[1] + ',' + str(data[0]) + '\n')
+#
+# with open('./data/results/awards/Ranking_PCI_Design_Awards.csv', 'w+', encoding = 'utf-8') as f:
+#     f.writelines('ranking,product,PCI\n')
+#     for n, data in enumerate(PCI_cat):
+#         f.writelines(str(n + 1) + ',' + data[1] + ',' + str(data[0]) + '\n')
+#
+# plt.scatter([i for i in range(len(ECI))], ECI)
+# plt.title('Indice de Complejidad Economica')
+# plt.show()
+#
+# plt.scatter([i for i in range(len(PCI))], PCI)
+# plt.title('Indice de Complejidad Economica de los Productos')
+# plt.show()
+#
+#
+# figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
+#
+# figs.Clustering(phi, save = False)
 
 #dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
 #figs.Density_plot(dom_phi, relatedness, xlabel = r'Densidad de similitud', ylabel = 'Probabilidad de transicionar en alguna categoría', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = False)
