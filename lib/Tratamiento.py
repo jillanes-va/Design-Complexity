@@ -55,7 +55,7 @@ def Promedio_temporal(X, n_time = None, Awards = True):
             _, _, T = X.shape
             return X.sum(axis = 2) / T
         if isinstance(n_time, int) or isinstance(n_time, float):
-            return X/ n_time
+            return X.sum(axis = 2)/ n_time
         else:
             raise TypeError
     else:

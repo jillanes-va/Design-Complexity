@@ -42,10 +42,14 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
         plt.show()
 
 def Density_plot(domain, prob, xlabel = '', ylabel = '', xlim_sup = 0.7, save = False, name = ''):
+    fig, ax = plt.subplots()
     plt.bar(domain, prob, width=1 / len(domain), align='edge')
     plt.xlabel(xlabel, fontsize = 'x-large')
     plt.ylabel(ylabel, fontsize = 'x-large')
     plt.xlim([-0.05, xlim_sup])
+    ax.spines[['right', 'top']].set_visible(False)
+    for axis in ['top', 'bottom', 'left', 'right']:
+        ax.spines[axis].set_linewidth(1.5)
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
