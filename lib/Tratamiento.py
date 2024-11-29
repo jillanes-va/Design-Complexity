@@ -84,3 +84,4 @@ def pareo_listas(lista_a, lista_b):
             i += 1
 
     return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]
+

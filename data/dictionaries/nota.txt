@@ -1,0 +1,3 @@
+En China WIPO se considera {Taipei, China continental, Hong Kong, Macau, Taiwan}
+En Israel WIPO se considera {Israel, Palestina}
+En United States of America WIPO se considera {EEUU, Puerto Rico}
