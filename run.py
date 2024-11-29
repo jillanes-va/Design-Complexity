@@ -10,12 +10,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as sc
 
-wipo_str = r'wipo_design.csv'
-wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
-
+# wipo_str = r'wipo_design.csv'
+# wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+#
 # awards_str = r'wrd_04_all-data.csv'
 # awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
-#
+
+export_str = r'wtf00.dta'
+export_columns = ['exporter', 'sitc4', 'value']
+
 # Informacion = test.categorias_presentes(X_cpt[:,:,:12], diccionaries)
 # plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
 # plt.ylabel('Frecuencia absoluta')
@@ -29,16 +32,16 @@ wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 # print(sisi)
 # print(sisi[sisi['award_score'] > 5.0])
 
-datos = imp.carga(wipo_str, wipo_columns)
+datos = imp.carga_especial(export_str, export_columns)
 
 diccionaries = trat.dictionaries(datos)
 
-X_cpt = trat.X_matrix(datos)
+X_cp = trat.X_matrix(datos)
 
-X_cpt = trat.Promedio_temporal(X_cpt, Awards= False)
-X_cp = X_cpt[:,:,2]
+# X_cpt = trat.Promedio_temporal(X_cpt, Awards= False)
+# X_cp = X_cpt[:,:,0]
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, 1, 2 )
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries)
 print(M_cp.shape)
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
@@ -53,24 +56,37 @@ print(M_cp.shape)
 # plt.xlabel('k_0')
 # plt.ylabel('k_1')
 # plt.show()
-#
-#
+
+
 # phi = calc.Similaridad(M_cp)
 # omega_cp = calc.Similarity_Density(R_cp)
 
-ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 6 )[0])
-PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 6 )[1])
 
-num_paises = trat.inv_dict(diccionaries[0])
-num_cat = trat.inv_dict(diccionaries[1])
+k_c1 = calc.Complexity_measures(M_cp, 1 )[0]
+k_c2 = calc.Complexity_measures(M_cp, 2 )[0]
 
+plt.scatter(k_c1, k_c2)
+plt.xlabel('$k_{p,1}$')
+plt.ylabel('$k_{p,2}$')
+plt.show()
 
-ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
-PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
-
-ECI_paises = sorted(ECI_paises, key=lambda A: A[0], reverse=1)
-PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
+# ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
+# PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
 #
+# num_paises = trat.inv_dict(diccionaries[0])
+# num_cat = trat.inv_dict(diccionaries[1])
+#
+#
+# ECI_paises = [ (ECI[n], num_paises[n]) for n in range(len(ECI)) ]
+# PCI_cat = [ (PCI[n], num_cat[n]) for n in range(len(PCI)) ]
+#
+# llave = lambda A: A[0]
+#
+# ECI_paises = sorted(ECI_paises, key = llave, reverse = 1)
+# PCI_cat = sorted(PCI_cat, key = llave, reverse = 1)
+
+
+
 # with open('./data/results/awards/Ranking_ECI_Design_Awards.csv', 'w+', encoding = 'utf-8') as f:
 #     f.writelines('ranking,country,ECI\n')
 #     for n, data in enumerate(ECI_paises):
@@ -81,12 +97,12 @@ PCI_cat = sorted(PCI_cat, key=lambda A: A[0], reverse=1)
 #     for n, data in enumerate(PCI_cat):
 #         f.writelines(str(n + 1) + ',' + data[1] + ',' + str(data[0]) + '\n')
 #
-plt.scatter([i for i in range(len(ECI))], [ECI_paises[i][0] for i in range(len(ECI))])
-
-plt.scatter([i for i in range(len(PCI))], [PCI_cat[i][0] for i in range(len(PCI))])
-plt.show()
-
-print(ECI_paises)
+# plt.scatter([i for i in range(len(ECI))], [ECI_paises[i][0] for i in range(len(ECI))])
+#
+# plt.scatter([i for i in range(len(PCI))], [PCI_cat[i][0] for i in range(len(PCI))])
+# plt.show()
+#
+# print(ECI_paises)
 #
 # figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
 #

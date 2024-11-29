@@ -48,7 +48,7 @@ def Matrices(X, diccionario = None, threshold = 1, c_min = 1, p_min = 1, time = 
     return RCA, M, X
 
 
-def Matrices_ordenadas(X, diccionario, c_min = 1, p_min = 1, threshold = 1, change_dict = True):
+def Matrices_ordenadas(X, diccionario, c_min = 1, p_min = 2, threshold = 1, change_dict = True):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
     RCA, M, X = Matrices(X, diccionario, threshold, c_min, p_min)
     M_p = np.sum(M, axis=0)
@@ -108,17 +108,20 @@ def Similarity_Density(RCA):
     Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 0)
     return Num
 
-def Complexity_measures(M, n):
+def Complexity_measures(M_cp, n):
     '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
-    M_c = np.sum(M, axis=1)
-    M_p = np.sum(M, axis=0)
+    k_c0 = np.sum(M_cp, axis=1)
+    k_p0 = np.sum(M_cp, axis=0)
+    C, P = len(k_c0), len(k_p0)
 
-    K_c = M_c
-    K_p = M_p
-    for i in range(n):
-        K_c = np.nan_to_num(np.matmul(M, K_p) / M_c)
-        K_p = np.nan_to_num(np.matmul(M.T, K_c) / M_p)
-    return K_c, K_p
+    k_cN = k_c0
+    k_pN = k_p0
+    for _ in range(n):
+        for c in range(C):
+            k_cN[c] = (1/k_c0[c]) * np.sum( M_cp[c,:] * k_pN )
+        for p in range(P):
+            k_pN[p] = (1 / k_p0[p]) * np.sum(M_cp[:, p] * k_cN)
+    return k_cN, k_pN
 
 def Z_transf(K):
     '''Aplica la transformada Z sobre un vector K'''
