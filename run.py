@@ -13,11 +13,11 @@ import scipy.stats as sc
 # wipo_str = r'wipo_design.csv'
 # wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
-# awards_str = r'wrd_04_all-data.csv'
-# awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+awards_str = r'wrd_04_all-data.csv'
+awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
-export_str = r'wtf00.dta'
-export_columns = ['exporter', 'sitc4', 'value']
+#export_str = r'wtf00.dta'
+#export_columns = ['exporter', 'sitc4', 'value']
 
 # Informacion = test.categorias_presentes(X_cpt[:,:,:12], diccionaries)
 # plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
@@ -32,14 +32,14 @@ export_columns = ['exporter', 'sitc4', 'value']
 # print(sisi)
 # print(sisi[sisi['award_score'] > 5.0])
 
-datos = imp.carga_especial(export_str, export_columns)
+datos = imp.carga(awards_str, awards_columns)
 
 diccionaries = trat.dictionaries(datos)
 
-X_cp = trat.X_matrix(datos)
+X_cpt = trat.X_matrix(datos)
 
-# X_cpt = trat.Promedio_temporal(X_cpt, Awards= False)
-# X_cp = X_cpt[:,:,0]
+X_cp = trat.Promedio_temporal(X_cpt, Awards= True)
+#X_cp = X_cpt[:,:,0]
 
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries)
 print(M_cp.shape)
@@ -58,17 +58,8 @@ print(M_cp.shape)
 # plt.show()
 
 
-# phi = calc.Similaridad(M_cp)
-# omega_cp = calc.Similarity_Density(R_cp)
+phi = calc.Similaridad(M_cp)
 
-
-k_c1 = calc.Complexity_measures(M_cp, 1 )[0]
-k_c2 = calc.Complexity_measures(M_cp, 2 )[0]
-
-plt.scatter(k_c1, k_c2)
-plt.xlabel('$k_{p,1}$')
-plt.ylabel('$k_{p,2}$')
-plt.show()
 
 # ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
 # PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
@@ -108,8 +99,8 @@ plt.show()
 #
 # figs.Clustering(phi, save = False)
 
-#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-#figs.Density_plot(dom_phi, relatedness, xlabel = r'Densidad de similitud', ylabel = 'Probabilidad de transicionar en alguna categoría', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = False)
+dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a design category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = True)
 
 # str_ECI_wipo = r'results/wipo/Ranking_ECI_Design_wipo.csv'
 # str_ECI_awards = r'results/awards/Ranking_ECI_Design_Awards.csv'
