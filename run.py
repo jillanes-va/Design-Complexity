@@ -1,4 +1,4 @@
-from sympy.physics.control.control_plots import matplotlib
+#from sympy.physics.control.control_plots import matplotlib
 
 import lib.Importacion as imp
 import lib.Tratamiento as trat
