@@ -1,5 +1,6 @@
 from pandas import read_csv, read_excel
 from pyreadstat import read_dta
+from numpy import nan
 
 def carga(nombre_archivo: str, columnas_importantes: list):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato csv e importa las columnas importantes limpiando los NaNs'''
@@ -16,6 +17,11 @@ def carga_especial(nombre_archivo: str, columnas_importantes: list):
     data_sin_nan = data.loc[data['exporter'] != 'World'].dropna()
     return data_sin_nan
 
+def carga_excel(nombre_archivo:str):
+    '''Función que importa directamente datasets en excel (.xls)'''
+    str_archivo = r'./data/datasets/' + nombre_archivo
+    data = read_excel(str_archivo).replace('no data', nan)
+    return data
 
 def locarno(nombre_archivo: str, columnas_importantes: list):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato .xlsx'''

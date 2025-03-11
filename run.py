@@ -10,6 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as sc
 
+from lib.Importacion import carga_excel
+
 # wipo_str = r'wipo_design.csv'
 # wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
@@ -37,7 +39,8 @@ datos = imp.carga(awards_str, awards_columns)
 diccionaries = trat.dictionaries(datos)
 
 X_cpt = trat.X_matrix(datos)
-print(diccionaries[2])
+datos_gdp = carga_excel('IMF_GDP_per_PPA.xls')
+print(datos_gdp.values)
 
 X_cp = trat.Promedio_temporal(X_cpt, Awards= True)
 #X_cp = X_cpt[:,:,0]

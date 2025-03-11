@@ -4,3 +4,4 @@ matplotlib=3.10.0
 scipy=1.15.1
 networkx=3.4.2
 pyreadstat=1.2.8
+xlrd=2.0.1
