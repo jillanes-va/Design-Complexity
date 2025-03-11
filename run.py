@@ -37,6 +37,7 @@ datos = imp.carga(awards_str, awards_columns)
 diccionaries = trat.dictionaries(datos)
 
 X_cpt = trat.X_matrix(datos)
+print(diccionaries[2])
 
 X_cp = trat.Promedio_temporal(X_cpt, Awards= True)
 #X_cp = X_cpt[:,:,0]
@@ -58,7 +59,7 @@ print(M_cp.shape)
 # plt.show()
 
 
-phi = calc.Similaridad(M_cp)
+#phi = calc.Similaridad(M_cp)
 
 
 # ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
@@ -99,8 +100,8 @@ phi = calc.Similaridad(M_cp)
 #
 # figs.Clustering(phi, save = False)
 
-dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a design category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = False)
+#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+#figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a design category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = False)
 
 # str_ECI_wipo = r'results/wipo/Ranking_ECI_Design_wipo.csv'
 # str_ECI_awards = r'results/awards/Ranking_ECI_Design_Awards.csv'
