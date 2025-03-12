@@ -17,6 +17,13 @@ def dictionaries(data):
         diccionarios.append(dict( [ (lista_de_elementos[index][n], n) for n in range(cantidad_de_elementos[index])] ))
     return diccionarios
 
+def transitividad(dict_1, dict_2):
+    '''Crea una lista que asocia las llaves del primer diccionario con los valores del diccionario 3'''
+    dict_3 = dict({})
+    for llave, valor in dict_1.items():
+        dict_3[llave] = dict_2[valor]
+    return dict_3
+
 def re_count(diccionario):
     new_dict = {}
     for n, keys in enumerate(diccionario.keys()):

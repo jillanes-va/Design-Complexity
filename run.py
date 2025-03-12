@@ -80,7 +80,7 @@ cat_PCI = { num_cat[n]: PCI[n] for n in range(len(PCI)) }
 importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media']]
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
-country_mapping = {
+paises_awards_gdp = { #paises_awards: paises_gdp
     "United States": "United States",
     "Italy": "Italy",
     "United Kingdom": "United Kingdom",
@@ -164,7 +164,7 @@ country_mapping = {
 }
 
 points = []
-for c_awards, c_gdp in country_mapping.items():
+for c_awards, c_gdp in paises_awards_gdp.items():
     points.append(
         [paises_ECI[c_awards], paises_GDP[c_gdp]]
     )
@@ -219,19 +219,20 @@ plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
 plt.xlabel('ECI del Diseño Awards 2011-2023')
 plt.ylabel('log Promedio PIB per capita PPA 2011-2023')
 plt.savefig('./figs/log_PIB_vs_ECI_awards.pdf')
+plt.clf()
 
 awards_WIPO = imp.dictionary_from_csv(r'dictionaries/dict_country_awards_wipo.csv')
-ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_Awards.csv', ranking = True)
-ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
+dict_ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_Awards.csv', ranking = True)
+dict_ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
 
-print(len(awards_WIPO), len(ECI_d_awards), len(ECI_d_wipo))
+
 points = []
 for award, wipo in awards_WIPO.items():
     try:
         points.append(
             [
-                ECI_d_awards[award],
-                ECI_d_wipo[wipo]
+                dict_ECI_d_awards[award],
+                dict_ECI_d_wipo[wipo]
             ]
         )
     except:
@@ -253,3 +254,27 @@ plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
 plt.xlabel('ECI del Diseño Awards 2011-2023')
 plt.ylabel('ECI de la WIPO 2010-2024')
 plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')
+plt.clf()
+
+points = []
+for pais, ECI in dict_ECI_d_wipo.items():
+    try:
+        points.append(
+            [
+                ECI, paises_GDP[pais]
+            ]
+        )
+    except:
+        pass
+points = np.array(points)
+
+m, c, low_slope, high_slope = sc.theilslopes(np.log(points[:, 1]), points[:, 0])
+#
+X = [ min(points[:, 0]), max(points[:, 0]) ]
+Y = [ m * X[0] + c, m * X[1] + c ]
+
+plt.scatter(points[:, 0], np.log(points[:, 1]))
+plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+plt.xlabel('ECI diseño de WIPO 2010-2024')
+plt.ylabel('log promedio de PIB per capita PPA 2010-2023')
+plt.savefig('./figs/Regresion_ECI_diseño_wipo_PIB_per_capita.pdf')

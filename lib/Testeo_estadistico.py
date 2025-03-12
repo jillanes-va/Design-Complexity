@@ -87,3 +87,4 @@ def categorias_presentes(X, diccionario):
         informacion = (año, cantidad, lista_cat)
         anios.append(informacion)
     return anios
+
