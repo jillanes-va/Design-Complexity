@@ -170,8 +170,6 @@ for c_awards, c_gdp in country_mapping.items():
     )
 
 points = np.array(points)
-plt.scatter(points[:, 0], np.log(points[:, 1]))
-plt.show()
 # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 
 # llave = lambda A: A[0]
@@ -205,31 +203,6 @@ plt.show()
 #dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
 #figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a design category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = False)
 
-# str_ECI_wipo = r'results/wipo/Ranking_ECI_Design_wipo.csv'
-# str_ECI_awards = r'results/awards/Ranking_ECI_Design_Awards.csv'
-# str_awards_wipo_dict = r'dictionaries/dict_country_awards_wipo.csv'
-#
-# ECI_wipo = imp.carga(str_ECI_wipo, columnas_importantes = ['country', 'ECI'])
-# ECI_awards = imp.carga(str_ECI_awards, columnas_importantes = ['country', 'ECI'])
-# c_award_c_wipo = imp.carga(str_awards_wipo_dict, columnas_importantes = ['country_award','country_wipo'])
-#
-# print(dict(c_award_c_wipo.values))
-
-# c_award_c_wipo = dict(imp.csv_to_list(str_awards_wipo_dict))
-#
-# ECI_horizontal = []
-# ECI_vertical = []
-#
-#
-# for pais_award, eci_award in ECI_awards.items():
-#     try:
-#         pais_wipo = c_award_c_wipo[ pais_award ]
-#         y = ECI_wipo[pais_wipo]
-#     except:
-#         continue
-#     ECI_vertical.append(y)
-#     ECI_horizontal.append(eci_award)
-#
 
 ECI_d = points[:, 0]
 log_GDP = np.log(points[:, 1])
@@ -244,6 +217,39 @@ Y = [ m * X[0] + c, m * X[1] + c ]
 plt.scatter(ECI_d, log_GDP)
 plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
 plt.xlabel('ECI del Diseño Awards 2011-2023')
-plt.ylabel('Promedio PIB per capita PPA 2011-2023')
-plt.legend()
-plt.show()
+plt.ylabel('log Promedio PIB per capita PPA 2011-2023')
+plt.savefig('./figs/log_PIB_vs_ECI_awards.pdf')
+
+awards_WIPO = imp.dictionary_from_csv(r'dictionaries/dict_country_awards_wipo.csv')
+ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_Awards.csv', ranking = True)
+ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
+
+print(len(awards_WIPO), len(ECI_d_awards), len(ECI_d_wipo))
+points = []
+for award, wipo in awards_WIPO.items():
+    try:
+        points.append(
+            [
+                ECI_d_awards[award],
+                ECI_d_wipo[wipo]
+            ]
+        )
+    except:
+        pass
+
+points = np.array(points)
+ECI_d_awards = points[:, 0]
+ECI_d_wipo = points[:, 1]
+
+m, c, low_slope, high_slope = sc.theilslopes(ECI_d_awards, ECI_d_wipo)
+#
+X = [ min(ECI_d_wipo), max(ECI_d_wipo) ]
+Y = [ m * X[0] + c, m * X[1] + c ]
+#
+# print(len(ECI_horizontal), len(ECI_vertical))
+#
+plt.scatter(ECI_d_wipo, ECI_d_awards)
+plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+plt.xlabel('ECI del Diseño Awards 2011-2023')
+plt.ylabel('ECI de la WIPO 2010-2024')
+plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')

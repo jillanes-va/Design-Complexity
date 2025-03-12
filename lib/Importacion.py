@@ -30,13 +30,18 @@ def locarno(nombre_archivo: str, columnas_importantes: list):
     data = read_excel(str_archivo).loc[:,columnas_importantes]
     return data
 
-def dictionary_from_csv(nombre_archivo: str):
+def dictionary_from_csv(nombre_archivo: str, ranking = False):
     '''Función que lee un archvio csv con dos columnas y lo transforma en un diccionario'''
-    location_str = r'./data/countries/dict_awards_gdp/' + nombre_archivo
+    location_str = r'./data/' + nombre_archivo
     dictionary = {}
     with open(location_str, 'r', encoding = 'utf-8') as awards_gdp:
         awards_gdp.readline()
-        for line in awards_gdp:
-            key, value = line.strip().split(',')
-            dictionary.update({key:value})
+        if ranking:
+            for line in awards_gdp:
+                rank, key, value = line.strip().split(',')
+                dictionary.update({key: float(value)})
+        else:
+            for line in awards_gdp:
+                key, value = line.strip().split(',')
+                dictionary.update({key:value})
     return dictionary
