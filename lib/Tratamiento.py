@@ -85,3 +85,9 @@ def pareo_listas(lista_a, lista_b):
 
     return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]
 
+def gdp_matrix(data, last = False):
+    matriz = data.values
+    if last:
+        return matriz[:,-1]
+    else:
+        return matriz[:,1:]
