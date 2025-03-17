@@ -10,8 +10,8 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-# wipo_str = r'wipo_design.csv'
-# wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+#wipo_str = r'wipo_design.csv'
+#wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
 awards_str = r'wrd_04_all-data.csv'
 awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
@@ -33,30 +33,30 @@ awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_
 # print(sisi[sisi['award_score'] > 5.0])
 
 datos = imp.carga(awards_str, awards_columns)
-
+#
 diccionaries = trat.dictionaries(datos)
 
 X_cpt = trat.X_matrix(datos)
-datos_gdp = carga_excel('IMF_GDP_per_PPA.xls')
-datos_gdp['media'] = datos_gdp.mean(axis = 1, numeric_only = True)
+#datos_gdp = carga_excel('IMF_GDP_per_PPA.xls')
+#datos_gdp['media'] = datos_gdp.mean(axis = 1, numeric_only = True)
 
-diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
-gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
+#diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
+#gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 
 
 X_cp = trat.Promedio_temporal(X_cpt, Awards= True)
 #X_cp = X_cpt[:,:,0]
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries)
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False)
 print(M_cp.shape)
-# figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
+figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
-# figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$')
+figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = True)
 #
-# figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 #
-# k_0 =  calc.Complexity_measures(M_cp, 0)[0]
-# k_1 =  calc.Complexity_measures(M_cp, 1)[0]
+k_0 =  calc.Complexity_measures(M_cp, 18)[0]
+q_1 =  calc.Complexity_measures(M_cp, 18)[1]
 #
 # plt.scatter(k_0, k_1)
 # plt.xlabel('k_0')
@@ -64,112 +64,113 @@ print(M_cp.shape)
 # plt.show()
 
 
-#phi = calc.Similaridad(M_cp)
+phi = calc.Similaridad(M_cp)
+figs.Clustering(phi, save = True, name = 'Similarity_matrix_awards.pdf')
 
 
-ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
-PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
+# ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
+# PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
+# #
+# num_paises = trat.inv_dict(diccionaries[0])
+# num_cat = trat.inv_dict(diccionaries[1])
+# #
+# #
+# paises_ECI = { num_paises[n]:ECI[n] for n in range(len(ECI)) }
+# cat_PCI = { num_cat[n]: PCI[n] for n in range(len(PCI)) }
 #
-num_paises = trat.inv_dict(diccionaries[0])
-num_cat = trat.inv_dict(diccionaries[1])
+# importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media']]
+# paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 #
+# paises_awards_gdp = { #paises_awards: paises_gdp
+#     "United States": "United States",
+#     "Italy": "Italy",
+#     "United Kingdom": "United Kingdom",
+#     "Germany": "Germany",
+#     "Turkey": "Türkiye, Republic of",
+#     "South Korea": "Korea, Republic of",
+#     "Canada": "Canada",
+#     "Hungary": "Hungary",
+#     "Russia": "Russian Federation",
+#     "Spain": "Spain",
+#     "Australia": "Australia",
+#     "Netherlands": "Netherlands",
+#     "India": "India",
+#     "Czechia": "Czech Republic",
+#     "Iran": "Iran",
+#     "France": "France",
+#     "Israel": "Israel",
+#     "Brazil": "Brazil",
+#     "Singapore": "Singapore",
+#     "Portugal": "Portugal",
+#     "Austria": "Austria",
+#     "Hong Kong": "Hong Kong SAR",
+#     "Switzerland": "Switzerland",
+#     "Belgium": "Belgium",
+#     "Denmark": "Denmark",
+#     "Sweden": "Sweden",
+#     "Thailand": "Thailand",
+#     "China": "China, People's Republic of",
+#     "Egypt": "Egypt",
+#     "Lithuania": "Lithuania",
+#     "Poland": "Poland",
+#     "Finland": "Finland",
+#     "Serbia": "Serbia",
+#     "Greece": "Greece",
+#     "Japan": "Japan",
+#     "Mexico": "Mexico",
+#     "Bulgaria": "Bulgaria",
+#     "Ireland": "Ireland",
+#     "Ukraine": "Ukraine",
+#     "Romania": "Romania",
+#     "United Arab Emirates": "United Arab Emirates",
+#     "Latvia": "Latvia",
+#     "New Zealand": "New Zealand",
+#     "Argentina": "Argentina",
+#     "Croatia": "Croatia",
+#     "Malaysia": "Malaysia",
+#     "Vietnam": "Vietnam",
+#     "Slovenia": "Slovenia",
+#     "Taiwan": "Taiwan Province of China",
+#     "Chinese Taipei": "Taiwan Province of China",
+#     "Indonesia": "Indonesia",
+#     "Philippines": "Philippines",
+#     "Slovakia": "Slovak Republic",
+#     "Saudi Arabia": "Saudi Arabia",
+#     "Chile": "Chile",
+#     "Estonia": "Estonia",
+#     "Norway": "Norway",
+#     "South Africa": "South Africa",
+#     "Jordan": "Jordan",
+#     "Lebanon": "Lebanon",
+#     "Peru": "Peru",
+#     "Colombia": "Colombia",
+#     "Cyprus": "Cyprus",
+#     "Guatemala": "Guatemala",
+#     "Kazakhstan": "Kazakhstan",
+#     "Qatar": "Qatar",
+#     "Armenia": "Armenia",
+#     "Georgia": "Georgia",
+#     "Iceland": "Iceland",
+#     "Moldova": "Moldova",
+#     "Pakistan": "Pakistan",
+#     "Belarus": "Belarus",
+#     "Bosnia and Herzegovina": "Bosnia and Herzegovina",
+#     "Kyrgyzstan": "Kyrgyz Republic",
+#     "Bangladesh": "Bangladesh",
+#     "Dominican Republic": "Dominican Republic",
+#     "Ecuador": "Ecuador",
+#     "Kuwait": "Kuwait",
+#     "Uruguay": "Uruguay",
+#     "Macau (China)": "Macao SAR",
+# }
 #
-paises_ECI = { num_paises[n]:ECI[n] for n in range(len(ECI)) }
-cat_PCI = { num_cat[n]: PCI[n] for n in range(len(PCI)) }
-
-importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media']]
-paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
-
-paises_awards_gdp = { #paises_awards: paises_gdp
-    "United States": "United States",
-    "Italy": "Italy",
-    "United Kingdom": "United Kingdom",
-    "Germany": "Germany",
-    "Turkey": "Türkiye, Republic of",
-    "South Korea": "Korea, Republic of",
-    "Canada": "Canada",
-    "Hungary": "Hungary",
-    "Russia": "Russian Federation",
-    "Spain": "Spain",
-    "Australia": "Australia",
-    "Netherlands": "Netherlands",
-    "India": "India",
-    "Czechia": "Czech Republic",
-    "Iran": "Iran",
-    "France": "France",
-    "Israel": "Israel",
-    "Brazil": "Brazil",
-    "Singapore": "Singapore",
-    "Portugal": "Portugal",
-    "Austria": "Austria",
-    "Hong Kong": "Hong Kong SAR",
-    "Switzerland": "Switzerland",
-    "Belgium": "Belgium",
-    "Denmark": "Denmark",
-    "Sweden": "Sweden",
-    "Thailand": "Thailand",
-    "China": "China, People's Republic of",
-    "Egypt": "Egypt",
-    "Lithuania": "Lithuania",
-    "Poland": "Poland",
-    "Finland": "Finland",
-    "Serbia": "Serbia",
-    "Greece": "Greece",
-    "Japan": "Japan",
-    "Mexico": "Mexico",
-    "Bulgaria": "Bulgaria",
-    "Ireland": "Ireland",
-    "Ukraine": "Ukraine",
-    "Romania": "Romania",
-    "United Arab Emirates": "United Arab Emirates",
-    "Latvia": "Latvia",
-    "New Zealand": "New Zealand",
-    "Argentina": "Argentina",
-    "Croatia": "Croatia",
-    "Malaysia": "Malaysia",
-    "Vietnam": "Vietnam",
-    "Slovenia": "Slovenia",
-    "Taiwan": "Taiwan Province of China",
-    "Chinese Taipei": "Taiwan Province of China",
-    "Indonesia": "Indonesia",
-    "Philippines": "Philippines",
-    "Slovakia": "Slovak Republic",
-    "Saudi Arabia": "Saudi Arabia",
-    "Chile": "Chile",
-    "Estonia": "Estonia",
-    "Norway": "Norway",
-    "South Africa": "South Africa",
-    "Jordan": "Jordan",
-    "Lebanon": "Lebanon",
-    "Peru": "Peru",
-    "Colombia": "Colombia",
-    "Cyprus": "Cyprus",
-    "Guatemala": "Guatemala",
-    "Kazakhstan": "Kazakhstan",
-    "Qatar": "Qatar",
-    "Armenia": "Armenia",
-    "Georgia": "Georgia",
-    "Iceland": "Iceland",
-    "Moldova": "Moldova",
-    "Pakistan": "Pakistan",
-    "Belarus": "Belarus",
-    "Bosnia and Herzegovina": "Bosnia and Herzegovina",
-    "Kyrgyzstan": "Kyrgyz Republic",
-    "Bangladesh": "Bangladesh",
-    "Dominican Republic": "Dominican Republic",
-    "Ecuador": "Ecuador",
-    "Kuwait": "Kuwait",
-    "Uruguay": "Uruguay",
-    "Macau (China)": "Macao SAR",
-}
-
-points = []
-for c_awards, c_gdp in paises_awards_gdp.items():
-    points.append(
-        [paises_ECI[c_awards], paises_GDP[c_gdp]]
-    )
-
-points = np.array(points)
+# points = []
+# for c_awards, c_gdp in paises_awards_gdp.items():
+#     points.append(
+#         [paises_ECI[c_awards], paises_GDP[c_gdp]]
+#     )
+#
+# points = np.array(points)
 # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 
 # llave = lambda A: A[0]
@@ -198,83 +199,82 @@ points = np.array(points)
 #
 # figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
 #
-# figs.Clustering(phi, save = False)
 
 #dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-#figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a design category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness', save = False)
+#figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a award category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness_awards', save = True)
 
-
-ECI_d = points[:, 0]
-log_GDP = np.log(points[:, 1])
-
-m, c, low_slope, high_slope = sc.theilslopes(log_GDP, ECI_d)
 #
-X = [ min(ECI_d), max(ECI_d) ]
-Y = [ m * X[0] + c, m * X[1] + c ]
+# ECI_d = points[:, 0]
+# log_GDP = np.log(points[:, 1])
 #
-# print(len(ECI_horizontal), len(ECI_vertical))
+# m, c, low_slope, high_slope = sc.theilslopes(log_GDP, ECI_d)
+# #
+# X = [ min(ECI_d), max(ECI_d) ]
+# Y = [ m * X[0] + c, m * X[1] + c ]
+# #
+# # print(len(ECI_horizontal), len(ECI_vertical))
+# #
+# plt.scatter(ECI_d, log_GDP)
+# plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+# plt.xlabel('ECI del Diseño Awards 2011-2023')
+# plt.ylabel('log Promedio PIB per capita PPA 2011-2023')
+# plt.savefig('./figs/log_PIB_vs_ECI_awards.pdf')
+# plt.clf()
 #
-plt.scatter(ECI_d, log_GDP)
-plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.xlabel('ECI del Diseño Awards 2011-2023')
-plt.ylabel('log Promedio PIB per capita PPA 2011-2023')
-plt.savefig('./figs/log_PIB_vs_ECI_awards.pdf')
-plt.clf()
-
-awards_WIPO = imp.dictionary_from_csv(r'dictionaries/dict_country_awards_wipo.csv')
-dict_ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_Awards.csv', ranking = True)
-dict_ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
-
-
-points = []
-for award, wipo in awards_WIPO.items():
-    try:
-        points.append(
-            [
-                dict_ECI_d_awards[award],
-                dict_ECI_d_wipo[wipo]
-            ]
-        )
-    except:
-        pass
-
-points = np.array(points)
-ECI_d_awards = points[:, 0]
-ECI_d_wipo = points[:, 1]
-
-m, c, low_slope, high_slope = sc.theilslopes(ECI_d_awards, ECI_d_wipo)
+# awards_WIPO = imp.dictionary_from_csv(r'dictionaries/dict_country_awards_wipo.csv')
+# dict_ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_Awards.csv', ranking = True)
+# dict_ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
 #
-X = [ min(ECI_d_wipo), max(ECI_d_wipo) ]
-Y = [ m * X[0] + c, m * X[1] + c ]
 #
-# print(len(ECI_horizontal), len(ECI_vertical))
+# points = []
+# for award, wipo in awards_WIPO.items():
+#     try:
+#         points.append(
+#             [
+#                 dict_ECI_d_awards[award],
+#                 dict_ECI_d_wipo[wipo]
+#             ]
+#         )
+#     except:
+#         pass
 #
-plt.scatter(ECI_d_wipo, ECI_d_awards)
-plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.xlabel('ECI del Diseño Awards 2011-2023')
-plt.ylabel('ECI de la WIPO 2010-2024')
-plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')
-plt.clf()
-
-points = []
-for pais, ECI in dict_ECI_d_wipo.items():
-    try:
-        points.append(
-            [
-                ECI, paises_GDP[pais]
-            ]
-        )
-    except:
-        pass
-points = np.array(points)
-
-m, c, low_slope, high_slope = sc.theilslopes(np.log(points[:, 1]), points[:, 0])
+# points = np.array(points)
+# ECI_d_awards = points[:, 0]
+# ECI_d_wipo = points[:, 1]
 #
-X = [ min(points[:, 0]), max(points[:, 0]) ]
-Y = [ m * X[0] + c, m * X[1] + c ]
-
-plt.scatter(points[:, 0], np.log(points[:, 1]))
-plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.xlabel('ECI diseño de WIPO 2010-2024')
-plt.ylabel('log promedio de PIB per capita PPA 2010-2023')
-plt.savefig('./figs/Regresion_ECI_diseño_wipo_PIB_per_capita.pdf')
+# m, c, low_slope, high_slope = sc.theilslopes(ECI_d_awards, ECI_d_wipo)
+# #
+# X = [ min(ECI_d_wipo), max(ECI_d_wipo) ]
+# Y = [ m * X[0] + c, m * X[1] + c ]
+# #
+# # print(len(ECI_horizontal), len(ECI_vertical))
+# #
+# plt.scatter(ECI_d_wipo, ECI_d_awards)
+# plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+# plt.xlabel('ECI del Diseño Awards 2011-2023')
+# plt.ylabel('ECI de la WIPO 2010-2024')
+# plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')
+# plt.clf()
+#
+# points = []
+# for pais, ECI in dict_ECI_d_wipo.items():
+#     try:
+#         points.append(
+#             [
+#                 ECI, paises_GDP[pais]
+#             ]
+#         )
+#     except:
+#         pass
+# points = np.array(points)
+#
+# m, c, low_slope, high_slope = sc.theilslopes(np.log(points[:, 1]), points[:, 0])
+# #
+# X = [ min(points[:, 0]), max(points[:, 0]) ]
+# Y = [ m * X[0] + c, m * X[1] + c ]
+#
+# plt.scatter(points[:, 0], np.log(points[:, 1]))
+# plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+# plt.xlabel('ECI diseño de WIPO 2010-2024')
+# plt.ylabel('log promedio de PIB per capita PPA 2010-2023')
+# plt.savefig('./figs/Regresion_ECI_diseño_wipo_PIB_per_capita.pdf')
