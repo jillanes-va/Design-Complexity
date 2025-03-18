@@ -69,7 +69,9 @@ figs.Clustering(phi, save = False, name = 'Similarity_matrix_awards.pdf')
 ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
 PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
 
-figs.red(phi, by_com = False, PCI = PCI, save = False, umbral_enlace = 0.58)
+figs.k_density(phi)
+
+figs.red(phi, by_com = False, PCI = PCI, save = False, umbral_enlace = 0.45)
 #
 num_paises = trat.inv_dict(diccionaries[0])
 num_cat = trat.inv_dict(diccionaries[1])

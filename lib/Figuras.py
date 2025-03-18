@@ -56,6 +56,13 @@ def Density_plot(domain, prob, xlabel = '', ylabel = '', xlim_sup = 0.7, save = 
     else:
         plt.show()
 
+def k_density(phi, bins = 30):
+    new_phi = phi[phi > 0]
+    plt.hist(new_phi, bins = bins, density = True)
+    plt.xlabel('Similaridad')
+    plt.ylabel('Densidad de Probabilidad')
+    plt.show()
+
 def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, save = False, name = ''):
     Red_original = nx.from_numpy_array(phi)
     Red_nueva = nx.maximum_spanning_tree(Red_original)
