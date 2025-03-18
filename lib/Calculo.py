@@ -48,7 +48,7 @@ def Matrices(X, diccionario = None, threshold = 1, c_min = 1, p_min = 1, time = 
     return RCA, M, X
 
 
-def Matrices_ordenadas(X, diccionario, c_min = 0, p_min = 0, threshold = 1, change_dict = True, time = False):
+def Matrices_ordenadas(X, diccionario, c_min = -1, p_min = -1, threshold = 1, change_dict = True, time = False):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
     RCA, M, X = Matrices(X, diccionario, threshold, c_min, p_min, time)
     M_p = np.sum(M, axis=0)

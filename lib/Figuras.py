@@ -71,8 +71,9 @@ def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, 
     print(k_degree) #Printea el grado promedio de la red sin peso.
     print( (phi[phi > umbral_enlace].sum() / phi.sum())*100, '%' ) #Contea la reconexion del top %
 
-    posicion_red = nx.kamada_kawai_layout(Red_nueva, weight = None)
+
     pesos = np.array([enlace[2]['weight'] for enlace in Red_nueva.edges.data()])
+    posicion_red = nx.kamada_kawai_layout(Red_nueva, weight = 'weight')
     pesos = 2 * smooth(pesos)
     fig, ax = plt.subplots()
     if by_com:

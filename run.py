@@ -68,6 +68,8 @@ figs.Clustering(phi, save = False, name = 'Similarity_matrix_awards.pdf')
 
 ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
 PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
+
+figs.red(phi, by_com = False, PCI = PCI, save = False, umbral_enlace = 0.58)
 #
 num_paises = trat.inv_dict(diccionaries[0])
 num_cat = trat.inv_dict(diccionaries[1])
@@ -203,10 +205,9 @@ paises_awards_gdp = { #paises_awards: paises_gdp
 # figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
 #
 
-#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-#figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a award category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness_awards', save = True)
+dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
+figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a award category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness_awards', save = False)
 
-#
 # ECI_d = points[:, 0]
 # log_GDP = np.log(points[:, 1])
 #
@@ -229,33 +230,34 @@ dict_ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_
 dict_ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
 #
 #
-# points = []
-# for award, wipo in awards_WIPO.items():
-#     try:
-#         points.append(
-#             [
-#                 dict_ECI_d_awards[award],
-#                 dict_ECI_d_wipo[wipo]
-#             ]
-#         )
-#     except:
-#         pass
+points = []
+for award, wipo in awards_WIPO.items():
+    try:
+        points.append(
+            [
+                dict_ECI_d_awards[award],
+                dict_ECI_d_wipo[wipo]
+            ]
+        )
+    except:
+        pass
+
+points = np.array(points)
+ECI_d_awards = points[:, 0]
+ECI_d_wipo = points[:, 1]
+
+m, c, low_slope, high_slope = sc.theilslopes(ECI_d_awards, ECI_d_wipo)
 #
-# points = np.array(points)
-# ECI_d_awards = points[:, 0]
-# ECI_d_wipo = points[:, 1]
+X = [ min(ECI_d_wipo), max(ECI_d_wipo) ]
+Y = [ m * X[0] + c, m * X[1] + c ]
 #
-# m, c, low_slope, high_slope = sc.theilslopes(ECI_d_awards, ECI_d_wipo)
-# #
-# X = [ min(ECI_d_wipo), max(ECI_d_wipo) ]
-# Y = [ m * X[0] + c, m * X[1] + c ]
-# #
-# # print(len(ECI_horizontal), len(ECI_vertical))
-# #
-# plt.scatter(ECI_d_wipo, ECI_d_awards)
-# plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-# plt.xlabel('ECI del Diseño Awards 2011-2023')
-# plt.ylabel('ECI de la WIPO 2010-2024')
+# print(len(ECI_horizontal), len(ECI_vertical))
+#
+plt.scatter(ECI_d_wipo, ECI_d_awards)
+plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+plt.xlabel('ECI del Diseño Awards 2011-2023')
+plt.ylabel('ECI de la WIPO 2010-2024')
+plt.show()
 # plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')
 # plt.clf()
 #
@@ -280,6 +282,6 @@ plt.scatter(points[:, 0], np.log(points[:, 1]))
 plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
 plt.xlabel('ECI diseño de WIPO 2010-2024')
 plt.ylabel('log promedio de PIB per capita PPA 2010-2023')
-plt.ylim([0,20])
+plt.ylim([2,14])
 plt.show()
 # plt.savefig('./figs/Regresion_ECI_diseño_wipo_PIB_per_capita.pdf')
