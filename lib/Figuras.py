@@ -4,7 +4,9 @@ import networkx as nx
 
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
+from matplotlib.colors import rgb2hex
 
+import distinctipy
 import lib.Tratamiento as trat
 
 plt.rcParams['font.family'] = 'STIXGeneral'
@@ -85,15 +87,22 @@ def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, 
     fig, ax = plt.subplots()
     if by_com:
         comunidades = nx.community.greedy_modularity_communities(Red_nueva)
-        for comunidad, color, color_oscuro in zip(comunidades, ['tab:blue', 'tab:green', 'tab:orange', 'tab:red', 'tab:brown', 'tab:purple', 'tab:pink', 'tab:cyan'], ['#1e547b', '#2b752b', '#bb7130', '#8e2829', '#6f372c', '#6b3996', '#ad3f8c', 'cyan']):
-            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color= color_oscuro, node_size=95)
-            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color = color, node_size = 55)
+        n = len(comunidades)
+        n_comm = np.arange(n)
+        coloracion = get_cmap(n_comm, N=n)[0]
+
+        for comunidad, c, c_o in zip(comunidades, coloracion, coloracion):
+            color = rgb2hex(c)
+            color_oscuro = rgb2hex(c_o * np.array([0.7, 0.7, 0.7, 1]))
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color= color_oscuro, node_size=55)
+            nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color = color, node_size = 25)
     else:
         coloracion, barra = get_cmap(PCI)
         nx.draw_networkx_nodes(Red_nueva, pos=posicion_red, node_size = 55, node_color=coloracion)
-        plt.colorbar(barra, ax=plt.gca())
+        plt.colorbar(barra, ax=plt.gca(), label = 'Product Complexity Index')
 
     nx.draw_networkx_edges(Red_nueva, pos = posicion_red, width = pesos, alpha = 0.3)
+    #nx.draw_networkx_labels(Red_original, pos = posicion_red, font_size=8)
 
 
     if save and len(name) != 0:
@@ -108,11 +117,14 @@ def grafico_prueba(A):
     ax.hist(A, bins = 30, density = True)
     plt.show()
 
-def get_cmap(PCI, name='inferno'):
+def get_cmap(PCI, name='inferno', N = None, pastel = 0.0):
     '''Returns a function that maps each index in 0, 1, ..., n-1 to a distinct
     RGB color; the keyword argument name must be a standard mpl colormap name.'''
     normalizacion = plt.Normalize(vmin = PCI.min(), vmax = PCI.max()+1)
-    cmap = plt.get_cmap(name)
+    if N is None:
+        cmap = plt.get_cmap(name)
+    else:
+        cmap = distinctipy.get_colormap(distinctipy.get_colors(N, pastel_factor= pastel))
     lista = np.array([cmap(normalizacion(valores)) for valores in PCI])
     colorbar = plt.cm.ScalarMappable(cmap = cmap, norm = normalizacion)
     colorbar.set_array([])

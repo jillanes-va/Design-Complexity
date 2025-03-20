@@ -38,7 +38,7 @@ def Relatedness_density_test(X, diccionario= None, threeshold = 0.5, n_t = None,
     if Awards:
         RCA, M_cp, X_total = calc.Matrices(X_total, cleaning = False)
     else:
-        RCA, M_cp, X_total = calc.Matrices(X_total.sum(axis =2)/15, cleaning=False)
+        RCA, M_cp, X_total = calc.Matrices(X_total[:,:,:1].sum(axis =2)/10, cleaning=False)
     phi_0 = calc.Similaridad(M_cp)
     Transicion, _ = Trans_matrix(X, threeshold, n_t, Awards)
     omega_cp_t = np.nan_to_num( np.matmul(M_cp, phi_0) * Transicion / np.sum(phi_0, axis = 0) )

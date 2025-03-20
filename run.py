@@ -10,11 +10,11 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-awards_str = r'wipo_design.csv'
-awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+#awards_str = r'wipo_design.csv'
+#awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
-#awards_str = r'wrd_04_all-data.csv'
-#awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+awards_str = r'wrd_04_all-data.csv'
+awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 #export_str = r'wtf00.dta'
 #export_columns = ['exporter', 'sitc4', 'value']
@@ -44,16 +44,16 @@ diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
 gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 
 
-X_cp = trat.Promedio_temporal(X_cpt, Awards= False)
+X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = True)
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False)
 print(M_cp.shape)
-figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
+#figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
-figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
+#figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
 #
-figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+#figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 
 #
 # plt.scatter(k_0, k_1)
@@ -63,16 +63,17 @@ figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 
 
 phi = calc.Similaridad(M_cp)
-figs.Clustering(phi, save = False, name = 'Similarity_matrix_awards.pdf')
+#figs.Clustering(phi, save = False, name = 'Similarity_matrix_awards.pdf')
 
 
 ECI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[0])
 PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
 
-figs.k_density(phi)
+#figs.k_density(phi)
 
-figs.red(phi, by_com = False, PCI = PCI, save = False, umbral_enlace = 0.45)
-#
+figs.red(phi, by_com = True, save = True, umbral_enlace = 0.45, name = 'Design_space_awards')
+
+
 num_paises = trat.inv_dict(diccionaries[0])
 num_cat = trat.inv_dict(diccionaries[1])
 
@@ -207,9 +208,9 @@ paises_awards_gdp = { #paises_awards: paises_gdp
 # figs.red(phi, PCI = PCI, diccionario = diccionaries, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
 #
 
-dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a award category', xlim_sup= 0.83, name = 'PrincipleOfRelatedness_awards', save = False)
-
+#dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15, Awards=False, n_t = 1)
+#figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a WIPO subclass', xlim_sup= 0.8, name = 'PrincipleOfRelatedness_wipo', save = False)
+plt.clf()
 # ECI_d = points[:, 0]
 # log_GDP = np.log(points[:, 1])
 #
@@ -257,8 +258,8 @@ Y = [ m * X[0] + c, m * X[1] + c ]
 #
 plt.scatter(ECI_d_wipo, ECI_d_awards)
 plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.xlabel('ECI del Diseño Awards 2011-2023')
-plt.ylabel('ECI de la WIPO 2010-2024')
+plt.xlabel('ECI from Awards 2011-2023')
+plt.ylabel('ECI from WIPO 2010-2024')
 plt.show()
 # plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')
 # plt.clf()
@@ -282,8 +283,7 @@ Y = [ m * X[0] + c, m * X[1] + c ]
 
 plt.scatter(points[:, 0], np.log(points[:, 1]))
 plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.xlabel('ECI diseño de WIPO 2010-2024')
-plt.ylabel('log promedio de PIB per capita PPA 2010-2023')
+plt.xlabel('ECI design from WIPO 2011-2023')
+plt.ylabel('log mean of GDP per capita PPA 2010-2024')
 plt.ylim([2,14])
-plt.show()
-# plt.savefig('./figs/Regresion_ECI_diseño_wipo_PIB_per_capita.pdf')
+#plt.savefig('./figs/Regresion_ECI_diseño_wipo_PIB_per_capita.pdf')
