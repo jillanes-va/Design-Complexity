@@ -38,7 +38,8 @@ diccionaries = trat.dictionaries(datos)
 
 X_cpt = trat.X_matrix(datos)
 datos_gdp = carga_excel('IMF_GDP_per_PPA.xls')
-datos_gdp['media'] = datos_gdp.mean(axis = 1, numeric_only = True)
+datos_gdp['media_wipo'] = datos_gdp.mean(axis = 1, numeric_only = True)
+datos_gdp['media_awards'] = datos_gdp.loc[:, 2011:2023].mean(axis = 1, numeric_only = True)
 
 diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
 gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
@@ -48,7 +49,7 @@ X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wip
 #X_cp = X_cpt[:,:,0]
 
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False)
-print(M_cp.shape)
+
 #figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
 #figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
@@ -72,6 +73,7 @@ PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
 #figs.k_density(phi)
 
 figs.red(phi, by_com = True, save = True, umbral_enlace = 0.45, name = 'Design_space_awards')
+plt.clf()
 
 
 num_paises = trat.inv_dict(diccionaries[0])
@@ -83,7 +85,7 @@ paises_num = diccionaries[0]
 paises_ECI = { num_paises[n]:ECI[n] for n in range(len(ECI)) }
 cat_PCI = { num_cat[n]: PCI[n] for n in range(len(PCI)) }
 
-importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media']]
+importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media_awards']]
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
 paises_awards_gdp = { #paises_awards: paises_gdp
@@ -169,16 +171,24 @@ paises_awards_gdp = { #paises_awards: paises_gdp
     "Macau (China)": "Macao SAR",
 }
 
-# points = []
-# for c_awards, c_gdp in paises_awards_gdp.items():
-#     points.append(
-#         [paises_ECI[c_awards], paises_GDP[c_gdp]]
-#     )
+points = []
+for c_awards, c_gdp in paises_awards_gdp.items():
+    points.append(
+        [paises_ECI[c_awards], paises_GDP[c_gdp]]
+    )
+
+points = np.array(points)
+plt.scatter(points[:,0], np.log(points[:, 1]), s = 5**2)
+plt.xlabel('ECI design from Awards 2011-2023')
+plt.ylabel('log mean GDP per capita PPA 2011-2023')
+m, c, low_slope, high_slope = sc.theilslopes(np.log(points[:, 1]), points[:,0])
 #
-# points = np.array(points)
-# plt.scatter(points[:,0], np.log(points[:, 1]), s = 2**2)
-# plt.ylim([0, 20])
-# plt.show()
+X = [ min(points[:,0]), max(points[:,0]) ]
+Y = [ m * X[0] + c, m * X[1] + c ]
+
+plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
+plt.ylim([4,14])
+plt.savefig('./figs/Regresion_ECI_diseño_award_PIB_per_capita.pdf')
 # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 
 # llave = lambda A: A[0]
