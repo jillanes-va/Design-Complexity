@@ -3,6 +3,7 @@ import lib.Tratamiento as trat
 import lib.Calculo as calc
 import lib.Testeo_estadistico as test
 import lib.Figuras as figs
+import lib.Diccionariacion as dicc
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,6 +11,7 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
+plt.style.use(['default'])
 #awards_str = r'wipo_design.csv'
 #awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
@@ -72,8 +74,7 @@ PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
 
 #figs.k_density(phi)
 
-figs.red(phi, by_com = True, save = True, umbral_enlace = 0.45, name = 'Design_space_awards')
-plt.clf()
+figs.red(phi, by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
 
 
 num_paises = trat.inv_dict(diccionaries[0])
@@ -88,99 +89,20 @@ cat_PCI = { num_cat[n]: PCI[n] for n in range(len(PCI)) }
 importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media_awards']]
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
-paises_awards_gdp = { #paises_awards: paises_gdp
-    "United States": "United States",
-    "Italy": "Italy",
-    "United Kingdom": "United Kingdom",
-    "Germany": "Germany",
-    "Turkey": "Türkiye, Republic of",
-    "South Korea": "Korea, Republic of",
-    "Canada": "Canada",
-    "Hungary": "Hungary",
-    "Russia": "Russian Federation",
-    "Spain": "Spain",
-    "Australia": "Australia",
-    "Netherlands": "Netherlands",
-    "India": "India",
-    "Czechia": "Czech Republic",
-    "Iran": "Iran",
-    "France": "France",
-    "Israel": "Israel",
-    "Brazil": "Brazil",
-    "Singapore": "Singapore",
-    "Portugal": "Portugal",
-    "Austria": "Austria",
-    "Hong Kong": "Hong Kong SAR",
-    "Switzerland": "Switzerland",
-    "Belgium": "Belgium",
-    "Denmark": "Denmark",
-    "Sweden": "Sweden",
-    "Thailand": "Thailand",
-    "China": "China, People's Republic of",
-    "Egypt": "Egypt",
-    "Lithuania": "Lithuania",
-    "Poland": "Poland",
-    "Finland": "Finland",
-    "Serbia": "Serbia",
-    "Greece": "Greece",
-    "Japan": "Japan",
-    "Mexico": "Mexico",
-    "Bulgaria": "Bulgaria",
-    "Ireland": "Ireland",
-    "Ukraine": "Ukraine",
-    "Romania": "Romania",
-    "United Arab Emirates": "United Arab Emirates",
-    "Latvia": "Latvia",
-    "New Zealand": "New Zealand",
-    "Argentina": "Argentina",
-    "Croatia": "Croatia",
-    "Malaysia": "Malaysia",
-    "Vietnam": "Vietnam",
-    "Slovenia": "Slovenia",
-    "Taiwan": "Taiwan Province of China",
-    "Chinese Taipei": "Taiwan Province of China",
-    "Indonesia": "Indonesia",
-    "Philippines": "Philippines",
-    "Slovakia": "Slovak Republic",
-    "Saudi Arabia": "Saudi Arabia",
-    "Chile": "Chile",
-    "Estonia": "Estonia",
-    "Norway": "Norway",
-    "South Africa": "South Africa",
-    "Jordan": "Jordan",
-    "Lebanon": "Lebanon",
-    "Peru": "Peru",
-    "Colombia": "Colombia",
-    "Cyprus": "Cyprus",
-    "Guatemala": "Guatemala",
-    "Kazakhstan": "Kazakhstan",
-    "Qatar": "Qatar",
-    "Armenia": "Armenia",
-    "Georgia": "Georgia",
-    "Iceland": "Iceland",
-    "Moldova": "Moldova",
-    "Pakistan": "Pakistan",
-    "Belarus": "Belarus",
-    "Bosnia and Herzegovina": "Bosnia and Herzegovina",
-    "Kyrgyzstan": "Kyrgyz Republic",
-    "Bangladesh": "Bangladesh",
-    "Dominican Republic": "Dominican Republic",
-    "Ecuador": "Ecuador",
-    "Kuwait": "Kuwait",
-    "Uruguay": "Uruguay",
-    "Macau (China)": "Macao SAR",
-}
 
 points = []
-for c_awards, c_gdp in paises_awards_gdp.items():
+labels = []
+for c_awards, c_gdp in dicc.awards_gdp.items():
+    xy = [paises_ECI[c_awards], np.log(paises_GDP[c_gdp])]
     points.append(
-        [paises_ECI[c_awards], paises_GDP[c_gdp]]
+        xy
     )
+    plt.scatter(*xy, s = 5**2, color = 'tab:blue')
+    #plt.annotate(dicc.award_iso[c_awards], xy)
+
 
 points = np.array(points)
-plt.scatter(points[:,0], np.log(points[:, 1]), s = 5**2)
-plt.xlabel('ECI design from Awards 2011-2023')
-plt.ylabel('log mean GDP per capita PPA 2011-2023')
+
 m, c, low_slope, high_slope = sc.theilslopes(np.log(points[:, 1]), points[:,0])
 #
 X = [ min(points[:,0]), max(points[:,0]) ]
@@ -188,7 +110,9 @@ Y = [ m * X[0] + c, m * X[1] + c ]
 
 plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
 plt.ylim([4,14])
-plt.savefig('./figs/Regresion_ECI_diseño_award_PIB_per_capita.pdf')
+plt.xlabel('ECI design from Awards 2011-2023')
+plt.ylabel('log mean GDP per capita PPA 2011-2023')
+plt.show()
 # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 
 # llave = lambda A: A[0]
