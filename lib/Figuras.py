@@ -9,7 +9,7 @@ from matplotlib.colors import rgb2hex
 import distinctipy
 import lib.Tratamiento as trat
 
-plt.rcParams['font.family'] = 'STIXGeneral'
+plt.style.use(['default'])
 
 
 def graf(X, xlabel = '', ylabel = '', save = False, name = '', title = ''):

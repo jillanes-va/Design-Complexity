@@ -11,7 +11,7 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-plt.style.use(['default'])
+
 #awards_str = r'wipo_design.csv'
 #awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
@@ -74,7 +74,7 @@ PCI = calc.Z_transf(calc.Complexity_measures(M_cp, 18 )[1])
 
 #figs.k_density(phi)
 
-figs.red(phi, by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
+#figs.red(phi, by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
 
 
 num_paises = trat.inv_dict(diccionaries[0])
@@ -92,26 +92,29 @@ paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
 points = []
 labels = []
+
+fig, ax = plt.subplots(figsize = (12, 12))
 for c_awards, c_gdp in dicc.awards_gdp.items():
-    xy = [paises_ECI[c_awards], np.log(paises_GDP[c_gdp])]
+    xy = np.array([paises_ECI[c_awards], np.log(paises_GDP[c_gdp])])
     points.append(
         xy
     )
-    plt.scatter(*xy, s = 5**2, color = 'tab:blue')
-    #plt.annotate(dicc.award_iso[c_awards], xy)
+    ax.annotate(dicc.award_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
+
 
 
 points = np.array(points)
 
-m, c, low_slope, high_slope = sc.theilslopes(np.log(points[:, 1]), points[:,0])
+m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
 #
 X = [ min(points[:,0]), max(points[:,0]) ]
 Y = [ m * X[0] + c, m * X[1] + c ]
+ax.plot(X, Y, alpha=1, linestyle='--', color='red')
+ax.scatter(points[:,0], points[:, 1], s = 5**2, color = 'tab:blue')
 
-plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.ylim([4,14])
-plt.xlabel('ECI design from Awards 2011-2023')
-plt.ylabel('log mean GDP per capita PPA 2011-2023')
+#ax.set_ylim([4,14])
+ax.set_xlabel('ECI design from Awards 2011-2023')
+ax.set_ylabel('log mean GDP per capita PPA 2011-2023')
 plt.show()
 # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 
@@ -144,7 +147,7 @@ plt.show()
 
 #dom_phi, relatedness = test.Relatedness_density_test(X_cpt, diccionaries, N_bins = 15, Awards=False, n_t = 1)
 #figs.Density_plot(dom_phi, relatedness, xlabel = r'Relatedness density', ylabel = 'Probability of developing RCA in a WIPO subclass', xlim_sup= 0.8, name = 'PrincipleOfRelatedness_wipo', save = False)
-plt.clf()
+
 # ECI_d = points[:, 0]
 # log_GDP = np.log(points[:, 1])
 #
@@ -167,15 +170,15 @@ dict_ECI_d_awards = imp.dictionary_from_csv(r'results/awards/Ranking_ECI_Design_
 dict_ECI_d_wipo = imp.dictionary_from_csv(r'results/wipo/Ranking_ECI_Design_wipo.csv', ranking = True)
 #
 #
+fig, ax = plt.subplots(figsize = (12,12))
 points = []
 for award, wipo in awards_WIPO.items():
     try:
+        xy = np.array([dict_ECI_d_awards[award], dict_ECI_d_wipo[wipo]])
         points.append(
-            [
-                dict_ECI_d_awards[award],
-                dict_ECI_d_wipo[wipo]
-            ]
+            xy
         )
+        ax.annotate(dicc.award_iso[award], xy, fontsize='x-small')
     except:
         pass
 
