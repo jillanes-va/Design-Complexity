@@ -12,11 +12,11 @@ import scipy.stats as sc
 from lib.Importacion import carga_excel
 
 
-#awards_str = r'wipo_design.csv'
-#awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+awards_str = r'wipo_design.csv'
+awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
-awards_str = r'wrd_04_all-data.csv'
-awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+#awards_str = r'wrd_04_all-data.csv'
+#awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 #export_str = r'wtf00.dta'
 #export_columns = ['exporter', 'sitc4', 'value']
@@ -47,10 +47,10 @@ diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
 gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 
 
-X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cp = trat.Promedio_temporal(X_cpt, Awards= False, n_time = 15) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False)
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = True)
 
 #figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
@@ -94,7 +94,7 @@ points = []
 labels = []
 
 fig, ax = plt.subplots(figsize = (12, 12))
-for c_awards, c_gdp in dicc.awards_gdp.items():
+for c_awards, c_gdp in dicc.wipo_iso.items(): #cambiar el dicc por cada wea
     xy = np.array([paises_ECI[c_awards], np.log(paises_GDP[c_gdp])])
     points.append(
         xy
@@ -106,15 +106,18 @@ for c_awards, c_gdp in dicc.awards_gdp.items():
 points = np.array(points)
 
 m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
+res = sc.spearmanr(points[:,0], points[:,1])
+print('r y p para award vs gdp',res.statistic, res.pvalue)
 #
 X = [ min(points[:,0]), max(points[:,0]) ]
 Y = [ m * X[0] + c, m * X[1] + c ]
-ax.plot(X, Y, alpha=1, linestyle='--', color='red')
+ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = '$\\rho = 0.35$\n$p-value=0.0015$')
 ax.scatter(points[:,0], points[:, 1], s = 5**2, color = 'tab:blue')
 
 #ax.set_ylim([4,14])
-ax.set_xlabel('ECI design from Awards 2011-2023')
+ax.set_xlabel('DCI design from Awards 2011-2023')
 ax.set_ylabel('log mean GDP per capita PPA 2011-2023')
+plt.legend()
 plt.show()
 # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 
@@ -178,7 +181,7 @@ for award, wipo in awards_WIPO.items():
         points.append(
             xy
         )
-        ax.annotate(dicc.award_iso[award], xy, fontsize='x-small')
+        ax.annotate(dicc.award_iso[award], xy + np.array([-0.1, -0.1]), fontsize='x-small')
     except:
         pass
 
@@ -187,16 +190,19 @@ ECI_d_awards = points[:, 0]
 ECI_d_wipo = points[:, 1]
 
 m, c, low_slope, high_slope = sc.theilslopes(ECI_d_awards, ECI_d_wipo)
+res = sc.spearmanr(points[:,0], points[:,1])
+print('r y p para award vs wipo',res.statistic, res.pvalue)
 #
 X = [ min(ECI_d_wipo), max(ECI_d_wipo) ]
 Y = [ m * X[0] + c, m * X[1] + c ]
 #
 # print(len(ECI_horizontal), len(ECI_vertical))
 #
-plt.scatter(ECI_d_wipo, ECI_d_awards)
-plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red')
-plt.xlabel('ECI from Awards 2011-2023')
-plt.ylabel('ECI from WIPO 2010-2024')
+plt.scatter(ECI_d_awards, ECI_d_wipo)
+plt.plot(X, Y, alpha = 0.5, linestyle  = '--', color = 'red', label = '$\\rho=$0.48\n$p-value=$5.3e-6')
+plt.xlabel('DCI from Awards 2011-2023')
+plt.ylabel('DCI from WIPO 2010-2024')
+plt.legend()
 plt.show()
 # plt.savefig('./figs/Regresion_ECI_diseño_award_wipo.pdf')
 # plt.clf()
