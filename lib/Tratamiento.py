@@ -98,3 +98,20 @@ def gdp_matrix(data, last = False):
         return matriz[:,-1]
     else:
         return matriz[:,1:]
+
+def sum_files(X, partida_llegada, cat_num):
+    paises_partida = partida_llegada.keys()
+    paises_llegada = list(set(partida_llegada.values()))
+
+    N, M = len(paises_partida), len(paises_llegada)
+
+    index_array = [[cat_num[ pais ] for pais in paises_partida] for _ in paises_llegada]
+
+    suma_de_filas = []
+    for indices in index_array:
+        sub_suma = 0
+        for i in indices:
+            sub_suma += X[i, :]
+
+        suma_de_filas.append(sub_suma)
+

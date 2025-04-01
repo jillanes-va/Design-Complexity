@@ -47,16 +47,16 @@ diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
 gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 
 
-X_cp = trat.Promedio_temporal(X_cpt, Awards= False, n_time = 15) #Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cp = trat.Promedio_temporal(X_cpt, Awards= False, n_time = False) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = True)
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = 15)
 
-#figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
-#
-#figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
-#
-#figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
+
+figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
+
+figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
 
 #
 # plt.scatter(k_0, k_1)
@@ -95,16 +95,19 @@ labels = []
 
 fig, ax = plt.subplots(figsize = (12, 12))
 for c_awards, c_gdp in dicc.wipo_iso.items(): #cambiar el dicc por cada wea
-    xy = np.array([paises_ECI[c_awards], np.log(paises_GDP[c_gdp])])
-    points.append(
-        xy
-    )
-    ax.annotate(dicc.award_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
+    try:
+        xy = np.array([paises_ECI[c_awards], np.log(paises_GDP[c_awards])])
+        points.append(
+            xy
+        )
+        ax.annotate(dicc.award_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
+    except:
+        pass
 
 
 
 points = np.array(points)
-
+print(points)
 m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
 res = sc.spearmanr(points[:,0], points[:,1])
 print('r y p para award vs gdp',res.statistic, res.pvalue)
@@ -181,7 +184,7 @@ for award, wipo in awards_WIPO.items():
         points.append(
             xy
         )
-        ax.annotate(dicc.award_iso[award], xy + np.array([-0.1, -0.1]), fontsize='x-small')
+        ax.annotate(dicc.wipo_iso[wipo], xy + np.array([-0.1, -0.1]), fontsize='x-small')
     except:
         pass
 
