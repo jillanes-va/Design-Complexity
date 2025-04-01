@@ -30,11 +30,15 @@ def re_count(diccionario):
         new_dict[keys] = n
     return new_dict
 
-def inv_dict(diccionario):
+def inv_dict(diccionario, unique = True):
     '''Toma un diccionario e invierte el mapeo de llaves a valores'''
     inv_map = {}
-    for k, v in diccionario.items():
-        inv_map[v] = k
+    if unique:
+        for k, v in diccionario.items():
+            inv_map[v] = k
+    else:
+        for k, v in diccionario.items():
+            inv_map[v] = inv_map.get(v, []) + [k]
     return inv_map
 def distributividad(d : list, l : list):
     '''Función que distribuye una lista con keys a una lista con diccionarios y retorna los valores de los diccionarios en una tupla.'''
@@ -103,6 +107,8 @@ def sum_files(X, partida_llegada, cat_num):
     paises_partida = partida_llegada.keys()
     paises_llegada = list(set(partida_llegada.values()))
 
+    llegada_partida = inv_dict(paises_llegada, unique = False)
+
     N, M = len(paises_partida), len(paises_llegada)
 
     index_array = [[cat_num[ pais ] for pais in paises_partida] for _ in paises_llegada]
@@ -114,4 +120,3 @@ def sum_files(X, partida_llegada, cat_num):
             sub_suma += X[i, :]
 
         suma_de_filas.append(sub_suma)
-
