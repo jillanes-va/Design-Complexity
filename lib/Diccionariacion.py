@@ -379,3 +379,16 @@ awards_gdp = { #paises_awards: paises_gdp
     "Uruguay": "Uruguay",
     "Macau (China)": "Macao SAR",
 }
+
+partida_award_llegada_wipo = {
+    'China':'China',
+    'Chinese Taipei':'China',
+    'Macau (China)':'China',
+    'Hong Kong':'China',
+    'Macau':'China',
+    'Taiwan':'China',
+    'Israel':'Israel',
+    'Palestine':'Israel',
+    'United States':'United States of America',
+    'Puerto Rico':'United States of America'
+}

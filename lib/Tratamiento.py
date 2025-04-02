@@ -96,6 +96,7 @@ def pareo_listas(lista_a, lista_b):
 
     return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]
 
+
 def gdp_matrix(data, last = False):
     matriz = data.values
     if last:
@@ -109,18 +110,23 @@ def sum_files(X, partida_llegada, cat_num):
     paises_llegada = list(set(partida_llegada.values()))
 
     llegada_partida = inv_dict(partida_llegada, unique = False)
+    num_cat = inv_dict(cat_num)
     N, M = len(paises_partida), len(paises_llegada)
 
     index_array = [[cat_num[pais_partida] for pais_partida in llegada_partida[ pais_llegada ]] for pais_llegada in paises_llegada]
-    indices_minimos = [np.min(indices) for indices in index_array]
+    super_indice = []
 
-    suma_de_filas = []
     for indices in index_array:
         sub_suma = 0
-        super_indice = []
         i_min = np.min(indices)
         for i in indices:
             sub_suma += X[i, :]
             if i != i_min:
+                super_indice += [i]
+        X_nuevo[i_min, :] = sub_suma
+    np.delete(X_nuevo, super_indice)
 
-        suma_de_filas.append(sub_suma)
+    for indices in super_indice:
+        _ = cat_num.pop(num_cat[indices])
+    new_dict = re_count(cat_num)
+    return X_nuevo, new_dict

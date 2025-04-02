@@ -11,7 +11,7 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-
+print(dicc.award_iso)
 awards_str = r'wipo_design.csv'
 awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
@@ -35,7 +35,6 @@ awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 # print(sisi[sisi['award_score'] > 5.0])
 
 datos = imp.carga(awards_str, awards_columns)
-#
 diccionaries = trat.dictionaries(datos)
 
 X_cpt = trat.X_matrix(datos)
