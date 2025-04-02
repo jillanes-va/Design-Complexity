@@ -111,11 +111,15 @@ def sum_files(X, partida_llegada, cat_num):
 
     llegada_partida = inv_dict(partida_llegada, unique = False)
     num_cat = inv_dict(cat_num)
-    N, M = len(paises_partida), len(paises_llegada)
 
-    index_array = [[cat_num[pais_partida] for pais_partida in llegada_partida[ pais_llegada ]] for pais_llegada in paises_llegada]
+    index_array = []
+    for pais_llegada in paises_llegada:
+        paises_partida = llegada_partida[ pais_llegada ]
+        indices_partida = [ cat_num[pais_partida] for pais_partida in paises_partida ]
+        index_array.append(
+            indices_partida
+        )
     super_indice = []
-
     for indices in index_array:
         sub_suma = 0
         i_min = np.min(indices)
@@ -124,9 +128,9 @@ def sum_files(X, partida_llegada, cat_num):
             if i != i_min:
                 super_indice += [i]
         X_nuevo[i_min, :] = sub_suma
-    np.delete(X_nuevo, super_indice)
-
-    for indices in super_indice:
-        _ = cat_num.pop(num_cat[indices])
+    X_nuevo = np.delete(X_nuevo, super_indice, axis = 0)
+    for pais_partida in paises_partida:
+        if pais_partida not in paises_llegada:
+            _ = cat_num.pop(pais_partida)
     new_dict = re_count(cat_num)
     return X_nuevo, new_dict

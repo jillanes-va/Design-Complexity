@@ -385,10 +385,9 @@ partida_award_llegada_wipo = {
     'Chinese Taipei':'China',
     'Macau (China)':'China',
     'Hong Kong':'China',
-    'Macau':'China',
     'Taiwan':'China',
     'Israel':'Israel',
     'Palestine':'Israel',
-    'United States':'United States of America',
-    'Puerto Rico':'United States of America'
+    'United States':'United States',
+    'Puerto Rico':'United States'
 }

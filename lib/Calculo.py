@@ -108,6 +108,10 @@ def Similarity_Density(RCA):
     Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 0)
     return Num
 
+def Z_transf(K):
+    '''Aplica la transformada Z sobre un vector K'''
+    return (K - np.mean(K)) / np.std(K)
+
 def Complexity_measures(M_cp, n):
     '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
     k_c0 = np.sum(M_cp, axis=1)
@@ -121,9 +125,40 @@ def Complexity_measures(M_cp, n):
             k_cN[c] = (1/k_c0[c]) * np.sum( M_cp[c,:] * k_pN )
         for p in range(P):
             k_pN[p] = (1 / k_p0[p]) * np.sum(M_cp[:, p] * k_cN)
-    return k_cN, k_pN
 
-def Z_transf(K):
-    '''Aplica la transformada Z sobre un vector K'''
-    return (K - np.mean(K)) / np.std(K)
+    s1 = np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
+    eci_t = Z_transf(s1 * k_cN)
+    pci_t = Z_transf(s1 * k_pN)
+
+    return (eci_t, pci_t)
+
+
+
+def Alt_Complexity_measures(M_cp):
+    '''Codigo extraido del modulo de ecomplexity'''
+    M_c = np.sum(M_cp, axis = 1)
+    M_p = np.sum(M_cp, axis = 0)
+
+    M_cp1 = M_cp / M_c[:, np.newaxis]
+    M_cp2_t = (M_cp / M_p[np.newaxis, :]).T.copy()
+
+    Mcc = M_cp1 @ M_cp2_t
+    Mpp = M_cp2_t @ M_cp1
+
+
+    eigvals, eigvecs = np.linalg.eig(Mpp)
+    eigvecs = np.real(eigvecs)
+    # Get eigenvector corresponding to second largest eigenvalue
+    eig_index = eigvals.argsort()[-2]
+    kp = eigvecs[:, eig_index]
+    kc = M_cp1 @ kp
+
+    s1 = np.sign(np.corrcoef(M_c, kc)[0, 1])
+    eci_t = Z_transf(s1 * kc)
+    pci_t = Z_transf(s1 * kp)
+
+    return (eci_t, pci_t)
+
+
+
 
