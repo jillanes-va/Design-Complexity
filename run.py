@@ -47,9 +47,10 @@ gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
+X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
+
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False)
 
-X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
 
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
@@ -74,6 +75,8 @@ num_cat = trat.inv_dict(diccionaries[1])
 ECI_e, PCI_e= calc.Alt_Complexity_measures(M_cp)
 ECI_m, PCI_m= calc.Complexity_measures(M_cp, 60)
 
+print(ECI_e.shape)
+
 paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
 paises_ECI_m = { num_paises[n]:ECI_m[n] for n in range(len(ECI_e)) }
 
@@ -84,11 +87,12 @@ importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars 
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
 print('Autovalores')
-print(sorted(tuple(paises_ECI_e), key = lambda X: X[1], reverse=1))
+print(sorted(tuple(paises_ECI_e), key = lambda X: X[0], reverse=1))
 print('Reflexiones')
-print(sorted(tuple(paises_ECI_m), key = lambda X: X[1], reverse=1))
+print(sorted(tuple(paises_ECI_m), key = lambda X: X[0], reverse=1))
 
 points = []
+fuera = []
 labels = []
 
 fig, ax = plt.subplots(figsize = (12, 12))
@@ -100,9 +104,10 @@ for c_awards, c_gdp in dicc.awards_gdp.items(): #cambiar el dicc por cada wea
         )
         ax.annotate(dicc.award_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
     except:
+        fuera.append([c_awards, c_gdp])
         pass
 
-
+print(fuera)
 points = np.array(points)
 print(points.shape)
 m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
