@@ -1,3 +1,5 @@
+from idlelib.autocomplete import TRY_A
+
 import lib.Importacion as imp
 import lib.Tratamiento as trat
 import lib.Calculo as calc
@@ -11,11 +13,11 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-#awards_str = r'wipo_design.csv'
-#awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+awards_str = r'wipo_design.csv'
+awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 #
-awards_str = r'wrd_04_all-data.csv'
-awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+#awards_str = r'wrd_04_all-data.csv'
+#awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 #export_str = r'wtf00.dta'
 #export_columns = ['exporter', 'sitc4', 'value']
@@ -44,12 +46,12 @@ datos_gdp['media_awards'] = datos_gdp.loc[:, 2011:2023].mean(axis = 1, numeric_o
 diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
 gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 
-X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cp = trat.Promedio_temporal(X_cpt, Awards= False, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
-X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
+#X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False)
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = 15 )
 
 
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
@@ -87,27 +89,30 @@ importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars 
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
 print('Autovalores')
-print(sorted(tuple(paises_ECI_e), key = lambda X: X[0], reverse=1))
+print(sorted(tuple(paises_ECI_e), key = lambda X: X[1], reverse=1), '\n')
 print('Reflexiones')
-print(sorted(tuple(paises_ECI_m), key = lambda X: X[0], reverse=1))
+print(sorted(tuple(paises_ECI_m), key = lambda X: X[1], reverse=1), '\n')
 
 points = []
+dentro = []
 fuera = []
 labels = []
 
 fig, ax = plt.subplots(figsize = (12, 12))
-for c_awards, c_gdp in dicc.awards_gdp.items(): #cambiar el dicc por cada wea
+for c_awards, c_gdp in dicc.wipo_gdp.items(): #cambiar el dicc por cada wea
     try:
         xy = np.array([paises_ECI_e[c_awards], np.log(paises_GDP[c_gdp])])
         points.append(
             xy
         )
-        ax.annotate(dicc.award_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
-    except:
-        fuera.append([c_awards, c_gdp])
-        pass
+        ax.annotate(dicc.wipo_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
+        dentro.append([c_awards, c_gdp])
+    # except:
+    #     fuera.append([c_awards, c_gdp])
+    #     pass
 
-print(fuera)
+print('Paises graficados', dentro, '\n')
+print('Paises no graficados', fuera)
 points = np.array(points)
 print(points.shape)
 m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
