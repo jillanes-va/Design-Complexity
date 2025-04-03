@@ -13,11 +13,11 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-awards_str = r'wipo_design.csv'
-awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
-#
-#awards_str = r'wrd_04_all-data.csv'
-#awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+#awards_str = r'wipo_design.csv'
+#awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+
+awards_str = r'wrd_04_all-data.csv'
+awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 #export_str = r'wtf00.dta'
 #export_columns = ['exporter', 'sitc4', 'value']
@@ -39,21 +39,19 @@ datos = imp.carga(awards_str, awards_columns)
 diccionaries = trat.dictionaries(datos)
 
 X_cpt = trat.X_matrix(datos)
-datos_gdp = carga_excel('IMF_GDP_per_PPA.xls')
-datos_gdp['media_wipo'] = datos_gdp.mean(axis = 1, numeric_only = True)
-datos_gdp['media_awards'] = datos_gdp.loc[:, 2011:2023].mean(axis = 1, numeric_only = True)
+datos_gdp = carga_excel('IMF_GDP_per_PPA_April_2024.xlsx')
 
 diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
 gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 
-X_cp = trat.Promedio_temporal(X_cpt, Awards= False, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
-#X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
+X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = 15 )
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False )
 
-
+print(diccionaries[0]['United States'])
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
 # figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
@@ -85,56 +83,58 @@ paises_ECI_m = { num_paises[n]:ECI_m[n] for n in range(len(ECI_e)) }
 cat_PCI = { num_cat[n]: PCI_e[n] for n in range(len(PCI_e)) }
 cat_PCI = { num_cat[n]: PCI_e[n] for n in range(len(PCI_e)) }
 
-importantes = datos_gdp.loc[:, ['GDP per capita, current prices\n (U.S. dollars per capita)', 'media_awards']]
+importantes = datos_gdp.loc[:, ['Country', 'mean_awards']]
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
 print('Autovalores')
-print(sorted(tuple(paises_ECI_e), key = lambda X: X[1], reverse=1), '\n')
+print(sorted(tuple(paises_ECI_e), key = lambda X: X[0], reverse=1), '\n')
 print('Reflexiones')
-print(sorted(tuple(paises_ECI_m), key = lambda X: X[1], reverse=1), '\n')
+print(sorted(tuple(paises_ECI_m), key = lambda X: X[0], reverse=1), '\n')
 
 points = []
 dentro = []
 fuera = []
 labels = []
 
-fig, ax = plt.subplots(figsize = (12, 12))
-for c_awards, c_gdp in dicc.wipo_gdp.items(): #cambiar el dicc por cada wea
+fig, ax = plt.subplots(figsize = (10, 7))
+for c_prod, ECI in paises_ECI_e.items(): #cambiar el dicc por cada wea
     try:
-        xy = np.array([paises_ECI_e[c_awards], np.log(paises_GDP[c_gdp])])
+        c_gdp = dicc.awards_gdp[c_prod]
+        xy = np.array([ECI, np.log(paises_GDP[c_gdp])])
         points.append(
             xy
         )
-        ax.annotate(dicc.wipo_iso[c_awards], xy + np.array([0.02, 0]), fontsize = 'x-small')
-        dentro.append([c_awards, c_gdp])
-    # except:
-    #     fuera.append([c_awards, c_gdp])
-    #     pass
+        ax.annotate(dicc.award_iso[c_prod], xy + np.array([0.02, 0]), fontsize = 'x-small')
+        dentro.append([c_prod, c_gdp])
+    except:
+        fuera.append([c_prod, c_gdp])
+        pass
 
-print('Paises graficados', dentro, '\n')
-print('Paises no graficados', fuera)
-points = np.array(points)
-print(points.shape)
+
+points = np.array(points)[~np.isnan(points).any(axis = 1)]
+
+print(fuera)
+
 m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
-res = sc.spearmanr(points[:,0], points[:,1])
+res = sc.spearmanr(points[:,0], points[:,1], nan_policy = 'omit')
 print('r y p para award vs gdp',res.statistic, res.pvalue)
 #
 X = [ min(points[:,0]), max(points[:,0]) ]
 Y = [ m * X[0] + c, m * X[1] + c ]
-ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = '$\\rho = 0.35$\n$p-value=0.0015$')
+ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = f'$\\rho = {res.statistic:.2f}$\n$p-value<0.01$')
 ax.scatter(points[:,0], points[:, 1], s = 5**2, color = 'tab:blue')
 
 #ax.set_ylim([4,14])
-ax.set_xlabel('DCI design from Awards 2011-2023')
+ax.set_xlabel('DCI design from WIPO 2011-2023')
 ax.set_ylabel('log mean GDP per capita PPA 2011-2023')
 plt.legend()
-plt.show()
+plt.savefig(r'figs/Regresion_DCI_awards_PIB_per_capita.pdf')
 
-plt.scatter(ECI_e, ECI_m)
-plt.scatter(PCI_e, PCI_m)
-plt.xlabel('Metodo de autovalores')
-plt.ylabel('Metodo de las reflexiones')
-plt.show()
+# plt.scatter(ECI_e, ECI_m)
+# plt.scatter(PCI_e, PCI_m)
+# plt.xlabel('Metodo de autovalores')
+# plt.ylabel('Metodo de las reflexiones')
+# plt.show()
 # # (pais_award, ECI) -> (pais_award, pais_gdp) -> (pais_gdp, GDP)
 #
 # # llave = lambda A: A[0]

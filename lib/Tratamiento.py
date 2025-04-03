@@ -128,9 +128,10 @@ def sum_files(X, partida_llegada, cat_num):
             if i != i_min:
                 super_indice += [i]
         X_nuevo[i_min, :] = sub_suma
-    X_nuevo = np.delete(X_nuevo, super_indice, axis = 0)
-    for pais_partida in paises_partida:
-        if pais_partida not in paises_llegada:
-            _ = cat_num.pop(pais_partida)
+    #X_nuevo = np.delete(X_nuevo, super_indice, axis = 0)
+    # for pais_partida in paises_partida:
+    #     if pais_partida not in paises_llegada:
+    #         print(pais_partida)
+    #         _ = cat_num.pop(pais_partida)
     new_dict = re_count(cat_num)
     return X_nuevo, new_dict
