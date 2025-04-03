@@ -51,7 +51,7 @@ X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, di
 
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False )
 
-print(diccionaries[0]['United States'])
+
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
 #
 # figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
@@ -97,7 +97,7 @@ fuera = []
 labels = []
 
 fig, ax = plt.subplots(figsize = (10, 7))
-for c_prod, ECI in paises_ECI_e.items(): #cambiar el dicc por cada wea
+for c_prod, ECI in paises_ECI_m.items(): #cambiar el dicc por cada wea
     try:
         c_gdp = dicc.awards_gdp[c_prod]
         xy = np.array([ECI, np.log(paises_GDP[c_gdp])])
@@ -107,7 +107,7 @@ for c_prod, ECI in paises_ECI_e.items(): #cambiar el dicc por cada wea
         ax.annotate(dicc.award_iso[c_prod], xy + np.array([0.02, 0]), fontsize = 'x-small')
         dentro.append([c_prod, c_gdp])
     except:
-        fuera.append([c_prod, c_gdp])
+        fuera.append(c_prod)
         pass
 
 
@@ -121,7 +121,7 @@ print('r y p para award vs gdp',res.statistic, res.pvalue)
 #
 X = [ min(points[:,0]), max(points[:,0]) ]
 Y = [ m * X[0] + c, m * X[1] + c ]
-ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = f'$\\rho = {res.statistic:.2f}$\n$p-value<0.01$')
+ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = f'$\\rho = {res.statistic:.2f}$\n$p-value={res.pvalue: .2f}$')
 ax.scatter(points[:,0], points[:, 1], s = 5**2, color = 'tab:blue')
 
 #ax.set_ylim([4,14])

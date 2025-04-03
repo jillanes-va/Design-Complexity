@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def domain_of_data(data):
     '''Toma los datos y retorna dos listas, la primera con todos los elementos existentes en cada columna y la segunda lista devuelve la cantidad de elementos existentes.'''
     lista_de_elementos = []
@@ -108,30 +109,33 @@ def sum_files(X, partida_llegada, cat_num):
     X_nuevo = np.copy(X)
     paises_partida = partida_llegada.keys()
     paises_llegada = list(set(partida_llegada.values()))
+    paises_eliminados = list(set(paises_partida) - set(paises_llegada))
 
-    llegada_partida = inv_dict(partida_llegada, unique = False)
     num_cat = inv_dict(cat_num)
 
-    index_array = []
+    num_partida = [cat_num[pais] for pais in paises_partida]
+    num_llegada = [cat_num[pais] for pais in paises_llegada]
+    num_eliminado = [cat_num[pais] for pais in paises_eliminados]
+
+    llegada_partida = inv_dict(partida_llegada, unique = False)
+    indexacion = []
     for pais_llegada in paises_llegada:
-        paises_partida = llegada_partida[ pais_llegada ]
-        indices_partida = [ cat_num[pais_partida] for pais_partida in paises_partida ]
-        index_array.append(
-            indices_partida
-        )
-    super_indice = []
-    for indices in index_array:
-        sub_suma = 0
-        i_min = np.min(indices)
-        for i in indices:
-            sub_suma += X[i, :]
-            if i != i_min:
-                super_indice += [i]
-        X_nuevo[i_min, :] = sub_suma
-    #X_nuevo = np.delete(X_nuevo, super_indice, axis = 0)
-    # for pais_partida in paises_partida:
-    #     if pais_partida not in paises_llegada:
-    #         print(pais_partida)
-    #         _ = cat_num.pop(pais_partida)
+        intermedio = []
+        for paises in llegada_partida[pais_llegada]:
+            intermedio.append(
+                cat_num[paises]
+            )
+        indexacion.append(intermedio)
+    print(indexacion)
+    for index in indexacion:
+        new_row = X_nuevo[index].sum(axis = 0)
+        first_country = partida_llegada[num_cat[index[0]]]
+        definitive_index = cat_num[ first_country ]
+        X_nuevo[definitive_index, :] = new_row
+
+    X_nuevo = np.delete(X_nuevo, num_eliminado, axis = 0)
+    for n in num_eliminado:
+        num_cat.pop(n)
+    cat_num = inv_dict(num_cat)
     new_dict = re_count(cat_num)
     return X_nuevo, new_dict
