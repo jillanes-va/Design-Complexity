@@ -36,10 +36,9 @@ dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
 gdp_by_country = trat.gdp_matrix(data_gdp) #**
 
-X_cpt = trat.X_matrix(data_DCI)
-X_cp = trat.Promedio_temporal(X_cpt, total_time = 1) #Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cpt = trat.X_matrix(data_DCI)  #Los datos wipo van en 3 periodos de 5 años cada uno.
 
-X_cp = trat.sum_files(X_cp, dicts_DCI, dicc.partida_award_llegada_wipo)
+X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 
 #----------------------------------------
@@ -48,7 +47,7 @@ X_cp = trat.sum_files(X_cp, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 #============== RCA, M_cp ================
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, dicts_DCI)
+R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 15)
 print(R_cp.shape)
 
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
