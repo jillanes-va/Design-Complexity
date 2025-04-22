@@ -1,12 +1,21 @@
 import numpy as np
 import lib.Tratamiento as trat
 
-def Limpieza(X, diccionarios, c_min, p_min, time = False):
-    '''Limpia los paises que esten bajo un cierto umbral, elimina de la lista aquellos que no cumplan tal motivo'''
-    if time:
-        X = X.sum(axis = 2)
-    Mask_c = (X.sum(axis = 1) > c_min)
-    Mask_p = (X.sum(axis = 0) > p_min)
+def Limpieza(X, diccionarios, c_min = 0, p_min = 0, time = False):
+    '''
+    Args:
+        X: numpy array. Es una matriz de volumen (c, p, t) o (c, p)
+        diccionarios: list[dict]. Son los diccionarios de (c, p) y/o t
+        c_min: int. Umbral mínimo para que un país tenga producción
+        p_min: int. Umbral mínimo para que un producto tenga producción.
+        time: bool.
+    '''
+    X_new = np.copy(X)
+
+    if time != 1:
+        X_new = X_new.sum(axis = 2)
+    Mask_c = (X_new.sum(axis = 1) > c_min)
+    Mask_p = (X_new.sum(axis = 0) > p_min)
 
     for n, valor in enumerate(Mask_c):
         if not valor:
@@ -17,7 +26,11 @@ def Limpieza(X, diccionarios, c_min, p_min, time = False):
 
     diccionarios[0] = trat.re_count(diccionarios[0])
     diccionarios[1] = trat.re_count(diccionarios[1])
-    return X[:, Mask_p][Mask_c, :]
+
+    if time != 1:
+        return X_new[:, :, Mask_p][:, Mask_c, :]
+    else:
+        return X_new[:, Mask_p][Mask_c, :]
 
 
 def Matrices(X, diccionario = None, threshold = 1, c_min = 1, p_min = 1, time = False, cleaning = True):

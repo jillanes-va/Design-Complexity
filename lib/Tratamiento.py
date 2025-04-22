@@ -60,18 +60,19 @@ def X_matrix(data):
         X_cpt[index] += data_number[-1]
     return X_cpt
 
-def Promedio_temporal(X, n_time = None, Awards = True):
-    '''Toma la matriz y le realiza el promedio temporal'''
-    if Awards:
-        if n_time is None:
-            _, _, T = X.shape
-            return X.sum(axis = 2) / T
-        if isinstance(n_time, int) or isinstance(n_time, float):
-            return X.sum(axis = 2)/ n_time
-        else:
-            raise TypeError
-    else:
-        return X/5
+def Promedio_temporal(X, total_time = 1):
+    '''
+    Args:
+        X : np array. Matriz de volumen de producción
+        total_time: int. Tiempo total
+    Returns:
+        X_new: np.array. Promedio temporal sobre el 3er indice
+    '''
+    if total_time == 1:
+        total_time = X.shape[2]
+    new_X = X.sum(axis = 2) / total_time
+
+    return new_X
 
 def pareo_listas(lista_a, lista_b):
     '''Toma dos listas de strings y entrega dos listas tal que si un string de A es contenido (parcialmente) por un string de B, se guarden en listas distinas pero pareads, entrega ademas aquellos strings sobrantes.'''
@@ -98,44 +99,54 @@ def pareo_listas(lista_a, lista_b):
     return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]
 
 
-def gdp_matrix(data, last = False):
-    matriz = data.values
-    if last:
-        return matriz[:,-1]
+def gdp_matrix(data):
+    return data.values
+
+def sum_files(X, diccionaries, partida_llegada):
+    '''
+    Args:
+        X : np.array. Matriz representando filas los países y columnas los productos.
+        diccionaries: list[dict]. Lista con todos los diccionarios de los indices de X.
+        partida_llegada: dict. Diccionario en donde clasifica los elementos de llegada o partida.
+
+    Returns:
+        X_nuevo: np.array. Matriz combinando los valores (sumandolos) que especificaba partida_llegada.
+        new_dict: dict. Nuevo diccionario desechando los países y reindexando la matriz X_nuevo.
+    '''
+    if len(partida_llegada) == 0:
+        return X
     else:
-        return matriz[:,1:]
+        cat_num = diccionaries[0]
+        X_nuevo = np.copy(X)
+        paises_partida = partida_llegada.keys()
+        paises_llegada = list(set(partida_llegada.values()))
+        paises_eliminados = list(set(paises_partida) - set(paises_llegada))
 
-def sum_files(X, partida_llegada, cat_num):
-    X_nuevo = np.copy(X)
-    paises_partida = partida_llegada.keys()
-    paises_llegada = list(set(partida_llegada.values()))
-    paises_eliminados = list(set(paises_partida) - set(paises_llegada))
+        num_cat = inv_dict(cat_num)
 
-    num_cat = inv_dict(cat_num)
+        num_partida = [cat_num[pais] for pais in paises_partida]
+        num_llegada = [cat_num[pais] for pais in paises_llegada]
+        num_eliminado = [cat_num[pais] for pais in paises_eliminados]
 
-    num_partida = [cat_num[pais] for pais in paises_partida]
-    num_llegada = [cat_num[pais] for pais in paises_llegada]
-    num_eliminado = [cat_num[pais] for pais in paises_eliminados]
+        llegada_partida = inv_dict(partida_llegada, unique = False)
+        indexacion = []
+        for pais_llegada in paises_llegada:
+            intermedio = []
+            for paises in llegada_partida[pais_llegada]:
+                intermedio.append(
+                    cat_num[paises]
+                )
+            indexacion.append(intermedio)
+        print(indexacion)
+        for index in indexacion:
+            new_row = X_nuevo[index].sum(axis = 0)
+            first_country = partida_llegada[num_cat[index[0]]]
+            definitive_index = cat_num[ first_country ]
+            X_nuevo[definitive_index, :] = new_row
 
-    llegada_partida = inv_dict(partida_llegada, unique = False)
-    indexacion = []
-    for pais_llegada in paises_llegada:
-        intermedio = []
-        for paises in llegada_partida[pais_llegada]:
-            intermedio.append(
-                cat_num[paises]
-            )
-        indexacion.append(intermedio)
-    print(indexacion)
-    for index in indexacion:
-        new_row = X_nuevo[index].sum(axis = 0)
-        first_country = partida_llegada[num_cat[index[0]]]
-        definitive_index = cat_num[ first_country ]
-        X_nuevo[definitive_index, :] = new_row
-
-    X_nuevo = np.delete(X_nuevo, num_eliminado, axis = 0)
-    for n in num_eliminado:
-        num_cat.pop(n)
-    cat_num = inv_dict(num_cat)
-    new_dict = re_count(cat_num)
-    return X_nuevo, new_dict
+        X_nuevo = np.delete(X_nuevo, num_eliminado, axis = 0)
+        for n in num_eliminado:
+            num_cat.pop(n)
+        cat_num = inv_dict(num_cat)
+        diccionaries[0] = re_count(cat_num)
+        return X_nuevo

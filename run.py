@@ -11,45 +11,48 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as sc
 
-from lib.Importacion import carga_excel
+#----------------------------------
+#--------- Carga de datos ---------
+#----------------------------------
 
-awards_str = r'wipo_design.csv'
-awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+wipo_file = r'wipo_design.csv'
+wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 
-# awards_str = r'wrd_04_all-data.csv'
-# awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+awards_file = r'wrd_04_all-data.csv'
+awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
-#export_str = r'wtf00.dta'
-#export_columns = ['exporter', 'sitc4', 'value']
+gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
+gdp_columns = ['Country', 'mean_awards']
 
-# Informacion = test.categorias_presentes(X_cpt[:,:,:12], diccionaries)
-# plt.scatter([i[0] for i in Informacion], [i[1] for i in Informacion])
-# plt.ylabel('Frecuencia absoluta')
-# plt.title('Categorias presentes por año')
-# plt.tight_layout()
-# plt.xticks(rotation = 45)
-# plt.show()
-#
-#
-# sisi = datos_premio.groupby(['designer_country']).sum()
-# print(sisi)
-# print(sisi[sisi['award_score'] > 5.0])
+data_DCI = imp.carga(awards_file, awards_columns)
+data_gdp = imp.carga_excel(gdp_file, gdp_columns)
 
-datos = imp.carga(awards_str, awards_columns)
-diccionaries = trat.dictionaries(datos)
+#----------------------------------------
+#--------- Tratamiento de datos ---------
+#----------------------------------------
 
-X_cpt = trat.X_matrix(datos)
-datos_gdp = carga_excel('IMF_GDP_per_PPA_April_2024.xlsx')
+dicts_DCI = trat.dictionaries(data_DCI)
 
-diccionaries_gdp = trat.dictionaries(datos_gdp)[0]
-gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
+dict_country_gdp = trat.dictionaries(data_gdp)[0]
+gdp_by_country = trat.gdp_matrix(data_gdp, last = 0) #**
 
-X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
-#X_cp = X_cpt[:,:,0]
+X_cpt = trat.X_matrix(data_DCI)
+X_cp = trat.Promedio_temporal(X_cpt, n_time = 0) #Los datos wipo van en 3 periodos de 5 años cada uno.
 
-#X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
+print(dicts_DCI[0])
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False )
+X_cp = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, dicts_DCI[0])
+
+print(dicts_DCI[0])
+
+#----------------------------------------
+#--------- Calculo de cosas -------------
+#----------------------------------------
+
+
+#============== RCA, M_cp ================
+
+#R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, dicts_DCI, time = False )
 
 
 # figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
@@ -57,7 +60,9 @@ R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False )
 # figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
 #
 # figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
-#
+
+#=============== Relatedness ===============
+
 # phi = calc.Similaridad(M_cp)
 # figs.Clustering(phi, save = False, name = 'Similarity_matrix_awards.pdf')
 #
@@ -68,35 +73,36 @@ R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False )
 #
 # figs.red(phi, by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
 
-num_paises = trat.inv_dict(diccionaries[0])
-num_cat = trat.inv_dict(diccionaries[1])
+#num_paises = trat.inv_dict(diccionaries[0])
+#num_cat = trat.inv_dict(diccionaries[1])
 
+#=============== Design Complexity Index ===============
 
-ECI_e, PCI_e= calc.Alt_Complexity_measures(M_cp)
-ECI_m, PCI_m= calc.Complexity_measures(M_cp, 60)
-
-print(ECI_e.shape)
-
-paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
-paises_ECI_m = { num_paises[n]:ECI_m[n] for n in range(len(ECI_e)) }
-
-cat_PCI = { num_cat[n]: PCI_e[n] for n in range(len(PCI_e)) }
-cat_PCI = { num_cat[n]: PCI_e[n] for n in range(len(PCI_e)) }
-
-importantes = datos_gdp.loc[:, ['Country', 'mean_awards']]
-paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
-
-print('Autovalores')
-print(sorted(tuple(paises_ECI_e), key = lambda X: X[1], reverse=0), '\n')
-print('Reflexiones')
-print(sorted(tuple(paises_ECI_m), key = lambda X: X[1], reverse=0), '\n')
-
-print(paises_ECI_m['Chile'])
-
-points = []
-dentro = []
-fuera = []
-labels = []
+# ECI_e, PCI_e= calc.Alt_Complexity_measures(M_cp)
+# ECI_m, PCI_m= calc.Complexity_measures(M_cp, 60)
+#
+# print(ECI_e.shape)
+#
+# paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
+# paises_ECI_m = { num_paises[n]:ECI_m[n] for n in range(len(ECI_e)) }
+#
+# cat_PCI = { num_cat[n]: PCI_e[n] for n in range(len(PCI_e)) }
+# cat_PCI = { num_cat[n]: PCI_e[n] for n in range(len(PCI_e)) }
+#
+# importantes = datos_gdp.loc[:, gdp_columns]
+# paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
+#
+# print('Autovalores')
+# print(sorted(tuple(paises_ECI_e), key = lambda X: X[1], reverse=0), '\n')
+# print('Reflexiones')
+# print(sorted(tuple(paises_ECI_m), key = lambda X: X[1], reverse=0), '\n')
+#
+# print(paises_ECI_m['Chile'])
+#
+# points = []
+# dentro = []
+# fuera = []
+# labels = []
 
 # fig, ax = plt.subplots(figsize = (10, 7))
 # for c_prod, ECI in paises_ECI_m.items(): #cambiar el dicc por cada wea
