@@ -1,19 +1,16 @@
 import numpy as np
 import lib.Tratamiento as trat
 
-def Limpieza(X, diccionarios, c_min = 0, p_min = 0, time = False):
+def Limpieza(X, diccionarios, c_min = 0, p_min = 0):
     '''
     Args:
-        X: numpy array. Es una matriz de volumen (c, p, t) o (c, p)
-        diccionarios: list[dict]. Son los diccionarios de (c, p) y/o t
-        c_min: int. Umbral mínimo para que un país tenga producción
+        X: numpy array. Es una matriz de volumen (c, p, t).
+        diccionarios: list[dict]. Son los diccionarios de (c, p, t).
+        c_min: int. Umbral mínimo para que un país tenga producción.
         p_min: int. Umbral mínimo para que un producto tenga producción.
-        time: bool.
     '''
-    X_new = np.copy(X)
 
-    if time != 1:
-        X_new = X_new.sum(axis = 2)
+    X_new = np.copy(X).sum(axis = 2)
     Mask_c = (X_new.sum(axis = 1) > c_min)
     Mask_p = (X_new.sum(axis = 0) > p_min)
 
@@ -27,72 +24,69 @@ def Limpieza(X, diccionarios, c_min = 0, p_min = 0, time = False):
     diccionarios[0] = trat.re_count(diccionarios[0])
     diccionarios[1] = trat.re_count(diccionarios[1])
 
-    if time != 1:
-        return X_new[:, :, Mask_p][:, Mask_c, :]
-    else:
-        return X_new[:, Mask_p][Mask_c, :]
+    return X_new[:, Mask_p][Mask_c, :]
 
 
-def Matrices(X, diccionario = None, threshold = 1, c_min = 1, p_min = 1, time = False, cleaning = True):
+def Matrices(X_cpt, diccionario, threshold = 1, c_min = 1, p_min = 1, cleaning = True):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
     if cleaning:
-        X = Limpieza(X, diccionario, c_min, p_min, time)
+        X_cpt = Limpieza(X_cpt, diccionario, c_min, p_min)
 
-    c_len, p_len = X.shape
-    RCA = np.zeros(X.shape)
-    M = np.zeros(X.shape)
+    c_len, p_len = X_cpt.shape
 
-    alpha = np.zeros(X.shape)
-    beta = np.zeros(X.shape)
+    RCA = np.zeros(X_cpt.shape)
+    alpha = np.zeros(X_cpt.shape)
+    beta = np.zeros(X_cpt.shape)
 
-    X_c = np.sum(X, axis=1)
-    X_p = np.sum(X, axis=0)
-    X_net = np.sum(X)
+    X_c = np.sum(X_cpt, axis = 1)
+    X_p = np.sum(X_cpt, axis = 0)
+    X_net = np.sum(X_cpt)
 
     for i in range(c_len):
         for j in range(p_len):
             if X_c[i] != 0:
-                alpha[i, j] = X[i, j] / X_c[i]
+                alpha[i, j] = X_cpt[i, j] / X_c[i]
             beta[i, j] = X_p[j] / X_net
             if X_p[j] != 0:
                 RCA[i, j] = alpha[i, j] / beta[i, j]
 
     M = 1 * (RCA >= threshold)
-    return RCA, M, X
+    return RCA, M, X_cpt
 
 
-def Matrices_ordenadas(X, diccionario, c_min = 0, p_min = 0, threshold = 1, change_dict = True, time = False):
+def Matrices_ordenadas(X, diccionario, c_min = 0, p_min = 0, threshold = 1, change_dict = True):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
-    RCA, M, X = Matrices(X, diccionario, threshold, c_min, p_min, time)
-    M_p = np.sum(M, axis=0)
-    M_c = np.sum(M, axis=1)
+    c_len, p_len, t_len = X.shape
 
-    N_c, N_p = X.shape
+    RCA, M, X = Matrices(X, diccionario, threshold, c_min, p_min)
+    R_p = np.sum(RCA, axis=0)
+    R_c = np.sum(RCA, axis=1)
 
-    lista_p = [(M_p[i], i) for i in range(N_p)]
-    lista_c = [(M_c[i], i) for i in range(N_c)]
+    c_len, p_len = X.shape
+
+    lista_c = [(R_c[i], i) for i in range(c_len)]
+    lista_p = [(R_p[i], i) for i in range(p_len)]
 
     llave = lambda A: A[0]
 
-    Shuffle_p = sorted(lista_p, key= llave, reverse = 1)
-    Shuffle_c = sorted(lista_c, key= llave, reverse = 1)
+    shuffle_c = sorted(lista_c, key = llave, reverse = 1)
+    shuffle_p = sorted(lista_p, key = llave, reverse = 1)
 
     arrays = [RCA, M, X]
     array_1 = [np.zeros(X.shape), np.zeros(X.shape), np.zeros(X.shape)]
     array_2 = [np.zeros(X.shape), np.zeros(X.shape), np.zeros(X.shape)]
 
     for i in range(3):
-        for j in range(N_c):
-            array_1[i][j, :] = arrays[i][ Shuffle_c[j][1], : ]
-    for i in range(3):
-        for j in range(N_p):
-            array_2[i][:, j] = array_1[i][:, Shuffle_p[j][1]]
+        for j in range(c_len):
+            array_1[i][j, :] = arrays[i][ shuffle_c[j][1], : ]
+        for k in range(p_len):
+            array_2[i][:, k] = array_1[i][:, shuffle_p[k][1]]
 
     if change_dict:
         llave_c = list(diccionario[0].keys())
         llave_p = list(diccionario[1].keys())
-        Nuevo_dict_c_num = dict([(llave_c[Shuffle_c[i][1]], i) for i in range(N_c)])
-        Nuevo_dict_p_num = dict([(llave_p[Shuffle_p[i][1]], i) for i in range(N_p)])
+        Nuevo_dict_c_num = dict([(llave_c[shuffle_c[i][1]], i) for i in range(c_len)])
+        Nuevo_dict_p_num = dict([(llave_p[shuffle_p[i][1]], i) for i in range(p_len)])
 
         diccionario[0] = Nuevo_dict_c_num
         diccionario[1] = Nuevo_dict_p_num

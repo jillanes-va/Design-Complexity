@@ -72,7 +72,7 @@ def Promedio_temporal(X, total_time = 1):
         total_time = X.shape[2]
     new_X = X.sum(axis = 2) / total_time
 
-    return new_X
+    return new_X[:,:, np.newaxis]
 
 def pareo_listas(lista_a, lista_b):
     '''Toma dos listas de strings y entrega dos listas tal que si un string de A es contenido (parcialmente) por un string de B, se guarden en listas distinas pero pareads, entrega ademas aquellos strings sobrantes.'''
@@ -137,7 +137,6 @@ def sum_files(X, diccionaries, partida_llegada):
                     cat_num[paises]
                 )
             indexacion.append(intermedio)
-        print(indexacion)
         for index in indexacion:
             new_row = X_nuevo[index].sum(axis = 0)
             first_country = partida_llegada[num_cat[index[0]]]
