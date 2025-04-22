@@ -13,11 +13,11 @@ import scipy.stats as sc
 
 from lib.Importacion import carga_excel
 
-#awards_str = r'wipo_design.csv'
-#awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
+awards_str = r'wipo_design.csv'
+awards_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 
-awards_str = r'wrd_04_all-data.csv'
-awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+# awards_str = r'wrd_04_all-data.csv'
+# awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 #export_str = r'wtf00.dta'
 #export_columns = ['exporter', 'sitc4', 'value']
@@ -47,7 +47,7 @@ gdp_by_country = trat.gdp_matrix(datos_gdp, last = 0)
 X_cp = trat.Promedio_temporal(X_cpt, Awards= True, n_time = None) #Los datos wipo van en 3 periodos de 5 años cada uno.
 #X_cp = X_cpt[:,:,0]
 
-X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
+#X_cp, diccionaries[0] = trat.sum_files(X_cp, dicc.partida_award_llegada_wipo, diccionaries[0])
 
 R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cp, diccionaries, time = False )
 
@@ -87,48 +87,50 @@ importantes = datos_gdp.loc[:, ['Country', 'mean_awards']]
 paises_GDP = {tupla[0]:tupla[1] for tupla in importantes.values}
 
 print('Autovalores')
-print(sorted(tuple(paises_ECI_e), key = lambda X: X[0], reverse=1), '\n')
+print(sorted(tuple(paises_ECI_e), key = lambda X: X[1], reverse=0), '\n')
 print('Reflexiones')
-print(sorted(tuple(paises_ECI_m), key = lambda X: X[0], reverse=1), '\n')
+print(sorted(tuple(paises_ECI_m), key = lambda X: X[1], reverse=0), '\n')
+
+print(paises_ECI_m['Chile'])
 
 points = []
 dentro = []
 fuera = []
 labels = []
 
-fig, ax = plt.subplots(figsize = (10, 7))
-for c_prod, ECI in paises_ECI_m.items(): #cambiar el dicc por cada wea
-    try:
-        c_gdp = dicc.awards_gdp[c_prod]
-        xy = np.array([ECI, np.log(paises_GDP[c_gdp])])
-        points.append(
-            xy
-        )
-        ax.annotate(dicc.award_iso[c_prod], xy + np.array([0.02, 0]), fontsize = 'x-small')
-        dentro.append([c_prod, c_gdp])
-    except:
-        fuera.append(c_prod)
-        pass
-
-
-points = np.array(points)[~np.isnan(points).any(axis = 1)]
-
-print(fuera)
-
-m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
-res = sc.spearmanr(points[:,0], points[:,1], nan_policy = 'omit')
-print('r y p para award vs gdp',res.statistic, res.pvalue)
+# fig, ax = plt.subplots(figsize = (10, 7))
+# for c_prod, ECI in paises_ECI_m.items(): #cambiar el dicc por cada wea
+#     try:
+#         c_gdp = dicc.wipo_gdp[c_prod]
+#         xy = np.array([ECI, np.log(paises_GDP[c_gdp])])
+#         points.append(
+#             xy
+#         )
+#         ax.annotate(dicc.wipo_iso[c_prod], xy + np.array([0.02, 0]), fontsize = 'x-small')
+#         dentro.append([c_prod, c_gdp])
+#     except:
+#         fuera.append(c_prod)
+#         pass
 #
-X = [ min(points[:,0]), max(points[:,0]) ]
-Y = [ m * X[0] + c, m * X[1] + c ]
-ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = f'$\\rho = {res.statistic:.2f}$\n$p-value={res.pvalue: .2f}$')
-ax.scatter(points[:,0], points[:, 1], s = 5**2, color = 'tab:blue')
-
-#ax.set_ylim([4,14])
-ax.set_xlabel('DCI design from WIPO 2011-2023')
-ax.set_ylabel('log mean GDP per capita PPA 2011-2023')
-plt.legend()
-plt.savefig(r'figs/Regresion_DCI_awards_PIB_per_capita.pdf')
+#
+# points = np.array(points)[~np.isnan(points).any(axis = 1)]
+#
+# print(fuera)
+#
+# m, c, low_slope, high_slope = sc.theilslopes(points[:, 1], points[:,0])
+# res = sc.spearmanr(points[:,0], points[:,1], nan_policy = 'omit')
+# print('r y p para award vs gdp',res.statistic, res.pvalue)
+# #
+# X = [ min(points[:,0]), max(points[:,0]) ]
+# Y = [ m * X[0] + c, m * X[1] + c ]
+# ax.plot(X, Y, alpha=1, linestyle='--', color='red', label = f'$\\rho = {res.statistic:.2f}$\n' + r'$p-value<10^{-8}$')
+# ax.scatter(points[:,0], points[:, 1], s = 5**2, color = 'tab:blue')
+#
+# ax.set_xlabel('DCI design from WIPO 2010-2024', size = 15)
+# ax.set_ylabel('log mean GDP per capita PPA 2010-2024', size = 15)
+# plt.legend()
+# #plt.show()
+# plt.savefig(r'figs/Regresion_DCI_wipo_PIB_per_capita.pdf')
 
 # plt.scatter(ECI_e, ECI_m)
 # plt.scatter(PCI_e, PCI_m)
