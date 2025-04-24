@@ -24,7 +24,7 @@ awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
 gdp_columns = ['Country', 'mean_awards']
 
-data_DCI = imp.carga(wipo_file, wipo_columns)
+data_DCI = imp.carga(awards_file, awards_columns)
 data_gdp = imp.carga_excel(gdp_file, gdp_columns)
 
 #----------------------------------------
@@ -36,7 +36,7 @@ dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
 gdp_by_country = trat.gdp_matrix(data_gdp) #**
 
-X_cpt = trat.X_matrix(data_DCI)#Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cpt = trat.X_matrix(data_DCI)[:,:,:] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
 #X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
@@ -50,35 +50,24 @@ X_cpt = trat.X_matrix(data_DCI)#Los datos wipo van en 3 periodos de 5 años cada
 
 X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 15)
 
-
-for i in range(4):
-    figs.graf(np.log(RCA_cpt[:,:,i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp' + f'{i}' + r'}$')
-#
-# figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
-#
-# figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
-
 #=============== Relatedness ===============
 
-# phi = calc.Similaridad(M_cp)
-# figs.Clustering(phi, save = False, name = 'Similarity_matrix_awards.pdf')
-#
-#
-#
-#
-# figs.k_density(phi)
-#
-# figs.red(phi, by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
+phi_t = calc.Similaridad(M_cpt)
+
+#=============== Design Complexity Index ===============
+
+#ECI_e, PCI_e = calc.Eigen_method(M_cpt)
+ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 20)
+
+for i in range(12):
+    plt.scatter(np.arange(len(ECI_m[:, i])), ECI_m[:, i])
+    plt.show()
 
 #num_paises = trat.inv_dict(diccionaries[0])
 #num_cat = trat.inv_dict(diccionaries[1])
 
-#=============== Design Complexity Index ===============
 
-# ECI_e, PCI_e= calc.Alt_Complexity_measures(M_cp)
-# ECI_m, PCI_m= calc.Complexity_measures(M_cp, 60)
-#
-# print(ECI_e.shape)
+
 #
 # paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
 # paises_ECI_m = { num_paises[n]:ECI_m[n] for n in range(len(ECI_e)) }
@@ -100,6 +89,20 @@ for i in range(4):
 # dentro = []
 # fuera = []
 # labels = []
+
+#---- Graficos -----
+
+#figs.graf(np.log(RCA_cpt[:,:,-1] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp' + f'{i}' + r'}$')
+#
+# figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
+#
+# figs.graf(M_cp, xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
+
+#figs.Clustering(phi_t[:, :, -1], save = False, name = 'Similarity_matrix_awards.pdf')
+
+# figs.k_density(phi)
+#
+# figs.red(phi, by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
 
 # fig, ax = plt.subplots(figsize = (10, 7))
 # for c_prod, ECI in paises_ECI_m.items(): #cambiar el dicc por cada wea

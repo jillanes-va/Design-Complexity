@@ -85,7 +85,7 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
 
     RCA, M = Matrices(X_cp, threshold)
 
-    shuffle_c, shuffle_p = shuffles(X_cp)
+    shuffle_c, shuffle_p = shuffles(M)
 
     X_, RCA_, M_ = [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1)
     X_t, RCA_t, M_t = [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1)
@@ -116,19 +116,21 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
 
 def Similaridad(M):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''
-    c_len, p_len = M.shape
-    phi = np.zeros((p_len, p_len))
-    ubicuidad = np.sum(M, axis=0)  # p
+    c_len, p_len, t_len = M.shape
+    phi_t = np.stack([np.zeros((p_len, p_len))] * (t_len + 1), axis = -1)
+    for t in range(t_len):
+        ubicuidad = np.sum(M[:, :, t], axis = 0)  # p
 
-    for p in range(p_len):
-        for q in range(p_len):
-            Maximo = np.max([ubicuidad[p], ubicuidad[q]])
-            if p != q and Maximo != 0:
-                S = 0
-                for c in range(c_len):
-                    S += M[c, p] * M[c, q]
-                phi[p, q] = S / Maximo
-    return phi
+        for p in range(p_len):
+            for q in range(p_len):
+                Maximo = np.max([ubicuidad[p], ubicuidad[q]])
+                if p != q and Maximo != 0:
+                    S = 0
+                    for c in range(c_len):
+                        S += M[c, p, t] * M[c, q, t]
+                    phi_t[p, q, t] = S / Maximo
+    return phi_t
+
 def Similarity_Density(RCA):
     '''Toma la matriz RCA y calcula su Densidad de Similaridad calculando la Similaridad y matriz M_cp'''
     M_cp = 1 * (RCA >= 1)
@@ -140,50 +142,65 @@ def Z_transf(K):
     '''Aplica la transformada Z sobre un vector K'''
     return (K - np.mean(K)) / np.std(K)
 
-def Complexity_measures(M_cp, n):
+def Reflextion_method(M_cpt, n):
     '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
-    k_c0 = np.sum(M_cp, axis=1)
-    k_p0 = np.sum(M_cp, axis=0)
-    C, P = len(k_c0), len(k_p0)
+    c_len, p_len, t_len = M_cpt.shape
 
-    k_cN = k_c0
-    k_pN = k_p0
-    for _ in range(n):
-        for c in range(C):
-            k_cN[c] = (1/k_c0[c]) * np.sum( M_cp[c,:] * k_pN )
-        for p in range(P):
-            k_pN[p] = (1 / k_p0[p]) * np.sum(M_cp[:, p] * k_cN)
+    eci_t = np.zeros((c_len, t_len))
+    pci_t = np.zeros((p_len, t_len))
+    for t in range(t_len):
+        M_cp = M_cpt[:, :, t]
 
-    s1 = np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
-    eci_t = Z_transf(s1 * k_cN)
-    pci_t = Z_transf(s1 * k_pN)
+        k_c0 = np.sum(M_cp, axis=1)
+        k_p0 = np.sum(M_cp, axis=0)
+        C, P = len(k_c0), len(k_p0)
+
+        k_cN = k_c0
+        k_pN = k_p0
+        for _ in range(n):
+            for c in range(C):
+                k_cN[c] = (1/k_c0[c]) * np.sum( M_cp[c,:] * k_pN )
+            for p in range(P):
+                k_pN[p] = (1 / k_p0[p]) * np.sum(M_cp[:, p] * k_cN)
+
+        s1 = np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
+        eci_t[:, t] = Z_transf(s1 * k_cN)
+        pci_t[:, t] = Z_transf(s1 * k_pN)
 
     return (eci_t, pci_t)
 
 
 
-def Alt_Complexity_measures(M_cp):
+def Eigen_method(M_cpt):
     '''Codigo extraido del modulo de ecomplexity'''
-    M_c = np.sum(M_cp, axis = 1)
-    M_p = np.sum(M_cp, axis = 0)
+    c_len, p_len, t_len = M_cpt.shape
 
-    M_cp1 = M_cp / M_c[:, np.newaxis]
-    M_cp2_t = (M_cp / M_p[np.newaxis, :]).T.copy()
+    eci_t = np.zeros((c_len, t_len))
+    pci_t = np.zeros((p_len, t_len))
 
-    Mcc = M_cp1 @ M_cp2_t
-    Mpp = M_cp2_t @ M_cp1
+    for t in range(t_len):
+        M_cp = M_cpt[:, :, t]
+
+        M_c = np.sum(M_cp, axis = 1)
+        M_p = np.sum(M_cp, axis = 0)
+
+        M_cp1 = M_cp / M_c[:, np.newaxis]
+        M_cp2_t = (M_cp / M_p[np.newaxis, :]).T.copy()
+
+        Mcc = M_cp1 @ M_cp2_t
+        Mpp = M_cp2_t @ M_cp1
 
 
-    eigvals, eigvecs = np.linalg.eig(Mpp)
-    eigvecs = np.real(eigvecs)
-    # Get eigenvector corresponding to second largest eigenvalue
-    eig_index = eigvals.argsort()[-2]
-    kp = eigvecs[:, eig_index]
-    kc = M_cp1 @ kp
+        eigvals, eigvecs = np.linalg.eig(Mpp)
+        eigvecs = np.real(eigvecs)
+        # Get eigenvector corresponding to second largest eigenvalue
+        eig_index = eigvals.argsort()[-2]
+        kp = eigvecs[:, eig_index]
+        kc = M_cp1 @ kp
 
-    s1 = np.sign(np.corrcoef(M_c, kc)[0, 1])
-    eci_t = Z_transf(s1 * kc)
-    pci_t = Z_transf(s1 * kp)
+        s1 = np.sign(np.corrcoef(M_c, kc)[0, 1])
+        eci_t[:, t] = Z_transf(s1 * kc)
+        pci_t[:, t] = Z_transf(s1 * kp)
 
     return (eci_t, pci_t)
 
