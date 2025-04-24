@@ -2,7 +2,6 @@ import numpy as np
 import lib.Tratamiento as trat
 
 def Limpieza(X, diccionarios, c_min = 0, p_min = 0):
-    print('Limpieza: ', X.shape)
     '''
     Args:
         X: numpy array. Es una matriz de volumen (c, p, t).
@@ -30,8 +29,7 @@ def Limpieza(X, diccionarios, c_min = 0, p_min = 0):
 
 def Matrices(X_cpt, threshold = 1):
     '''Función que toma una matriz de volumen de país-producción y devuelve la RCA y la matriz de especialización binaria'''
-    print('Matrices: ', X_cpt.shape)
-    c_len, p_len, _ = X_cpt.shape
+    c_len, p_len = X_cpt.shape
 
     RCA = np.zeros(X_cpt.shape)
     alpha = np.zeros(X_cpt.shape)
@@ -53,8 +51,7 @@ def Matrices(X_cpt, threshold = 1):
     return RCA, M
 
 def shuffles(RCA):
-    print('shuffles: ', RCA.shape)
-    c_len, p_len, _ = RCA.shape
+    c_len, p_len = RCA.shape
 
     R_p = np.sum(RCA, axis = 0)
     R_c = np.sum(RCA, axis = 1)
@@ -69,9 +66,8 @@ def shuffles(RCA):
     return shuffle_c, shuffle_p
 
 def array_shuffler(A, shuffle_c, shuffle_p):
-    print('array_shuffler: ', A.shape)
-    c_len, p_len, _ = A.shape
-    array_ex, array_ante = [np.zeros((c_len, p_len))] *2
+    c_len, p_len = A.shape
+    array_ex, array_ante = np.zeros((c_len, p_len)), np.zeros((c_len, p_len))
     for i in range(c_len):
         array_ex[i, :] = A[shuffle_c[i][1], :]
     for j in range(p_len):
@@ -81,31 +77,30 @@ def array_shuffler(A, shuffle_c, shuffle_p):
 
 def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, threshold = 1, cleaning = True):
     '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
-    print('Matrices_ordenadas antes: ', X_cpt.shape)
     if cleaning:
         X_cpt = Limpieza(X_cpt, diccionario, c_min, p_min)
 
-    print('Matrices_ordenadas dsp: ', X_cpt.shape)
-
     c_len, p_len, t_len = X_cpt.shape
-    X_cp = trat.Promedio_temporal(X_cpt, total_time = total_time)[:, : 0]
+    X_cp = trat.Promedio_temporal(X_cpt, total_time = total_time)
+
     RCA, M = Matrices(X_cp, threshold)
 
-    shuffle_c, shuffle_p = shuffles(RCA)
+    shuffle_c, shuffle_p = shuffles(X_cp)
 
-    arrays = [[np.zeros(X_cp.shape)]*3 ] * (t_len + 1)
-    arrays_nuevos = [[np.zeros(X_cp.shape)]*3 ] * (t_len + 1)
+    X_, RCA_, M_ = [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1)
+    X_t, RCA_t, M_t = [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1) , [np.zeros(X_cp.shape)]* (t_len + 1)
 
     for i in range(t_len):
         X_cp_i = X_cpt[:, :, i]
         RCA_i, M_i = Matrices(X_cp_i, threshold)
 
-        arrays[i] = [X_cp_i, RCA_i, M_i]
-    arrays[-1] = [X_cp, RCA, M]
+        X_[i], RCA_[i], M_[i] = [X_cp_i, RCA_i, M_i]
+    X_[-1], RCA_[-1], M_[-1] = [X_cp, RCA, M]
 
-    for j in range(t_len + 1):
-        for i in range(3):
-            arrays_nuevos[i][j] = array_shuffler(arrays[i][j], shuffle_c, shuffle_p)
+    for i in range(t_len + 1):
+        X_t[i] = array_shuffler(X_[i], shuffle_c, shuffle_p)
+        RCA_t[i] = array_shuffler(RCA_[i], shuffle_c, shuffle_p)
+        M_t[i] = array_shuffler(M_[i], shuffle_c, shuffle_p)
 
 
     llave_c = list(diccionario[0].keys())
@@ -113,10 +108,11 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
     Nuevo_dict_c_num = dict([(llave_c[shuffle_c[i][1]], i) for i in range(c_len)])
     Nuevo_dict_p_num = dict([(llave_p[shuffle_p[i][1]], i) for i in range(p_len)])
 
+
     diccionario[0] = Nuevo_dict_c_num
     diccionario[1] = Nuevo_dict_p_num
 
-    return arrays_nuevos
+    return np.stack(X_t, axis = -1), np.stack(RCA_t, axis = -1), np.stack(M_t, axis = -1)
 
 def Similaridad(M):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''

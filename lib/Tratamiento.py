@@ -72,7 +72,7 @@ def Promedio_temporal(X, total_time = 1):
         total_time = X.shape[2]
     new_X = X.sum(axis = 2) / total_time
 
-    return new_X[:,:, np.newaxis]
+    return new_X
 
 def pareo_listas(lista_a, lista_b):
     '''Toma dos listas de strings y entrega dos listas tal que si un string de A es contenido (parcialmente) por un string de B, se guarden en listas distinas pero pareads, entrega ademas aquellos strings sobrantes.'''

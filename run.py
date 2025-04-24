@@ -24,7 +24,7 @@ awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
 gdp_columns = ['Country', 'mean_awards']
 
-data_DCI = imp.carga(awards_file, awards_columns)
+data_DCI = imp.carga(wipo_file, wipo_columns)
 data_gdp = imp.carga_excel(gdp_file, gdp_columns)
 
 #----------------------------------------
@@ -36,9 +36,10 @@ dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
 gdp_by_country = trat.gdp_matrix(data_gdp) #**
 
-X_cpt = trat.X_matrix(data_DCI)  #Los datos wipo van en 3 periodos de 5 años cada uno.
+X_cpt = trat.X_matrix(data_DCI)#Los datos wipo van en 3 periodos de 5 años cada uno.
 
-X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
+#X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
+
 
 
 #----------------------------------------
@@ -47,10 +48,11 @@ X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 #============== RCA, M_cp ================
 
-R_cp, M_cp, X_cp = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 15)
-print(R_cp.shape)
+X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 15)
 
-# figs.graf(np.log(X_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$X_{cp}$')
+
+for i in range(4):
+    figs.graf(np.log(RCA_cpt[:,:,i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp' + f'{i}' + r'}$')
 #
 # figs.graf(np.log(R_cp + 1), xlabel = 'Categorias', ylabel = 'Paises', title = 'log-$RCA_{cp}$', name = 'log_RCA_awards', save = False)
 #
