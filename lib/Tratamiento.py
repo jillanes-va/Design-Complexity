@@ -99,8 +99,8 @@ def pareo_listas(lista_a, lista_b):
     return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]
 
 
-def gdp_matrix(data):
-    return data.values
+def gdp_matrix(data, columna):
+    return data.loc[:, columna].values
 
 def sum_files(X, diccionaries, partida_llegada):
     '''

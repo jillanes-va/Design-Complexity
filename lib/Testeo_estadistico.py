@@ -88,3 +88,29 @@ def categorias_presentes(X, diccionario):
         anios.append(informacion)
     return anios
 
+def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y):
+    '''
+    Args:
+        X: numpy array. Contiene valores de elementos probablemente pareados con Y.
+        Y: numpy array. Contiene valores de eleementos probablemente pareados con X.
+        dict_X_num: dict. Parea los elementos hacia su índice para X.
+        dict_Y_num: dict. Parea los elementos hacia su índice para Y.
+        dict_X_Y: dict. Parea los elementos de X hacia Y
+    Returns:
+        tuple[numpy array, list]. Una tupla con los puntos (X,Y) pareados y una lista con el nombre de los elementos de X.
+    '''
+    lista_X_incluidos = []
+    puntos = []
+    for X_name, X_num in dict_X_num.items():
+        try:
+            Y_name = dict_X_Y[X_name]
+            Y_num = dict_Y_num[Y_name]
+
+            puntos.append(np.array([
+                X[X_num], Y[Y_num]
+            ]))
+
+            lista_X_incluidos.append(X_name)
+        except:
+            pass
+    return np.array(puntos), lista_X_incluidos
