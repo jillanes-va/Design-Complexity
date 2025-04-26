@@ -172,6 +172,37 @@ def Reflextion_method(M_cpt, n, last = False):
 
     return (eci_t, pci_t)
 
+def Reflextion_method_(M_cpt, n, last = False):
+    '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
+
+    if last:
+        M_cpt = (M_cpt[:, :, -1])[:, :, np.newaxis]
+
+    c_len, p_len, t_len = M_cpt.shape
+
+    eci_t = np.zeros((c_len, t_len))
+    pci_t = np.zeros((p_len, t_len))
+    for t in range(t_len):
+        M_cp = M_cpt[:, :, t]
+
+        k_c0 = np.sum(M_cp, axis=1)
+        k_p0 = np.sum(M_cp, axis=0)
+        C, P = len(k_c0), len(k_p0)
+
+        k_cN = k_c0
+        k_pN = k_p0
+        for _ in range(n):
+            for c in range(C):
+                k_cN[c] = (1/k_c0[c]) * np.sum( M_cp[c,:] * k_pN )
+            for p in range(P):
+                k_pN[p] = (1 / k_p0[p]) * np.sum(M_cp[:, p] * k_cN)
+
+        s1 = np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
+        eci_t[:, t] = Z_transf(s1 * k_cN)
+        pci_t[:, t] = Z_transf(s1 * k_pN)
+
+    return (eci_t, pci_t)
+
 
 
 def Eigen_method(M_cpt, last = False):

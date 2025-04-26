@@ -58,27 +58,35 @@ phi_t = calc.Similaridad(M_cpt)
 #=============== Design Complexity Index ===============
 
 #ECI_e, PCI_e = calc.Eigen_method(M_cpt, last = True)
-ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 40, last = True)
+ECIs = np.zeros(20)
+for i in range(20):
+    ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 2 * (i + 1), last = True)
+    print(ECI_m)
+    ECIs[i] = ECI_m
 
-last_ECI = ECI_m[:, -1]
-
-DCI_vs_GDP, paises = test.punteo_especifico(last_ECI, gdp_array, dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
-
-DCI = DCI_vs_GDP[:, 0]
-log_GDP = np.log(DCI_vs_GDP[:, 1])
+diff = ECIs[1:] - ECIs[:-1]
+print(diff)
 
 
-fig, ax = plt.subplots(figsize = (6,6))
-
-ax.scatter(DCI, log_GDP, color = 'tab:blue', s = 4**2)
-ta.allocate(
-    ax, DCI, log_GDP,
-    paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
-    draw_lines = False
-)
-
-plt.xscale('linear')
-plt.show()
+# last_ECI = ECI_m[:, -1]
+#
+# DCI_vs_GDP, paises = test.punteo_especifico(last_ECI, gdp_array, dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+#
+# DCI = DCI_vs_GDP[:, 0]
+# log_GDP = np.log(DCI_vs_GDP[:, 1])
+#
+#
+# fig, ax = plt.subplots(figsize = (6,6))
+#
+# ax.scatter(DCI, log_GDP, color = 'tab:blue', s = 4**2)
+# ta.allocate(
+#     ax, DCI, log_GDP,
+#     paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
+#     draw_lines = False
+# )
+#
+# plt.xscale('linear')
+# plt.show()
 
 
 # paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
