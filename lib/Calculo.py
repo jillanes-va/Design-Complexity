@@ -171,8 +171,11 @@ def Reflextion_method(M_cpt, n):
 
 
 
-def Eigen_method(M_cpt):
+def Eigen_method(M_cpt, last = False):
     '''Codigo extraido del modulo de ecomplexity'''
+    if last:
+        M_cpt = (M_cpt[:, :, -1])[:, :, np.newaxis]
+
     c_len, p_len, t_len = M_cpt.shape
 
     eci_t = np.zeros((c_len, t_len))

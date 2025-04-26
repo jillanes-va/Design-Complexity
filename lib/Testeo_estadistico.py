@@ -88,14 +88,15 @@ def categorias_presentes(X, diccionario):
         anios.append(informacion)
     return anios
 
-def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y):
+def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y, dict_X_short = None):
     '''
     Args:
         X: numpy array. Contiene valores de elementos probablemente pareados con Y.
         Y: numpy array. Contiene valores de eleementos probablemente pareados con X.
         dict_X_num: dict. Parea los elementos hacia su índice para X.
         dict_Y_num: dict. Parea los elementos hacia su índice para Y.
-        dict_X_Y: dict. Parea los elementos de X hacia Y
+        dict_X_Y: dict. Parea los elementos de X hacia Y.
+        dict_X_short: dict. Parea elementos de X hacia un acronimo.
     Returns:
         tuple[numpy array, list]. Una tupla con los puntos (X,Y) pareados y una lista con el nombre de los elementos de X.
     '''
@@ -105,6 +106,7 @@ def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y):
         try:
             Y_name = dict_X_Y[X_name]
             Y_num = dict_Y_num[Y_name]
+            print(Y_name, X_name)
 
             puntos.append(np.array([
                 X[X_num], Y[Y_num]
@@ -113,4 +115,11 @@ def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y):
             lista_X_incluidos.append(X_name)
         except:
             pass
+
+    if dict_X_short is not None:
+        N = len(lista_X_incluidos)
+        for i in range(N):
+            lista_X_incluidos[i] = dict_X_short[
+                lista_X_incluidos[i]
+            ]
     return np.array(puntos), lista_X_incluidos
