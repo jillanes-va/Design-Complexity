@@ -142,8 +142,11 @@ def Z_transf(K):
     '''Aplica la transformada Z sobre un vector K'''
     return (K - np.mean(K)) / np.std(K)
 
-def Reflextion_method(M_cpt, n):
+def Reflextion_method(M_cpt, n, last = False):
     '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
+    if last:
+        M_cpt = (M_cpt[:, :, -1])[:, :, np.newaxis]
+
     c_len, p_len, t_len = M_cpt.shape
 
     eci_t = np.zeros((c_len, t_len))

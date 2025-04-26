@@ -25,7 +25,7 @@ awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
 gdp_columns = ['Country', 'mean_awards']
 
-data_DCI = imp.carga(wipo_file, wipo_columns)
+data_DCI = imp.carga(awards_file, awards_columns)
 data_gdp = imp.carga_excel(gdp_file, gdp_columns)
 
 #----------------------------------------
@@ -35,11 +35,11 @@ data_gdp = imp.carga_excel(gdp_file, gdp_columns)
 dicts_DCI = trat.dictionaries(data_DCI)
 
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
-gdp_array = trat.gdp_matrix(data_gdp, gdp_columns[-1])
+gdp_array = trat.gdp_matrix(data_gdp)
 
 X_cpt = trat.X_matrix(data_DCI)[:,:,:] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
-#X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
+X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 
 
@@ -57,33 +57,28 @@ phi_t = calc.Similaridad(M_cpt)
 
 #=============== Design Complexity Index ===============
 
-paises_gdp = list(dict_country_gdp.keys())
+#ECI_e, PCI_e = calc.Eigen_method(M_cpt, last = True)
+ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 40, last = True)
 
-Lista = [(paises_gdp[i], gdp_array[i]) for i in range(len(paises_gdp))]
-print(sorted(Lista, key = lambda A: A[1], reverse = True))
+last_ECI = ECI_m[:, -1]
 
-# ECI_e, PCI_e = calc.Eigen_method(M_cpt, last = True)
-# #ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 40)
-#
-# last_ECI = ECI_e[:, -1]
-#
-# DCI_vs_GDP, paises = test.punteo_especifico(last_ECI, gdp_array, dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
-#
-# DCI = DCI_vs_GDP[:, 0]
-# log_GDP = np.log(DCI_vs_GDP[:, 1])
-#
-#
-# fig, ax = plt.subplots(figsize = (6,6))
-#
-# ax.scatter(DCI, log_GDP, color = 'tab:blue', s = 4**2)
-# ta.allocate(
-#     ax, DCI, log_GDP,
-#     paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
-#     draw_lines = False
-# )
-#
-# plt.xscale('linear')
-# plt.show()
+DCI_vs_GDP, paises = test.punteo_especifico(last_ECI, gdp_array, dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+
+DCI = DCI_vs_GDP[:, 0]
+log_GDP = np.log(DCI_vs_GDP[:, 1])
+
+
+fig, ax = plt.subplots(figsize = (6,6))
+
+ax.scatter(DCI, log_GDP, color = 'tab:blue', s = 4**2)
+ta.allocate(
+    ax, DCI, log_GDP,
+    paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
+    draw_lines = False
+)
+
+plt.xscale('linear')
+plt.show()
 
 
 # paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }

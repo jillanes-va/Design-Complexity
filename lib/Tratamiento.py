@@ -99,8 +99,13 @@ def pareo_listas(lista_a, lista_b):
     return [nueva_lista_1, nueva_lista_2], [lista_1, lista_2]
 
 
-def gdp_matrix(data, columna):
-    return data.loc[:, columna].values
+def gdp_matrix(data):
+    diccionario = dictionaries(data)[0]
+    valores = np.zeros( len(diccionario) )
+    columna = data.columns[-1]
+    for pais, num in diccionario.items():
+        valores[num] = data.loc[ data['Country'] == pais].loc[:,columna]
+    return valores
 
 def sum_files(X, diccionaries, partida_llegada):
     '''

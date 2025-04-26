@@ -106,7 +106,6 @@ def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y, dict_X_short = Non
         try:
             Y_name = dict_X_Y[X_name]
             Y_num = dict_Y_num[Y_name]
-            print(Y_name, X_name)
 
             puntos.append(np.array([
                 X[X_num], Y[Y_num]
