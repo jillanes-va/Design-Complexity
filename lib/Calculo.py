@@ -163,13 +163,19 @@ def Reflextion_method(M_cpt, n, last = False):
         k_p0 = ubiquity[ubiquity != 0][np.newaxis, :]
         M_cp = M[diversity != 0, :][:, ubiquity != 0]
 
+        M_cp_1 = M_cp/k_c0
+        M_cp_2 = (M_cp/k_p0).T
+
+        M_pp = M_cp_2 @ M_cp_1
+        M_cc = M_cp_1 @ M_cp_2
+
         c, p = M_cp.shape
 
         k_cN = k_c0
         k_pN = k_p0
         for j in range(n):
-            k_cN = (M_cp @ k_pN.T) / k_c0
-            k_pN = (k_cN.T @ M_cp) / k_p0
+            k_cN = M_cc @ k_cN
+            k_pN = k_pN @ M_pp
 
         s = 1#np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
 
@@ -183,7 +189,7 @@ def Reflextion_method(M_cpt, n, last = False):
 
         eci_t[:, t] = eci
         pci_t[:, t] = pci
-    return (eci, pci)
+    return (eci_t, pci_t)
 
 def Eigen_method(M_cpt, last = False):
     '''Codigo extraido del modulo de ecomplexity'''
@@ -221,7 +227,7 @@ def Eigen_method(M_cpt, last = False):
         kp = eigvecs[:, eig_index]
         kc = M_cp1 @ kp
 
-        s1 = 1#np.sign(np.corrcoef(k_c0, kc[:, np.newaxis])[0, 1])
+        s1 = np.sign(np.corrcoef(k_c0[:, 0], kc)[0, 1])
         eci = Z_transf(s1 * kc)
         pci = Z_transf(s1 * kp)
 

@@ -108,12 +108,12 @@ def gdp_matrix(data):
     c, n = valores_originales.shape
 
     #Nueva data
-    valores_nuevos = np.zeros((c, n - 1))
+    valores_nuevos = np.zeros((c, n - 4))
 
     for i in range(c):
         cntry = valores_originales[i, 0]
         num_of_cntry = dicc_ctry_num[cntry]
-        valores_nuevos[num_of_cntry, :] = valores_originales[i, 1:]
+        valores_nuevos[num_of_cntry, :] = valores_originales[i, 4:]
     return valores_nuevos
 
 def sum_files(X, diccionaries, partida_llegada):

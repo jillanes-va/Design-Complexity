@@ -23,10 +23,10 @@ awards_file = r'wrd_04_all-data.csv'
 awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
-gdp_columns = ['Country', 'mean_awards']
+gdp_columns = ['Country'] + [2011 + i for i in range(13)] + ['mean_awards']
 
 data_DCI = imp.carga(awards_file, awards_columns)
-data_gdp = imp.carga_excel(gdp_file, gdp_columns)
+data_gdp = imp.carga_excel(gdp_file, None)
 
 #----------------------------------------
 #--------- Tratamiento de datos ---------
@@ -60,24 +60,49 @@ phi_t = calc.Similaridad(M_cpt)
 ECI_e, PCI_e = calc.Eigen_method(M_cpt)
 ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 10)
 
-# DCI_vs_GDP, paises = test.punteo_especifico(last_ECI, gdp_array, dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+# fig, ax = plt.subplots(3, 4, sharex = True, sharey = True, figsize = (8,6))
 #
-# DCI = DCI_vs_GDP[:, 0]
-# log_GDP = np.log(DCI_vs_GDP[:, 1])
+# for i in range(12):
+#     j = i // 4
+#     k = i % 4
+#     DCI_vs_GDP, paises = test.punteo_especifico(ECI_e[:,i], gdp_array[:, i], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+#     DCI = DCI_vs_GDP[:, 0]
+#     log_GDP = np.log(DCI_vs_GDP[:, 1])
 #
-#
-# fig, ax = plt.subplots(figsize = (6,6))
-#
-# ax.scatter(DCI, log_GDP, color = 'tab:blue', s = 4**2)
-# ta.allocate(
-#     ax, DCI, log_GDP,
-#     paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
-#     draw_lines = False
-# )
-#
-# plt.xscale('linear')
+#     if 2011 + i != 2023:
+#         ax[j,k].scatter(DCI, log_GDP, color = 'tab:blue', s = 3**2, label = f'{2011 + i}')
+#     else:
+#         ax[j,k].scatter(DCI, log_GDP, color='tab:blue', s=4 ** 2, label = 'Promedio')
+#     #ta.allocate(
+#     #    ax[j,k], DCI, log_GDP,
+#     #    paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
+#     #    draw_lines = False
+#     #)
+#     if (j,k) == (1,0):
+#         ax[j,k].set_ylabel('GDP per capita PPA [US$]')
+#     if (j,k) == (2, 1):
+#         ax[j,k].set_xlabel('DCI awards')
+#     ax[j,k].legend(loc = 'upper left')
+#     ax[j, k].set_xlim([-2,2])
+# fig.tight_layout()
 # plt.show()
 
+fig, ax = plt.subplots(figsize = (4,4))
+DCI_vs_GDP, paises = test.punteo_especifico(ECI_e[:,-1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+DCI = DCI_vs_GDP[:, 0]
+log_GDP = np.log(DCI_vs_GDP[:, 1])
+
+ax.scatter(DCI, log_GDP, color='tab:blue', s=4 ** 2, label = 'Promedio')
+ta.allocate(
+   ax, DCI, log_GDP,
+   paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
+   draw_lines = False
+)
+ax.set_xlabel('DCI awards')
+ax.set_ylabel('mean GDP per capita PPA ')
+
+ax.legend()
+plt.show()
 
 # paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
 # paises_ECI_m = { num_paises[n]:ECI_m[n] for n in range(len(ECI_e)) }

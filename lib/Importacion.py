@@ -17,13 +17,13 @@ def carga_especial(nombre_archivo: str, columnas_importantes: list):
     data_sin_nan = data.loc[data['exporter'] != 'World'].dropna()
     return data_sin_nan
 
-def carga_excel(nombre_archivo:str, columnas_importantes, last = False):
+def carga_excel(nombre_archivo:str, columnas_importantes = None, last = False):
     '''Función que importa directamente datasets en excel (.xls)'''
     str_archivo = r'./data/datasets/' + nombre_archivo
     if columnas_importantes is None:
-        data = read_excel(str_archivo).replace('no data', nan)
+        data = read_excel(str_archivo).replace('n/a', nan)
     else:
-        data = read_excel(str_archivo).replace('no data', nan).loc[:, columnas_importantes]
+        data = read_excel(str_archivo).replace('n/a', nan).loc[:, columnas_importantes]
 
     if last:
         first_column = data.columns[0]
