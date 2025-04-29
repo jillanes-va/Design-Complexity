@@ -17,11 +17,20 @@ def carga_especial(nombre_archivo: str, columnas_importantes: list):
     data_sin_nan = data.loc[data['exporter'] != 'World'].dropna()
     return data_sin_nan
 
-def carga_excel(nombre_archivo:str, columnas_importantes: list):
+def carga_excel(nombre_archivo:str, columnas_importantes, last = False):
     '''Función que importa directamente datasets en excel (.xls)'''
     str_archivo = r'./data/datasets/' + nombre_archivo
-    data = read_excel(str_archivo).replace('no data', nan).loc[:, columnas_importantes]
-    return data
+    if columnas_importantes is None:
+        data = read_excel(str_archivo).replace('no data', nan)
+    else:
+        data = read_excel(str_archivo).replace('no data', nan).loc[:, columnas_importantes]
+
+    if last:
+        first_column = data.columns[0]
+        last_column = data.columns[-1]
+        return data.loc[:, [first_column, last_column]]
+    else:
+        return data
 
 def locarno(nombre_archivo: str, columnas_importantes: list):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato .xlsx'''

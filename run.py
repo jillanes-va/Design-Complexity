@@ -37,7 +37,7 @@ dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
 gdp_array = trat.gdp_matrix(data_gdp)
 
-X_cpt = trat.X_matrix(data_DCI)[:,:,:] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
+X_cpt = trat.X_matrix(data_DCI)[:,:,:12] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
 X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
@@ -57,19 +57,9 @@ phi_t = calc.Similaridad(M_cpt)
 
 #=============== Design Complexity Index ===============
 
-#ECI_e, PCI_e = calc.Eigen_method(M_cpt, last = True)
-ECIs = np.zeros(20)
-for i in range(20):
-    ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 2 * (i + 1), last = True)
-    print(ECI_m)
-    ECIs[i] = ECI_m
+ECI_e, PCI_e = calc.Eigen_method(M_cpt)
+ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 10)
 
-diff = ECIs[1:] - ECIs[:-1]
-print(diff)
-
-
-# last_ECI = ECI_m[:, -1]
-#
 # DCI_vs_GDP, paises = test.punteo_especifico(last_ECI, gdp_array, dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
 #
 # DCI = DCI_vs_GDP[:, 0]

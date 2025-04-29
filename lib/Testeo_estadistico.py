@@ -104,14 +104,19 @@ def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y, dict_X_short = Non
     puntos = []
     for X_name, X_num in dict_X_num.items():
         try:
+
             Y_name = dict_X_Y[X_name]
             Y_num = dict_Y_num[Y_name]
 
-            puntos.append(np.array([
-                X[X_num], Y[Y_num]
-            ]))
+            X_value = X[X_num]
+            Y_value = Y[Y_num]
 
-            lista_X_incluidos.append(X_name)
+            if X_value != np.nan and Y_value != np.nan:
+                puntos.append(np.array([
+                    X[X_num], Y[Y_num]
+                ]))
+
+                lista_X_incluidos.append(X_name)
         except:
             pass
 

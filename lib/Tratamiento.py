@@ -100,12 +100,21 @@ def pareo_listas(lista_a, lista_b):
 
 
 def gdp_matrix(data):
-    diccionario = dictionaries(data)[0]
-    valores = np.zeros( len(diccionario) )
-    columna = data.columns[-1]
-    for pais, num in diccionario.items():
-        valores[num] = data.loc[ data['Country'] == pais].loc[:,columna]
-    return valores
+    #Diccionarios
+    dicc_ctry_num = dictionaries(data)[0]
+
+    #Data
+    valores_originales = data.values
+    c, n = valores_originales.shape
+
+    #Nueva data
+    valores_nuevos = np.zeros((c, n - 1))
+
+    for i in range(c):
+        cntry = valores_originales[i, 0]
+        num_of_cntry = dicc_ctry_num[cntry]
+        valores_nuevos[num_of_cntry, :] = valores_originales[i, 1:]
+    return valores_nuevos
 
 def sum_files(X, diccionaries, partida_llegada):
     '''
