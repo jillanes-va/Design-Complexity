@@ -49,59 +49,43 @@ X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 #============== RCA, M_cp ================
 
-X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 15)
+X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 12, c_min = 10, p_min = 0)
 
+#12 para awards
+#15 para WIPO
 #=============== Relatedness ===============
 
-phi_t = calc.Similaridad(M_cpt)
+#phi_t = calc.Similaridad(M_cpt)
 
 #=============== Design Complexity Index ===============
 
-ECI_e, PCI_e = calc.Eigen_method(M_cpt)
-ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 10)
+ECI_e, PCI_e = calc.Eigen_method(M_cpt, last = True)
 
-# fig, ax = plt.subplots(3, 4, sharex = True, sharey = True, figsize = (8,6))
-#
-# for i in range(12):
-#     j = i // 4
-#     k = i % 4
-#     DCI_vs_GDP, paises = test.punteo_especifico(ECI_e[:,i], gdp_array[:, i], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
-#     DCI = DCI_vs_GDP[:, 0]
-#     log_GDP = np.log(DCI_vs_GDP[:, 1])
-#
-#     if 2011 + i != 2023:
-#         ax[j,k].scatter(DCI, log_GDP, color = 'tab:blue', s = 3**2, label = f'{2011 + i}')
-#     else:
-#         ax[j,k].scatter(DCI, log_GDP, color='tab:blue', s=4 ** 2, label = 'Promedio')
-#     #ta.allocate(
-#     #    ax[j,k], DCI, log_GDP,
-#     #    paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
-#     #    draw_lines = False
-#     #)
-#     if (j,k) == (1,0):
-#         ax[j,k].set_ylabel('GDP per capita PPA [US$]')
-#     if (j,k) == (2, 1):
-#         ax[j,k].set_xlabel('DCI awards')
-#     ax[j,k].legend(loc = 'upper left')
-#     ax[j, k].set_xlim([-2,2])
-# fig.tight_layout()
-# plt.show()
+#ECI_m, PCI_m = calc.Reflextion_method(M_cpt, 10, last = True)
 
-fig, ax = plt.subplots(figsize = (4,4))
+fig, ax = plt.subplots(figsize = (6,4))
 DCI_vs_GDP, paises = test.punteo_especifico(ECI_e[:,-1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
 DCI = DCI_vs_GDP[:, 0]
 log_GDP = np.log(DCI_vs_GDP[:, 1])
 
-ax.scatter(DCI, log_GDP, color='tab:blue', s=4 ** 2, label = 'Promedio')
+b_1, b_0, r, p, se = sc.linregress(DCI, log_GDP)
+
+ax.scatter(DCI, log_GDP, color='tab:blue', s=4 ** 2)
 ta.allocate(
    ax, DCI, log_GDP,
    paises, x_scatter = DCI, y_scatter = log_GDP, textsize = 6,
    draw_lines = False
 )
-ax.set_xlabel('DCI awards')
-ax.set_ylabel('mean GDP per capita PPA ')
 
-ax.legend()
+reg_x = np.array([np.min(DCI), np.max(DCI)])
+reg_y = b_1 * reg_x + b_0
+
+ax.plot(reg_x, reg_y, color = 'tab:red', alpha = 0.6, label = f'm={b_1:.3f}\np={p:.3f}\n' + r'$r^2$' + f'={r**2:.3f}', linestyle = '--')
+ax.set_xlabel('DCI awards')
+ax.set_ylabel('mean log GDP per capita PPA')
+ax.set_title('A\'Design Awards')
+
+ax.legend(loc = 'lower right')
 plt.show()
 
 # paises_ECI_e = { num_paises[n]:ECI_e[n] for n in range(len(ECI_e)) }
