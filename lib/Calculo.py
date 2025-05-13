@@ -76,7 +76,23 @@ def array_shuffler(A, shuffle_c, shuffle_p):
 
 
 def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, threshold = 1, cleaning = True):
-    '''Funcion que toma una matriz de especialización y la reordena por ubicuidad... y entrega la matriz reordenada, con el diccionario correspondiente'''
+    '''
+        Args:
+            X_cpt: numpy array. Matriz de volumen de producción en el tiempo
+            diccionario: list[dict]. Diccionarios para cada indice de la matriz de producción.
+            total_time: int. Tiempo real transcurrido en la matriz de volumen de producción.
+            c_min: int. Premios promedio por país mínimo, es un umbral.
+            p_min: int. Cantidad de países promedio por categoría, es un umbral.
+            threshold: float. Umbral para calcular RCA.
+            cleaning: Bool. Es para limpiar países Y categorías segun c_min y p_min.
+
+        Returns:
+            X_cpt: numpy array. Matriz de volumen de producción en el tiempo.
+            RCA_cpt: numpy array. Matriz RCA en el tiempo.
+            M_cpt: numpy array. Matriz de especialización binaria.
+
+        A todas las matrices se les ordena por ubicuidad y diversidad, así como se les añade un índice extra de tiempo que contiene la matriz promediada.
+    '''
     if cleaning:
         X_cpt = Limpieza(X_cpt, diccionario, c_min, p_min)
 
@@ -117,7 +133,7 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
 def Similaridad(M):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''
     c_len, p_len, t_len = M.shape
-    phi_t = np.stack([np.zeros((p_len, p_len))] * (t_len + 1), axis = -1)
+    phi_t = np.stack([np.zeros((p_len, p_len))] * (t_len), axis = -1)
     for t in range(t_len):
         ubicuidad = np.sum(M[:, :, t], axis = 0)  # p
 

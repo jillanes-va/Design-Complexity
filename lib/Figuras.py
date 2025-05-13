@@ -45,15 +45,16 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
     else:
         plt.show()
 
-def Density_plot(domain, prob, xlabel = '', ylabel = '', xlim_sup = 0.7, save = False, name = ''):
+def Density_plot(domain, prob, param = ['', '', ''], xlim_sup = 0.7, save = False, name = ''):
     fig, ax = plt.subplots()
     plt.bar(domain, prob, width=1 / len(domain), align='edge')
-    plt.xlabel(xlabel, fontsize = 'x-large')
-    plt.ylabel(ylabel, fontsize = 'x-large')
-    plt.xlim([-0.05, xlim_sup])
-    ax.spines[['right', 'top']].set_visible(False)
-    for axis in ['top', 'bottom', 'left', 'right']:
-        ax.spines[axis].set_linewidth(1.5)
+    if xlim_sup == 0:
+        plt.xlim([-0.05, xlim_sup])
+
+    xlabel, ylabel, title = param
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
@@ -163,7 +164,7 @@ def equal_vectors(comunidades):
 
     return nodes_pos
 
-def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], savefig = False, name = ''):
+def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False, name = ''):
     fig, ax = plt.subplots(figsize=(6, 4))
     X = Z[:, 0]
     Y = Z[:, 1]
@@ -192,7 +193,7 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], savefig = Fal
     ax.set_title(title)
 
     ax.legend(loc='lower right')
-    if savefig:
+    if save:
         plt.savefig(r'./figs/' + name + '.pdf')
     else:
         plt.show()
