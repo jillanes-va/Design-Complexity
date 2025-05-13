@@ -4,9 +4,11 @@ import networkx as nx
 
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
+from scipy.stats import linregress
 from matplotlib.colors import rgb2hex
 
 import distinctipy
+import textalloc as ta
 import lib.Tratamiento as trat
 
 plt.style.use(['default'])
@@ -160,3 +162,37 @@ def equal_vectors(comunidades):
     print('')
 
     return nodes_pos
+
+def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], savefig = False, name = ''):
+    fig, ax = plt.subplots(figsize=(6, 4))
+    X = Z[:, 0]
+    Y = Z[:, 1]
+    if log:
+        Y = np.log(Y)
+
+    b_1, b_0, r, p, se = linregress(X, Y)
+
+    ax.scatter(X, Y, color='tab:blue', s=4 ** 2)
+    if len(listado) != 0:
+        ta.allocate(
+            ax, X, Y,
+            listado, x_scatter = X, y_scatter = Y, textsize=6,
+            draw_lines=False
+        )
+
+    reg_x = np.array([np.min(X), np.max(X)])
+    reg_y = b_1 * reg_x + b_0
+
+    ax.plot(reg_x, reg_y, color='tab:red', alpha=0.6,
+            label=f'm={b_1:.3f}\np={p:.3f}\n' + r'$r^2$' + f'={r ** 2:.3f}', linestyle='--')
+
+    xlabel, ylabel, title = param
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+
+    ax.legend(loc='lower right')
+    if savefig:
+        plt.savefig(r'./figs/' + name + '.pdf')
+    else:
+        plt.show()
