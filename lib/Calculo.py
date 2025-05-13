@@ -143,7 +143,7 @@ def Z_transf(K):
     return (K - np.mean(K)) / np.std(K)
 
 def Reflextion_method(M_cpt, n, last = False):
-    '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
+    '''DEPRECATED'''
     if last:
         M_cpt = (M_cpt[:, :, -1])[:, :, np.newaxis]
 
@@ -238,41 +238,6 @@ def Eigen_method(M_cpt, last = False):
 
         eci_t[:, t] = eci
         pci_t[:, t] = pci
-
-    return (eci_t, pci_t)
-
-def Reflextion_method_(M_cpt, n, last = False):
-    '''Toma la matriz de especialización binaria y aplica el metodo de las reflexiones n veces devolviendo el vector de las iteración de las localidades y los productos'''
-    if last:
-        M_cpt = (M_cpt[:, :, -1])[:, :, np.newaxis]
-
-    c_len, p_len, t_len = M_cpt.shape
-
-    eci_t = np.zeros((c_len, t_len, n))
-    pci_t = np.zeros((p_len, t_len, n))
-    for t in range(t_len):
-        M_cp = M_cpt[:, :, t]
-
-        k_c0 = np.sum(M_cp, axis=1)
-        k_p0 = np.sum(M_cp, axis=0)
-        C, P = len(k_c0), len(k_p0)
-
-        k_cN = k_c0
-        k_pN = k_p0
-
-        eci_t[:, t, 0] = Z_transf(k_cN)
-        pci_t[:, t, 0] = Z_transf(k_pN)
-
-
-        for j in range(n - 1):
-            for c in range(C):
-                k_cN[c] = (1/k_c0[c]) * np.sum( M_cp[c,:] * k_pN )
-            for p in range(P):
-                k_pN[p] = (1 / k_p0[p]) * np.sum(M_cp[:, p] * k_cN)
-
-            s1 = 1#np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
-            eci_t[:, t, j + 1] = Z_transf(s1 * k_cN)
-            pci_t[:, t, j + 1] = Z_transf(s1 * k_pN)
 
     return (eci_t, pci_t)
 
