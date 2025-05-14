@@ -64,30 +64,29 @@ phi_t = calc.Similaridad(M_cpt)
 
 # #=============== Design Complexity Index ===============
 
-ECI, PCI = calc.Eigen_method(M_cpt, last = False)
-for i in range(len(ECI[0, :])):
-    DCI_vs_GDP, paises = test.punteo_especifico(ECI[:,i], gdp_array[:, i], dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
-
-
-
-    #---- Graficos -----
-
-    figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
-
-    figs.graf(np.log(RCA_cpt[:,:,i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
-
-    figs.graf(M_cpt[:,:,i], xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$', save = False, name = 'M_cp_awards')
-
-    figs.Clustering(phi_t[:, :, i], save = False, name = 'Relatedness_awards')
-
-    figs.k_density(phi_t[:, :, i], save = False, name = 'k_density_awards')
-
-    figs.red(phi_t[:, :, i], by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards_communitites')
+# ECI, PCI = calc.Eigen_method(M_cpt, last = False)
+# for i in range(len(ECI[0, :])):
+#     DCI_vs_GDP, paises = test.punteo_especifico(ECI[:,i], gdp_array[:, i], dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
+#
+#
+#
+#     #---- Graficos -----
+#
+#     figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
+#
+#     figs.graf(np.log(RCA_cpt[:,:,i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
+#
+#     figs.graf(M_cpt[:,:,i], xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$', save = False, name = 'M_cp_awards')
+#
+#     figs.Clustering(phi_t[:, :, i], save = False, name = 'Relatedness_awards')
+#
+#     figs.k_density(phi_t[:, :, i], save = False, name = 'k_density_awards')
+#
+#     figs.red(phi_t[:, :, i], by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards_communitites')
 
 #    figs.red(phi_t[:, :, i], by_com = False, save = False, umbral_enlace = 0.45, PCI = PCI, diccionario = dicts_DCI, name = 'Design_space_awards_PCI')
 #
 #
-# dom_phi, relatedness = test.Relatedness_density_test(X_cpt, M_cpt, phi_t[:, :, -1], N_bins = 30)
-# print(relatedness)
-# figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_awards', save = False, xlim_sup = 0.8)
+dom_phi, relatedness = test.Relatedness_density_test(X_cpt, M_cpt, phi_t[:, :, -1], N_bins = 30)
+figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_awards', save = False, xlim_sup = 0.8)
 

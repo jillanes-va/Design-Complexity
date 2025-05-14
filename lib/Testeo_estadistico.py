@@ -27,7 +27,7 @@ def Trans_matrix(X, threeshold = 0.5, mid_t = 0, mid_index = 0):
             if RCA_0[c,p] <= threeshold:
                 if RCA_1[c,p] >=1:
                     Transicion[c,p] = 1
-                if RCA_1[c,p] <= threeshold:
+                if RCA_1[c,p] <=threeshold:
                     Intransicion[c,p] = 1
     return Transicion, Intransicion
 
