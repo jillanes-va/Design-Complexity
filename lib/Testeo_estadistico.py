@@ -19,8 +19,8 @@ def Trans_matrix(X, threeshold = 0.5, mid_t = 0, mid_index = 0):
     X_0 = X[:, :, :mid_index].sum(axis = 2) / (mid_t + 1)
     X_1 = X[:, :, mid_index + 1:-1].sum(axis = 2) / (T - 1 - mid_t)
 
-    RCA_0 = calc.Matrices(X_0)[0]
-    RCA_1 = calc.Matrices(X_1)[0]
+    RCA_0, M_0 = calc.Matrices(X_0)
+    RCA_1, M_1 = calc.Matrices(X_1)
 
     for c in range(C):
         for p in range(P):
@@ -29,22 +29,22 @@ def Trans_matrix(X, threeshold = 0.5, mid_t = 0, mid_index = 0):
                     Transicion[c,p] = 1
                 if RCA_1[c,p] <=threeshold:
                     Intransicion[c,p] = 1
-    return Transicion, Intransicion
+    return Transicion, M_0
 
-def Relatedness_density_test(X_cpt, M_cpt, phi_0, threeshold = 0.5, mid_t = 0, mid_index = 0, N_bins = 50):
+def Relatedness_density_test(X_cpt, phi_0, threeshold = 0.5, mid_t = 0, mid_index = 0, N_bins = 50):
     '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
 
-    M_cp = M_cpt[:, :, -1]
-    Transicion, _ = Trans_matrix(X_cpt, threeshold, mid_t = mid_t, mid_index = mid_index)
+    Transicion, M_cp_inicial = Trans_matrix(X_cpt, threeshold, mid_t = mid_t, mid_index = mid_index)
     cantidad_paises, cantidad_categorias, _ = X_cpt.shape
 
     Ocurrencias_t = np.zeros(N_bins)
     Total = np.zeros(N_bins)
     Prob_t = np.zeros(N_bins)
+    products_trans = dict()
 
     for c in range(cantidad_paises):
         for p in range(cantidad_categorias):
-            phi_max = (M_cp[c, :] * phi_0[p, :]).max()
+            phi_max = (M_cp_inicial[c, :] * phi_0[p, :]).max() #Relatedness del vecino más cercano a tiempo t-1
             rebanada = int(np.floor(phi_max * N_bins))
             if rebanada == N_bins:
                 rebanada += -1
@@ -52,6 +52,7 @@ def Relatedness_density_test(X_cpt, M_cpt, phi_0, threeshold = 0.5, mid_t = 0, m
 
             if Transicion[c, p] == 1:
                 Ocurrencias_t[rebanada] += 1
+                products_trans.update({(c, p) : rebanada})
 
     for i in range(N_bins):
         if Total[i] == 0:
@@ -59,7 +60,7 @@ def Relatedness_density_test(X_cpt, M_cpt, phi_0, threeshold = 0.5, mid_t = 0, m
         else:
             Prob_t[i] = Ocurrencias_t[i]/Total[i]
     dom_phi = np.linspace(0, 1, N_bins)
-    return dom_phi, Prob_t
+    return dom_phi, Prob_t, products_trans
 
 def categorias_presentes(X, diccionario):
     '''Para una matriz país-producto-año retorna los productos no registrados en un año'''

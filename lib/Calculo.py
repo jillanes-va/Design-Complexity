@@ -1,5 +1,6 @@
 import numpy as np
 import lib.Tratamiento as trat
+from scipy.stats import pearsonr
 
 def Limpieza(X, diccionarios, c_min = 0, p_min = 0):
     '''
@@ -130,13 +131,15 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
 
     return np.stack(X_t, axis = -1), np.stack(RCA_t, axis = -1), np.stack(M_t, axis = -1)
 
-def Similaridad(M):
+def Relatedness(M, last = True):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''
+    if last:
+        M = (M[:, :, -1])[:, :, np.newaxis]
+
     c_len, p_len, t_len = M.shape
     phi_t = np.stack([np.zeros((p_len, p_len))] * (t_len), axis = -1)
     for t in range(t_len):
         ubicuidad = np.sum(M[:, :, t], axis = 0)  # p
-
         for p in range(p_len):
             for q in range(p_len):
                 Maximo = np.max([ubicuidad[p], ubicuidad[q]])
@@ -147,10 +150,31 @@ def Similaridad(M):
                     phi_t[p, q, t] = S / Maximo
     return phi_t
 
+def Proximity(RCA, last = True):
+    '''
+        No tiene mucha utilidad. No se porta bien.
+    '''
+    if last:
+        RCA = (RCA[:, :, -1])[:, :, np.newaxis]
+    c_len, p_len, t_len = RCA.shape
+    log_RCA = np.log(RCA + 1)
+
+    phi_t = np.stack([np.zeros((c_len, c_len))] * t_len, axis = -1)
+    for t in range(t_len):
+        for c in range(c_len):
+            for c_prime in range(c_len):
+                X = log_RCA[c, :, t]
+                Y = log_RCA[c_prime, :, t]
+                mask = ~(X != 0) & ~(Y != 0)
+                if (c != c_prime) and (mask.sum() > 2):
+                    phi_t[c, c_prime, t] = pearsonr(X[mask], Y[mask]).statistic
+    return phi_t
+
+
 def Similarity_Density(RCA):
     '''Toma la matriz RCA y calcula su Densidad de Similaridad calculando la Similaridad y matriz M_cp'''
     M_cp = 1 * (RCA >= 1)
-    phi = Similaridad(M_cp)
+    phi = Relatedness(M_cp)
     Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 0)
     return Num
 
