@@ -60,7 +60,7 @@ def X_matrix(data):
         X_cpt[index] += data_number[-1]
     return X_cpt
 
-def Promedio_temporal(X, total_time = 1):
+def Promedio_temporal(X, total_time = 1, ventana = 0):
     '''
     Args:
         X : np array. Matriz de volumen de producción
@@ -70,9 +70,46 @@ def Promedio_temporal(X, total_time = 1):
     '''
     if total_time == 1:
         total_time = X.shape[2]
-    new_X = X.sum(axis = 2) / total_time
 
+    new_X = X.sum(axis = 2) / total_time
     return new_X
+
+def Media_movil(X, m = 1, tiempo_total = 0):
+    C, P, T = X.shape
+    Caben = T//m
+    Sobran = T - Caben * m
+    new_matrix = np.zeros((C, P, Caben + (Sobran > 0) ))
+
+    if tiempo_total != 0:
+        dt = tiempo_total / m
+    else:
+        dt = 1
+
+    for i in range(Caben):
+        new_matrix[:, :, i] = np.sum(
+            X[:, :, m * i : m * (i + 1)], axis = 2
+        ) / (dt * m)
+    if Sobran > 0:
+        new_matrix[:, :, -1] = np.sum(
+            X[-Sobran:], axis = 2
+        ) / (dt * Sobran)
+    return new_matrix
+
+def agregado_movil(X, m = 1):
+    C, P, T = X.shape
+    Caben = T//m
+    Sobran = T - Caben * m
+    new_matrix = np.zeros((C, P, Caben + (Sobran > 0) ))
+
+    for i in range(Caben):
+        new_matrix[:, :, i] = np.sum(
+            X[:, :, m * i : m * (i + 1)], axis = 2
+        )
+    if Sobran > 0:
+        new_matrix[:, :, -1] = np.sum(
+            X[-Sobran:], axis = 2
+        )
+    return new_matrix
 
 def pareo_listas(lista_a, lista_b):
     '''Toma dos listas de strings y entrega dos listas tal que si un string de A es contenido (parcialmente) por un string de B, se guarden en listas distinas pero pareads, entrega ademas aquellos strings sobrantes.'''
@@ -108,12 +145,12 @@ def gdp_matrix(data):
     c, n = valores_originales.shape
 
     #Nueva data
-    valores_nuevos = np.zeros((c, n - 4))
+    valores_nuevos = np.zeros((c, n - 1))
 
     for i in range(c):
         cntry = valores_originales[i, 0]
         num_of_cntry = dicc_ctry_num[cntry]
-        valores_nuevos[num_of_cntry, :] = valores_originales[i, 4:]
+        valores_nuevos[num_of_cntry, :] = valores_originales[i, 1:]
     return valores_nuevos
 
 def sum_files(X, diccionaries, partida_llegada):

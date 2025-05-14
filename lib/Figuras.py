@@ -22,6 +22,7 @@ def graf(X, xlabel = '', ylabel = '', save = False, name = '', title = ''):
     plt.title(title)
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
+        plt.close()
     else:
         plt.show()
 
@@ -42,13 +43,13 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
+        plt.close()
     else:
         plt.show()
 
-def Density_plot(domain, prob, param = ['', '', ''], xlim_sup = 0.7, save = False, name = ''):
-    fig, ax = plt.subplots()
+def Density_plot(domain, prob, param = ['', '', ''], xlim_sup = 0, save = False, name = ''):
     plt.bar(domain, prob, width=1 / len(domain), align='edge')
-    if xlim_sup == 0:
+    if xlim_sup != 0:
         plt.xlim([-0.05, xlim_sup])
 
     xlabel, ylabel, title = param
@@ -58,15 +59,20 @@ def Density_plot(domain, prob, param = ['', '', ''], xlim_sup = 0.7, save = Fals
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
+        plt.close()
     else:
         plt.show()
 
-def k_density(phi, bins = 30):
-    new_phi = phi[phi > 0]
+def k_density(phi, bins = 30, save = False, name = ''):
+    new_phi = phi.reshape(-1)
     plt.hist(new_phi, bins = bins, density = True)
-    plt.xlabel('Similaridad')
+    plt.xlabel('Relatedness')
     plt.ylabel('Densidad de Probabilidad')
-    plt.show()
+    if save:
+        plt.savefig(r'./figs/' + name + '.pdf')
+        plt.close()
+    else:
+        plt.show()
 
 def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, save = False, name = ''):
     Red_original = nx.from_numpy_array(phi)
@@ -111,14 +117,11 @@ def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, 
     if save and len(name) != 0:
         plt.axis('off')
         plt.savefig('./figs/' + name + '.pdf', transparent = True, bbox_inches = 'tight')
+        plt.close()
     else:
         plt.tight_layout()
         plt.show()
 
-def grafico_prueba(A):
-    fig, ax = plt.subplots()
-    ax.hist(A, bins = 30, density = True)
-    plt.show()
 
 def get_cmap(PCI, name='inferno', N = None, pastel = 0.0):
     '''Returns a function that maps each index in 0, 1, ..., n-1 to a distinct
@@ -171,13 +174,18 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
     if log:
         Y = np.log(Y)
 
+    mask =  ~np.isnan(X) & ~np.isnan(Y)
+    X = X[mask]
+    Y = Y[mask]
+    listado_arreglado = [listado[i] for i in range(len(mask)) if (mask[i] == True)]
+
     b_1, b_0, r, p, se = linregress(X, Y)
 
     ax.scatter(X, Y, color='tab:blue', s=4 ** 2)
     if len(listado) != 0:
         ta.allocate(
             ax, X, Y,
-            listado, x_scatter = X, y_scatter = Y, textsize=6,
+            listado_arreglado, x_scatter = X, y_scatter = Y, textsize=6,
             draw_lines=False
         )
 
@@ -195,5 +203,6 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
     ax.legend(loc='lower right')
     if save:
         plt.savefig(r'./figs/' + name + '.pdf')
+        plt.close()
     else:
         plt.show()

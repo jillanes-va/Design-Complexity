@@ -97,7 +97,7 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
         X_cpt = Limpieza(X_cpt, diccionario, c_min, p_min)
 
     c_len, p_len, t_len = X_cpt.shape
-    X_cp = trat.Promedio_temporal(X_cpt, total_time = total_time)
+    X_cp = trat.Promedio_temporal(X_cpt, total_time = total_time, ventana = 0)
 
     RCA, M = Matrices(X_cp, threshold)
 

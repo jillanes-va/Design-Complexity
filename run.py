@@ -22,10 +22,11 @@ awards_file = r'wrd_04_all-data.csv'
 awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
 
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
-gdp_columns = ['Country'] + [2011 + i for i in range(13)] + ['mean_awards']
+#gdp_columns = ['Country'] + [2011 + i for i in range(13)] + ['mean_awards'] #Para awards
+gdp_columns = ['Country'] + ['mean_1', 'mean_2', 'mean_3'] + ['mean_wipo'] #Pawa WIPO
 
-data_DCI = imp.carga(awards_file, awards_columns)
-data_gdp = imp.carga_excel(gdp_file, None)
+data_DCI = imp.carga(wipo_file, wipo_columns)
+data_gdp = imp.carga_excel(gdp_file, gdp_columns)
 
 #----------------------------------------
 #--------- Tratamiento de datos ---------
@@ -34,10 +35,12 @@ data_gdp = imp.carga_excel(gdp_file, None)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
 gdp_array = trat.gdp_matrix(data_gdp)
 
+
 dicts_DCI = trat.dictionaries(data_DCI)
 
-X_cpt = trat.X_matrix(data_DCI)[:,:,:12] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
-X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
+X_cpt = trat.X_matrix(data_DCI)[:,:,:12]#Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
+#X_cpt = trat.agregado_movil(X_cpt, 4)
+#X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 
 
@@ -47,7 +50,7 @@ X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 #============== RCA, M_cp ================
 
-X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 12, c_min = 0, p_min = 0)
+X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, 15, c_min = 1, p_min = 1)
 
 #total time =
 #        12 para awards
@@ -61,30 +64,30 @@ phi_t = calc.Similaridad(M_cpt)
 
 # #=============== Design Complexity Index ===============
 
-ECI, PCI = calc.Eigen_method(M_cpt, last = True)
-
-DCI_vs_GDP, paises = test.punteo_especifico(ECI[:,-1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
-
-
-
-#---- Graficos -----
-
-figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False)
-
-figs.graf(np.log(RCA_cpt[:,:,-1] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp' + f'{2}' + r'}$')
-
-figs.graf(M_cpt[:,:,-1], xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$')
-
-figs.Clustering(phi_t[:, :, -1], save = False, name = 'Similarity_matrix_awards.pdf')
-
-figs.k_density(phi_t[:, :, -1])
-
-figs.red(phi_t[:, :, -1], by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards')
-
-figs.red(phi_t[:, :, -1], PCI = PCI, diccionario = dicts_DCI, by_com = True, name = 'Espacio_productos_Comunidades', save = False, umbral_enlace = 0.4)
+ECI, PCI = calc.Eigen_method(M_cpt, last = False)
+for i in range(len(ECI[0, :])):
+    DCI_vs_GDP, paises = test.punteo_especifico(ECI[:,i], gdp_array[:, i], dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
 
 
-dom_phi, relatedness = test.Relatedness_density_test(X_cpt, M_cpt, phi_t[:, :, -1], mid_index = 4, N_bins = 30)
-print(relatedness)
-figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_wipo', save = False)
+
+    #---- Graficos -----
+
+    figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
+
+    figs.graf(np.log(RCA_cpt[:,:,i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
+
+    figs.graf(M_cpt[:,:,i], xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$', save = False, name = 'M_cp_awards')
+
+    figs.Clustering(phi_t[:, :, i], save = False, name = 'Relatedness_awards')
+
+    figs.k_density(phi_t[:, :, i], save = False, name = 'k_density_awards')
+
+    figs.red(phi_t[:, :, i], by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards_communitites')
+
+#    figs.red(phi_t[:, :, i], by_com = False, save = False, umbral_enlace = 0.45, PCI = PCI, diccionario = dicts_DCI, name = 'Design_space_awards_PCI')
+#
+#
+# dom_phi, relatedness = test.Relatedness_density_test(X_cpt, M_cpt, phi_t[:, :, -1], N_bins = 30)
+# print(relatedness)
+# figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_awards', save = False, xlim_sup = 0.8)
 
