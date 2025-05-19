@@ -53,14 +53,17 @@ def X_matrix(data):
     Dim = len(numero_de_cosas) - 1
     diccionarios = dictionaries(data)[:Dim]
     X_cpt = np.zeros(numero_de_cosas[:Dim])
+    length = len(data.index)
+    percentages = [10 * i for i in range(1, 10 + 1)]
 
     for number in data.index:
         data_number = list(data.loc[number])
         index = distributividad(diccionarios, data_number[:Dim])
         X_cpt[index] += data_number[-1]
+        share = number/length
     return X_cpt
 
-def Promedio_temporal(X, total_time = 1, ventana = 0):
+def Promedio_temporal(X, total_time = 1):
     '''
     Args:
         X : np array. Matriz de volumen de producción
@@ -107,7 +110,7 @@ def agregado_movil(X, m = 1):
         )
     if Sobran > 0:
         new_matrix[:, :, -1] = np.sum(
-            X[-Sobran:], axis = 2
+            X[:, :, -Sobran:], axis = 2
         )
     return new_matrix
 

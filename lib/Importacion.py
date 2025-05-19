@@ -1,20 +1,25 @@
 from pandas import read_csv, read_excel
 from pyreadstat import read_dta
-from numpy import nan
+from numpy import nan, isnan
+from lib.Tratamiento import inv_dict
+import os
 
-def carga(nombre_archivo: str, columnas_importantes: list):
+def carga(nombre_archivo, columnas_importantes = None, encoding = 'uft-8'):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato csv e importa las columnas importantes limpiando los NaNs'''
     str_archivo = r'./data/' + nombre_archivo
-    data = read_csv(str_archivo).loc[:,columnas_importantes]
-    data_sin_nan = data.dropna()
+    data = read_csv(str_archivo, encoding = encoding).reset_index()
+    if columnas_importantes is not None:
+        data = data.loc[:,columnas_importantes]
+    data_sin_nan = data
     return data_sin_nan
 
-def carga_especial(nombre_archivo: str, columnas_importantes: list):
+def carga_especial(nombre_archivo, columnas_importantes = None, encoding = 'uft-8'):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato csv e importa las columnas importantes limpiando los NaNs'''
     str_archivo = r'./data/' + nombre_archivo
-    data, meta = read_dta(str_archivo)
-    data = data.loc[:, columnas_importantes ]
-    data_sin_nan = data.loc[data['exporter'] != 'World'].dropna()
+    data = read_csv(str_archivo, encoding = encoding).reset_index()
+    if columnas_importantes is not None:
+        data = data.loc[:,columnas_importantes]
+    data_sin_nan = data.groupby(columnas_importantes[:-1]).sum().reset_index()
     return data_sin_nan
 
 def carga_excel(nombre_archivo:str, columnas_importantes = None, last = False):
@@ -54,3 +59,30 @@ def dictionary_from_csv(nombre_archivo: str, ranking = False):
                 key, value = line.strip().split(',')
                 dictionary.update({key:value})
     return dictionary
+
+def guardado_ranking(X, dicc, folder, subfolders, name):
+    num_carac = inv_dict(dicc)
+    N = len(X[:, 0])
+    M = len(X[0, :])
+    for i in range(M):
+        X_i = X[:, i]
+        conjunto_raro = []
+        conjunto_bueno = []
+        for j in range(N):
+            tupla = (X_i[j], num_carac[j])
+            if isnan(tupla[0]):
+                conjunto_raro.append(tupla)
+            else:
+                conjunto_bueno.append(tupla)
+        paises_ECI_ = sorted(conjunto_bueno, key=lambda A: A[0], reverse=True)
+        sorteado = paises_ECI_ + conjunto_raro
+        str_file = r'./data/results/' + folder + r'/'
+        if (i != M-1):
+            str_file +=  subfolders[i]
+        if not os.path.exists(str_file):
+            os.mkdir(str_file)
+
+        with open(str_file + '/'+ name +'.csv', 'w+', encoding='utf-8') as f:
+            f.writelines('rank,category,DCI\n')
+            for k in range(N):
+                f.writelines(f'{k},' + f'{sorteado[k][0]}' + ',' + f'{sorteado[k][1]}\n')

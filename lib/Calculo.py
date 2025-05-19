@@ -76,12 +76,11 @@ def array_shuffler(A, shuffle_c, shuffle_p):
     return array_ante
 
 
-def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, threshold = 1, cleaning = True):
+def Matrices_ordenadas(X_cpt, diccionario, c_min = 0, p_min = 0, threshold = 1, cleaning = True):
     '''
         Args:
             X_cpt: numpy array. Matriz de volumen de producción en el tiempo
             diccionario: list[dict]. Diccionarios para cada indice de la matriz de producción.
-            total_time: int. Tiempo real transcurrido en la matriz de volumen de producción.
             c_min: int. Premios promedio por país mínimo, es un umbral.
             p_min: int. Cantidad de países promedio por categoría, es un umbral.
             threshold: float. Umbral para calcular RCA.
@@ -98,7 +97,7 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
         X_cpt = Limpieza(X_cpt, diccionario, c_min, p_min)
 
     c_len, p_len, t_len = X_cpt.shape
-    X_cp = trat.Promedio_temporal(X_cpt, total_time = total_time, ventana = 0)
+    X_cp = X_cpt.sum(axis = 2)
 
     RCA, M = Matrices(X_cp, threshold)
 
@@ -133,50 +132,40 @@ def Matrices_ordenadas(X_cpt, diccionario, total_time, c_min = 0, p_min = 0, thr
 
 def Relatedness(M, last = True):
     '''De una matriz de especialización binaria, obtiene la metrica de similaridad definida en Hidalgo et al 2009 entre actividades. Mantiene la diagonal igual a cero.'''
+
+    M = M.astype(float)
     if last:
         M = (M[:, :, -1])[:, :, np.newaxis]
 
     c_len, p_len, t_len = M.shape
     phi_t = np.stack([np.zeros((p_len, p_len))] * (t_len), axis = -1)
     for t in range(t_len):
-        ubicuidad = np.sum(M[:, :, t], axis = 0)  # p
-        for p in range(p_len):
-            for q in range(p_len):
-                Maximo = np.max([ubicuidad[p], ubicuidad[q]])
-                if p != q and Maximo != 0:
-                    S = 0
-                    for c in range(c_len):
-                        S += M[c, p, t] * M[c, q, t]
-                    phi_t[p, q, t] = S / Maximo
+        M_esimo = M[:, :, t]
+        producto = M_esimo.T @ M_esimo
+        ubicuidad = np.sum(M_esimo, axis = 0)
+
+        a, b = np.meshgrid(ubicuidad, ubicuidad)
+        mask = (a > b)
+        result = a * mask + b * (1 - mask)
+
+        division = np.divide(producto, result, out = np.zeros_like(producto), where = (result != 0))
+        phi_t[:, :, t] = division - np.diag(np.diag(division))
     return phi_t
 
-def Proximity(RCA, last = True):
-    '''
-        No tiene mucha utilidad. No se porta bien.
-    '''
-    if last:
-        RCA = (RCA[:, :, -1])[:, :, np.newaxis]
-    c_len, p_len, t_len = RCA.shape
-    log_RCA = np.log(RCA + 1)
-
-    phi_t = np.stack([np.zeros((c_len, c_len))] * t_len, axis = -1)
-    for t in range(t_len):
-        for c in range(c_len):
-            for c_prime in range(c_len):
-                X = log_RCA[c, :, t]
-                Y = log_RCA[c_prime, :, t]
-                mask = ~(X != 0) & ~(Y != 0)
-                if (c != c_prime) and (mask.sum() > 2):
-                    phi_t[c, c_prime, t] = pearsonr(X[mask], Y[mask]).statistic
-    return phi_t
-
-
-def Similarity_Density(RCA):
+def relatedness_density(M_cp, last = True):
     '''Toma la matriz RCA y calcula su Densidad de Similaridad calculando la Similaridad y matriz M_cp'''
-    M_cp = 1 * (RCA >= 1)
-    phi = Relatedness(M_cp)
-    Num = np.matmul(M_cp, phi) / np.sum(phi, axis = 0)
-    return Num
+    if last:
+        M_cp = (M_cp[:, :, -1])[:, :, np.newaxis]
+
+    c_len, p_len, t_len = M_cp.shape
+    omega_t = np.zeros((c_len, p_len, t_len))
+    phi_t = Relatedness(M_cp, last = last)
+    for t in range(t_len):
+        M = M_cp[:, :, t]
+        phi = phi_t[:, :, t]
+        phi_q = np.sum(phi, axis = 0)
+        omega_t[:, :, t] = np.divide(np.matmul(M, phi), phi_q, out = np.zeros_like(M), where = (phi_q != 0))
+    return omega_t
 
 def Z_transf(K):
     '''Aplica la transformada Z sobre un vector K'''
@@ -217,7 +206,7 @@ def Reflextion_method(M_cpt, n, last = False):
             k_cN = M_cc @ k_cN
             k_pN = k_pN @ M_pp
 
-        s = 1#np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
+        s = np.sign(np.corrcoef(k_c0, k_cN)[0, 1])
 
         eci = Z_transf(s * k_cN)[:, 0]
         pci = Z_transf(s * k_pN)[0, :]

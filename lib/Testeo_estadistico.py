@@ -28,14 +28,14 @@ def Trans_matrix(X, threeshold = 0.5, mid_index = 0):
                     Intransicion[c,p] = 1
     return Transicion, M_0
 
-def Relatedness_density_test(X_cpt, M = None, phi = None, threeshold = 0.5, mid_index = 0, N_bins = 50):
+def Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, threeshold = 0.5, mid_index = 0, N_bins = 50):
     '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
 
-    Transicion, M_cp_inicial = Trans_matrix(X_cpt, threeshold, mid_index = mid_index)
-    if M is not None:
-        M = M_cp_inicial
-    if phi is not None:
-        phi_inicial = calc.Relatedness(M_cp_inicial[:, :, np.newaxis], last = True)[:, :, 0]
+    Transicion, M_cp = Trans_matrix(X_cpt, threeshold, mid_index = mid_index)
+    if M_inicial is None:
+        M_inicial = M_cp[:, :, np.newaxis]
+    if phi_inicial is None:
+        phi_inicial = calc.Relatedness(M_inicial)
     cantidad_paises, cantidad_categorias, _ = X_cpt.shape
 
     Ocurrencias_t = np.zeros(N_bins)
@@ -43,13 +43,12 @@ def Relatedness_density_test(X_cpt, M = None, phi = None, threeshold = 0.5, mid_
     Prob_t = np.zeros(N_bins)
     products_trans = dict()
 
-    def phi_operacional(M, phi, cp):
-        c, p = cp
-        return (M[c, :] * phi[p, :]).max()
+    #omega = calc.relatedness_density(M_inicial, last = True)[:, :, -1]
+    #print(np.isnan(omega).sum())
 
     for c in range(cantidad_paises):
         for p in range(cantidad_categorias):
-            phi_max = phi_operacional(M, phi_inicial, (c, p)) #Relatedness del vecino más cercano a tiempo t-1
+            phi_max = (M_inicial[c,:] * phi_inicial[p,:]).max() #Relatedness del vecino más cercano a tiempo t-1
             rebanada = int(np.floor(phi_max * N_bins))
             if rebanada == N_bins:
                 rebanada += -1
