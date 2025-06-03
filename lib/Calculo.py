@@ -25,7 +25,7 @@ def Limpieza(X, diccionarios, c_min = 0, p_min = 0):
     diccionarios[0] = trat.re_count(diccionarios[0])
     diccionarios[1] = trat.re_count(diccionarios[1])
 
-    return X[:, Mask_p][Mask_c, :]
+    return X[:, Mask_p, :][Mask_c, :, :]
 
 
 def Matrices(X_cpt, threshold = 1):

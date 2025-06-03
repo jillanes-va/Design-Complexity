@@ -7,16 +7,16 @@ import os
 def carga(nombre_archivo, columnas_importantes = None, encoding = 'uft-8'):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato csv e importa las columnas importantes limpiando los NaNs'''
     str_archivo = r'./data/' + nombre_archivo
-    data = read_csv(str_archivo, encoding = encoding).reset_index()
+    data = read_csv(str_archivo).reset_index()
     if columnas_importantes is not None:
         data = data.loc[:,columnas_importantes]
-    data_sin_nan = data
+    data_sin_nan = data.dropna()
     return data_sin_nan
 
-def carga_especial(nombre_archivo, columnas_importantes = None, encoding = 'uft-8'):
+def carga_especial(nombre_archivo, columnas_importantes = None, encoding = 'utf-8'):
     '''Función que toma el nombre del archivo (que DEBE estar en la carpeta /data) en formato csv e importa las columnas importantes limpiando los NaNs'''
     str_archivo = r'./data/' + nombre_archivo
-    data = read_csv(str_archivo, encoding = encoding).reset_index()
+    data = read_csv(str_archivo).reset_index()
     if columnas_importantes is not None:
         data = data.loc[:,columnas_importantes]
     data_sin_nan = data.groupby(columnas_importantes[:-1]).sum().reset_index()
