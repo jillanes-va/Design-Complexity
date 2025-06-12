@@ -123,3 +123,21 @@ def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y, dict_X_short = Non
                 lista_X_incluidos[i]
             ]
     return np.array(puntos), lista_X_incluidos
+
+def mi_pais_a_ganado(X_cpt, country, diccionarios, time):
+    c_number = diccionarios[0][country]
+    print(f'{country} ha ganado: ')
+    listado = []
+    for i in range(X_cpt.shape[1]):
+        if X_cpt[c_number, i, time] != 0:
+            listado.append([trat.inv_dict(diccionarios[1])[i], X_cpt[c_number, i, time]])
+
+    for i,j in sorted(listado, key = lambda A: A[1], reverse = True):
+        print(i,j)
+
+def mi_premio_a_ganado(X_cpt, award, diccionarios, time):
+    p_number = diccionarios[1][award]
+    print(f'{award} ha sido ganado por: ')
+    for i in range(X_cpt.shape[0]):
+        if X_cpt[p_number, i, time] != 0:
+            print(trat.inv_dict(diccionarios[0])[i], X_cpt[i, p_number, -1])

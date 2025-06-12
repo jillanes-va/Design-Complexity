@@ -10,6 +10,25 @@ def domain_of_data(data):
 
 #¿Debería unir a una sola función dictionaries y domain_of_data?
 
+def direct_dict(data, columna_binaria):
+    N = len(data)
+    diccionario = {}
+    for i in range(N):
+        x = data.loc[i, columna_binaria[0]]
+        y = data.loc[i, columna_binaria[1]]
+        diccionario[x] = y
+    return diccionario
+
+def interchange_dict(dict_1, dict_2):
+    new_dict = {}
+    for key_1 in dict_1.keys():
+        try:
+            new_dict[key_1] = dict_2[dict_1[key_1]]
+        except:
+            pass
+    return new_dict
+
+
 def dictionaries(data):
     '''Genera los diccionarios para asociar los elementos a números. Lista de diccionarios***'''
     lista_de_elementos, cantidad_de_elementos = domain_of_data(data)

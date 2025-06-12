@@ -4,7 +4,7 @@ import networkx as nx
 
 from scipy.cluster.hierarchy import linkage, leaves_list, dendrogram
 from scipy.spatial.distance import squareform
-from scipy.stats import linregress
+from scipy.stats import linregress, spearmanr
 from matplotlib.colors import rgb2hex
 
 import distinctipy
@@ -180,9 +180,10 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
     Y = Y[mask]
     listado_arreglado = [listado[i] for i in range(len(mask)) if (mask[i] == True)]
 
-    b_1, b_0, r, p, se = linregress(X, Y)
+    result = spearmanr(X, Y)
+    r, p = result.statistic, result.pvalue
 
-    ax.scatter(X, Y, color='tab:blue', s=4 ** 2)
+    ax.scatter(X, Y, color='tab:blue', s=4 ** 2, label = f'$r={r:.2f}$\n$p={p:.2f}$')
     if len(listado) != 0:
         ta.allocate(
             ax, X, Y,
@@ -190,11 +191,11 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
             draw_lines=False
         )
 
-    reg_x = np.array([np.min(X), np.max(X)])
-    reg_y = b_1 * reg_x + b_0
-
-    ax.plot(reg_x, reg_y, color='tab:red', alpha=0.6,
-            label=f'm={b_1:.3f}\np={p:.3f}\n' + r'$r^2$' + f'={r ** 2:.3f}', linestyle='--')
+    # reg_x = np.array([np.min(X), np.max(X)])
+    # reg_y = b_1 * reg_x + b_0
+    #
+    # ax.plot(reg_x, reg_y, color='tab:red', alpha=0.6,
+    #         label=f'm={b_1:.3f}\np={p:.3f}\n' + r'$r^2$' + f'={r ** 2:.3f}', linestyle='--')
 
     xlabel, ylabel, title = param
     ax.set_xlabel(xlabel)
@@ -202,11 +203,9 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
     ax.set_title(title)
 
     ax.legend(loc='lower right')
-    plt.close()
-    return r**2, p
 
-    # if save:
-    #     plt.savefig(r'./figs/' + name + '.pdf')
-    #     plt.close()
-    # else:
-    #     plt.show()
+    if save:
+        plt.savefig(r'./figs/' + name + '.pdf')
+        plt.close()
+    else:
+        plt.show()

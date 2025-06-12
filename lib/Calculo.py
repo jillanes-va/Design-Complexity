@@ -2,17 +2,23 @@ import numpy as np
 import lib.Tratamiento as trat
 from scipy.stats import pearsonr
 
-def Limpieza(X, diccionarios, c_min = 0, p_min = 0):
+def Limpieza(X, diccionarios, diccionario_pop, pop_min = 1000000, c_min = 0, p_min = 0):
     '''
     Args:
         X: numpy array. Es una matriz de volumen (c, p, t).
         diccionarios: list[dict]. Son los diccionarios de (c, p, t).
+        diccionario_pop: dict. Es el diccionario entre paises y poblacion.
+        pop_min: int. Umbral mínimo de población para un país.
         c_min: int. Umbral mínimo para que un país tenga producción.
         p_min: int. Umbral mínimo para que un producto tenga producción.
     '''
+    Mask_pop = np.array([
+        (diccionario_pop[trat.inv_dict(diccionarios[0])[i]] > pop_min) for i in range(len(diccionarios[0]))
+    ])
+
 
     X_sum = np.copy(X).sum(axis = 2)
-    Mask_c = (X_sum.sum(axis = 1) > c_min)
+    Mask_c = (X_sum.sum(axis = 1) > c_min) * Mask_pop
     Mask_p = (X_sum.sum(axis = 0) > p_min)
 
     for n, valor in enumerate(Mask_c):
@@ -76,11 +82,12 @@ def array_shuffler(A, shuffle_c, shuffle_p):
     return array_ante
 
 
-def Matrices_ordenadas(X_cpt, diccionario, c_min = 0, p_min = 0, threshold = 1, cleaning = True):
+def Matrices_ordenadas(X_cpt, diccionario, diccionario_pop, pop_min = 1_000_000, c_min = 0, p_min = 0, threshold = 1, cleaning = True):
     '''
         Args:
             X_cpt: numpy array. Matriz de volumen de producción en el tiempo
             diccionario: list[dict]. Diccionarios para cada indice de la matriz de producción.
+            diccionario_pop: dict: Diccionario entre pais y poblacion
             c_min: int. Premios promedio por país mínimo, es un umbral.
             p_min: int. Cantidad de países promedio por categoría, es un umbral.
             threshold: float. Umbral para calcular RCA.
@@ -94,7 +101,7 @@ def Matrices_ordenadas(X_cpt, diccionario, c_min = 0, p_min = 0, threshold = 1, 
         A todas las matrices se les ordena por ubicuidad y diversidad, así como se les añade un índice extra de tiempo que contiene la matriz promediada.
     '''
     if cleaning:
-        X_cpt = Limpieza(X_cpt, diccionario, c_min, p_min)
+        X_cpt = Limpieza(X_cpt, diccionario, diccionario_pop, pop_min, c_min, p_min)
 
     c_len, p_len, t_len = X_cpt.shape
     X_cp = X_cpt.sum(axis = 2)
