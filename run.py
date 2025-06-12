@@ -9,6 +9,7 @@ import lib.Diccionariacion as dicc
 
 import os
 
+import time
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as sc
@@ -50,14 +51,18 @@ print('Importando...')
 
 print('Calculando Matriz X')
 
-p = np.arange(0, 70, 1)
-c = np.arange(0, 4_000, 100)
+p = np.arange(0, 125, 5)
+c = np.arange(0, 500, 10)
+Total = len(c) * len(p)
+contador = 0
 
-R_sq = np.zeros((len(c), len(p)))
-p_value = np.zeros(R_sq.shape)
+R_sq = np.full(shape = (len(c), len(p)), fill_value = np.nan)
+p_value = np.full(shape = (len(c), len(p)), fill_value = np.nan)
 
 for i in range(len(c)):
     for j in range(len(p)):
+        contador += 1
+        t_0 = time.time()
         dicts_DCI = trat.dictionaries(data_DCI)
         X_cpt = trat.X_matrix(data_DCI) #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
         X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
@@ -81,12 +86,13 @@ for i in range(len(c)):
         #=============== Relatedness ===============
 
         #print('Relatedness')
-        phi_t = calc.Relatedness(M_cpt)
+        #phi_t = calc.Relatedness(M_cpt)
 
         # #=============== Design Complexity Index ===============
 
         #print('DCI')
-        DCI, PCI = calc.Eigen_method(M_cpt, last = True)
+        try:
+            DCI, PCI = calc.Eigen_method(M_cpt, last = True)
 
         #
         # anios = ['2015-2019', '2020-2023','']
@@ -95,26 +101,32 @@ for i in range(len(c)):
         #imp.guardado_ranking(DCI, dicts_DCI[0], '', [''], 'Ranking_DCI_awards')
         #imp.guardado_ranking(PCI, dicts_DCI[1], '', [''], 'Ranking_PCI_awards')
 
-
-
-        DCI_vs_GDP, paises = test.punteo_especifico(DCI[:, -1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+            DCI_vs_GDP, paises = test.punteo_especifico(DCI[:, -1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
 
         #---- Graficos -----
-        print(p[i]/70 * 100)
-        R_sq[i, j], p_value[i, j] = figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
+            R_sq[i, j], p_value[i, j] = figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
+        except:
+            pass
+        t_1 = time.time()
+        print(round(100 * contador / Total, 2))
+        print(f'{t_1 - t_0}\n', flush = True)
 
 C, P = np.meshgrid(c, p)
 
 
-plt.imshow(C, P, R_sq)
+plt.pcolor(C, P, R_sq.T)
+plt.colorbar()
 plt.xlabel('Umbral de productos (c_min)')
 plt.ylabel('Umbral de paises (p_min)')
+plt.title('R squared')
 plt.show()
 plt.close()
 
-plt.plot(C, P, p_value)
+plt.pcolor(C, P, np.log(p_value.T))
+plt.colorbar()
 plt.xlabel('Umbral de productos (c_min)')
 plt.ylabel('Umbral de paises (p_min)')
+plt.title('log p_value')
 plt.show()
 
 # for i in range(0):
