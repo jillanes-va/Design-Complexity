@@ -49,24 +49,23 @@ data_pop = imp.carga_excel(population_file, population_columns)
 #----------------------------------------
 #--------- Tratamiento de datos ---------
 #----------------------------------------
+
 print('Generando dicts')
 
 dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
 
-print(dicts_DCI[0])
 if is_award:
     dict_country_pop = trat.interchange_dict(dicc.awards_pop, trat.direct_dict(data_pop, population_columns))
 else:
-    dict_country_pop = trat.interchange_dict(dicc.wipo_gdp, trat.direct_dict(data_pop, population_columns))
+    dict_country_pop = trat.interchange_dict(dicc.wipo_pop, trat.direct_dict(data_pop, population_columns))
 gdp_array = trat.gdp_matrix(data_gdp)
 
-print(dict_country_pop)
-
-print(dict_country_pop)
 
 print('Calculando Matriz X')
 X_cpt = trat.X_matrix(data_DCI) #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
+
+test.mi_pais_a_ganado(X_cpt, 'Holy See', dicts_DCI, -1)
 
 if is_award:
     X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
