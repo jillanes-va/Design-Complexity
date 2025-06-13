@@ -180,10 +180,10 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
     Y = Y[mask]
     listado_arreglado = [listado[i] for i in range(len(mask)) if (mask[i] == True)]
 
-    result = spearmanr(X, Y)
-    r, p = result.statistic, result.pvalue
+    slope, intercept, _, _, _= linregress(X, Y)
+    rho, pvalue = spearmanr(X, Y)
 
-    ax.scatter(X, Y, color='tab:blue', s=4 ** 2, label = f'$r={r:.2f}$\n$p={p:.2f}$')
+    ax.scatter(X, Y, color='tab:blue', s=4 ** 2)
     if len(listado) != 0:
         ta.allocate(
             ax, X, Y,
@@ -191,11 +191,11 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
             draw_lines=False
         )
 
-    # reg_x = np.array([np.min(X), np.max(X)])
-    # reg_y = b_1 * reg_x + b_0
-    #
-    # ax.plot(reg_x, reg_y, color='tab:red', alpha=0.6,
-    #         label=f'm={b_1:.3f}\np={p:.3f}\n' + r'$r^2$' + f'={r ** 2:.3f}', linestyle='--')
+    reg_x = np.array([np.min(X), np.max(X)])
+    reg_y = slope * reg_x + intercept
+
+    ax.plot(reg_x, reg_y, color='tab:red', alpha=0.6,
+            label=f'm={slope:.3f}\np={pvalue:.3f}\n' + r'$\rho^2$' + f'={rho ** 2:.3f}', linestyle='--')
 
     xlabel, ylabel, title = param
     ax.set_xlabel(xlabel)
