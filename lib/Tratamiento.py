@@ -117,6 +117,13 @@ def Media_movil(X, m = 1, tiempo_total = 0):
         ) / (dt * Sobran)
     return new_matrix
 
+def agregado_movil_(X):
+    C, P, T = X.shape
+    new_matrix = np.zeros((C, P, 2))
+    new_matrix[:, :, 0] = np.sum(X[:, :, 4:10], axis = 2)
+    new_matrix[:, :, 1] = np.sum(X[:, :, 10:], axis = 2)
+    return new_matrix
+
 def agregado_movil(X, m = 1):
     C, P, T = X.shape
     Caben = T//m

@@ -60,7 +60,7 @@ def dictionary_from_csv(nombre_archivo: str, ranking = False):
                 dictionary.update({key:value})
     return dictionary
 
-def guardado_ranking(X, dicc, folder, subfolders, name):
+def guardado_ranking(X, dicc, folder, subfolders, name, metric_name):
     num_carac = inv_dict(dicc)
     N = len(X[:, 0])
     M = len(X[0, :])
@@ -83,6 +83,6 @@ def guardado_ranking(X, dicc, folder, subfolders, name):
             os.mkdir(str_file)
 
         with open(str_file + '/'+ name +'.csv', 'w+', encoding='utf-8') as f:
-            f.writelines('rank,category,DCI\n')
+            f.writelines(f'rank,{metric_name},category\n')
             for k in range(N):
-                f.writelines(f'{k},' + f'{sorteado[k][0]}' + ',' + f'{sorteado[k][1]}\n')
+                f.writelines(f'{k + 1},' + f'{sorteado[k][0]}' + ',' + f'{sorteado[k][1]}\n')

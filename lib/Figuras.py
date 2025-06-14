@@ -203,9 +203,11 @@ def scatter_lm(Z, listado = [], log = False, param = ['', '', ''], save = False,
     ax.set_title(title)
 
     ax.legend(loc='lower right')
+    plt.close()
 
-    if save:
-        plt.savefig(r'./figs/' + name + '.pdf')
-        plt.close()
-    else:
-        plt.show()
+    # if save:
+    #     plt.savefig(r'./figs/' + name + '.pdf')
+    #     plt.close()
+    # else:
+    #     plt.show()
+    return slope, intercept, rho, pvalue
