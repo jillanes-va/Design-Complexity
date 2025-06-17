@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import lib.Calculo as calc
 import lib.Tratamiento as trat
 
-def Trans_matrix(X, threeshold = 0.5, mid_index = 0):
+def Trans_matrix(X, threesholds = [0.5, 1], mid_index = 0):
     '''Toma la matriz de RCA y retorna dos matrices que reportan aquellos productos que son de transición o no, dependiendo de un umbral.'''
     C, P, T = X.shape
     Transicion = np.zeros((C, P))
@@ -21,17 +21,17 @@ def Trans_matrix(X, threeshold = 0.5, mid_index = 0):
 
     for c in range(C):
         for p in range(P):
-            if RCA_0[c,p] <= threeshold:
+            if RCA_0[c,p] <= threesholds[0]:
                 if RCA_1[c,p] >=1:
                     Transicion[c,p] = 1
-                if RCA_1[c,p] <=threeshold:
+                if RCA_1[c,p] <=threesholds[1]:
                     Intransicion[c,p] = 1
     return Transicion, M_0
 
-def Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, threeshold = 0.5, mid_index = 0, N_bins = 50):
+def Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, threesholds = [0.5, 1], mid_index = 0, N_bins = 50):
     '''Testea la similaridad en productos de transición y de intransición. No retorna nada, solo grafica la similaridad vs la frecuencia relativa.'''
 
-    Transicion, M_cp = Trans_matrix(X_cpt, threeshold, mid_index = mid_index)
+    Transicion, M_cp = Trans_matrix(X_cpt, threesholds, mid_index = mid_index)
     if M_inicial is None:
         M_inicial = M_cp[:, :, np.newaxis]
     if phi_inicial is None:

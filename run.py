@@ -20,8 +20,9 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 #----------------------------------
 #--------- Carga de datos ---------
 #----------------------------------
-is_award = False
+is_award = True
 save_things = False
+thre = 1
 
 
 population_file = r'World_Population.xls'
@@ -39,24 +40,22 @@ wipo_gdp_columns = ['Country'] + ['mean_1', 'mean_2', 'mean_3'] + ['mean_wipo'] 
 
 print('Importando...')
 
-SIRP = [[], [], [], [], [], []]
+if is_award:
+    data_DCI = imp.carga(awards_file, awards_columns)#***
+    data_gdp = imp.carga_excel(gdp_file, awards_gdp_columns)
+else:
+    data_DCI = imp.carga(wipo_file, wipo_columns)#***
+    data_gdp = imp.carga_excel(gdp_file, wipo_gdp_columns)
 
-for thre in np.linspace(0.1, 1.2, 10):
-    if is_award:
-        data_DCI = imp.carga(awards_file, awards_columns)#***
-        data_gdp = imp.carga_excel(gdp_file, awards_gdp_columns)
-    else:
-        data_DCI = imp.carga(wipo_file, wipo_columns)#***
-        data_gdp = imp.carga_excel(gdp_file, wipo_gdp_columns)
+data_pop = imp.carga_excel(population_file, population_columns)
 
-    data_pop = imp.carga_excel(population_file, population_columns)
+#----------------------------------------
+#--------- Tratamiento de datos ---------
+#----------------------------------------
 
-    #----------------------------------------
-    #--------- Tratamiento de datos ---------
-    #----------------------------------------
+print('Generando dicts')
 
-    print('Generando dicts')
-
+for thre in np.arange(0.4, 1.2, 0.1):
     dicts_DCI = trat.dictionaries(data_DCI)
     dict_country_gdp = trat.dictionaries(data_gdp)[0]
 
@@ -65,6 +64,7 @@ for thre in np.linspace(0.1, 1.2, 10):
     else:
         dict_country_pop = trat.interchange_dict(dicc.wipo_pop, trat.direct_dict(data_pop, population_columns))
     gdp_array = trat.gdp_matrix(data_gdp)
+
 
 
     print('Calculando Matriz X')
@@ -86,67 +86,51 @@ for thre in np.linspace(0.1, 1.2, 10):
     # print('Suma sobre paises', np.max(X_cpt.sum(axis = 0)))
     if is_award:
         X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
-                                                        c_min=50,
+                                                        c_min=10,
                                                         p_min=10)  # c min significa cantidad de premios minima de un país
     else:
         X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
-                                                        c_min=50,
-                                                        p_min=10)  # c min significa cantidad de premios minima de un país
+                                                    c_min=10,
+                                                    p_min=10)  # c min significa cantidad de premios minima de un país
+    figs.graf(M_cpt[:, :, -1], xlabel='Categorias', ylabel='Paises', title=f'Umbral = {thre} ', save=False, name='M_cp_awards')
+#test.mi_pais_a_ganado(X_cpt, 'Italy', dicts_DCI, -1)
 
+#c_min =
+#        10 para awards
 
-    #test.mi_pais_a_ganado(X_cpt, 'Italy', dicts_DCI, -1)
+#=============== Relatedness ===============
 
-    #c_min =
-    #        10 para awards
+#print('Calculando Relatedness...')
+#phi_t = calc.Relatedness(M_cpt)
 
-    #=============== Relatedness ===============
+# #=============== Design Complexity Index ===============
 
-    #print('Calculando Relatedness...')
-    #phi_t = calc.Relatedness(M_cpt)
+print('Calculando DCI...')
+DCI, PCI = calc.Eigen_method(M_cpt, last = True)
+N = len(DCI)
 
-    # #=============== Design Complexity Index ===============
+# for i in range(len(DCI)):
+#     print(DCI[i], trat.inv_dict(dicts_DCI[0])[i])
+#
+# anios = ['2015-2019', '2020-2023','']
 
-    print('Calculando DCI...')
-    DCI, PCI = calc.Eigen_method(M_cpt, last = True)
-    N = len(DCI)
-
-    # for i in range(len(DCI)):
-    #     print(DCI[i], trat.inv_dict(dicts_DCI[0])[i])
-    #
-    # anios = ['2015-2019', '2020-2023','']
-
-    if save_things:
-        print('Guardado...')
-        if is_award:
-            imp.guardado_ranking(DCI, dicts_DCI[0], 'awards', ['2015-2019', '2020-2023'], 'Ranking_DCI_awards', 'DCI')
-            imp.guardado_ranking(PCI, dicts_DCI[1], 'awards', ['2015-2019', '2020-2023'], 'Ranking_PCI_awards', 'PCI')
-        else:
-            imp.guardado_ranking(DCI, dicts_DCI[0], 'wipo', ['2010-2014','2015-2019','2020-2024'], 'Ranking_DCI_wipo', 'DCI')
-            imp.guardado_ranking(PCI, dicts_DCI[1], 'wipo', ['2010-2014','2015-2019','2020-2024'], 'Ranking_PCI_wipo', 'PCI')
-
-    # for i in range(3):
+if save_things:
+    print('Guardado...')
     if is_award:
-        DCI_vs_GDP, paises = test.punteo_especifico(DCI[:, -1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+        imp.guardado_ranking(DCI, dicts_DCI[0], 'awards', ['2015-2019', '2020-2023'], 'Ranking_DCI_awards', 'DCI')
+        imp.guardado_ranking(PCI, dicts_DCI[1], 'awards', ['2015-2019', '2020-2023'], 'Ranking_PCI_awards', 'PCI')
     else:
-        DCI_vs_GDP, paises = test.punteo_especifico(DCI[:, -1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
+        imp.guardado_ranking(DCI, dicts_DCI[0], 'wipo', ['2010-2014','2015-2019','2020-2024'], 'Ranking_DCI_wipo', 'DCI')
+        imp.guardado_ranking(PCI, dicts_DCI[1], 'wipo', ['2010-2014','2015-2019','2020-2024'], 'Ranking_PCI_wipo', 'PCI')
 
-    #---- Graficos -----
-    slope, intercept, rho, pvalue = figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
-    SIRP[1].append(slope)
-    SIRP[2].append(intercept)
-    SIRP[3].append(rho**2)
-    SIRP[4].append(pvalue)
-    SIRP[0].append(thre)
-    print(thre)
+# for i in range(3):
+if is_award:
+    DCI_vs_GDP, paises = test.punteo_especifico(DCI[:, -1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.awards_gdp, dicc.awards_iso)
+else:
+    DCI_vs_GDP, paises = test.punteo_especifico(DCI[:, -1], gdp_array[:, -1], dicts_DCI[0], dict_country_gdp, dicc.wipo_gdp, dicc.wipo_iso)
 
-print('Graficando...')
-plt.plot(SIRP[0], SIRP[3], label = '$\\rho^2$')
-plt.plot(SIRP[0], SIRP[4], label = '$pvalue$')
-plt.plot([0.1, 1.3], [0.05, 0.05], alpha = 0.7, linestyle = '--', color = 'tab:red')
-plt.xlabel('Threeshold')
-plt.legend()
-plt.title('Usando datos wipo')
-plt.show()
+#---- Graficos -----
+slope, intercept, rho, pvalue = figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
 
 # for i in range(0):
 #     figs.graf(np.log(X_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
@@ -167,6 +151,6 @@ plt.show()
 #
 # figs.red(phi_t[:, :, -1], by_com = False, save = False, umbral_enlace = 0.45, PCI = PCI, diccionario = dicts_DCI, name = 'Design_space_awards_PCI')
 #
-omega_cp = calc.relatedness_density(M_cpt, False)
-dom_phi, relatedness, dict_trans = test.Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, mid_index = 1, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_awards', save = False)
+#omega_cp = calc.relatedness_density(M_cpt, False)
+#dom_phi, relatedness, dict_trans = test.Relatedness_density_test(X_cpt, threeshold = thre, M_inicial = None, phi_inicial = None, mid_index = 1, N_bins = 15)
+#figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_awards', save = False)
