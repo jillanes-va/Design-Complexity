@@ -316,7 +316,7 @@ awards_gdp =  {
     "Canada": "Canada",
     "Cayman Islands": None,
     "Chile": "Chile",
-    "China": "China, People's Republic of",
+    "China": "China",
     "Chinese Taipei": "Taiwan Province of China",
     "Colombia": "Colombia",
     "Costa Rica": "Costa Rica",
