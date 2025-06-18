@@ -1,0 +1,1 @@
+"0","corruwu <- cor(ECIs[, c('dci_award', 'dci_wipo', 'ECI_tr', 'ECI_te', 'ECI_rs')]) - diag(5)"

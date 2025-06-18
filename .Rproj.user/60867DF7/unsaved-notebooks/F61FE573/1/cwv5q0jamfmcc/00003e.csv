@@ -1,0 +1,6 @@
+"0",""
+"0","pheatmap(corruwu, "
+"0","         color = colorRampPalette(c(""white"", ""red2""))(20),"
+"0","         breaks = seq(0, 1, length.out = 20),"
+"0","         main = ""Matriz de Correlación"","
+"0","         angle_col = 45)"
