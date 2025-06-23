@@ -1,92 +1,89 @@
 rank,PCI,category
-1,2.164646671508438,Futuristic Design Award Category.
-2,2.164646671508438,Luxury Design Award Category.
-3,2.164646671508438,Prosumer Products, Tools, and Machinery Design Award Category.
-4,2.164646671508438,Vehicle Parts, Auto Accessories and Care Products Design Award Category.
-5,2.160856413028964,Wearable Technologies Design Award Category.
-6,2.042588264848193,Footwear, Shoes and Boots Design Award Category.
-7,1.7205591356997587,Performing Arts, Style and Scenery Design Award Category.
-8,1.5123737866606777,Camera and Photography Equipment Design Award Category.
-9,1.5123737866606777,Scientific Instruments and Research Equipment Design Award Category.
-10,1.433739724404146,Engineering and Technical Design Award Category.
-11,1.298940695223666,Textile, Fabric, Textures, Patterns and Cloth Design Award Category.
-12,1.279024880751704,Computers and Peripheral Devices Design Award Category.
-13,1.0682862508519981,Office and Business Appliances Design Award Category.
-14,0.8820325889977313,Information Technologies Design Award Category.
-15,0.8601009018129194,Cybernetics, Prosthesis and Implant Design Award Category.
-16,0.7235682877184058,Musical Instruments Design Award Category.
-17,0.6874346327785308,Construction and Real Estate Projects Design Award Category.
-18,0.6745042375964009,Manufacturing and Processing Machinery Design Award Category.
-19,0.6262607043136914,Meta, Strategic and Service Design Award Category.
-20,0.5935346199815192,Idea Design Award Category.
-21,0.5803043066065449,Car and Land Based Motor Vehicles Design Award Category.
-22,0.5534807955995175,Security, Safety and Surveillance Products Design Award Category.
-23,0.541589422228082,Public Awareness, Volunteerism, and Society Design Award Category.
-24,0.5227823395727694,Furniture Accessories, Hardware and Materials Design Award Category.
-25,0.47532186504825236,Wholesale, Retail Trade, Commerce and E-Commerce Design Award Category.
-26,0.4057115300314332,Aerospace and Aircraft Design Award Category.
-27,0.38221449656385004,Street Furniture Design Award Category.
-28,0.38024363742109896,Pet Supplies and Products for Animals Design Award Category.
-29,0.37938756644267146,Outdoor Gear and Camping Equipment Design Award Category.
-30,0.35778501097448456,Safety Clothing and Personal Protective Equipment Design Award Category.
-31,0.32341534604292527,Audio and Sound Equipment Design Award Category.
-32,0.3013483384539662,Sustainable Products, Projects and Green Design Award Category.
-33,0.19517901508682392,Heating, Ventilation, and Air Conditioning Products Design Award Category.
-34,0.18819339817570527,Baby, Kids' and Children's Products Design Award Category.
-35,0.1742173679562644,Toy, Games and Hobby Products Design Award Category.
-36,0.13158096023461996,Sports, Entertainment and Recreation Equipment Design Award Category.
-37,0.10008448253632873,Beauty, Personal Care and Cosmetic Products Design Award Category.
-38,0.07914873949686531,Home Appliances Design Award Category.
-39,0.03827152933858328,Urban Planning and Urban Design Award Category.
-40,0.03321638672878433,Medical Devices and Medical Equipment Design Award Category.
-41,0.016849129361065435,Energy Products, Projects and Devices Design Award Category.
-42,0.011108668748418647,Landscape Planning and Garden Design Award Category.
-43,-0.007999597711578888,Event and Happening Design Award Category.
-44,-0.04862808303416521,Bakeware, Tableware, Drinkware and Cookware Design Award Category.
-45,-0.05623808944557092,Hospitality, Recreation, Travel and Tourism Design Award Category.
-46,-0.05994416061431095,Robotics, Automaton and Automation Design Award Category.
-47,-0.14478426612285186,Digital and Electronic Devices Design Award Category.
-48,-0.20065446445752885,Fashion, Apparel and Garment Design Award Category.
-49,-0.23505751504846362,3D Printed Forms and Products Design Award Category.
-50,-0.27217768515856766,Education, Teaching Aid and Training Content Design Award Category.
-51,-0.30370281990467063,Advertising, Marketing and Communication Design Award Category.
-52,-0.32004845799764137,Art Materials, Stationery Supplies and Gift Items Design Award Category.
-53,-0.3327706456265507,Print and Published Media Design Award Category.
-54,-0.4039013372340601,Differently Abled and Seniors' Assistance Design Award Category.
-55,-0.4086489323224585,Vehicle, Mobility and Transportation Design Award Category.
-56,-0.4174601803404148,Social Design Award Category.
-57,-0.44068453309288275,Generative, Algorithmic and Parametric Design Award Category.
-58,-0.477774951107548,Hospitality, Restaurant and Catering Products Design Award Category.
-59,-0.5017982729492942,Photography and Photo Manipulation Design Award Category.
-60,-0.5187985368206519,Cultural Heritage and Culture Industry Design Award Category.
-61,-0.5232100222288146,Bathroom Furniture and Sanitary Ware Design Award Category.
-62,-0.535296960769258,Fashion and Travel Accessories Design Award Category.
-63,-0.5427991392639088,Interface and Interaction Design Award Category.
-64,-0.6382128382049516,Lighting Products and Lighting Projects Design Award Category.
-65,-0.6850939692223533,Limited Edition and Custom Design Award Category.
-66,-0.7109901411591932,Food, Beverage and Culinary Arts Design Award Category.
-67,-0.7415860558841032,Awards, Prize and Competitions Design Award Category.
-68,-0.7514670891499048,Jewelry, Eyewear and Watch Design Award Category.
-69,-0.7617894715048823,Mobile Technologies, Applications and Software Design Award Category.
-70,-0.7913553142520989,Hardware, Power and Hand Tools Design Award Category.
-71,-0.8041153239419114,Kitchen Furniture, Equipment and Fixtures Design Award Category.
-72,-0.8350354121545137,Movie, Video and Animation Design Award Category.
-73,-0.9705537313619845,Arts, Crafts and Ready-Made Design Award Category.
-74,-1.0119189345106963,Graphics, Illustration and Visual Communication Design Award Category.
-75,-1.0413935061477089,Garden and Outdoor Furniture Design Award Category.
-76,-1.0417397706410345,Computer Graphics and 3D Model Design Award Category.
-77,-1.0518266538261163,Music, Audio and Sound Design Award Category.
-78,-1.0520390565190951,Furniture Design Award Category.
-79,-1.1287779193901901,Website and Web Design Award Category.
-80,-1.1941476661745487,Packaging Design Award Category.
-81,-1.2276947012090451,Agricultural Tools, Equipment and Machinery Design Award Category.
-82,-1.2894861177575916,Yacht and Marine Vessels Design Award Category.
-83,-1.3015842690079098,Building Materials and Construction Components Design Award Category.
-84,-1.3537559405206123,Office Furniture Design Award Category.
-85,-1.9083208618638117,Architecture, Building and Structure Design Award Category.
-86,-2.2160764504120447,Interior Space and Exhibition Design Award Category.
-87,-2.6448600839442857,Design Quality and Innovation Award Category.
-88,nan,Disposable and Single-Use Product Design Award Category.
-89,nan,Digital and Broadcasting Media Design Award Category.
-90,nan,Engineering, Construction and Infrastructure Design Award Category.
-91,nan,Heavy Machinery Design Award Category.
+1,0.11547005383792514,Furniture Design Award Category.
+2,0.11547005383792514,Graphics, Illustration and Visual Communication Design Award Category.
+3,0.11547005383792514,Architecture, Building and Structure Design Award Category.
+4,0.11547005383792514,Packaging Design Award Category.
+5,0.11547005383792514,Jewelry, Eyewear and Watch Design Award Category.
+6,0.11547005383792514,Arts, Crafts and Ready-Made Design Award Category.
+7,0.11547005383792514,Lighting Products and Lighting Projects Design Award Category.
+8,0.11547005383792514,Bakeware, Tableware, Drinkware and Cookware Design Award Category.
+9,0.11547005383792514,Website and Web Design Award Category.
+10,0.11547005383792514,Fashion and Travel Accessories Design Award Category.
+11,0.11547005383792514,Baby, Kids' and Children's Products Design Award Category.
+12,0.11547005383792514,Mobile Technologies, Applications and Software Design Award Category.
+13,0.11547005383792514,Toy, Games and Hobby Products Design Award Category.
+14,0.11547005383792514,Advertising, Marketing and Communication Design Award Category.
+15,0.11547005383792514,Building Materials and Construction Components Design Award Category.
+16,0.11547005383792514,Vehicle, Mobility and Transportation Design Award Category.
+17,0.11547005383792514,Sustainable Products, Projects and Green Design Award Category.
+18,0.11547005383792514,Digital and Electronic Devices Design Award Category.
+19,0.11547005383792514,Fashion, Apparel and Garment Design Award Category.
+20,0.11547005383792514,Print and Published Media Design Award Category.
+21,0.11547005383792514,Social Design Award Category.
+22,0.11547005383792514,Street Furniture Design Award Category.
+23,0.11547005383792514,Home Appliances Design Award Category.
+24,0.11547005383792514,Interior Space and Exhibition Design Award Category.
+25,0.11547005383792514,Medical Devices and Medical Equipment Design Award Category.
+26,0.11547005383792514,Photography and Photo Manipulation Design Award Category.
+27,0.11547005383792514,Differently Abled and Seniors' Assistance Design Award Category.
+28,0.11547005383792514,Interface and Interaction Design Award Category.
+29,0.11547005383792514,Movie, Video and Animation Design Award Category.
+30,0.11547005383792514,Textile, Fabric, Textures, Patterns and Cloth Design Award Category.
+31,0.11547005383792514,Art Materials, Stationery Supplies and Gift Items Design Award Category.
+32,0.11547005383792514,Bathroom Furniture and Sanitary Ware Design Award Category.
+33,0.11547005383792514,Pet Supplies and Products for Animals Design Award Category.
+34,0.11547005383792514,Engineering and Technical Design Award Category.
+35,0.11547005383792514,Limited Edition and Custom Design Award Category.
+36,0.11547005383792514,Sports, Entertainment and Recreation Equipment Design Award Category.
+37,0.11547005383792514,Cultural Heritage and Culture Industry Design Award Category.
+38,0.11547005383792514,Yacht and Marine Vessels Design Award Category.
+39,0.11547005383792514,3D Printed Forms and Products Design Award Category.
+40,0.11547005383792514,Education, Teaching Aid and Training Content Design Award Category.
+41,0.11547005383792514,Safety Clothing and Personal Protective Equipment Design Award Category.
+42,0.11547005383792514,Hospitality, Recreation, Travel and Tourism Design Award Category.
+43,0.11547005383792514,Idea Design Award Category.
+44,0.11547005383792514,Security, Safety and Surveillance Products Design Award Category.
+45,0.11547005383792514,Beauty, Personal Care and Cosmetic Products Design Award Category.
+46,0.11547005383792514,Event and Happening Design Award Category.
+47,0.11547005383792514,Futuristic Design Award Category.
+48,0.11547005383792514,Prosumer Products, Tools, and Machinery Design Award Category.
+49,0.11547005383792514,Footwear, Shoes and Boots Design Award Category.
+50,0.11547005383792514,Computer Graphics and 3D Model Design Award Category.
+51,0.11547005383792514,Landscape Planning and Garden Design Award Category.
+52,0.11547005383792514,Energy Products, Projects and Devices Design Award Category.
+53,0.11547005383792514,Furniture Accessories, Hardware and Materials Design Award Category.
+54,0.11547005383792514,Meta, Strategic and Service Design Award Category.
+55,0.11547005383792514,Office Furniture Design Award Category.
+56,0.11547005383792514,Public Awareness, Volunteerism, and Society Design Award Category.
+57,0.11547005383792514,Robotics, Automaton and Automation Design Award Category.
+58,0.11547005383792514,Wearable Technologies Design Award Category.
+59,0.11547005383792514,Audio and Sound Equipment Design Award Category.
+60,0.11547005383792514,Food, Beverage and Culinary Arts Design Award Category.
+61,0.11547005383792514,Generative, Algorithmic and Parametric Design Award Category.
+62,0.11547005383792514,Musical Instruments Design Award Category.
+63,0.11547005383792514,Urban Planning and Urban Design Award Category.
+64,0.11547005383792514,Construction and Real Estate Projects Design Award Category.
+65,0.11547005383792514,Garden and Outdoor Furniture Design Award Category.
+66,0.11547005383792514,Performing Arts, Style and Scenery Design Award Category.
+67,0.11547005383792514,Heating, Ventilation, and Air Conditioning Products Design Award Category.
+68,0.11547005383792514,Kitchen Furniture, Equipment and Fixtures Design Award Category.
+69,0.11547005383792514,Car and Land Based Motor Vehicles Design Award Category.
+70,0.11547005383792514,Outdoor Gear and Camping Equipment Design Award Category.
+71,0.11547005383792514,Wholesale, Retail Trade, Commerce and E-Commerce Design Award Category.
+72,0.11547005383792514,Computers and Peripheral Devices Design Award Category.
+73,0.11547005383792514,Office and Business Appliances Design Award Category.
+74,0.11547005383792514,Scientific Instruments and Research Equipment Design Award Category.
+75,0.11547005383792514,Vehicle Parts, Auto Accessories and Care Products Design Award Category.
+76,-8.660254037844386,Agricultural Tools, Equipment and Machinery Design Award Category.
+77,nan,Luxury Design Award Category.
+78,nan,Design Quality and Innovation Award Category.
+79,nan,Hardware, Power and Hand Tools Design Award Category.
+80,nan,Awards, Prize and Competitions Design Award Category.
+81,nan,Aerospace and Aircraft Design Award Category.
+82,nan,Cybernetics, Prosthesis and Implant Design Award Category.
+83,nan,Manufacturing and Processing Machinery Design Award Category.
+84,nan,Music, Audio and Sound Design Award Category.
+85,nan,Disposable and Single-Use Product Design Award Category.
+86,nan,Camera and Photography Equipment Design Award Category.
+87,nan,Hospitality, Restaurant and Catering Products Design Award Category.
+88,nan,Information Technologies Design Award Category.
