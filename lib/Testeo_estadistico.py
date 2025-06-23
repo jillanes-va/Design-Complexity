@@ -141,3 +141,7 @@ def mi_premio_a_ganado(X_cpt, award, diccionarios, time):
     for i in range(X_cpt.shape[0]):
         if X_cpt[p_number, i, time] != 0:
             print(trat.inv_dict(diccionarios[0])[i], X_cpt[i, p_number, -1])
+
+def have_outlier(z_score_vector):
+    check = np.abs(z_score_vector) > 3
+    return 100 * int(check.any())

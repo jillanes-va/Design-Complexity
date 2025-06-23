@@ -20,7 +20,7 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 #----------------------------------
 #--------- Carga de datos ---------
 #----------------------------------
-is_award = False
+is_award = True
 save_things = True
 thre = 1
 
@@ -52,31 +52,34 @@ data_pop = imp.carga_excel(population_file, population_columns)
 #----------------------------------------
 #--------- Tratamiento de datos ---------
 #----------------------------------------
+array = []
 
 print('Generando dicts')
+for j in range(0, 50, 5):
+    array_j = []
+    for i in range(0, 100, 1):
 
+        dicts_DCI = trat.dictionaries(data_DCI)
+        dict_country_gdp = trat.dictionaries(data_gdp)[0]
 
-dicts_DCI = trat.dictionaries(data_DCI)
-dict_country_gdp = trat.dictionaries(data_gdp)[0]
+        if is_award:
+            dict_country_pop = trat.interchange_dict(dicc.awards_pop, trat.direct_dict(data_pop, population_columns))
+        else:
+            dict_country_pop = trat.interchange_dict(dicc.wipo_pop, trat.direct_dict(data_pop, population_columns))
+        gdp_array = trat.gdp_matrix(data_gdp)
 
-if is_award:
-    dict_country_pop = trat.interchange_dict(dicc.awards_pop, trat.direct_dict(data_pop, population_columns))
-else:
-    dict_country_pop = trat.interchange_dict(dicc.wipo_pop, trat.direct_dict(data_pop, population_columns))
-gdp_array = trat.gdp_matrix(data_gdp)
+        print('Calculando Matriz X')
+        X_cpt = trat.X_matrix(data_DCI)[..., 1:] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
-
-
-print('Calculando Matriz X')
-X_cpt = trat.X_matrix(data_DCI)[..., 1:] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
-
-if is_award:
-    X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
-    X_cpt = trat.agregado_movil_(X_cpt)
+        if is_award:
+            X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
+            X_cpt = trat.agregado_movil_(X_cpt)
 
 #----------------------------------------
 #--------- Calculo de cosas -------------
 #----------------------------------------
+
+
 
 #============== RCA, M_cp ================
 
@@ -84,31 +87,40 @@ if is_award:
 #
 # print('Suma sobre productos', np.max(X_cpt.sum(axis = 1)))
 # print('Suma sobre paises', np.max(X_cpt.sum(axis = 0)))
-if is_award:
-    X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
-                                                    c_min=10,
-                                                    p_min=10)  # c min significa cantidad de premios minima de un país
-else:
-    X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
-                                                c_min=10,
-                                                p_min=10)  # c min significa cantidad de premios minima de un país
 
-#test.mi_pais_a_ganado(X_cpt, 'Italy', dicts_DCI, -1)
+        if is_award:
+            X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
+                                                            c_min=i,
+                                                            p_min=j)  # c min significa cantidad de premios minima de un país
+        else:
+            X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
+                                                        c_min=10,
+                                                        p_min=10)  # c min significa cantidad de premios minima de un país
+        #test.mi_pais_a_ganado(X_cpt, 'Italy', dicts_DCI, -1)
 
-#c_min =
-#        10 para awards
+        #c_min =
+        #        10 para awards
 
-#=============== Relatedness ===============
+        #=============== Relatedness ===============
 
-#print('Calculando Relatedness...')
-#phi_t = calc.Relatedness(M_cpt)
+        #print('Calculando Relatedness...')
+        #phi_t = calc.Relatedness(M_cpt)
 
-# #=============== Design Complexity Index ===============
+        # #=============== Design Complexity Index ===============
 
-print('Calculando DCI...')
-DCI, PCI = calc.Eigen_method(M_cpt, last = True)
-N = len(DCI)
+        print('Calculando DCI...')
+        DCI, PCI = calc.Eigen_method(M_cpt, last = True)
+        array_j.append([i, np.min(DCI), np.max(DCI)])
 
+    q = plt.plot(np.array(array_j)[:, 0], np.array(array_j)[:, 1], label = f'p_min = {j}')
+    p = plt.plot(np.array(array_j)[:, 0], np.array(array_j)[:, 2], color = q[0].get_color())
+    print(round(j/50 * 100, 2))
+plt.legend()
+plt.xlabel('Umbral de puntos (c_min)')
+plt.ylabel('DCI [z-score]')
+plt.show()
+
+input('¿Continuar?')
 # for i in range(len(DCI)):
 #     print(DCI[i], trat.inv_dict(dicts_DCI[0])[i])
 #
