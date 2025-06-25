@@ -47,19 +47,19 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
     else:
         plt.show()
 
-def Density_plot(domain, prob, param = ['', '', ''], label = '', xlim_sup = 0, save = False, name = ''):
-    plt.bar(domain, prob, width=1 / len(domain), align='edge', label = label)
+def Density_plot(domain, prob, param = ['', '', '', '', ''], xlim_sup = 0, save = False, name = ''):
     if xlim_sup != 0:
         plt.xlim([-0.05, xlim_sup])
-
-    xlabel, ylabel, title = param
+    xlabel, ylabel, title, legen, color = param
+    plt.bar(domain, prob, width=1 / len(domain), align='edge', label= legen, color = color)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-    plt.legend()
+
+    plt.legend(loc = 'upper left')
 
     if save and len(name) != 0:
-        plt.savefig('./figs/' + name + '.pdf')
+        plt.savefig('./figs/' + name + '.png')
         plt.close()
     else:
         plt.show()

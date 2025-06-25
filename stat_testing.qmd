@@ -44,6 +44,11 @@ length(unique(df_nuevo$designer_country))
 
 ```{r}
 
+length(unique(df_wipo$country_code, na.rm = T))
+```
+
+```{r}
+
 ECIs <- read.csv('test/All_ECIs.csv') %>%
   select(-c(X.1, X)) %>%
   mutate(
@@ -102,4 +107,10 @@ pheatmap(corruwu,
          breaks = seq(0, 1, length.out = 20),
          main = "Matriz de Correlación",
          angle_col = 45)
+```
+
+```{r}
+
+
+
 ```

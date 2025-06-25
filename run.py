@@ -20,9 +20,9 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 #----------------------------------1
 #--------- Carga de datos ---------
 #----------------------------------
-is_award = True
-save_things = True
-thre = 1
+is_award = False
+save_things = False
+thre = 0.5
 
 
 population_file = r'World_Population.xls'
@@ -157,7 +157,19 @@ if save_things:
 #
 # figs.red(phi_t[:, :, -1], by_com = False, save = False, umbral_enlace = 0.45, PCI = PCI, diccionario = dicts_DCI, name = 'Design_space_awards_PCI')
 
+intto = lambda number: '0' + str(int(100 * number)) if number < 1 else str(int(100 * number))
+print(intto(thre))
+
 omega_cpt = calc.relatedness_density(M_cpt, True)
-figs.graf(omega_cpt[:, :, -1], xlabel = 'Categorias', ylabel = 'Paises')
-dom_phi, relatedness, dict_trans = test.Relatedness_density_test(X_cpt, M_inicial = M_cpt[:, :, -1], phi_inicial = phi_t[:,:,-1], mid_index = 1, N_bins = 15)
-figs.Density_plot(dom_phi, relatedness, param = ['Relatedness density', 'Probability of developing RCA in a award category', ''], name = 'PrincipleOfRelatedness_awards', save = False)
+#figs.graf(omega_cpt[:, :, -1], xlabel = 'Categorias', ylabel = 'Paises')
+dom_phi, relatedness, dict_trans = test.Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, N_bins = 15, threesholds = 2 * [thre])
+if is_award:
+    figs.Density_plot(dom_phi, relatedness,
+                      param=['Relatedness density', 'Probability of developing RCA in a award category',
+                             'Red dinámica award', f'thre = {thre}', 'tab:blue'],
+                      name=f'correlations/dyn_PhiDensity_awards_{intto(thre)}', save=True)
+else:
+    figs.Density_plot(dom_phi, relatedness,
+                      param = ['Relatedness density', 'Probability of developing RCA in a WIPO subclass',
+                               'Red dinámica WIPO', f'thre = {thre}', 'tab:orange'],
+                      name = f'correlations/dyn_PhiDensity_wipo_{intto(thre)}', save = True)
