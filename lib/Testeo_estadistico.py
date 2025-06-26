@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import linregress,  spearmanr
 
 import lib.Calculo as calc
 import lib.Tratamiento as trat
@@ -87,6 +88,7 @@ def categorias_presentes(X, diccionario):
         anios.append(informacion)
     return anios
 
+
 def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y, dict_X_short = None):
     '''
     Args:
@@ -126,6 +128,23 @@ def punteo_especifico(X, Y, dict_X_num, dict_Y_num, dict_X_Y, dict_X_short = Non
             ]
     return np.array(puntos), lista_X_incluidos
 
+def x_vs_y(x_dict, y_dict, x_dict_y, log = False):
+    N = len(x_dict)
+    XY = np.full((2, N), fill_value = np.nan)
+    not_present = []
+    i = 0
+    for x_name, x_value in x_dict.items():
+        try:
+            y_name = x_dict_y[x_name]
+            y_value = y_dict[y_name]
+            if log:
+                y_value = np.log1p(y_value)
+            XY[:, i] = [x_value, y_value]
+        except:
+            not_present.append(x_name)
+        i += 1
+    return XY, not_present
+
 def mi_pais_a_ganado(X_cpt, country, diccionarios, time):
     c_number = diccionarios[0][country]
     print(f'{country} ha ganado: ')
@@ -147,3 +166,18 @@ def mi_premio_a_ganado(X_cpt, award, diccionarios, time):
 def have_outlier(z_score_vector):
     check = np.abs(z_score_vector) > 3
     return 100 * int(check.any())
+
+
+def reg(XY):
+    x, y = XY
+    mask = ~(np.isnan(x) + np.isnan(y))
+
+    x_clean = x[mask]
+    y_clean = y[mask]
+
+    slope, intercept, r, p, se = linregress(x_clean, y_clean)
+    res = spearmanr(x_clean, y_clean)
+    XY_reg = np.zeros((2, 2))
+    XY_reg[0, :] = [np.min(x_clean), np.max(x_clean)]
+    XY_reg[1, :] = slope * XY_reg[0, :] + intercept
+    return XY_reg, [res.statistic, res.pvalue]
