@@ -174,7 +174,7 @@ for thre in np.arange(0.1, 1.3, 0.01):
         country : DCI[number][0] for country, number in dicts_DCI[0].items()
     }
 
-    DCI_ECI, _ = test.x_vs_y(DCI_dict, ECIs['ECI_tr']['mean_awards'], wipo_OEC)
+    DCI_ECI, _ = test.x_vs_y(DCI_dict, ECIs['ECI_re']['mean_awards'], wipo_OEC)
     _, [rho, pvalue] = test.reg(DCI_ECI)
     array.append([thre, rho**2, pvalue])
     print(round( i * 100 / N,2))
@@ -185,7 +185,7 @@ plt.plot(array[:, 0], array[:, 1], label = '$\\rho^2$')
 plt.plot(array[:, 0], array[:, 2], label = 'pvalue', alpha = 0.6)
 plt.xlabel('Threshold')
 plt.ylabel('Correlación')
-plt.title('Correlación awards vs ECI exportacion')
+plt.title('Correlación wipo vs ECI investigación')
 plt.tight_layout()
 plt.legend()
 plt.grid(alpha = 0.6, linestyle = ':')
