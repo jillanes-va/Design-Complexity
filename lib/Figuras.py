@@ -12,7 +12,7 @@ import textalloc as ta
 import lib.Tratamiento as trat
 
 plt.style.use(['default'])
-
+plt.rcParams.update({'font.size': 16})
 
 def graf(X, xlabel = '', ylabel = '', save = False, name = '', title = ''):
     plt.figure(figsize = (7,7))
@@ -48,15 +48,19 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
         plt.show()
 
 def Density_plot(domain, prob, param = ['', '', '', '', ''], xlim_sup = 0, save = False, name = ''):
+    fig, ax = plt.subplots(figsize = (10,7))
     if xlim_sup != 0:
-        plt.xlim([-0.05, xlim_sup])
+        ax.set_xlim([-0.05, xlim_sup])
+    else:
+        ax.set_xlim([-0.05, 1.05])
     xlabel, ylabel, title, legen, color = param
-    plt.bar(domain, prob, width=1 / len(domain), align='edge', label= legen, color = color)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.title(title)
+    ax.bar(domain, prob, width=1 / len(domain), align='edge', label= legen, color = color)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
 
     plt.legend(loc = 'upper left')
+    plt.tight_layout()
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.png')

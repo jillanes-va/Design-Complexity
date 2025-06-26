@@ -15,6 +15,8 @@ def Trans_matrix(X, threesholds = [0.5, 1], mid_index = 0):
 
     X_0 = X[:, :, :mid_index].sum(axis = 2)
     X_1 = X[:, :, mid_index:-1].sum(axis = 2)
+    print('Matriz anterior: ', X[:, :, :mid_index].shape)
+    print('Matriz posterior: ', X[:, :, mid_index:-1].shape, '\n')
 
     RCA_0, M_0 = calc.Matrices(X_0)
     RCA_1, M_1 = calc.Matrices(X_1)
@@ -64,7 +66,7 @@ def Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, threes
         else:
             Prob_t[i] = Ocurrencias_t[i]/Total[i]
     dom_phi = np.linspace(0, 1, N_bins)
-    return dom_phi, Prob_t, products_trans
+    return dom_phi, Prob_t, products_trans, np.max(phi_inicial)
 
 def categorias_presentes(X, diccionario):
     '''Para una matriz país-producto-año retorna los productos no registrados en un año'''

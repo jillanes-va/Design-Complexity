@@ -20,9 +20,10 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 #----------------------------------1
 #--------- Carga de datos ---------
 #----------------------------------
-is_award = False
+
 save_things = False
-thre = 0.5
+is_award = True
+thre = 1
 
 
 population_file = r'World_Population.xls'
@@ -66,10 +67,7 @@ else:
 gdp_array = trat.gdp_matrix(data_gdp)
 
 print('Calculando Matriz X')
-if is_award:
-    X_cpt = trat.X_matrix(data_DCI)[..., 1:] #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
-else:
-    X_cpt = trat.X_matrix(data_DCI)
+X_cpt = trat.X_matrix(data_DCI) #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
 if is_award:
     X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
@@ -110,7 +108,7 @@ phi_t = calc.Relatedness(M_cpt)
 # #=============== Design Complexity Index ===============
 
 print('Calculando DCI...')
-DCI, PCI = calc.Eigen_method(M_cpt, last = True)
+DCI, PCI = calc.Eigen_method(M_cpt, last = False)
 
 
 # for i in range(len(DCI)):
@@ -138,12 +136,12 @@ if save_things:
 #---- Graficos -----
 #slope, intercept, rho, pvalue = figs.scatter_lm(DCI_vs_GDP, paises, log = True, param = ['DCI awards', 'log mean GDP per capita PPA', ''], save = False, name = 'DCI_awards_GDP_regression')
 
-# for i in range(0):
-#     figs.graf(np.log(X_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
+#figs.graf(np.log(X_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
 #
-# for i in range(0):
-#     figs.graf(np.log(RCA_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$RCA_{cp}$', save = False, name = 'logRCA_awards')
-#
+figs.graf(RCA_cpt[:,:, -1] > 1, xlabel = 'Categorias', ylabel = 'Paises', title = r'$RCA_{cp}$', save = False, name = 'RCA_awards')
+
+
+
 # for i in range(0):
 #     figs.graf(np.log(M_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$M_{cp}$', save = False, name = 'logRCA_awards')
 #
@@ -158,18 +156,19 @@ if save_things:
 # figs.red(phi_t[:, :, -1], by_com = False, save = False, umbral_enlace = 0.45, PCI = PCI, diccionario = dicts_DCI, name = 'Design_space_awards_PCI')
 
 intto = lambda number: '0' + str(int(100 * number)) if number < 1 else str(int(100 * number))
-print(intto(thre))
 
 omega_cpt = calc.relatedness_density(M_cpt, True)
 #figs.graf(omega_cpt[:, :, -1], xlabel = 'Categorias', ylabel = 'Paises')
-dom_phi, relatedness, dict_trans = test.Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, N_bins = 15, threesholds = 2 * [thre])
-if is_award:
-    figs.Density_plot(dom_phi, relatedness,
-                      param=['Relatedness density', 'Probability of developing RCA in a award category',
-                             'Red dinámica award', f'thre = {thre}', 'tab:blue'],
-                      name=f'correlations/dyn_PhiDensity_awards_{intto(thre)}', save=True)
-else:
-    figs.Density_plot(dom_phi, relatedness,
-                      param = ['Relatedness density', 'Probability of developing RCA in a WIPO subclass',
-                               'Red dinámica WIPO', f'thre = {thre}', 'tab:orange'],
-                      name = f'correlations/dyn_PhiDensity_wipo_{intto(thre)}', save = True)
+dom_phi, relatedness, dict_trans, xlim = test.Relatedness_density_test(X_cpt, M_inicial = None, phi_inicial = None, N_bins = 15, threesholds = 2 * [thre])
+# if is_award:
+#     print('Awards')
+#     figs.Density_plot(dom_phi, relatedness,
+#                       param=['Relatedness density', 'P(Developing an award category)',
+#                              'Red dinámica award', f'thre = {thre}', 'tab:blue'],
+#                       name=f'correlations/PhiDensity_awards_{intto(thre)}', save=False)
+# else:
+#     print('WIPO')
+#     figs.Density_plot(dom_phi, relatedness,
+#                       param = ['Relatedness density', 'P(Developing a WIPO subclass)',
+#                                'Red dinámica WIPO', f'thre = {thre}', 'tab:orange'],
+#                       name = f'correlations/PhiDensity_wipo_{intto(thre)}', save = False)

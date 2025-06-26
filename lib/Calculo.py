@@ -2,7 +2,7 @@ import numpy as np
 import lib.Tratamiento as trat
 from scipy.stats import pearsonr
 
-def Limpieza(X, diccionarios, diccionario_pop, pop_min = 1000000, c_min = 0, p_min = 0):
+def Limpieza(X, diccionarios, diccionario_pop, pop_min = 1_000_000, c_min = 0, p_min = 0):
     '''
     Args:
         X: numpy array. Es una matriz de volumen (c, p, t).
@@ -243,8 +243,8 @@ def Eigen_method(M_cpt, last = False):
         diversity = M.sum(axis=1)
         ubiquity = M.sum(axis=0)
 
-        cntry_mask = np.argwhere(diversity == 0).squeeze()
-        prod_mask = np.argwhere(ubiquity == 0).squeeze()
+        cntry_mask = np.argwhere(diversity == 0).flatten()
+        prod_mask = np.argwhere(ubiquity == 0).flatten()
         k_c0 = diversity[diversity != 0][:, np.newaxis]
         k_p0 = ubiquity[ubiquity != 0][np.newaxis, :]
         M_cp = M[diversity != 0, :][:, ubiquity != 0]
@@ -267,10 +267,12 @@ def Eigen_method(M_cpt, last = False):
         eci = Z_transf(s1 * kc)
         pci = Z_transf(s1 * kp)
 
-        for x in cntry_mask:
-            eci = np.insert(eci, x, np.nan)
-        for x in prod_mask:
-            pci = np.insert(pci, x, np.nan)
+        if len(cntry_mask) != 0:
+            for x in cntry_mask:
+                eci = np.insert(eci, x, np.nan)
+        if len(prod_mask) != 0:
+            for x in prod_mask:
+                pci = np.insert(pci, x, np.nan)
 
         eci_t[:, t] = eci
         pci_t[:, t] = pci
