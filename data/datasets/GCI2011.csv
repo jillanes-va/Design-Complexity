@@ -1,0 +1,83 @@
+Rank,Country,Tech,Talent,Tolerance,GCI
+1,Sweden,5,2,7,0.923
+2,United States,3,8,8,0.902
+3,Finland,1,1,19,0.894
+4,Denmark,7,4,14,0.878
+5,Australia,15,7,5,0.870
+6,New Zealand,19,5,4,0.866
+7,Canada,11,17,1,0.862
+7,Norway,12,6,11,0.862
+9,Singapore,10,3,17,0.858
+10,Netherlands,17,11,3,0.854
+11,Belgium,16,12,13,0.813
+12,Ireland,20,21,2,0.805
+13,United Kingdom,18,19,10,0.789
+14,Switzerland,6,22,20,0.785
+15,France,14,23,16,0.764
+15,Germany,9,26,18,0.764
+17,Spain,24,28,6,0.744
+18,Taiwan,â€”,32,21,0.737
+19,Italy,26,18,23,0.707
+20,Hong Kong,22,37,12,0.691
+21,Austria,13,30,35,0.663
+22,Greece,38,9,37,0.638
+22,Slovenia,23,10,51,0.638
+24,Serbia,28,35,27,0.614
+24,Israel,4,20,66,0.614
+26,Hungary,33,25,34,0.606
+27,Republic of Korea,8,24,62,0.598
+28,Portugal,32,34,33,0.577
+29,Czech Republic,25,31,49,0.553
+30,Japan,2,45,61,0.541
+30,Russian Federation,21,13,74,0.541
+32,Costa Rica,43,42,26,0.528
+32,Estonia,27,15,69,0.528
+34,Latvia,39,14,60,0.520
+35,Croatia,29,39,46,0.516
+36,United Arab Emirates,â€”,49,38,0.513
+37,Uruguay,63,46,9,0.500
+38,Argentina,55,36,31,0.484
+38,Lithuania,31,16,75,0.484
+40,Bulgaria,40,38,45,0.480
+41,Slovakia,36,33,55,0.476
+41,Poland,37,29,58,0.476
+43,Nicaragua,â€”,69,24,0.474
+44,Cyprus,59,43,25,0.463
+45,South Africa,45,68,15,0.459
+46,Brazil,41,66,22,0.455
+47,Chile,48,54,28,0.451
+48,Malaysia,54,50,29,0.439
+49,Ukraine,34,27,77,0.419
+50,India,42,75,30,0.382
+51,Panama,65,52,39,0.346
+51,Romania,49,63,44,0.346
+51,Macedonia,61,47,48,0.346
+54,Philippines,52,64,41,0.341
+54,Armenia,46,61,50,0.341
+54,Kazakhstan,60,40,57,0.341
+57,Georgia,47,48,63,0.337
+58,China,30,76,â€”,0.327
+59,Ecuador,72,58,32,0.321
+60,Bolivia,66,44,53,0.319
+61,Mexico,62,65,36,0.317
+62,Egypt,â€”,41,76,0.316
+63,Sri Lanka,69,55,42,0.305
+63,Trinidad and Tobago,53,70,43,0.305
+65,Kyrgyzstan,50,53,65,0.297
+66,Peru,56,62,53,0.287
+67,Uganda,35,79,59,0.276
+68,Turkey,51,59,64,0.272
+69,Mongolia,â€”,51,73,0.270
+70,Azerbaijan,44,67,72,0.236
+71,El Salvador,67,73,47,0.220
+71,Thailand,64,56,67,0.220
+73,Jamaica,57,60,71,0.215
+74,Honduras,58,77,56,0.203
+75,Madagascar,70,82,40,0.199
+76,Saudi Arabia,â€”,57,79,0.191
+77,Paraguay,71,72,54,0.179
+78,Iran,â€”,71,68,0.171
+79,Viet Nam,68,78,70,0.102
+80,Pakistan,73,74,81,0.053
+81,Indonesia,74,80,78,0.037
+82,Cambodia,75,81,80,0.020
