@@ -1,0 +1,1259 @@
+rank;university;country;score
+1;University of Oxford;United Kingdom;96.0
+2;University of Cambridge;United Kingdom;94.8
+3;Stanford University;United States;94.7
+4;Massachusetts Institute of Technology;United States;94.2
+5;California Institute of Technology;United States;94.1
+6;Harvard University;United States;93.6
+7;Princeton University;United States;92.3
+8;Yale University;United States;91.3
+9;Imperial College London;United Kingdom;90.3
+10;The University of Chicago;United States;90.2
+11;ETH Zurich;Switzerland;89.3
+12;Johns Hopkins University;United States;89.0
+13;University of Pennsylvania;United States;89.0
+14;UCL;United Kingdom;87.8
+15;University of California, Berkeley;United States;87.7
+16;Columbia University;United States;87.2
+17;University of California, Los Angeles;United States;86.4
+18;Duke University;United States;85.4
+19;Cornell University;United States;85.1
+20;University of Michigan-Ann Arbor;United States;84.1
+21;University of Toronto;Canada;84.0
+22;Tsinghua University;China;82.9
+23;National University of Singapore;Singapore;82.4
+24;Carnegie Mellon University;United States;82.0
+25;Northwestern University;United States;81.7
+26;London School of Economics and Political Science;United Kingdom;81.3
+27;New York University;United States;81.0
+28;University of Washington;United States;80.4
+29;University of Edinburgh;United Kingdom;79.8
+30;University of California, San Diego;United States;79.7
+31;Peking University;China;79.3
+32;LMU Munich;Germany;78.3
+33;University of Melbourne;Australia;78.3
+34;Georgia Institute of Technology;United States;77.5
+35;École Polytechnique Fédérale de Lausanne;Switzerland;76.9
+36;University of Hong Kong;Hong Kong;76.3
+37;University of British Columbia;Canada;76.0
+38;King’s College London;United Kingdom;75.8
+39;University of Texas at Austin;United States;75.4
+40;Karolinska Institute;Sweden;74.9
+41;The Hong Kong University of Science and Technology;Hong Kong;74.5
+42;Paris Sciences et Lettres – PSL Research University Paris;France;74.4
+43;The University of Tokyo;Japan;74.1
+44;University of Wisconsin-Madison;United States;73.9
+45;McGill University;Canada;73.7
+46;Technical University of Munich;Germany;73.7
+47;Universität Heidelberg;Germany;73.2
+48;KU Leuven;Belgium;72.6
+49;Australian National University;Australia;72.4
+50;University of Illinois at Urbana-Champaign;United States;72.3
+51;Nanyang Technological University, Singapore;Singapore;72.2
+52;University of California, Santa Barbara;United States;71.5
+53;Brown University;United States;71.4
+54;The Chinese University of Hong Kong;Hong Kong;71.4
+55;Washington University in St Louis;United States;70.9
+56;University of North Carolina at Chapel Hill;United States;70.0
+57;University of Manchester;United Kingdom;69.9
+58;Delft University of Technology;Netherlands;69.2
+59;University of California, Davis;United States;68.5
+60;The University of Sydney;Australia;68.5
+61;Wageningen University & Research;Netherlands;68.5
+62;University of Amsterdam;Netherlands;67.9
+63;Seoul National University;South Korea;67.5
+64;Purdue University West Lafayette;United States;67.4
+65;Kyoto University;Japan;67.3
+66;University of Southern California;United States;67.0
+67;Humboldt University of Berlin;Germany;66.9
+68;Leiden University;Netherlands;66.3
+69;The University of Queensland;Australia;66.0
+70;Erasmus University Rotterdam;Netherlands;65.8
+71;University of Minnesota;United States;65.3
+72;Ohio State University (Main campus);United States;65.3
+73;Sorbonne University;France;65.1
+74;Boston University;United States;65.0
+75;Utrecht University;Netherlands;65.0
+76;University of Freiburg;Germany;64.7
+77;McMaster University;Canada;64.4
+78;University of Bristol;United Kingdom;64.3
+79;University of Groningen;Netherlands;64.1
+80;University of Warwick;United Kingdom;64.1
+81;Penn State (Main campus);United States;63.8
+82;University of Maryland, College Park;United States;63.7
+83;Sungkyunkwan University (SKKU);South Korea;63.7
+84;Emory University;United States;63.6
+85;Monash University;Australia;63.6
+86;Rice University;United States;63.5
+87;RWTH Aachen University;Germany;63.3
+88;Uppsala University;Sweden;63.3
+89;University of Tübingen;Germany;63.2
+90;Charité - Universitätsmedizin Berlin;Germany;63.0
+91;Université de Montréal;Canada;63.0
+92;University of Zurich;Switzerland;63.0
+93;University of Science and Technology of China;China;62.9
+94;University of Glasgow;United Kingdom;62.8
+95;Michigan State University;United States;62.8
+96;University of California, Irvine;United States;62.7
+97;UNSW Sydney;Australia;62.7
+98;Lund University;Sweden;62.5
+99;Dartmouth College;United States;62.4
+100;University of Helsinki;Finland;62.4
+101;Zhejiang University;China;62.2
+102;Korea Advanced Institute of Science and Technology (KAIST);South Korea;61.8
+103;University of Basel;Switzerland;61.5
+104;Free University of Berlin;Germany;61.4
+105;Fudan University;China;61.4
+106;University of Sheffield;United Kingdom;61.2
+107;University of Virginia (Main campus);United States;61.0
+108;École Polytechnique – Institut Polytechnique de Paris;France;60.8
+109;Georgetown University;United States;60.7
+110;University of Bern;Switzerland;60.3
+111;University of Bonn;Germany;60.3
+112;City University of Hong Kong;Hong Kong;60.3
+113;University of Pittsburgh-Pittsburgh campus;United States;60.3
+114;University of Colorado Boulder;United States;59.9
+115;Durham University;United Kingdom;59.9
+116;University of Birmingham;United Kingdom;59.7
+117;University of Copenhagen;Denmark;59.7
+118;University of Southampton;United Kingdom;59.6
+119;University of York;United Kingdom;59.3
+120;Trinity College Dublin;Ireland;59.2
+121;University of Oslo;Norway;59.1
+122;Vanderbilt University;United States;59.1
+123;Aarhus University;Denmark;59.0
+124;Arizona State University (Tempe);United States;59.0
+125;University of Göttingen;Germany;59.0
+126;University of Mannheim;Germany;59.0
+127;Radboud University Nijmegen;Netherlands;59.0
+128;Université Catholique de Louvain;Belgium;58.9
+129;Maastricht University;Netherlands;58.9
+130;Queen Mary University of London;United Kingdom;58.8
+131;Technical University of Berlin;Germany;58.7
+132;University of Alberta;Canada;58.5
+133;Case Western Reserve University;United States;58.5
+134;Nanjing University;China;58.4
+135;The University of Western Australia;Australia;58.4
+136;University of Adelaide;Australia;58.3
+137;University of Geneva;Switzerland;58.3
+138;University of Hamburg;Germany;58.3
+139;Karlsruhe Institute of Technology;Germany;58.3
+140;Pompeu Fabra University;Spain;58.3
+141;University of Exeter;United Kingdom;57.8
+142;Pohang University of Science and Technology (POSTECH);South Korea;57.7
+143;Ghent University;Belgium;57.6
+144;University of Vienna;Austria;57.6
+145;Universitat Autònoma de Barcelona (UAB);Spain;57.5
+146;University of Cologne;Germany;57.3
+147;Indiana University;United States;57.3
+148;Lancaster University;United Kingdom;57.3
+149;University of Nottingham;United Kingdom;57.2
+150;Ulm University;Germany;57.2
+151;TU Dresden;Germany;57.0
+152;Tufts University;United States;56.8
+153;University of Leeds;United Kingdom;56.6
+154;Sant’Anna School of Advanced Studies – Pisa;Italy;56.6
+155;Stockholm University;Sweden;56.6
+156;University of Cape Town;South Africa;56.5
+157;University of Florida;United States;56.5
+158;University of Aberdeen;United Kingdom;56.3
+159;University of Arizona;United States;56.2
+160;The Hong Kong Polytechnic University;Hong Kong;56.2
+161;University of Würzburg;Germany;56.2
+162;Scuola Normale Superiore di Pisa;Italy;56.0
+163;University of Sussex;United Kingdom;56.0
+164;University of Rochester;United States;55.9
+165;Technical University of Denmark;Denmark;55.9
+166;University of St Andrews;United Kingdom;55.8
+167;Vrije Universiteit Amsterdam;Netherlands;55.7
+168;University of California, Santa Cruz;United States;55.6
+169;Eindhoven University of Technology;Netherlands;55.6
+170;University of Leicester;United Kingdom;55.6
+171;National Taiwan University (NTU);Taiwan;55.5
+172;Newcastle University;United Kingdom;55.4
+173;Texas A&M University;United States;55.4
+174;University of Notre Dame;United States;55.3
+175;University of Erlangen-Nuremberg;Germany;55.2
+176;University of Lausanne;Switzerland;54.9
+177;University of Ottawa;Canada;54.9
+178;Rutgers University–New Brunswick;United States;54.9
+179;University of Alabama at Birmingham;United States;54.8
+180;University of Bologna;Italy;54.7
+181;Aalto University;Finland;54.5
+182;George Washington University;United States;54.5
+183;University of Liverpool;United Kingdom;54.5
+184;University of Münster;Germany;54.4
+185;Northeastern University, US;United States;54.4
+186;University of Twente;Netherlands;54.4
+187;Cardiff University;United Kingdom;54.2
+188;KTH Royal Institute of Technology;Sweden;54.2
+189;University of Konstanz;Germany;54.1
+190;Shanghai Jiao Tong University;China;54.1
+191;University of Duisburg-Essen;Germany;54.0
+192;University of East Anglia;United Kingdom;54.0
+193;Western University;Canada;54.0
+194;Aalborg University;Denmark;53.9
+195;Paris Diderot University – Paris 7;France;53.9
+196;University of Technology Sydney;Australia;53.6
+197;University of Bergen;Norway;53.3
+198;Korea University;South Korea;53.2
+199;University of Calgary;Canada;53.1
+200;University of Calgary;Russian Federation;53.1
+201;University of Antwerp;Belgium;49.5–53.0
+202;University of Auckland;New Zealand;49.5–53.0
+203;University of Barcelona;Spain;49.5–53.0
+204;University of Bath;United Kingdom;49.5–53.0
+205;Bielefeld University;Germany;49.5–53.0
+206;Brandeis University;United States;49.5–53.0
+207;University at Buffalo;United States;49.5–53.0
+208;University of California, Riverside;United States;49.5–53.0
+209;Chalmers University of Technology;Sweden;49.5–53.0
+210;Copenhagen Business School;Denmark;49.5–53.0
+211;University of Dundee;United Kingdom;49.5–53.0
+212;École Nationale des Ponts et Chaussées - Institut Polytechnique de Paris;France;49.5–53.0
+213;École Normale Supérieure de Lyon;France;49.5–53.0
+214;University of Fribourg;Switzerland;49.5–53.0
+215;University of Gothenburg;Sweden;49.5–53.0
+216;University of Hawai’i at Mānoa;United States;49.5–53.0
+217;Hebrew University of Jerusalem;Israel;49.5–53.0
+218;University of Hohenheim;Germany;49.5–53.0
+219;University of Iowa;United States;49.5–53.0
+220;James Cook University;Australia;49.5–53.0
+221;University of Kiel;Germany;49.5–53.0
+222;King Abdulaziz University;Saudi Arabia;49.5–53.0
+223;Université Libre de Bruxelles;Belgium;49.5–53.0
+224;University of Luxembourg;Luxembourg;49.5–53.0
+225;Macquarie University;Australia;49.5–53.0
+226;University of Massachusetts;United States;49.5–53.0
+227;Medical University of Graz;Austria;49.5–53.0
+228;Medical University of Vienna;Austria;49.5–53.0
+229;University of Miami;United States;49.5–53.0
+230;University of Otago;New Zealand;49.5–53.0
+231;University of Padua;Italy;49.5–53.0
+232;Paris-Sud University;France;49.5–53.0
+233;University of Passau;Germany;49.5–53.0
+234;University of Potsdam;Germany;49.5–53.0
+235;Queen’s University Belfast;United Kingdom;49.5–53.0
+236;Queensland University of Technology;Australia;49.5–53.0
+237;RCSI University of Medicine and Health Sciences;Ireland;49.5–53.0
+238;University of Reading;United Kingdom;49.5–53.0
+239;University of South Australia;Australia;49.5–53.0
+240;University of Tampere;Finland;49.5–53.0
+241;Tel Aviv University;Israel;49.5–53.0
+242;Tilburg University;Netherlands;49.5–53.0
+243;Ulsan National Institute of Science and Technology (UNIST);South Korea;49.5–53.0
+244;University College Dublin;Ireland;49.5–53.0
+245;University of Utah;United States;49.5–53.0
+246;Vita-Salute San Raffaele University;Italy;49.5–53.0
+247;University of Waterloo;Canada;49.5–53.0
+248;William & Mary;United States;49.5–53.0
+249;University of the Witwatersrand;South Africa;49.5–53.0
+250;University of Wollongong;Australia;49.5–53.0
+251;Yonsei University (Seoul campus);South Korea;49.5–53.0
+252;Brighton and Sussex Medical School;United Kingdom;46.4–49.4
+253;University of Canberra;Australia;46.4–49.4
+254;University of Cincinnati – Uptown;United States;46.4–49.4
+255;Clark University;United States;46.4–49.4
+256;Colorado School of Mines;United States;46.4–49.4
+257;Dalhousie University;Canada;46.4–49.4
+258;University of Delaware;United States;46.4–49.4
+259;University of Essex;United Kingdom;46.4–49.4
+260;Flinders University;Australia;46.4–49.4
+261;Florida State University;United States;46.4–49.4
+262;Goethe University Frankfurt;Germany;46.4–49.4
+263;Griffith University;Australia;46.4–49.4
+264;University of Iceland;Iceland;46.4–49.4
+265;University of Illinois Chicago;United States;46.4–49.4
+266;Indian Institute of Science;India;46.4–49.4
+267;Constructor University;Germany;46.4–49.4
+268;Johannes Gutenberg University of Mainz;Germany;46.4–49.4
+269;Université Laval;Canada;46.4–49.4
+270;University of Marburg;Germany;46.4–49.4
+271;University of Marburg;Russian Federation;46.4–49.4
+272;University of Navarra;Spain;46.4–49.4
+273;North Carolina State University;United States;46.4–49.4
+274;Oregon Health and Science University;United States;46.4–49.4
+275;The University of Osaka;Japan;46.4–49.4
+276;University of Oulu;Finland;46.4–49.4
+277;Queen’s University;Canada;46.4–49.4
+278;Royal Holloway, University of London;United Kingdom;46.4–49.4
+279;Ruhr University Bochum;Germany;46.4–49.4
+280;St George’s, University of London;United Kingdom;46.4–49.4
+281;University of São Paulo;Brazil;46.4–49.4
+282;Sapienza University of Rome;Italy;46.4–49.4
+283;Simon Fraser University;Canada;46.4–49.4
+284;University of Southern Denmark;Denmark;46.4–49.4
+285;University of South Florida (Tampa);United States;46.4–49.4
+286;Stony Brook University;United States;46.4–49.4
+287;University of Stuttgart;Germany;46.4–49.4
+288;University of Surrey;United Kingdom;46.4–49.4
+289;Swansea University;United Kingdom;46.4–49.4
+290;Swedish University of Agricultural Sciences;Sweden;46.4–49.4
+291;Syracuse University;United States;46.4–49.4
+292;Technical University of Darmstadt;Germany;46.4–49.4
+293;University of Texas at Dallas;United States;46.4–49.4
+294;Tohoku University;Japan;46.4–49.4
+295;Tokyo Institute of Technology;Japan;46.4–49.4
+296;University of Trento;Italy;46.4–49.4
+297;TU Wien;Austria;46.4–49.4
+298;Virginia Polytechnic Institute and State University;United States;46.4–49.4
+299;Vrije Universiteit Brussel;Belgium;46.4–49.4
+300;Wake Forest University;United States;46.4–49.4
+301;Aix-Marseille University;France;44.0–46.3
+302;University of Alaska Fairbanks;United States;44.0–46.3
+303;Alfaisal University;Saudi Arabia;44.0–46.3
+304;American University;United States;44.0–46.3
+305;Anglia Ruskin University (ARU);United Kingdom;44.0–46.3
+306;Auckland University of Technology;New Zealand;44.0–46.3
+307;University of Bayreuth;Germany;44.0–46.3
+308;Birkbeck, University of London;United Kingdom;44.0–46.3
+309;Boston College;United States;44.0–46.3
+310;University of Bremen;Germany;44.0–46.3
+311;University of Canterbury;New Zealand;44.0–46.3
+312;University of Colorado Denver/Anschutz Medical Campus;United States;44.0–46.3
+313;University of Connecticut;United States;44.0–46.3
+314;Curtin University;Australia;44.0–46.3
+315;Cyprus University of Technology;Cyprus;44.0–46.3
+316;University of Denver;United States;44.0–46.3
+317;University of Toulouse;France;44.0–46.3
+318;George Mason University;United States;44.0–46.3
+319;Grenoble Alpes University;France;44.0–46.3
+320;Heriot-Watt University;United Kingdom;44.0–46.3
+321;University of Houston;United States;44.0–46.3
+322;University of Houston;Russian Federation;44.0–46.3
+323;Khalifa University;United Arab Emirates;44.0–46.3
+324;La Trobe University;Australia;44.0–46.3
+325;University of Liège;Belgium;44.0–46.3
+326;University of Malaya;Malaysia;44.0–46.3
+327;University of Milan;Italy;44.0–46.3
+328;Montpellier University;France;44.0–46.3
+329;Nagoya University;Japan;44.0–46.3
+330;University of Naples Federico II;Italy;44.0–46.3
+331;University of Galway;Ireland;44.0–46.3
+332;University of Newcastle;Australia;44.0–46.3
+333;University of New Mexico (Main campus);United States;44.0–46.3
+334;Oregon State University;United States;44.0–46.3
+335;University of Pisa;Italy;44.0–46.3
+336;Politecnico di Milano;Italy;44.0–46.3
+337;Reykjavík University;Iceland;44.0–46.3
+338;Southern University of Science and Technology (SUSTech);China;44.0–46.3
+339;Stellenbosch University;South Africa;44.0–46.3
+340;Sun Yat-sen University;China;44.0–46.3
+341;University of Tartu;Estonia;44.0–46.3
+342;Technion Israel Institute of Technology;Israel;44.0–46.3
+343;The University of Tennessee-Knoxville;United States;44.0–46.3
+344;TU Dortmund University;Germany;44.0–46.3
+345;Tulane University;United States;44.0–46.3
+346;Umeå University;Sweden;44.0–46.3
+347;University College Cork;Ireland;44.0–46.3
+348;Université de Versailles Saint-Quentin-en-Yvelines;France;44.0–46.3
+349;Victoria University;Australia;44.0–46.3
+350;University of Victoria;Canada;44.0–46.3
+351;Washington State University;United States;44.0–46.3
+352;Wayne State University;United States;44.0–46.3
+353;Wuhan University;China;44.0–46.3
+354;Aberystwyth University;United Kingdom;41.7–43.9
+355;Aston University;United Kingdom;41.7–43.9
+356;Autonomous University of Madrid;Spain;41.7–43.9
+357;Babol Noshirvani University of Technology;Iran;41.7–43.9
+358;University of California, Merced;United States;41.7–43.9
+359;City, University of London;United Kingdom;41.7–43.9
+360;Université Côte d'Azur;France;41.7–43.9
+361;University of Crete;Greece;41.7–43.9
+362;University of Cyprus;Cyprus;41.7–43.9
+363;Deakin University;Australia;41.7–43.9
+364;Drexel University;United States;41.7–43.9
+365;University of Eastern Finland;Finland;41.7–43.9
+366;Free University of Bozen-Bolzano;Italy;41.7–43.9
+367;Hanyang University;South Korea;41.7–43.9
+368;Hofstra University;United States;41.7–43.9
+369;Huazhong University of Science and Technology;China;41.7–43.9
+370;IMT Atlantique;France;41.7–43.9
+371;Indian Institute of Technology Indore;India;41.7–43.9
+372;University of Innsbruck;Austria;41.7–43.9
+373;Iowa State University;United States;41.7–43.9
+374;Jordan University of Science and Technology;Jordan;41.7–43.9
+375;Justus Liebig University Giessen;Germany;41.7–43.9
+376;University of Kansas;United States;41.7–43.9
+377;University of Kent;United Kingdom;41.7–43.9
+378;Kyung Hee University;South Korea;41.7–43.9
+379;Linköping University;Sweden;41.7–43.9
+380;University of Macau;Macao;41.7–43.9
+381;Maynooth University;Ireland;41.7–43.9
+382;University of Modena and Reggio Emilia;Italy;41.7–43.9
+383;Nankai University;China;41.7–43.9
+384;Nankai University;Russian Federation;41.7–43.9
+385;University of Nebraska-Lincoln;United States;41.7–43.9
+386;Norwegian University of Science and Technology;Norway;41.7–43.9
+387;University of Perugia;Italy;41.7–43.9
+388;Rensselaer Polytechnic Institute;United States;41.7–43.9
+389;Rush University;United States;41.7–43.9
+390;Sabancı University;Turkey;41.7–43.9
+391;University of Salerno;Italy;41.7–43.9
+392;University of Siena;Italy;41.7–43.9
+393;University of Stirling;United Kingdom;41.7–43.9
+394;University of Tasmania;Australia;41.7–43.9
+395;Temple University;United States;41.7–43.9
+396;University of Turku;Finland;41.7–43.9
+397;United Arab Emirates University;United Arab Emirates;41.7–43.9
+398;University of Vermont;United States;41.7–43.9
+399;Western Sydney University;Australia;41.7–43.9
+400;York University;Canada;41.7–43.9
+401;The University of Alabama;United States;37.1–41.6
+402;University of Alabama in Huntsville;United States;37.1–41.6
+403;American University of Beirut;Lebanon;37.1–41.6
+404;Australian Catholic University;Australia;37.1–41.6
+405;Bangor University;United Kingdom;37.1–41.6
+406;University of Bari Aldo Moro;Italy;37.1–41.6
+407;Bar-Ilan University;Israel;37.1–41.6
+408;University of Bordeaux;France;37.1–41.6
+409;Brunel University of London;United Kingdom;37.1–41.6
+410;University of Calabria;Italy;37.1–41.6
+411;University of Campinas;Brazil;37.1–41.6
+412;Università Cattolica del Sacro Cuore;Italy;37.1–41.6
+413;Centrale Nantes;France;37.1–41.6
+414;CentraleSupélec;France;37.1–41.6
+415;Charles University;Czechia;37.1–41.6
+416;Claude Bernard University Lyon 1;France;37.1–41.6
+417;Colorado State University, Fort Collins;United States;37.1–41.6
+418;Complutense University of Madrid;Spain;37.1–41.6
+419;Universidad del Desarrollo;Chile;37.1–41.6
+420;Diego Portales University;Chile;37.1–41.6
+421;Dublin City University;Ireland;37.1–41.6
+422;University of Ferrara;Italy;37.1–41.6
+423;University of Florence;Italy;37.1–41.6
+424;Florida International University;United States;37.1–41.6
+425;Fujita Health University;Japan;37.1–41.6
+426;University of Genoa;Italy;37.1–41.6
+427;University of Georgia (USA);United States;37.1–41.6
+428;Georgia State University;United States;37.1–41.6
+429;Graz University of Technology;Austria;37.1–41.6
+430;University of Greifswald;Germany;37.1–41.6
+431;Gwangju Institute of Science and Technology (GIST);South Korea;37.1–41.6
+432;Hamburg University of Technology;Germany;37.1–41.6
+433;Harbin Institute of Technology;China;37.1–41.6
+434;Hasselt University;Belgium;37.1–41.6
+435;Hokkaido University;Japan;37.1–41.6
+436;Hong Kong Baptist University;Hong Kong;37.1–41.6
+437;Indian Institute of Technology Bombay;India;37.1–41.6
+438;Indian Institute of Technology Roorkee;India;37.1–41.6
+439;JSS Academy of Higher Education and Research;India;37.1–41.6
+440;University of Jyväskylä;Finland;37.1–41.6
+441;University of Kaiserslautern;Germany;37.1–41.6
+442;University of Kentucky;United States;37.1–41.6
+443;Koç University;Turkey;37.1–41.6
+444;University of KwaZulu-Natal;South Africa;37.1–41.6
+445;Kyushu University;Japan;37.1–41.6
+446;Leibniz University Hannover;Germany;37.1–41.6
+447;University of Lille;France;37.1–41.6
+448;Loughborough University;United Kingdom;37.1–41.6
+449;University of Manitoba;Canada;37.1–41.6
+450;Marche Polytechnic University;Italy;37.1–41.6
+451;Middlesex University;United Kingdom;37.1–41.6
+452;University of Milan-Bicocca;Italy;37.1–41.6
+453;University of Montana;United States;37.1–41.6
+454;Murdoch University;Australia;37.1–41.6
+455;National Taiwan University of Science and Technology (Taiwan Tech);Taiwan;37.1–41.6
+456;National Tsing Hua University;Taiwan;37.1–41.6
+457;University of Nebraska Medical Center;United States;37.1–41.6
+458;New Mexico Institute of Mining and Technology;United States;37.1–41.6
+459;Northern Arizona University;United States;37.1–41.6
+460;Northumbria University;United Kingdom;37.1–41.6
+461;University of Oklahoma;United States;37.1–41.6
+462;Örebro University;Sweden;37.1–41.6
+463;University of Pavia;Italy;37.1–41.6
+464;University of Plymouth;United Kingdom;37.1–41.6
+465;Polytechnic University of Bari;Italy;37.1–41.6
+466;Polytechnic University of Turin;Italy;37.1–41.6
+467;University of Porto;Portugal;37.1–41.6
+468;University of Portsmouth;United Kingdom;37.1–41.6
+469;Qatar University;Qatar;37.1–41.6
+470;RMIT University;Australia;37.1–41.6
+471;University of Rome II – Tor Vergata;Italy;37.1–41.6
+472;University of Rome III;Italy;37.1–41.6
+473;Rovira i Virgili University;Spain;37.1–41.6
+474;Royal Veterinary College;United Kingdom;37.1–41.6
+475;University of St Gallen;Switzerland;37.1–41.6
+476;University of Saskatchewan;Canada;37.1–41.6
+477;Sciences Po;France;37.1–41.6
+478;Semmelweis University;Hungary;37.1–41.6
+479;University of Siegen;Germany;37.1–41.6
+480;SOAS University of London;United Kingdom;37.1–41.6
+481;University of South Carolina-Columbia;United States;37.1–41.6
+482;University of Strasbourg;France;37.1–41.6
+483;University of Strathclyde;United Kingdom;37.1–41.6
+484;SUNY University at Albany;United States;37.1–41.6
+485;Swinburne University of Technology;Australia;37.1–41.6
+486;Tampere University of Technology;Finland;37.1–41.6
+487;Teikyo University;Japan;37.1–41.6
+488;Tokyo Medical and Dental University (TMDU);Japan;37.1–41.6
+489;Tokyo Metropolitan University;Japan;37.1–41.6
+490;Tongji University;China;37.1–41.6
+491;University of Trieste;Italy;37.1–41.6
+492;University of Tsukuba;Japan;37.1–41.6
+493;The University of Tulsa;United States;37.1–41.6
+494;University of Turin;Italy;37.1–41.6
+495;UiT The Arctic University of Norway;Norway;37.1–41.6
+496;University of Urbino Carlo Bo;Italy;37.1–41.6
+497;University of Valencia;Spain;37.1–41.6
+498;Verona University;Italy;37.1–41.6
+499;Victoria University of Wellington;New Zealand;37.1–41.6
+500;University of Waikato;New Zealand;37.1–41.6
+501;University of the West of Scotland;United Kingdom;37.1–41.6
+502;University of Wisconsin-Milwaukee;United States;37.1–41.6
+503;Amirkabir University of Technology;Iran;33.5–37.0
+504;University of Aveiro;Portugal;33.5–37.0
+505;University of the Balearic Islands;Spain;33.5–37.0
+506;Beihang University;China;33.5–37.0
+507;University of Bergamo;Italy;33.5–37.0
+508;Bilkent University;Turkey;33.5–37.0
+509;Boğaziçi University;Turkey;33.5–37.0
+510;Bond University;Australia;33.5–37.0
+511;Université Bourgogne Franche-Comté (UBFC);France;33.5–37.0
+512;Bournemouth University;United Kingdom;33.5–37.0
+513;University of Brescia;Italy;33.5–37.0
+514;Carleton University;Canada;33.5–37.0
+515;University of Catania;Italy;33.5–37.0
+516;Central Queensland University;Australia;33.5–37.0
+517;Charles Darwin University;Australia;33.5–37.0
+518;Chemnitz University of Technology;Germany;33.5–37.0
+519;China Medical University, Taiwan;Taiwan;33.5–37.0
+520;Chung-Ang University;South Korea;33.5–37.0
+521;University of Coimbra;Portugal;33.5–37.0
+522;Creighton University;United States;33.5–37.0
+523;East China Normal University;China;33.5–37.0
+524;Edith Cowan University;Australia;33.5–37.0
+525;University of Graz;Austria;33.5–37.0
+526;University of Guelph;Canada;33.5–37.0
+527;Hacettepe University;Turkey;33.5–37.0
+528;University of Hull;United Kingdom;33.5–37.0
+529;Hunan University;China;33.5–37.0
+530;University of Idaho;United States;33.5–37.0
+531;Indian Institute of Technology Delhi;India;33.5–37.0
+532;Indian Institute of Technology Kanpur;India;33.5–37.0
+533;Indian Institute of Technology Kharagpur;India;33.5–37.0
+534;Indian Institute of Technology Kharagpur;Russian Federation;33.5–37.0
+535;Johannes Kepler University of Linz;Austria;33.5–37.0
+536;University of Kashan;Iran;33.5–37.0
+537;Keele University;United Kingdom;33.5–37.0
+538;Kent State University;United States;33.5–37.0
+539;King Saud University;Saudi Arabia;33.5–37.0
+540;King Saud bin Abdulaziz University for Health Sciences;Saudi Arabia;33.5–37.0
+541;University of La Laguna;Spain;33.5–37.0
+542;LUT University;Finland;33.5–37.0
+543;Lehigh University;United States;33.5–37.0
+544;University of Limerick;Ireland;33.5–37.0
+545;Lincoln University (New Zealand);New Zealand;33.5–37.0
+546;University of Lisbon;Portugal;33.5–37.0
+547;Liverpool John Moores University;United Kingdom;33.5–37.0
+548;Louisiana State University;United States;33.5–37.0
+549;Makerere University;Uganda;33.5–37.0
+550;University of Maryland, Baltimore County;United States;33.5–37.0
+551;Massey University;New Zealand;33.5–37.0
+552;Memorial University of Newfoundland;Canada;33.5–37.0
+553;Missouri University of Science and Technology;United States;33.5–37.0
+554;Montana State University;United States;33.5–37.0
+555;Nanjing University of Information Science and Technology;China;33.5–37.0
+556;National and Kapodistrian University of Athens;Greece;33.5–37.0
+557;National Cheng Kung University (NCKU);Taiwan;33.5–37.0
+558;National Chiao Tung University;Taiwan;33.5–37.0
+559;National Yang-Ming University;Taiwan;33.5–37.0
+560;University of Neuchâtel;Switzerland;33.5–37.0
+561;New Jersey Institute of Technology;United States;33.5–37.0
+562;Norwegian University of Life Sciences;Norway;33.5–37.0
+563;NOVA University of Lisbon;Portugal;33.5–37.0
+564;NOVA University of Lisbon;Russian Federation;33.5–37.0
+565;Oklahoma State University;United States;33.5–37.0
+566;The Open University;United Kingdom;33.5–37.0
+567;Oxford Brookes University;United Kingdom;33.5–37.0
+568;University of Palermo;Italy;33.5–37.0
+569;Panthéon-Sorbonne University – Paris 1;France;33.5–37.0
+570;University of Parma;Italy;33.5–37.0
+571;Universidad Peruana Cayetano Heredia;Peru;33.5–37.0
+572;University of the Philippines;Philippines;33.5–37.0
+573;Universitat Politècnica de Catalunya;Spain;33.5–37.0
+574;Pontificia Universidad Javeriana;Colombia;33.5–37.0
+575;Renmin University of China;China;33.5–37.0
+576;Saint Louis University;United States;33.5–37.0
+577;Saint Louis University;Russian Federation;33.5–37.0
+578;University of Salento;Italy;33.5–37.0
+579;San Diego State University;United States;33.5–37.0
+580;Savitribai Phule Pune University;India;33.5–37.0
+581;Sejong University;South Korea;33.5–37.0
+582;Shandong University;China;33.5–37.0
+583;Soochow University, China;China;33.5–37.0
+584;South China University of Technology;China;33.5–37.0
+585;Southeast University;China;33.5–37.0
+586;Southern Cross University;Australia;33.5–37.0
+587;Stevens Institute of Technology;United States;33.5–37.0
+588;SUNY Binghamton University;United States;33.5–37.0
+589;Taipei Medical University;Taiwan;33.5–37.0
+590;The University of Texas at San Antonio;United States;33.5–37.0
+591;Tianjin University;China;33.5–37.0
+592;University of Toledo;United States;33.5–37.0
+593;University of Toledo;Russian Federation;33.5–37.0
+594;University of Toledo;Russian Federation;33.5–37.0
+595;Universiti Tunku Abdul Rahman (UTAR);Malaysia;33.5–37.0
+596;University of Udine;Italy;33.5–37.0
+597;University of Ulsan;South Korea;33.5–37.0
+598;The University of the West Indies;Jamaica;33.5–37.0
+599;Worcester Polytechnic Institute;United States;33.5–37.0
+600;Xiamen University;China;33.5–37.0
+601;Xi’an Jiaotong University;China;33.5–37.0
+602;University of the Aegean;Greece;26.0–33.4
+603;The University of Aizu;Japan;26.0–33.4
+604;University of Alcalá;Spain;26.0–33.4
+605;University of Algarve;Portugal;26.0–33.4
+606;American University in Cairo;Egypt;26.0–33.4
+607;Amrita Vishwa Vidyapeetham;India;26.0–33.4
+608;University of the Andes, Colombia;Colombia;26.0–33.4
+609;Aristotle University of Thessaloniki;Greece;26.0–33.4
+610;University of Arkansas;United States;26.0–33.4
+611;Athens University of Economics and Business;Greece;26.0–33.4
+612;Auburn University;United States;26.0–33.4
+613;Banaras Hindu University;India;26.0–33.4
+614;University of the Basque Country;Spain;26.0–33.4
+615;Baylor University;United States;26.0–33.4
+616;Beijing Institute of Technology;China;26.0–33.4
+617;University of Beira Interior;Portugal;26.0–33.4
+618;Ben-Gurion University of the Negev;Israel;26.0–33.4
+619;Benha University;Egypt;26.0–33.4
+620;Beni-Suef University;Egypt;26.0–33.4
+621;University of Bradford;United Kingdom;26.0–33.4
+622;University of Brighton;United Kingdom;26.0–33.4
+623;Ca’ Foscari University of Venice;Italy;26.0–33.4
+624;University of Cagliari;Italy;26.0–33.4
+625;Carlos III University of Madrid;Spain;26.0–33.4
+626;Catholic University of Portugal;Portugal;26.0–33.4
+627;University of Central Florida;United States;26.0–33.4
+628;Central South University;China;26.0–33.4
+629;Chang Gung University;Taiwan;26.0–33.4
+630;Chiba University;Japan;26.0–33.4
+631;University of Chile;Chile;26.0–33.4
+632;China Agricultural University;China;26.0–33.4
+633;China University of Geosciences, Beijing;China;26.0–33.4
+634;University of Clermont Auvergne;France;26.0–33.4
+635;COMSATS University Islamabad;Pakistan;26.0–33.4
+636;Concordia University;Canada;26.0–33.4
+637;University of Costa Rica;Costa Rica;26.0–33.4
+638;Covenant University;Nigeria;26.0–33.4
+639;Coventry University;United Kingdom;26.0–33.4
+640;Dalian University of Technology;China;26.0–33.4
+641;University of Dayton;United States;26.0–33.4
+642;University of Delhi;India;26.0–33.4
+643;De Montfort University;United Kingdom;26.0–33.4
+644;University of Deusto;Spain;26.0–33.4
+645;East China University of Science and Technology;China;26.0–33.4
+646;Eastern Mediterranean University;Northern Cyprus;26.0–33.4
+647;École Centrale de Lyon;France;26.0–33.4
+648;École normale supérieure Paris-Saclay;France;26.0–33.4
+649;Edinburgh Napier University;United Kingdom;26.0–33.4
+650;Embry-Riddle Aeronautical University;United States;26.0–33.4
+651;Eötvös Loránd University;Hungary;26.0–33.4
+652;Ewha Womans University;South Korea;26.0–33.4
+653;Federal University of Minas Gerais;Brazil;26.0–33.4
+654;Federal University of Rio de Janeiro;Brazil;26.0–33.4
+655;Universidade Federal do Rio Grande do Sul;Brazil;26.0–33.4
+656;Universidade Federal de São Paulo (UNIFESP);Brazil;26.0–33.4
+657;Federico Santa María Technical University;Chile;26.0–33.4
+658;Fordham University;United States;26.0–33.4
+659;Fuzhou University;China;26.0–33.4
+660;Glasgow Caledonian University;United Kingdom;26.0–33.4
+661;University of Granada;Spain;26.0–33.4
+662;University of Greenwich;United Kingdom;26.0–33.4
+663;University of Haifa;Israel;26.0–33.4
+664;University of Hertfordshire;United Kingdom;26.0–33.4
+665;Hiroshima University;Japan;26.0–33.4
+666;Huazhong Agricultural University;China;26.0–33.4
+667;University of Huddersfield;United Kingdom;26.0–33.4
+668;University of Ibadan;Nigeria;26.0–33.4
+669;Technische Universität Ilmenau;Germany;26.0–33.4
+670;Indian Institute of Science Education and Research, Pune;India;26.0–33.4
+671;Indian Institute of Technology Bhubaneswar;India;26.0–33.4
+672;Indian Institute of Technology Guwahati;India;26.0–33.4
+673;Indian Institute of Technology Hyderabad;India;26.0–33.4
+674;Indian Institute of Technology Madras;India;26.0–33.4
+675;University of Indonesia;Indonesia;26.0–33.4
+676;University of Ioannina;Greece;26.0–33.4
+677;Iran University of Science and Technology;Iran;26.0–33.4
+678;ISCTE-University Institute of Lisbon;Portugal;26.0–33.4
+679;Isfahan University of Technology;Iran;26.0–33.4
+680;Istanbul Technical University;Turkey;26.0–33.4
+681;Jadavpur University;India;26.0–33.4
+682;Jagiellonian University;Poland;26.0–33.4
+683;Jaume I University;Spain;26.0–33.4
+684;University of Johannesburg;South Africa;26.0–33.4
+685;Juntendo University;Japan;26.0–33.4
+686;Kafrelsheikh University;Egypt;26.0–33.4
+687;Kansas State University;United States;26.0–33.4
+688;Kansas State University;Russian Federation;26.0–33.4
+689;Universiti Kebangsaan Malaysia;Malaysia;26.0–33.4
+690;Keio University;Japan;26.0–33.4
+691;Kindai University;Japan;26.0–33.4
+692;King Fahd University of Petroleum and Minerals;Saudi Arabia;26.0–33.4
+693;Kingston University;United Kingdom;26.0–33.4
+694;Kobe University;Japan;26.0–33.4
+695;Konkuk University;South Korea;26.0–33.4
+696;University of Las Palmas de Gran Canaria;Spain;26.0–33.4
+697;Lebanese American University;Lebanon;26.0–33.4
+698;Montanuniversität Leoben;Austria;26.0–33.4
+699;University of Lincoln;United Kingdom;26.0–33.4
+700;University of Ljubljana;Slovenia;26.0–33.4
+701;University of Lorraine;France;26.0–33.4
+702;Louisiana Tech University;United States;26.0–33.4
+703;Mahidol University;Thailand;26.0–33.4
+704;Manchester Metropolitan University;United Kingdom;26.0–33.4
+705;Mansoura University;Egypt;26.0–33.4
+706;Marquette University;United States;26.0–33.4
+707;Masaryk University;Czechia;26.0–33.4
+708;Mashhad University of Medical Sciences;Iran;26.0–33.4
+709;Middle East Technical University;Turkey;26.0–33.4
+710;Miguel Hernández University of Elche;Spain;26.0–33.4
+711;University of Minho;Portugal;26.0–33.4
+712;Mississippi State University;United States;26.0–33.4
+713;Tecnológico de Monterrey;Mexico;26.0–33.4
+714;Nanjing Agricultural University;China;26.0–33.4
+715;Nanjing Medical University;China;26.0–33.4
+716;Nanjing Normal University;China;26.0–33.4
+717;Nanjing Tech University;China;26.0–33.4
+718;Nantes Université;France;26.0–33.4
+719;National Autonomous University of Mexico;Mexico;26.0–33.4
+720;National Institute of Applied Sciences of Lyon (INSA Lyon);France;26.0–33.4
+721;National Institute of Technology Rourkela;India;26.0–33.4
+722;National Institute of Technology Rourkela;Russian Federation;26.0–33.4
+723;National Sun Yat-Sen University;Taiwan;26.0–33.4
+724;National Taiwan Normal University;Taiwan;26.0–33.4
+725;University of Nevada, Las Vegas;United States;26.0–33.4
+726;New Mexico State University (Main campus);United States;26.0–33.4
+727;Nippon Medical School;Japan;26.0–33.4
+728;University of North Carolina at Greensboro;United States;26.0–33.4
+729;Northeast Normal University;China;26.0–33.4
+730;Northwestern Polytechnical University;China;26.0–33.4
+731;Nottingham Trent University;United Kingdom;26.0–33.4
+732;Old Dominion University;United States;26.0–33.4
+733;Open University of Catalonia;Spain;26.0–33.4
+734;Otto von Guericke University of Magdeburg;Germany;26.0–33.4
+735;University of Oviedo;Spain;26.0–33.4
+736;Palacký University Olomouc;Czechia;26.0–33.4
+737;Panjab University;India;26.0–33.4
+738;University of Pécs;Hungary;26.0–33.4
+739;University of Pécs;Russian Federation;26.0–33.4
+740;Polytechnic Institute of Porto;Portugal;26.0–33.4
+741;Polytechnic University of Valencia;Spain;26.0–33.4
+742;Pontificia Universidad Católica de Chile;Chile;26.0–33.4
+743;Pontifical Catholic University of Rio de Janeiro (PUC-Rio);Brazil;26.0–33.4
+744;Portland State University;United States;26.0–33.4
+745;University of Pretoria;South Africa;26.0–33.4
+746;Pusan National University;South Korea;26.0–33.4
+747;Université du Québec;Canada;26.0–33.4
+748;University of Regina;Canada;26.0–33.4
+749;University of Rennes 1;France;26.0–33.4
+750;Rikkyo University;Japan;26.0–33.4
+751;Rochester Institute of Technology;United States;26.0–33.4
+752;Roskilde University;Denmark;26.0–33.4
+753;Roskilde University;Russian Federation;26.0–33.4
+754;Universiti Sains Malaysia;Malaysia;26.0–33.4
+755;University of Salamanca;Spain;26.0–33.4
+756;University of Salford;United Kingdom;26.0–33.4
+757;University of San Diego;United States;26.0–33.4
+758;University of Santiago de Compostela;Spain;26.0–33.4
+759;University of Sassari;Italy;26.0–33.4
+760;University of Seville;Spain;26.0–33.4
+761;Sharif University of Technology;Iran;26.0–33.4
+762;Shenzhen University;China;26.0–33.4
+763;Université de Sherbrooke;Canada;26.0–33.4
+764;Shiraz University of Technology;Iran;26.0–33.4
+765;Sichuan University;China;26.0–33.4
+766;Sogang University;South Korea;26.0–33.4
+767;University of South Alabama;United States;26.0–33.4
+768;University of South Dakota;United States;26.0–33.4
+769;University of Southern Queensland;Australia;26.0–33.4
+770;University of Split;Croatia;26.0–33.4
+771;Suez Canal University;Egypt;26.0–33.4
+772;University of the Sunshine Coast;Australia;26.0–33.4
+773;University of Szeged;Hungary;26.0–33.4
+774;University of Tabriz;Iran;26.0–33.4
+775;Tallinn University of Technology;Estonia;26.0–33.4
+776;Technical University of Madrid;Spain;26.0–33.4
+777;University of Technology of Compiègne;France;26.0–33.4
+778;University of Tehran;Iran;26.0–33.4
+779;Tehran University of Medical Sciences;Iran;26.0–33.4
+780;Universiti Teknologi Malaysia;Malaysia;26.0–33.4
+781;Universiti Teknologi Petronas;Malaysia;26.0–33.4
+782;University of Texas at Arlington;United States;26.0–33.4
+783;University of Texas at El Paso;United States;26.0–33.4
+784;Texas Tech University;United States;26.0–33.4
+785;Tezpur University;India;26.0–33.4
+786;University of Trás-os-Montes and Alto Douro;Portugal;26.0–33.4
+787;Ulster University;United Kingdom;26.0–33.4
+788;University of Vigo;Spain;26.0–33.4
+789;University of Warsaw;Poland;26.0–33.4
+790;Waseda University;Japan;26.0–33.4
+791;UWE Bristol (University of the West of England);United Kingdom;26.0–33.4
+792;University of the Western Cape;South Africa;26.0–33.4
+793;Western Washington University;United States;26.0–33.4
+794;University of Westminster;United Kingdom;26.0–33.4
+795;West Virginia University;United States;26.0–33.4
+796;University of Windsor;Canada;26.0–33.4
+797;University of Wolverhampton;United Kingdom;26.0–33.4
+798;Yeungnam University;South Korea;26.0–33.4
+799;Yokohama City University;Japan;26.0–33.4
+800;University of Zaragoza;Spain;26.0–33.4
+801;Acharya Nagarjuna University;India;19.0–25.9
+802;University of A Coruña;Spain;19.0–25.9
+803;Adam Mickiewicz University, Poznań;Poland;19.0–25.9
+804;AGH University of Krakow;Poland;19.0–25.9
+805;University of Agriculture, Faisalabad;Pakistan;19.0–25.9
+806;Aichi Medical University;Japan;19.0–25.9
+807;Ajou University;South Korea;19.0–25.9
+808;Alexandria University;Egypt;19.0–25.9
+809;Al-Farabi Kazakh National University;Kazakhstan;19.0–25.9
+810;University of Alicante;Spain;19.0–25.9
+811;Aligarh Muslim University;India;19.0–25.9
+812;University of Almería;Spain;19.0–25.9
+813;American University of Sharjah;United Arab Emirates;19.0–25.9
+814;Anadolu University;Turkey;19.0–25.9
+815;Asia University, Taiwan;Taiwan;19.0–25.9
+816;Atılım University;Turkey;19.0–25.9
+817;Austral University of Chile;Chile;19.0–25.9
+818;Universidad Autónoma de Querétaro;Mexico;19.0–25.9
+819;Azarbaijan Shahid Madani University;Iran;19.0–25.9
+820;Babeş-Bolyai University;Romania;19.0–25.9
+821;University of Baghdad;Iraq;19.0–25.9
+822;Bandung Institute of Technology (ITB);Indonesia;19.0–25.9
+823;Bandung Institute of Technology (ITB);Russian Federation;19.0–25.9
+824;University of Bedfordshire;United Kingdom;19.0–25.9
+825;Beijing Jiaotong University;China;19.0–25.9
+826;University of Béjaïa;Algeria;19.0–25.9
+827;University of Béjaïa;Russian Federation;19.0–25.9
+828;University of Belgrade;Serbia;19.0–25.9
+829;Birla Institute of Technology and Science, Pilani;India;19.0–25.9
+830;University of Brasília;Brazil;19.0–25.9
+831;Brno University of Technology;Czechia;19.0–25.9
+832;University of Bucharest;Romania;19.0–25.9
+833;Budapest University of Technology and Economics;Hungary;19.0–25.9
+834;University of Burgos;Spain;19.0–25.9
+835;Cairo University;Egypt;19.0–25.9
+836;California Polytechnic State University, San Luis Obispo;United States;19.0–25.9
+837;Capital Medical University;China;19.0–25.9
+838;University of Castilla-La Mancha;Spain;19.0–25.9
+839;University of Lancashire;United Kingdom;19.0–25.9
+840;University of Cergy-Pontoise;France;19.0–25.9
+841;University of Chemistry and Technology, Prague;Czechia;19.0–25.9
+842;Chiang Mai University;Thailand;19.0–25.9
+843;China University of Geosciences, Wuhan;China;19.0–25.9
+844;China University of Mining and Technology;China;19.0–25.9
+845;China University of Petroleum, Beijing;China;19.0–25.9
+846;China Pharmaceutical University;China;19.0–25.9
+847;Chongqing University;China;19.0–25.9
+848;Chonnam National University;South Korea;19.0–25.9
+849;Chulalongkorn University;Thailand;19.0–25.9
+850;Chung Yuan Christian University;Taiwan;19.0–25.9
+851;Comenius University in Bratislava;Slovakia;19.0–25.9
+852;Czech University of Life Sciences Prague (CZU);Czechia;19.0–25.9
+853;Czech Technical University in Prague;Czechia;19.0–25.9
+854;University of Debrecen;Hungary;19.0–25.9
+855;De La Salle University;Philippines;19.0–25.9
+856;University of Derby;United Kingdom;19.0–25.9
+857;Dublin Institute of Technology;Ireland;19.0–25.9
+858;East Carolina University;United States;19.0–25.9
+859;University of East London;United Kingdom;19.0–25.9
+860;Edge Hill University;United Kingdom;19.0–25.9
+861;Erciyes University;Turkey;19.0–25.9
+862;Universidade Estadual Paulista (Unesp);Brazil;19.0–25.9
+863;University of Évora;Portugal;19.0–25.9
+864;Fayoum University;Egypt;19.0–25.9
+865;Universidade Federal do ABC (UFABC);Brazil;19.0–25.9
+866;Universidade Federal da Bahia;Brazil;19.0–25.9
+867;Federal University of Pelotas;Brazil;19.0–25.9
+868;Universidade Federal de Santa Catarina;Brazil;19.0–25.9
+869;Federal University of São Carlos;Brazil;19.0–25.9
+870;Ferdowsi University of Mashhad;Iran;19.0–25.9
+871;Ferhat Abbas Sétif University 1;Algeria;19.0–25.9
+872;Florida Atlantic University;United States;19.0–25.9
+873;Florida Institute of Technology;United States;19.0–25.9
+874;University of La Frontera;Chile;19.0–25.9
+875;Fu Jen Catholic University;Taiwan;19.0–25.9
+876;Gebze Technical University;Turkey;19.0–25.9
+877;University of Ghana;Ghana;19.0–25.9
+878;University of Guilan;Iran;19.0–25.9
+879;Hamamatsu University School of Medicine;Japan;19.0–25.9
+880;Hyogo College of Medicine;Japan;19.0–25.9
+881;Indian Institute of Science Education and Research Kolkata;India;19.0–25.9
+882;Indian Institute of Technology (Indian School of Mines) Dhanbad;India;19.0–25.9
+883;Universidad Industrial de Santander (UIS);Colombia;19.0–25.9
+884;Inha University;South Korea;19.0–25.9
+885;Iran University of Medical Sciences;Iran;19.0–25.9
+886;University of Isfahan;Iran;19.0–25.9
+887;Istanbul University;Turkey;19.0–25.9
+888;Iuliu Haţieganu University of Medicine and Pharmacy Cluj-Napoca;Romania;19.0–25.9
+889;University of Jaén;Spain;19.0–25.9
+890;Jamia Millia Islamia;India;19.0–25.9
+891;Jeonbuk National University;South Korea;19.0–25.9
+892;Jiangsu University;China;19.0–25.9
+893;The Jikei University School of Medicine;Japan;19.0–25.9
+894;Jilin University;China;19.0–25.9
+895;Jinan University (China);China;19.0–25.9
+896;The University of Jordan;Jordan;19.0–25.9
+897;Kagawa University;Japan;19.0–25.9
+898;Kanazawa University;Japan;19.0–25.9
+899;Kansai Medical University;Japan;19.0–25.9
+900;Kaohsiung Medical University;Taiwan;19.0–25.9
+901;King Mongkut’s University of Technology Thonburi;Thailand;19.0–25.9
+902;K.N. Toosi University of Technology;Iran;19.0–25.9
+903;Kochi University;Japan;19.0–25.9
+904;Kumamoto University;Japan;19.0–25.9
+905;Kuwait University;Kuwait;19.0–25.9
+906;Kyungpook National University (KNU);South Korea;19.0–25.9
+907;Kyushu Institute of Technology (Kyutech);Japan;19.0–25.9
+908;University of Latvia;Latvia;19.0–25.9
+909;Leeds Beckett University;United Kingdom;19.0–25.9
+910;University of Maribor;Slovenia;19.0–25.9
+911;University Cadi Ayyad of Marrakech;Morocco;19.0–25.9
+912;University of Mazandaran;Iran;19.0–25.9
+913;Metropolitan Autonomous University;Mexico;19.0–25.9
+914;Mohammed V University of Rabat;Morocco;19.0–25.9
+915;University of Murcia;Spain;19.0–25.9
+916;Nagasaki University;Japan;19.0–25.9
+917;Nagoya City University;Japan;19.0–25.9
+918;National Central University;Taiwan;19.0–25.9
+919;National Chengchi University;Taiwan;19.0–25.9
+920;National Chung Hsing University;Taiwan;19.0–25.9
+921;National University of Cuyo;Argentina;19.0–25.9
+922;National Dong Hwa University;Taiwan;19.0–25.9
+923;National Institute of Technology, Tiruchirappalli;India;19.0–25.9
+924;National University of San Martín;Argentina;19.0–25.9
+925;National University of Sciences and Technology;Pakistan;19.0–25.9
+926;National Taipei University;Taiwan;19.0–25.9
+927;National Taipei University of Technology;Taiwan;19.0–25.9
+928;National Taiwan Ocean University;Taiwan;19.0–25.9
+929;Niigata University;Japan;19.0–25.9
+930;Normandy University;France;19.0–25.9
+931;Northeastern University, China;China;19.0–25.9
+932;University of Northern British Columbia (UNBC);Canada;19.0–25.9
+933;Northwest University (China);China;19.0–25.9
+934;NorthWest A&F University;China;19.0–25.9
+935;NorthWest A&F University;Russian Federation;19.0–25.9
+936;Oakland University;United States;19.0–25.9
+937;Ocean University of China;China;19.0–25.9
+938;Okayama University;Japan;19.0–25.9
+939;Osaka City University;Japan;19.0–25.9
+940;Osmania University;India;19.0–25.9
+941;University of Ostrava;Czechia;19.0–25.9
+942;Pablo de Olavide University;Spain;19.0–25.9
+943;Paris Nanterre University;France;19.0–25.9
+944;University of Patras;Greece;19.0–25.9
+945;Pondicherry University;India;19.0–25.9
+946;Pontifical Catholic University of Peru;Peru;19.0–25.9
+947;Pontifical Catholic University of Rio Grande do Sul (PUCRS);Brazil;19.0–25.9
+948;Universiti Putra Malaysia;Malaysia;19.0–25.9
+949;University Rey Juan Carlos;Spain;19.0–25.9
+950;Riga Technical University;Latvia;19.0–25.9
+951;Robert Gordon University;United Kingdom;19.0–25.9
+952;University of Roehampton;United Kingdom;19.0–25.9
+953;Saitama University;Japan;19.0–25.9
+954;Saitama University;Russian Federation;19.0–25.9
+955;Sapporo Medical University;Japan;19.0–25.9
+956;University of Science and Technology Beijing;China;19.0–25.9
+957;University of Seoul;South Korea;19.0–25.9
+958;University of Sfax;Tunisia;19.0–25.9
+959;Shahid Beheshti University;Iran;19.0–25.9
+960;Shahid Beheshti University of Medical Sciences;Iran;19.0–25.9
+961;Shanghai University;China;19.0–25.9
+962;Shantou University;China;19.0–25.9
+963;University of Sharjah;United Arab Emirates;19.0–25.9
+964;Sheffield Hallam University;United Kingdom;19.0–25.9
+965;Shinshu University;Japan;19.0–25.9
+966;Shiraz University;Iran;19.0–25.9
+967;Sidi Mohamed Ben Abdellah University;Morocco;19.0–25.9
+968;Sohag University;Egypt;19.0–25.9
+969;Southern Medical University;China;19.0–25.9
+970;University of South Wales;United Kingdom;19.0–25.9
+971;Sri Venkateswara University;India;19.0–25.9
+972;University of Staffordshire;United Kingdom;19.0–25.9
+973;Sultan Qaboos University;Oman;19.0–25.9
+974;Suranaree University of Technology;Thailand;19.0–25.9
+975;University of Talca;Chile;19.0–25.9
+976;Tanta University;Egypt;19.0–25.9
+977;Teesside University;United Kingdom;19.0–25.9
+978;Universiti Tenaga Nasional (UNITEN);Malaysia;19.0–25.9
+979;Texas State University;United States;19.0–25.9
+980;Thapar Institute of Engineering and Technology;India;19.0–25.9
+981;Toho University;Japan;19.0–25.9
+982;Tokushima University;Japan;19.0–25.9
+983;Tokyo University of Agriculture and Technology;Japan;19.0–25.9
+984;Tokyo Medical University;Japan;19.0–25.9
+985;Tokyo University of Science;Japan;19.0–25.9
+986;Toyohashi University of Technology (TUT);Japan;19.0–25.9
+987;Tribhuvan University;Nepal;19.0–25.9
+988;Tshwane University of Technology;South Africa;19.0–25.9
+989;Universiti Utara Malaysia;Malaysia;19.0–25.9
+990;Vilnius University;Lithuania;19.0–25.9
+991;VIT University;India;19.0–25.9
+992;Warsaw University of Technology;Poland;19.0–25.9
+993;Wuhan University of Technology;China;19.0–25.9
+994;Xiangtan University;China;19.0–25.9
+995;Xidian University;China;19.0–25.9
+996;Yamagata University;Japan;19.0–25.9
+997;University of Yamanashi;Japan;19.0–25.9
+998;Yangzhou University;China;19.0–25.9
+999;Yokohama National University;Japan;19.0–25.9
+1000;University of Zagreb;Croatia;19.0–25.9
+1001;University of Abou Bekr Belkaïd Tlemcen;Algeria;9.8–18.9
+1002;Ain Shams University;Egypt;9.8–18.9
+1003;Akdeniz University;Turkey;9.8–18.9
+1004;Akita University;Japan;9.8–18.9
+1005;Al-Azhar University;Egypt;9.8–18.9
+1006;Alexandru Ioan Cuza University;Romania;9.8–18.9
+1007;Alzahra University;Iran;9.8–18.9
+1008;Amity University, Noida;India;9.8–18.9
+1009;University of the Andes, Venezuela;Venezuela;9.8–18.9
+1010;Andhra University;India;9.8–18.9
+1011;Universidad Andrés Bello (UNAB);Chile;9.8–18.9
+1012;Ankara University;Turkey;9.8–18.9
+1013;Annamalai University;India;9.8–18.9
+1014;University of Antioquia;Colombia;9.8–18.9
+1015;Aoyama Gakuin University;Japan;9.8–18.9
+1016;Assiut University;Egypt;9.8–18.9
+1017;Universidad Autónoma del Estado de Hidalgo;Mexico;9.8–18.9
+1018;Universidad Autónoma del Estado de Mexico (UAEMex);Mexico;9.8–18.9
+1019;Universidad Autónoma de Nuevo León (UANL);Mexico;9.8–18.9
+1020;Universidad Autónoma de Yucatán;Mexico;9.8–18.9
+1021;Autonomous University of Baja California;Mexico;9.8–18.9
+1022;Autonomous University of San Luis Potosi;Mexico;9.8–18.9
+1023;Badji Mokhtar University – Annaba;Algeria;9.8–18.9
+1024;Bahauddin Zakariya University;Pakistan;9.8–18.9
+1025;Bahçeşehir University;Turkey;9.8–18.9
+1026;Bahçeşehir University;Belarus;9.8–18.9
+1027;Benemérita Universidad Autónoma de Puebla;Mexico;9.8–18.9
+1028;University of Bío-Bío;Chile;9.8–18.9
+1029;University of Birjand;Iran;9.8–18.9
+1030;Birmingham City University;United Kingdom;9.8–18.9
+1031;Bucharest University of Economic Studies;Romania;9.8–18.9
+1032;Canterbury Christ Church University;United Kingdom;9.8–18.9
+1033;Catholic University of the North;Chile;9.8–18.9
+1034;Ceará State University;Brazil;9.8–18.9
+1035;Chaoyang University of Technology;Taiwan;9.8–18.9
+1036;University of Chester;United Kingdom;9.8–18.9
+1037;Chiba Institute of Technology;Japan;9.8–18.9
+1038;Chubu University;Japan;9.8–18.9
+1039;Chungnam National University;South Korea;9.8–18.9
+1040;Chuo University;Japan;9.8–18.9
+1041;Cochin University of Science and Technology;India;9.8–18.9
+1042;University of Colombo;Sri Lanka;9.8–18.9
+1043;University of Concepción;Chile;9.8–18.9
+1044;Corvinus University of Budapest;Hungary;9.8–18.9
+1045;Cukurova University;Turkey;9.8–18.9
+1046;University of Dar es Salaam;Tanzania;9.8–18.9
+1047;Del Rosario University;Colombia;9.8–18.9
+1048;Democritus University of Thrace;Greece;9.8–18.9
+1049;Dokuz Eylül University;Turkey;9.8–18.9
+1050;Doshisha University;Japan;9.8–18.9
+1051;University of Economics in Prague;Czechia;9.8–18.9
+1052;Ehime University;Japan;9.8–18.9
+1053;The University of Electro-Communications;Japan;9.8–18.9
+1054;University of Engineering & Technology (UET) Lahore;Pakistan;9.8–18.9
+1055;Universidade do Estado do Rio de Janeiro (UERJ);Brazil;9.8–18.9
+1056;Universidade Estadual de Maringá;Brazil;9.8–18.9
+1057;Universidade Estadual do Oeste do Paraná (Unioeste);Brazil;9.8–18.9
+1058;Universidade Estadual do Oeste do Paraná (Unioeste);Russian Federation;9.8–18.9
+1059;Universidade Federal do Ceará (UFC);Brazil;9.8–18.9
+1060;Federal University of Goiás;Brazil;9.8–18.9
+1061;Federal University of Itajubá;Brazil;9.8–18.9
+1062;Federal University of Lavras;Brazil;9.8–18.9
+1063;Federal University of Pará;Brazil;9.8–18.9
+1064;Universidade Federal do Paraná (UFPR);Brazil;9.8–18.9
+1065;Universidade Federal de Pernambuco;Brazil;9.8–18.9
+1066;Federal University of Rio Grande do Norte (UFRN);Brazil;9.8–18.9
+1067;Federal University of Santa Maria;Brazil;9.8–18.9
+1068;Federal University of Uberlândia;Brazil;9.8–18.9
+1069;Federal University of Viçosa;Brazil;9.8–18.9
+1070;Feng Chia University;Taiwan;9.8–18.9
+1071;Fluminense Federal University;Brazil;9.8–18.9
+1072;Université Frères Mentouri Constantine 1;Algeria;9.8–18.9
+1073;University of Fukui;Japan;9.8–18.9
+1074;Universitas Gadjah Mada;Indonesia;9.8–18.9
+1075;Gazi University;Turkey;9.8–18.9
+1076;G.B. Pant University of Agriculture &amp;India;9.8–18.9
+1077;University of Gdańsk;Poland;9.8–18.9
+1078;Gdańsk University of Technology;Poland;9.8–18.9
+1079;Gifu University;Japan;9.8–18.9
+1080;GITAM University;India;9.8–18.9
+1081;Government College University Lahore;Pakistan;9.8–18.9
+1082;Grigore T. Popa University of Medicine and Pharmacy;Romania;9.8–18.9
+1083;University of Guadalajara;Mexico;9.8–18.9
+1084;University of Guanajuato;Mexico;9.8–18.9
+1085;Guangxi University;China;9.8–18.9
+1086;Gunma University;Japan;9.8–18.9
+1087;Hallym University;South Korea;9.8–18.9
+1088;Harbin Engineering University;China;9.8–18.9
+1089;The Hashemite University;Jordan;9.8–18.9
+1090;Université Hassan II de Casablanca;Morocco;9.8–18.9
+1091;Helwan University;Egypt;9.8–18.9
+1092;Hosei University;Japan;9.8–18.9
+1093;Huaqiao University;China;9.8–18.9
+1094;University of Hyogo;Japan;9.8–18.9
+1095;Ibaraki University;Japan;9.8–18.9
+1096;Imam Abdulrahman Bin Faisal University;Saudi Arabia;9.8–18.9
+1097;Incheon National University;South Korea;9.8–18.9
+1098;Instituto Politécnico Nacional (IPN);Mexico;9.8–18.9
+1099;IPB University;Indonesia;9.8–18.9
+1100;I-Shou University;Taiwan;9.8–18.9
+1101;Ivane Javakhishvili Tbilisi State University;Georgia;9.8–18.9
+1102;Ivan Franko National University of Lviv;Ukraine;9.8–18.9
+1103;Iwate University;Japan;9.8–18.9
+1104;Izmir Institute of Technology;Turkey;9.8–18.9
+1105;Kagoshima University;Japan;9.8–18.9
+1106;Kanagawa University;Japan;9.8–18.9
+1107;Kansai University;Japan;9.8–18.9
+1108;Kasetsart University;Thailand;9.8–18.9
+1109;Kaunas University of Technology;Lithuania;9.8–18.9
+1110;Kaunas University of Technology;Russian Federation;9.8–18.9
+1111;University of Kerala;India;9.8–18.9
+1112;Kharazmi University;Iran;9.8–18.9
+1113;Khon Kaen University;Thailand;9.8–18.9
+1114;KIIT University;India;9.8–18.9
+1115;King Mongkut’s Institute of Technology Ladkrabang;Thailand;9.8–18.9
+1116;King Mongkut's University of Technology North Bangkok;Thailand;9.8–18.9
+1117;Kitasato University;Japan;9.8–18.9
+1118;Kogakuin University;Japan;9.8–18.9
+1119;Kookmin University;South Korea;9.8–18.9
+1120;Kwansei Gakuin University;Japan;9.8–18.9
+1121;Kyoto Institute of Technology;Japan;9.8–18.9
+1122;University of Lahore;Pakistan;9.8–18.9
+1123;University of León;Spain;9.8–18.9
+1124;L.N. Gumilyov Eurasian National University;Kazakhstan;9.8–18.9
+1125;L.N. Gumilyov Eurasian National University;Russian Federation;9.8–18.9
+1126;University of Lodz;Poland;9.8–18.9
+1127;Lodz University of Technology;Poland;9.8–18.9
+1128;London South Bank University;United Kingdom;9.8–18.9
+1129;Londrina State University;Brazil;9.8–18.9
+1130;Lviv Polytechnic National University;Ukraine;9.8–18.9
+1131;Maharaja Sayajirao University of Baroda;India;9.8–18.9
+1132;Mahasarakham University;Thailand;9.8–18.9
+1133;Universiti Malaysia Sarawak (UNIMAS);Malaysia;9.8–18.9
+1134;Manipal Academy of Higher Education;India;9.8–18.9
+1135;Marmara University;Turkey;9.8–18.9
+1136;Meiji University;Japan;9.8–18.9
+1137;Meijo University;Japan;9.8–18.9
+1138;Menoufia University;Egypt;9.8–18.9
+1139;Universidad Michoacana de San Nicolás de Hidalgo;Mexico;9.8–18.9
+1140;Ming Chuan University;Taiwan;9.8–18.9
+1141;Minia University;Egypt;9.8–18.9
+1142;Minia University;Russian Federation;9.8–18.9
+1143;University of Miyazaki;Japan;9.8–18.9
+1144;University of Monastir;Tunisia;9.8–18.9
+1145;University of Monastir;Russian Federation;9.8–18.9
+1146;University of Monastir;Russian Federation;9.8–18.9
+1147;Muroran Institute of Technology;Japan;9.8–18.9
+1148;University of Mysore;India;9.8–18.9
+1149;Nagaoka University of Technology;Japan;9.8–18.9
+1150;Nagoya Institute of Technology;Japan;9.8–18.9
+1151;University of Nairobi;Kenya;9.8–18.9
+1152;Nara Medical University;Japan;9.8–18.9
+1153;Naresuan University;Thailand;9.8–18.9
+1154;National Changhua University of Education;Taiwan;9.8–18.9
+1155;National Chiayi University;Taiwan;9.8–18.9
+1156;National Chung Cheng University;Taiwan;9.8–18.9
+1157;National University of Colombia;Colombia;9.8–18.9
+1158;National University of Córdoba;Argentina;9.8–18.9
+1159;National University of Kaohsiung;Taiwan;9.8–18.9
+1160;National University of La Plata;Argentina;9.8–18.9
+1161;National University of La Plata;Russian Federation;9.8–18.9
+1162;National University of La Plata;Russian Federation;9.8–18.9
+1163;National University of the South;Argentina;9.8–18.9
+1164;Nicolaus Copernicus University in Toruń;Poland;9.8–18.9
+1165;University of Nigeria Nsukka;Nigeria;9.8–18.9
+1166;North China Electric Power University;China;9.8–18.9
+1167;Ochanomizu University;Japan;9.8–18.9
+1168;Oita University;Japan;9.8–18.9
+1169;Ondokuz Mayis University;Turkey;9.8–18.9
+1170;Osaka Prefecture University;Japan;9.8–18.9
+1171;University of Pardubice;Czechia;9.8–18.9
+1172;University of Pardubice;Russian Federation;9.8–18.9
+1173;University of Pardubice;Russian Federation;9.8–18.9
+1174;University of Pardubice;Russian Federation;9.8–18.9
+1175;PMAS Arid Agriculture University Rawalpindi;Pakistan;9.8–18.9
+1176;Pontifical Catholic University of Valparaíso;Chile;9.8–18.9
+1177;Universidad Pontificia Bolivariana (UPB);Colombia;9.8–18.9
+1178;Pontifícia Universidade Católica do Paraná;Brazil;9.8–18.9
+1179;Prince of Songkla University;Thailand;9.8–18.9
+1180;PSG College of Technology;India;9.8–18.9
+1181;Ritsumeikan University;Japan;9.8–18.9
+1182;University of the Ryukyus;Japan;9.8–18.9
+1183;Saga University;Japan;9.8–18.9
+1184;Saitama Medical University;Japan;9.8–18.9
+1185;University of Santiago, Chile (USACH);Chile;9.8–18.9
+1186;SASTRA University;India;9.8–18.9
+1187;Sathyabama Institute of Science and Technology;India;9.8–18.9
+1188;University of Sciences and Technology Houari Boumediene;Algeria;9.8–18.9
+1189;University of Sciences and Technology Houari Boumediene;Russian Federation;9.8–18.9
+1190;Seoul National University of Science and Technology (SeoulTech);South Korea;9.8–18.9
+1191;Shahid Bahonar University of Kerman;Iran;9.8–18.9
+1192;Shahrood University of Technology;Iran;9.8–18.9
+1193;Shanghai Maritime University;China;9.8–18.9
+1194;Shibaura Institute of Technology;Japan;9.8–18.9
+1195;Shimane University;Japan;9.8–18.9
+1196;Shizuoka University;Japan;9.8–18.9
+1197;University of Shizuoka;Japan;9.8–18.9
+1198;Showa University;Japan;9.8–18.9
+1199;Showa University;Russian Federation;9.8–18.9
+1200;University of Silesia in Katowice;Poland;9.8–18.9
+1201;Simón Bolívar University;Venezuela;9.8–18.9
+1202;Slovak University of Technology in Bratislava;Slovakia;9.8–18.9
+1203;Sofia University;Bulgaria;9.8–18.9
+1204;University of Sonora;Mexico;9.8–18.9
+1205;Sophia University;Japan;9.8–18.9
+1206;University of South Africa;South Africa;9.8–18.9
+1207;University of South China;China;9.8–18.9
+1208;University of South China;Russian Federation;9.8–18.9
+1209;University of Southern Mississippi;United States;9.8–18.9
+1210;South Valley University  (Egypt);Egypt;9.8–18.9
+1211;Southwest Jiaotong University;China;9.8–18.9
+1212;Srinakharinwirot University;Thailand;9.8–18.9
+1213;SRM Institute of Science and Technology;India;9.8–18.9
+1214;State University of Ponta Grossa;Brazil;9.8–18.9
+1215;State University of Ponta Grossa;Russian Federation;9.8–18.9
+1216;Tamil Nadu Agricultural University;India;9.8–18.9
+1217;Tamkang University;Taiwan;9.8–18.9
+1218;University of Tarapacá;Chile;9.8–18.9
+1219;Taras Shevchenko National University of Kyiv;Ukraine;9.8–18.9
+1220;Technical University of Košice;Slovakia;9.8–18.9
+1221;Technical University of Liberec;Czechia;9.8–18.9
+1222;Universidade Tecnológica Federal do Paraná (UTFPR);Brazil;9.8–18.9
+1223;Universiti Teknologi MARA;Malaysia;9.8–18.9
+1224;Institut Teknologi Sepuluh Nopember;Indonesia;9.8–18.9
+1225;Thammasat University;Thailand;9.8–18.9
+1226;TOBB University of Economics and Technology;Turkey;9.8–18.9
+1227;Tokai University;Japan;9.8–18.9
+1228;Tokyo University of Agriculture;Japan;9.8–18.9
+1229;Tokyo City University;Japan;9.8–18.9
+1230;Tokyo Denki University;Japan;9.8–18.9
+1231;Tokyo University of Marine Science and Technology;Japan;9.8–18.9
+1232;Tomas Bata University in Zlín;Czechia;9.8–18.9
+1233;Tottori University;Japan;9.8–18.9
+1234;University of Toyama;Japan;9.8–18.9
+1235;Toyo University;Japan;9.8–18.9
+1236;University of Tunis El Manar;Tunisia;9.8–18.9
+1237;Unisinos University;Brazil;9.8–18.9
+1238;Unisinos University;Russian Federation;9.8–18.9
+1239;Urmia University;Iran;9.8–18.9
+1240;Utsunomiya University;Japan;9.8–18.9
+1241;University of Valparaíso;Chile;9.8–18.9
+1242;University of Veracruz;Mexico;9.8–18.9
+1243;University of Veterinary and Animal Sciences, Lahore;Pakistan;9.8–18.9
+1244;V.N. Karazin Kharkiv National University;Ukraine;9.8–18.9
+1245;V.N. Karazin Kharkiv National University;Russian Federation;9.8–18.9
+1246;V.N. Karazin Kharkiv National University;Russian Federation;9.8–18.9
+1247;VSB - Technical University of Ostrava;Czechia;9.8–18.9
+1248;University of West Bohemia;Czechia;9.8–18.9
+1249;West University of Timişoara;Romania;9.8–18.9
+1250;Wrocław University of Science and Technology;Poland;9.8–18.9
+1251;Yamaguchi University;Japan;9.8–18.9
+1252;Yanshan University;China;9.8–18.9
+1253;Yarmouk University;Jordan;9.8–18.9
+1254;Yazd University;Iran;9.8–18.9
+1255;Yeditepe University;Turkey;9.8–18.9
+1256;Yuan Ze University;Taiwan;9.8–18.9
+1257;Zagazig University;Egypt;9.8–18.9
+1258;University of Zanjan;Iran;9.8–18.9
