@@ -20,12 +20,18 @@ def direct_dict(data, columna_binaria):
     return diccionario
 
 def interchange_dict(dict_1, dict_2):
+    '''
+    dict_1: dict. Diccionario inicial {llave_1 : valor_1}
+    dict_2. dict. Diccionario llegada {llave_2 : valor_2}
+
+    Retorna: new_dict. Diccionario final {llave_1 : valor_2} (Si es que existen coincidencias entre valor_1 y llave_2)
+    '''
     new_dict = {}
     for key_1 in dict_1.keys():
         try:
             new_dict[key_1] = dict_2[dict_1[key_1]]
         except:
-            pass
+            new_dict[key_1] = None
     return new_dict
 
 

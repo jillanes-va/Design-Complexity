@@ -23,7 +23,7 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 
 save_things = True
 is_award = True
-thre = 1
+thre = 0.5
 
 
 plt.rcParams.update({'font.size': 12})
