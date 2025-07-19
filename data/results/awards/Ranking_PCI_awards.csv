@@ -1,92 +1,95 @@
-rank,PCI,category
-1,2.457575481509802,Heavy Machinery Design Award Category.
-2,2.1336683185212464,Vehicle Parts, Auto Accessories and Care Products Design Award Category.
-3,1.8282660146507288,Manufacturing and Processing Machinery Design Award Category.
-4,1.521602581251669,Wholesale, Retail Trade, Commerce and E-Commerce Design Award Category.
-5,1.4170575586523864,Camera and Photography Equipment Design Award Category.
-6,1.3844658097485207,Car and Land Based Motor Vehicles Design Award Category.
-7,1.3745430055214918,Outdoor Gear and Camping Equipment Design Award Category.
-8,1.3013691100525087,Cybernetics, Prosthesis and Implant Design Award Category.
-9,1.2622243053210471,Hardware, Power and Hand Tools Design Award Category.
-10,1.222256172075953,Computers and Peripheral Devices Design Award Category.
-11,1.1941535049989997,Scientific Instruments and Research Equipment Design Award Category.
-12,1.1142156325539292,Disposable and Single-Use Product Design Award Category.
-13,1.037871239683887,Hospitality, Restaurant and Catering Products Design Award Category.
-14,0.9689923042317348,Heating, Ventilation, and Air Conditioning Products Design Award Category.
-15,0.9151899595878856,Aerospace and Aircraft Design Award Category.
-16,0.7948619141413341,Security, Safety and Surveillance Products Design Award Category.
-17,0.6876474053338758,Futuristic Design Award Category.
-18,0.6728988951451236,Engineering, Construction and Infrastructure Design Award Category.
-19,0.6706965888026474,Prosumer Products, Tools, and Machinery Design Award Category.
-20,0.6617838859006913,Audio and Sound Equipment Design Award Category.
-21,0.6480508850730667,Wearable Technologies Design Award Category.
-22,0.6409370585962493,Footwear, Shoes and Boots Design Award Category.
-23,0.6390671112028096,Construction and Real Estate Projects Design Award Category.
-24,0.6334565846659863,Energy Products, Projects and Devices Design Award Category.
-25,0.6178797628801171,Robotics, Automaton and Automation Design Award Category.
-26,0.5598209249911527,Education, Teaching Aid and Training Content Design Award Category.
-27,0.5530695217406767,Performing Arts, Style and Scenery Design Award Category.
-28,0.5470209386214859,Safety Clothing and Personal Protective Equipment Design Award Category.
-29,0.5216558750801298,Music, Audio and Sound Design Award Category.
-30,0.5049289940696455,3D Printed Forms and Products Design Award Category.
-31,0.4929784120767506,Digital and Broadcasting Media Design Award Category.
-32,0.4495016123671337,Urban Planning and Urban Design Award Category.
-33,0.4453058700703797,Sports, Entertainment and Recreation Equipment Design Award Category.
-34,0.424103999221206,Agricultural Tools, Equipment and Machinery Design Award Category.
-35,0.357147483569393,Engineering and Technical Design Award Category.
-36,0.3549270998884304,Beauty, Personal Care and Cosmetic Products Design Award Category.
-37,0.3404978512897451,Medical Devices and Medical Equipment Design Award Category.
-38,0.31591026199306393,Meta, Strategic and Service Design Award Category.
-39,0.30689613362561063,Public Awareness, Volunteerism, and Society Design Award Category.
-40,0.30306747625996117,Digital and Electronic Devices Design Award Category.
-41,0.2691238360858004,Garden and Outdoor Furniture Design Award Category.
-42,0.23699759989609936,Baby, Kids' and Children's Products Design Award Category.
-43,0.16413473357189193,Idea Design Award Category.
-44,0.11008269108248384,Awards, Prize and Competitions Design Award Category.
-45,0.03647072696397734,Design Quality and Innovation Award Category.
-46,0.032495670737124054,Street Furniture Design Award Category.
-47,0.01831053529482756,Information Technologies Design Award Category.
-48,0.006009413239707087,Yacht and Marine Vessels Design Award Category.
-49,-0.007351782142487353,Home Appliances Design Award Category.
-50,-0.011742293869163945,Musical Instruments Design Award Category.
-51,-0.09410325451549759,Art Materials, Stationery Supplies and Gift Items Design Award Category.
-52,-0.09414722892079837,Office Furniture Design Award Category.
-53,-0.1332101859285237,Pet Supplies and Products for Animals Design Award Category.
-54,-0.14361257560907836,Vehicle, Mobility and Transportation Design Award Category.
-55,-0.15364083437896503,Furniture Accessories, Hardware and Materials Design Award Category.
-56,-0.1736386697991469,Cultural Heritage and Culture Industry Design Award Category.
-57,-0.281191866847468,Mobile Technologies, Applications and Software Design Award Category.
-58,-0.29083654910950335,Fashion and Travel Accessories Design Award Category.
-59,-0.34394241186784336,Sustainable Products, Projects and Green Design Award Category.
-60,-0.3471774383517375,Movie, Video and Animation Design Award Category.
-61,-0.3526572713954773,Social Design Award Category.
-62,-0.38229179105304517,Textile, Fabric, Textures, Patterns and Cloth Design Award Category.
-63,-0.39944229488585137,Differently Abled and Seniors' Assistance Design Award Category.
-64,-0.4014254676976052,Toy, Games and Hobby Products Design Award Category.
-65,-0.4892697740023677,Fashion, Apparel and Garment Design Award Category.
-66,-0.4929429155743089,Food, Beverage and Culinary Arts Design Award Category.
-67,-0.5116791252598808,Interface and Interaction Design Award Category.
-68,-0.5676798592930807,Kitchen Furniture, Equipment and Fixtures Design Award Category.
-69,-0.5706249112666623,Building Materials and Construction Components Design Award Category.
-70,-0.5883677431956607,Bakeware, Tableware, Drinkware and Cookware Design Award Category.
-71,-0.6031756235430539,Bathroom Furniture and Sanitary Ware Design Award Category.
-72,-0.6339066572842228,Event and Happening Design Award Category.
-73,-0.6569601743804131,Arts, Crafts and Ready-Made Design Award Category.
-74,-0.7120552244734186,Luxury Design Award Category.
-75,-0.73460645938472,Print and Published Media Design Award Category.
-76,-0.7755177864564728,Website and Web Design Award Category.
-77,-0.819763791272921,Generative, Algorithmic and Parametric Design Award Category.
-78,-0.9504270613515795,Limited Edition and Custom Design Award Category.
-79,-1.037404931634656,Lighting Products and Lighting Projects Design Award Category.
-80,-1.1209716955698144,Hospitality, Recreation, Travel and Tourism Design Award Category.
-81,-1.2100660144248832,Jewelry, Eyewear and Watch Design Award Category.
-82,-1.3668589647822769,Computer Graphics and 3D Model Design Award Category.
-83,-1.5400523889504185,Photography and Photo Manipulation Design Award Category.
-84,-1.6055079714020464,Graphics, Illustration and Visual Communication Design Award Category.
-85,-1.6132801267707217,Furniture Design Award Category.
-86,-1.628113684821806,Advertising, Marketing and Communication Design Award Category.
-87,-1.6714189884666049,Landscape Planning and Garden Design Award Category.
-88,-1.7017725514003863,Packaging Design Award Category.
-89,-1.7783770587724985,Office and Business Appliances Design Award Category.
-90,-2.839028172438794,Architecture, Building and Structure Design Award Category.
-91,-3.3209471792945,Interior Space and Exhibition Design Award Category.
+rank	PCI	category
+1	2.108376351784539	Entertainment, Content Creation and Streaming Media Design Award Category.
+2	2.108376351784539	Industrial Equipment and Heavy-duty Appliances Design Award Category.
+3	1.8431756014727831	Heavy Machinery Design Award Category.
+4	1.596234354039755	Vehicle Parts, Auto Accessories and Care Products Design Award Category.
+5	1.3528113979206646	Manufacturing and Processing Machinery Design Award Category.
+6	1.1616318418205192	Performing Arts, Style and Scenery Design Award Category.
+7	1.1060097158483173	Camera and Photography Equipment Design Award Category.
+8	1.0921902103044479	Wholesale, Retail Trade, Commerce and E-Commerce Design Award Category.
+9	1.065865271353168	Outdoor Gear and Camping Equipment Design Award Category.
+10	1.0456598174705367	Car and Land Based Motor Vehicles Design Award Category.
+11	0.9402068757774416	Scientific Instruments and Research Equipment Design Award Category.
+12	0.9397028881626619	Cybernetics, Prosthesis and Implant Design Award Category.
+13	0.9239931400385931	Computers and Peripheral Devices Design Award Category.
+14	0.9041182954275884	Disposable and Single-Use Product Design Award Category.
+15	0.8933104836803546	Hardware, Power and Hand Tools Design Award Category.
+16	0.8092637862616824	Video and Broadcasting Equipment Design Award Category.
+17	0.776253604672203	Heating, Ventilation, and Air Conditioning Products Design Award Category.
+18	0.7201216828397676	Aerospace and Aircraft Design Award Category.
+19	0.6862453745750369	Hospitality, Restaurant and Catering Products Design Award Category.
+20	0.608677808682597	Security, Safety and Surveillance Products Design Award Category.
+21	0.6011688025419252	Audio and Sound Equipment Design Award Category.
+22	0.5206348862578066	Futuristic Design Award Category.
+23	0.5204694299696193	Wearable Technologies Design Award Category.
+24	0.48557941408012756	Sports, Entertainment and Recreation Equipment Design Award Category.
+25	0.48495114970934733	Energy Products, Projects and Devices Design Award Category.
+26	0.4843227984371747	Engineering, Construction and Infrastructure Design Award Category.
+27	0.471358386576655	Music, Audio and Sound Design Award Category.
+28	0.45568591286149934	Construction and Real Estate Projects Design Award Category.
+29	0.4333293340380355	Robotics, Automaton and Automation Design Award Category.
+30	0.42857355900292815	Safety Clothing and Personal Protective Equipment Design Award Category.
+31	0.428518205927543	Prosumer Products, Tools, and Machinery Design Award Category.
+32	0.4198690981264524	Urban Planning and Urban Design Award Category.
+33	0.419657283862282	Footwear, Shoes and Boots Design Award Category.
+34	0.40979808096922865	Education, Teaching Aid and Training Content Design Award Category.
+35	0.38265607858902967	Engineering and Technical Design Award Category.
+36	0.3737149134265935	3D Printed Forms and Products Design Award Category.
+37	0.3574744386653547	Agricultural Tools, Equipment and Machinery Design Award Category.
+38	0.3415381983032481	Medical Devices and Medical Equipment Design Award Category.
+39	0.3304771747233777	Digital and Broadcasting Media Design Award Category.
+40	0.32830542469774876	Public Awareness, Volunteerism, and Society Design Award Category.
+41	0.3008491603614682	Beauty, Personal Care and Cosmetic Products Design Award Category.
+42	0.2908999944253805	Meta, Strategic and Service Design Award Category.
+43	0.28498610131253416	Garden and Outdoor Furniture Design Award Category.
+44	0.2197390035562663	Digital and Electronic Devices Design Award Category.
+45	0.21696261870093309	Baby, Kids' and Children's Products Design Award Category.
+46	0.17711586070873747	Idea Design Award Category.
+47	0.11471896509389705	Awards, Prize and Competitions Design Award Category.
+48	0.07234358134953826	Pet Supplies and Products for Animals Design Award Category.
+49	0.0670850476057149	Design Quality and Innovation Award Category.
+50	0.05412742426428303	Street Furniture Design Award Category.
+51	0.046283910233912415	Musical Instruments Design Award Category.
+52	0.03789572121570729	Information Technologies Design Award Category.
+53	0.032269942344018684	Home Appliances Design Award Category.
+54	-0.007131173334048955	Office Furniture Design Award Category.
+55	-0.008701953894228731	Yacht and Marine Vessels Design Award Category.
+56	-0.08203731005198901	Furniture Accessories, Hardware and Materials Design Award Category.
+57	-0.08745451349301771	Vehicle, Mobility and Transportation Design Award Category.
+58	-0.09184724805115757	Fashion and Travel Accessories Design Award Category.
+59	-0.13907625652734504	Mobile Technologies, Applications and Software Design Award Category.
+60	-0.1924028480449035	Textile, Fabric, Textures, Patterns and Cloth Design Award Category.
+61	-0.22869840638548708	Cultural Heritage and Culture Industry Design Award Category.
+62	-0.23582914471717334	Social Design Award Category.
+63	-0.26381025864575314	Sustainable Products, Projects and Green Design Award Category.
+64	-0.2764973869017607	Art Materials, Stationery Supplies and Gift Items Design Award Category.
+65	-0.28950962330349367	Differently Abled and Seniors' Assistance Design Award Category.
+66	-0.30851743937456416	Movie, Video and Animation Design Award Category.
+67	-0.30922266619585975	Toy, Games and Hobby Products Design Award Category.
+68	-0.3099493110319482	Interface and Interaction Design Award Category.
+69	-0.3624419758849337	Fashion, Apparel and Garment Design Award Category.
+70	-0.37184954224732	Bathroom Furniture and Sanitary Ware Design Award Category.
+71	-0.39014412493889133	Kitchen Furniture, Equipment and Fixtures Design Award Category.
+72	-0.41952749234683734	Arts, Crafts and Ready-Made Design Award Category.
+73	-0.45994579641823247	Luxury Design Award Category.
+74	-0.47710439748748756	Event and Happening Design Award Category.
+75	-0.4820437677035228	Bakeware, Tableware, Drinkware and Cookware Design Award Category.
+76	-0.5835646664338762	Website and Web Design Award Category.
+77	-0.6005300151828966	Building Materials and Construction Components Design Award Category.
+78	-0.630515227769912	Print and Published Media Design Award Category.
+79	-0.6909654170952504	Generative, Algorithmic and Parametric Design Award Category.
+80	-0.6941297472581666	Limited Edition and Custom Design Award Category.
+81	-0.7083633399675201	Hospitality, Recreation, Travel and Tourism Design Award Category.
+82	-0.9436798175731678	Landscape Planning and Garden Design Award Category.
+83	-0.9991840488610956	Food, Beverage and Culinary Arts Design Award Category.
+84	-1.0310016696444582	Jewelry, Eyewear and Watch Design Award Category.
+85	-1.0836142735318401	Lighting Products and Lighting Projects Design Award Category.
+86	-1.1921486606708336	Advertising, Marketing and Communication Design Award Category.
+87	-1.4816168927829174	Office and Business Appliances Design Award Category.
+88	-1.4948352531295175	Furniture Design Award Category.
+89	-1.5230944229624124	Packaging Design Award Category.
+90	-1.6371330575256098	Photography and Photo Manipulation Design Award Category.
+91	-1.6386489861890672	Graphics, Illustration and Visual Communication Design Award Category.
+92	-2.909092185521027	Architecture, Building and Structure Design Award Category.
+93	-3.3900808957073423	Computer Graphics and 3D Model Design Award Category.
+94	-4.249643541068697	Interior Space and Exhibition Design Award Category.

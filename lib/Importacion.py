@@ -83,6 +83,6 @@ def guardado_ranking(X, dicc, folder, subfolders, name, metric_name):
             os.mkdir(str_file)
 
         with open(str_file + '/'+ name +'.csv', 'w+', encoding='utf-8') as f:
-            f.writelines(f'rank,{metric_name},category\n')
+            f.writelines(f'rank\t{metric_name}\tcategory\n')
             for k in range(N):
-                f.writelines(f'{k + 1},' + f'{sorteado[k][0]}' + ',' + f'{sorteado[k][1]}\n')
+                f.writelines(f'{k + 1}\t{sorteado[k][0]}\t{sorteado[k][1]}\n')

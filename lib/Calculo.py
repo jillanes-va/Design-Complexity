@@ -12,10 +12,17 @@ def Limpieza(X, diccionarios, diccionario_pop, pop_min = 1_000_000, c_min = 0, p
         c_min: int. Umbral mínimo para que un país tenga producción.
         p_min: int. Umbral mínimo para que un producto tenga producción.
     '''
-    Mask_pop = np.array([
-        (diccionario_pop[trat.inv_dict(diccionarios[0])[i]] > pop_min) for i in range(len(diccionarios[0]))
-    ])
+    Mask_pop = []
+    for i in range(len(diccionarios[0])):
+        try:
+            if diccionario_pop[trat.inv_dict(diccionarios[0])[i]] > pop_min:
+                Mask_pop.append(True)
+            else:
+                Mask_pop.append(False)
+        except:
+            Mask_pop.append(True)
 
+    Mask_pop = np.array(Mask_pop)
 
     X_sum = np.copy(X).sum(axis = 2)
     Mask_c = (X_sum.sum(axis = 1) > c_min) * Mask_pop
