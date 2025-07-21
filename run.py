@@ -21,9 +21,9 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 #--------- Carga de datos ---------
 #----------------------------------
 
-save_things = False
-is_award = True
-thre = 0.5
+save_things = True
+is_award = False
+thre = 0.75
 
 
 plt.rcParams.update({'font.size': 12})
@@ -35,7 +35,7 @@ wipo_file = r'wipo_design.csv'
 wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 
 awards_file = r'wrd_04_all-data.csv'
-awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score', 'designer_name']
 
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
 awards_gdp_columns = ['Country'] + [2011 + i for i in range(13)] + ['mean_awards'] #Para awards
@@ -116,8 +116,13 @@ print('Generando dicts')
 N = len(np.arange(0.1, 1.3, 0.01))
 i = 0
 
+if is_award:
+    data_DCI = trat.unique_designers(data_DCI, 3)
+
 dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
+
+
 
 if is_award:
     dict_country_pop = trat.interchange_dict(dicc.awards_pop, trat.direct_dict(data_pop, population_columns))
@@ -126,6 +131,7 @@ else:
 gdp_array = trat.gdp_matrix(data_gdp)
 
 print('Calculando Matriz X')
+
 X_cpt = trat.X_matrix(data_DCI) #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
 if is_award:
@@ -150,7 +156,7 @@ if is_award:
                                                     c_min=0,
                                                     p_min=0)  # c min significa cantidad de premios minima de un país
 else:
-    X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000,
+    X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
                                                 c_min=0,
                                                 p_min=0)  # c min significa cantidad de premios minima de un país
 #test.mi_pais_a_ganado(X_cpt, 'Italy', dicts_DCI, -1)

@@ -238,3 +238,7 @@ def sum_files(X, diccionaries, partida_llegada):
         cat_num = inv_dict(num_cat)
         diccionaries[0] = re_count(cat_num)
         return X_nuevo
+
+def unique_designers(data, n):
+    df_filtrado = data.groupby('designer_country').filter(lambda x: x['designer_name'].nunique() > n).drop('designer_name', axis = 1)
+    return df_filtrado
