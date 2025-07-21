@@ -602,8 +602,8 @@ partida_award_llegada_wipo = {
     'Macau (China)':'China',
     'Hong Kong':'China',
     'Taiwan':'China',
-    'Israel':'Israel',
-    'Palestine':'Israel',
+    # 'Israel':'Israel',
+    # 'Palestine':'Israel',
     'United States':'United States',
     'Puerto Rico':'United States'
 }

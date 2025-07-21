@@ -38,8 +38,8 @@ def Clustering(phi, metodo  = 'complete', save = False, name = ''):
 
     plt.imshow(phi_star)
     plt.title(r'$\phi_{pq}$')
-    plt.xlabel('Categoria')
-    plt.ylabel('Categoria')
+    plt.xlabel('Subclase')
+    plt.ylabel('Subclase')
 
     if save and len(name) != 0:
         plt.savefig('./figs/' + name + '.pdf')
@@ -110,6 +110,7 @@ def red(phi, by_com = True, diccionario =None, PCI = None, umbral_enlace = 0.5, 
             color_oscuro = rgb2hex(c_o * np.array([0.7, 0.7, 0.7, 1]))
             nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color= color_oscuro, node_size=55)
             nx.draw_networkx_nodes(Red_original, pos=posicion_red, nodelist=comunidad, node_color = color, node_size = 25)
+
     else:
         coloracion, barra = get_cmap(PCI)
         nx.draw_networkx_nodes(Red_nueva, pos=posicion_red, node_size = 55, node_color=coloracion)

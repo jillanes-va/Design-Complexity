@@ -22,8 +22,8 @@ from lib.Testeo_estadistico import mi_pais_a_ganado
 #----------------------------------
 
 save_things = True
-is_award = True
-thre = 0.5
+is_award = False
+thre = 0.75
 
 
 plt.rcParams.update({'font.size': 12})
@@ -35,7 +35,7 @@ wipo_file = r'wipo_design.csv'
 wipo_columns = ['country_name','subclass_name', 'wipo_year_to', 'n']
 
 awards_file = r'wrd_04_all-data.csv'
-awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score']
+awards_columns = ['designer_country', 'award_category', 'award_period' , 'award_score', 'designer_name']
 
 gdp_file = r'IMF_GDP_per_PPA_April_2024.xlsx'
 awards_gdp_columns = ['Country'] + [2011 + i for i in range(13)] + ['mean_awards'] #Para awards
@@ -116,8 +116,13 @@ print('Generando dicts')
 N = len(np.arange(0.1, 1.3, 0.01))
 i = 0
 
+if is_award:
+    data_DCI = trat.unique_designers(data_DCI, 3)
+
 dicts_DCI = trat.dictionaries(data_DCI)
 dict_country_gdp = trat.dictionaries(data_gdp)[0]
+
+
 
 if is_award:
     dict_country_pop = trat.interchange_dict(dicc.awards_pop, trat.direct_dict(data_pop, population_columns))
@@ -126,11 +131,12 @@ else:
 gdp_array = trat.gdp_matrix(data_gdp)
 
 print('Calculando Matriz X')
+
 X_cpt = trat.X_matrix(data_DCI) #Los datos wipo van en 3 periodos de 5 años cada uno. Los datos awards solo consideran 12 periodos (el último no tiene nada)
 
 if is_award:
-    X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
     X_cpt = trat.agregado_movil_(X_cpt)
+    X_cpt = trat.sum_files(X_cpt, dicts_DCI, dicc.partida_award_llegada_wipo)
 
 #----------------------------------------
 #--------- Calculo de cosas -------------
@@ -146,12 +152,12 @@ if is_award:
 # print('Suma sobre paises', np.max(X_cpt.sum(axis = 0)))
 
 if is_award:
-    X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
-                                                    c_min=15,
-                                                    p_min=10)  # c min significa cantidad de premios minima de un país
+    X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000,
+                                                    c_min=0,
+                                                    p_min=0)  # c min significa cantidad de premios minima de un país
 else:
     X_cpt, RCA_cpt, M_cpt = calc.Matrices_ordenadas(X_cpt, dicts_DCI, dict_country_pop, threshold=thre, pop_min=1_000_000,
-                                                c_min=10,
+                                                c_min=0,
                                                 p_min=0)  # c min significa cantidad de premios minima de un país
 #test.mi_pais_a_ganado(X_cpt, 'Italy', dicts_DCI, -1)
 
@@ -174,9 +180,10 @@ DCI_dict = {
     country : DCI[number][0] for country, number in dicts_DCI[0].items()
 }
 
+
 #DCI_ECI, _ = test.x_vs_y(DCI_dict, ECIs['ECI_re']['mean_awards'], wipo_OEC)
 
-input('¿Continuar?')
+
 # for i in range(len(DCI)):
 #     print(DCI[i], trat.inv_dict(dicts_DCI[0])[i])
 #
@@ -204,20 +211,22 @@ if save_things:
 
 #figs.graf(np.log(X_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$X_{cp}$', save = False, name = 'logRCA_awards')
 #
-#figs.graf(RCA_cpt[:,:, -1] > 1, xlabel = 'Categorias', ylabel = 'Paises', title = r'$RCA_{cp}$', save = False, name = 'RCA_awards')
+figs.graf(np.log1p(RCA_cpt[:,:, -1]), xlabel = 'Categorías', ylabel = 'Paises', title = r'$\log(RCA_{cp})$', save = False, name = 'RCA_awards')
 
+input('a')
 
-
+phi_t = calc.Relatedness(M_cpt, last = False)
 # for i in range(0):
 #     figs.graf(np.log(M_cpt[:,:, i] + 1), xlabel = 'Categorias', ylabel = 'Paises', title = r'log-$M_{cp}$', save = False, name = 'logRCA_awards')
 #
 # figs.graf(M_cpt[:,:, -1], xlabel = 'Categorias', ylabel = 'Paises',title = '$M_{cp}$', save = False, name = 'M_cp_awards')
 #
-# figs.Clustering(phi_t[:, :, -1], save = False, name = 'Relatedness_awards')
+#figs.Clustering(phi_t[:, :, -1], save = False, name = 'Relatedness_awards')
+#
 #
 # figs.k_density(phi_t[:, :, -1], save = False, name = 'k_density_awards')
 #
-# figs.red(phi_t[:, :, -1], by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards_communitites')
+figs.red(phi_t[:, :, -1], by_com = True, save = False, umbral_enlace = 0.45, name = 'Design_space_awards_communitites')
 #
 # figs.red(phi_t[:, :, -1], by_com = False, save = False, umbral_enlace = 0.45, PCI = PCI, diccionario = dicts_DCI, name = 'Design_space_awards_PCI')
 
